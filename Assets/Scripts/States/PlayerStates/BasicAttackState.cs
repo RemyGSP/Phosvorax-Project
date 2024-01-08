@@ -16,7 +16,8 @@ public class BasicAttackState : States
     [SerializeField] private float attackOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
     [SerializeField] private float sphereSize; // Tamaño del área de detección
     [SerializeField] private float attackDamage;
-
+    Animator anim;
+    bool canAttack;
     private float currentAttackDelay;
     private Transform playerTransform;
 
@@ -56,7 +57,7 @@ public class BasicAttackState : States
     public override void Start()
     {
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
-
+        anim = stateGameObject.GetComponent<Animator>();
         playerTransform = stateGameObject.GetComponent<Transform>();
         currentAttackDelay = attackDelay;
         
@@ -92,9 +93,14 @@ public class BasicAttackState : States
 
         attackAreaVisualizer.attackOffset = attackOffset;
         attackAreaVisualizer.sphereSize = sphereSize;
-    
+        ExecuteAnim();
     }
-
+    private void ExecuteAnim()
+    {
+        anim.SetTrigger("attack");
+        currentAttackDelay = attackDelay;
+        canAttack = true;
+    }
     void ExecuteAttack()
     {
         Vector3 attackPosition = playerTransform.position + playerTransform.forward * attackOffset;
@@ -108,16 +114,16 @@ public class BasicAttackState : States
             }
             Debug.Log("Impacto con: " + hitCollider.gameObject.name);
         }
+        canAttack = false;
     }
 
     public override void FixedUpdate()
     {
         currentAttackDelay -= Time.deltaTime;
 
-        if (currentAttackDelay <= 0)
+        if (currentAttackDelay <= 0 && canAttack)
         {
             ExecuteAttack();
-            currentAttackDelay = attackDelay;
             Timers.timer.playerBasicAttackTimer = 0;
         }
         
@@ -125,6 +131,6 @@ public class BasicAttackState : States
 
     public override void Update()
     {
-        // Implementación específica de Update para BasicAttackState
+        return;
     }
 }

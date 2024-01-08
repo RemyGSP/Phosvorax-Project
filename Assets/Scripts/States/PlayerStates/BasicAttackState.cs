@@ -9,12 +9,13 @@ public class BasicAttackState : States
     [SerializeField] private States idleState;
     [SerializeField] private States moveState;
     [SerializeField] private States rollState;
-
+    [SerializeField] LayerMask enemyLayerMask;
     private Rigidbody rigidBody;
 
     [SerializeField] private float attackDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
     [SerializeField] private float attackOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
-    [SerializeField] private  float sphereSize; // Tamaño del área de detección
+    [SerializeField] private float sphereSize; // Tamaño del área de detección
+    [SerializeField] private float attackDamage;
 
     private float currentAttackDelay;
     private Transform playerTransform;
@@ -50,12 +51,6 @@ public class BasicAttackState : States
         }
         return newGameState;
         
-    }
-
-    public override void InitializeState(GameObject gameObject)
-    {
-        // Implementación específica de InitializeState para BasicAttackState
-        stateGameObject = gameObject;
     }
 
     public override void Start()
@@ -95,19 +90,22 @@ public class BasicAttackState : States
             return;
         }
 
-        attackAreaVisualizer.atacOffset = attackOffset;
+        attackAreaVisualizer.attackOffset = attackOffset;
         attackAreaVisualizer.sphereSize = sphereSize;
     
     }
 
-    void ExecuteAtaque()
+    void ExecuteAttack()
     {
-        Vector3 atacPosition = playerTransform.position + playerTransform.forward * attackOffset;
-        int layerMask = 1 << 6; // Selecciona solo la capa 6
-        Collider[] hitColliders = Physics.OverlapSphere(atacPosition, sphereSize / 2, layerMask, QueryTriggerInteraction.UseGlobal);
+        Vector3 attackPosition = playerTransform.position + playerTransform.forward * attackOffset;
+        Collider[] hitColliders = Physics.OverlapSphere(attackPosition, sphereSize / 2, enemyLayerMask, QueryTriggerInteraction.UseGlobal);
 
         foreach (Collider hitCollider in hitColliders)
         {
+            if (hitCollider.TryGetComponent<HealthBehaviour>(out HealthBehaviour healthBehaviour))
+            {
+                healthBehaviour.Damage(attackDamage);
+            }
             Debug.Log("Impacto con: " + hitCollider.gameObject.name);
         }
     }
@@ -118,7 +116,7 @@ public class BasicAttackState : States
 
         if (currentAttackDelay <= 0)
         {
-            ExecuteAtaque();
+            ExecuteAttack();
             currentAttackDelay = attackDelay;
             Timers.timer.playerBasicAttackTimer = 0;
         }

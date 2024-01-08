@@ -9,11 +9,14 @@ public class IdleState : States
     [SerializeField] private States moveState;
     [SerializeField] private States rollState;
     [SerializeField] private States basicAttackState;
-    #region Variables
+
+    #region Constructor
     public IdleState(GameObject stateGameObject) : base(stateGameObject)
     {
     }
+    #endregion
 
+    #region Methods
     public override States CheckTransitions()
     {
         States newPlayerState = null;
@@ -21,11 +24,11 @@ public class IdleState : States
         {
             newPlayerState = moveState;
         }
-        if (PlayerInputController.IsRolling() && Timers.timer.rollTimer > Timers.timer.rollCD)
+        if (PlayerInputController.IsRolling() && PlayerTimers.timer.rollTimer > PlayerTimers.timer.rollCD)
         {
             newPlayerState = rollState;
         }
-        if (PlayerInputController.IsAttacking() && Timers.timer.playerBasicAttackTimer > Timers.timer.playerBasicAttackCD)
+        if (PlayerInputController.IsAttacking() && PlayerTimers.timer.playerBasicAttackTimer > PlayerTimers.timer.playerBasicAttackCD)
         {
             newPlayerState = basicAttackState;
         }

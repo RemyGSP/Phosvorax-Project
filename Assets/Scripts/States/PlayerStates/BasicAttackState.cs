@@ -9,18 +9,13 @@ public class BasicAttackState : States
     [SerializeField] private States idleState;
     [SerializeField] private States moveState;
     [SerializeField] private States rollState;
-    [SerializeField] LayerMask enemyLayerMask;
+
     private Rigidbody rigidBody;
-    [SerializeField] float animOffsetRotation;
 
     [SerializeField] private float attackDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
     [SerializeField] private float attackOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
-    [SerializeField] private float sphereSize; // Tamaño del área de detección
-    [SerializeField] private float attackDamage;
-    Animator anim;
-    [SerializeField] float attackTime;
-    float currentAttackTime;
-    bool canAttack;
+    [SerializeField] private  float sphereSize; // Tamaño del área de detección
+
     private float currentAttackDelay;
     private Transform playerTransform;
 
@@ -35,11 +30,11 @@ public class BasicAttackState : States
     public override States CheckTransitions()
     {
         States newGameState = null;
-         if (currentAttackTime > attackTime){
+         if (PlayerTimers.timer.playerBasicAttackTimer < PlayerTimers.timer.playerBasicAttackCD){
             if (PlayerInputController.GetPlayerInputDirection() != Vector3.zero){
-                newGameState = Instantiate(moveState);
+            newGameState = Instantiate(moveState);
             }
-            if (PlayerInputController.IsRolling() && Timers.timer.rollTimer > Timers.timer.rollCD){
+            if (PlayerInputController.IsRolling() && PlayerTimers.timer.rollTimer > PlayerTimers.timer.rollCD){
                 newGameState = Instantiate(rollState);
             }
             if (PlayerInputController.GetPlayerInputDirection() == Vector3.zero){
@@ -51,18 +46,22 @@ public class BasicAttackState : States
             newGameState.InitializeState(stateGameObject);
             newGameState.Start();
             rigidBody.velocity = Vector3.zero;
-            stateGameObject.transform.rotation = Quaternion.Euler(stateGameObject.transform.rotation.x , stateGameObject.transform.rotation.y - animOffsetRotation, stateGameObject.transform.rotation.z );
             //animator.SetBool("running",false);
         }
         return newGameState;
         
     }
 
+    public override void InitializeState(GameObject gameObject)
+    {
+        // Implementación específica de InitializeState para BasicAttackState
+        stateGameObject = gameObject;
+    }
+
     public override void Start()
     {
-        currentAttackTime = 0;
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
-        anim = stateGameObject.GetComponent<Animator>();
+
         playerTransform = stateGameObject.GetComponent<Transform>();
         currentAttackDelay = attackDelay;
         
@@ -96,47 +95,38 @@ public class BasicAttackState : States
             return;
         }
 
-        attackAreaVisualizer.attackOffset = attackOffset;
+        attackAreaVisualizer.atacOffset = attackOffset;
         attackAreaVisualizer.sphereSize = sphereSize;
-        ExecuteAnim();
+    
     }
-    private void ExecuteAnim()
+
+    void ExecuteAtaque()
     {
-        anim.SetTrigger("attack");
-        stateGameObject.transform.rotation = Quaternion.Euler(stateGameObject.transform.rotation.x , stateGameObject.transform.rotation.y + animOffsetRotation, stateGameObject.transform.rotation.z );
-        currentAttackDelay = attackDelay;
-        canAttack = true;
-    }
-    void ExecuteAttack()
-    {
-        Vector3 attackPosition = playerTransform.position + playerTransform.forward * attackOffset;
-        Collider[] hitColliders = Physics.OverlapSphere(attackPosition, sphereSize / 2, enemyLayerMask, QueryTriggerInteraction.UseGlobal);
+        Vector3 atacPosition = playerTransform.position + playerTransform.forward * attackOffset;
+        int layerMask = 1 << 6; // Selecciona solo la capa 6
+        Collider[] hitColliders = Physics.OverlapSphere(atacPosition, sphereSize / 2, layerMask, QueryTriggerInteraction.UseGlobal);
 
         foreach (Collider hitCollider in hitColliders)
         {
-            if (hitCollider.TryGetComponent<HealthBehaviour>(out HealthBehaviour healthBehaviour))
-            {
-                healthBehaviour.Damage(attackDamage);
-            }
             Debug.Log("Impacto con: " + hitCollider.gameObject.name);
         }
-        canAttack = false;
     }
 
     public override void FixedUpdate()
     {
         currentAttackDelay -= Time.deltaTime;
-        currentAttackTime += Time.deltaTime;
-        if (currentAttackDelay <= 0 && canAttack)
+
+        if (currentAttackDelay <= 0)
         {
-            ExecuteAttack();
-            Timers.timer.playerBasicAttackTimer = 0;
+            ExecuteAtaque();
+            currentAttackDelay = attackDelay;
+            PlayerTimers.timer.playerBasicAttackTimer = 0;
         }
         
     }
 
     public override void Update()
     {
-        return;
+        // Implementación específica de Update para BasicAttackState
     }
 }

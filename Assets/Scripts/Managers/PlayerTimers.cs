@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Timers : MonoBehaviour
+public class PlayerTimers : MonoBehaviour
 {
-    static public Timers timer;
+    [Header("PlayerTimers")]
+    static public PlayerTimers timer;
     public float playerBasicAttackTimer;
     public float playerBasicAttackCD;
     public float rollTimer;

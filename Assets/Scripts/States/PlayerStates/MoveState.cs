@@ -39,13 +39,13 @@ public class MoveState : States
     {
         States newGameState = null;
         
-        if (PlayerInputController.IsRolling() && Timers.timer.rollTimer > Timers.timer.rollCD){
+        if (PlayerInputController.IsRolling() && PlayerTimers.timer.rollTimer > PlayerTimers.timer.rollCD){
             newGameState = Instantiate(rollState);
         }
         if (PlayerInputController.GetPlayerInputDirection() == Vector3.zero){
             newGameState = Instantiate(idleState);
         }
-        if (PlayerInputController.IsAttacking() && Timers.timer.playerBasicAttackTimer > Timers.timer.playerBasicAttackCD)
+        if (PlayerInputController.IsAttacking() && PlayerTimers.timer.playerBasicAttackTimer > PlayerTimers.timer.playerBasicAttackCD)
         {
             newGameState = Instantiate(basicAttackState);
         }     

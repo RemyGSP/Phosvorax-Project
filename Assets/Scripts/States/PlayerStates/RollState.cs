@@ -39,7 +39,7 @@ public class RollState : States
     {
         States newPlayerState = null;
 
-        if (Timers.timer.rollTimer < Timers.timer.rollCD)
+        if (PlayerTimers.timer.rollTimer < PlayerTimers.timer.rollCD)
         {
             
             if (PlayerInputController.GetPlayerInputDirection() != Vector3.zero){
@@ -70,7 +70,7 @@ public class RollState : States
         }
         else
         {
-            Timers.timer.rollTimer = 0;
+            PlayerTimers.timer.rollTimer = 0;
         }
     }
 

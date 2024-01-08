@@ -12,14 +12,14 @@ public class BasicAttackState : States
 
     private Rigidbody rigidBody;
 
-    public float atacDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
-    public float atacOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
-    public float sphereSize; // Tamaño del área de detección
+    [SerializeField] private float attackDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
+    [SerializeField] private float attackOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
+    [SerializeField] private  float sphereSize; // Tamaño del área de detección
 
-    private float currentAtacDelay;
+    private float currentAttackDelay;
     private Transform playerTransform;
 
-    public AttackAreaVisualizer attackAreaVisualizer;
+    [SerializeField] private AttackAreaVisualizer attackAreaVisualizer;
 
     
 
@@ -63,7 +63,7 @@ public class BasicAttackState : States
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
 
         playerTransform = stateGameObject.GetComponent<Transform>();
-        currentAtacDelay = atacDelay;
+        currentAttackDelay = attackDelay;
         
        // Obtener la posición del ratón en la pantalla
         Vector3 mousePos = Input.mousePosition;
@@ -95,14 +95,14 @@ public class BasicAttackState : States
             return;
         }
 
-        attackAreaVisualizer.atacOffset = atacOffset;
+        attackAreaVisualizer.atacOffset = attackOffset;
         attackAreaVisualizer.sphereSize = sphereSize;
     
     }
 
     void ExecuteAtaque()
     {
-        Vector3 atacPosition = playerTransform.position + playerTransform.forward * atacOffset;
+        Vector3 atacPosition = playerTransform.position + playerTransform.forward * attackOffset;
         int layerMask = 1 << 6; // Selecciona solo la capa 6
         Collider[] hitColliders = Physics.OverlapSphere(atacPosition, sphereSize / 2, layerMask, QueryTriggerInteraction.UseGlobal);
 
@@ -114,12 +114,12 @@ public class BasicAttackState : States
 
     public override void FixedUpdate()
     {
-        currentAtacDelay -= Time.deltaTime;
+        currentAttackDelay -= Time.deltaTime;
 
-        if (currentAtacDelay <= 0)
+        if (currentAttackDelay <= 0)
         {
             ExecuteAtaque();
-            currentAtacDelay = atacDelay;
+            currentAttackDelay = attackDelay;
             Timers.timer.playerBasicAttackTimer = 0;
         }
         

@@ -5,21 +5,21 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "States/PlayerRollState")]
 public class RollState : States
 {
-    [Header("States")]
     [SerializeField] private States idleState;
     [SerializeField] private States moveState;
-    #region Variables
+
     private Rigidbody rigidBody;
-    [Header("Dash Variables")]
     [SerializeField] private float dashForce;
     [SerializeField] private float dashTime;
+    //[SerializeField] private float dashDistance;
     private Vector3 dashFinalPos;
     private Animator animator;
     private Vector3 playerDirection;
-    private float currentDashTime = 0f;
-    #endregion
 
-    #region Methods
+
+    //-----------------------------------------
+    private float currentDashTime = 0f;
+
     public RollState(GameObject stateGameObject) : base(stateGameObject)
     {
     }
@@ -33,6 +33,7 @@ public class RollState : States
             animator.SetBool("dashing", true);
         }
         playerDirection = PlayerInputController.GetPlayerInputDirection();
+        //dashFinalPos = stateGameObject.transform.position + playerDirection * dashDistance;
     }
 
     public override States CheckTransitions()
@@ -56,7 +57,7 @@ public class RollState : States
             newPlayerState.InitializeState(stateGameObject);
             newPlayerState.Start();
             rigidBody.velocity = Vector3.zero;
-            //animator.SetBool("dashing", false); Comentado porque de momento no tenemos animacion
+            //animator.SetBool("dashing", false);
         }
         return newPlayerState;
     }
@@ -80,7 +81,6 @@ public class RollState : States
         {
             rigidBody.AddForce(playerDirection * dashForce * Time.deltaTime, ForceMode.Impulse);
         }
-        //Esto es por si el usuario no tienes ninguna direccion pulsada, asi que pillara la rotacion actual del personaje
         else
             rigidBody.AddForce(stateGameObject.transform.rotation * Vector3.forward * dashForce * Time.deltaTime, ForceMode.Impulse);
     }
@@ -90,5 +90,4 @@ public class RollState : States
     {
         return;
     }
-    #endregion
 }

@@ -13,8 +13,6 @@ public class MoveState : States
     [SerializeField] private States rollState;
     [SerializeField] private States basicAttackState;
 
-    private RotateCharacter rotateCharacter;
-
     #region Variables
     private Rigidbody rigidBody;
 
@@ -63,7 +61,6 @@ public class MoveState : States
     #region Métodos concretos
     public override void Start()
     {
-        rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         currentMovementStatusTimer = 0;
         currentSpeed = 0;
@@ -74,7 +71,12 @@ public class MoveState : States
         }
     }
 
-
+    void Rotate(Vector3 direction)
+    {
+        Vector3 relative = (stateGameObject.transform.position + direction) - stateGameObject.transform.position;
+        Quaternion rotation = Quaternion.LookRotation(relative, Vector3.up);
+        stateGameObject.transform.rotation = rotation;
+    }
 
     private Vector3 Move(Vector3 playerDirection)
     {
@@ -96,7 +98,7 @@ public class MoveState : States
     {
         Vector3 PlayerDirection = PlayerInputController.GetPlayerInputDirection();
         rigidBody.velocity = Move(PlayerDirection);
-        stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.position, PlayerDirection);
+        Rotate(PlayerDirection);
     }
     #endregion
 }

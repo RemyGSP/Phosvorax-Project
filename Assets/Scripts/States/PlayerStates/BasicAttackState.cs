@@ -9,19 +9,17 @@ public class BasicAttackState : States
     [SerializeField] private States idleState;
     [SerializeField] private States moveState;
     [SerializeField] private States rollState;
-    [SerializeField] LayerMask targetHitLayers;
 
     private Rigidbody rigidBody;
 
-    [SerializeField] private float attackDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
-    [SerializeField] private float attackOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
-    [SerializeField] private float sphereSize; // Tamaño del área de detección
-    [SerializeField] private float attackDamage;
+    public float atacDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
+    public float atacOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
+    public float sphereSize; // Tamaño del área de detección
 
-    private float currentAttackDelay;
+    private float currentAtacDelay;
     private Transform playerTransform;
 
-    [SerializeField] private AttackAreaVisualizer attackAreaVisualizer;
+    public AttackAreaVisualizer attackAreaVisualizer;
 
     
 
@@ -54,12 +52,18 @@ public class BasicAttackState : States
         
     }
 
+    public override void InitializeState(GameObject gameObject)
+    {
+        // Implementación específica de InitializeState para BasicAttackState
+        stateGameObject = gameObject;
+    }
+
     public override void Start()
     {
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
 
         playerTransform = stateGameObject.GetComponent<Transform>();
-        currentAttackDelay = attackDelay;
+        currentAtacDelay = atacDelay;
         
        // Obtener la posición del ratón en la pantalla
         Vector3 mousePos = Input.mousePosition;
@@ -91,35 +95,31 @@ public class BasicAttackState : States
             return;
         }
 
-        attackAreaVisualizer.attackOffset = attackOffset;
+        attackAreaVisualizer.atacOffset = atacOffset;
         attackAreaVisualizer.sphereSize = sphereSize;
     
     }
 
-    void ExecuteAttack()
+    void ExecuteAtaque()
     {
-        Vector3 attackPosition = playerTransform.position + playerTransform.forward * attackOffset;
-
-        Collider[] hitColliders = Physics.OverlapSphere(attackPosition, sphereSize / 2, targetHitLayers, QueryTriggerInteraction.UseGlobal);
+        Vector3 atacPosition = playerTransform.position + playerTransform.forward * atacOffset;
+        int layerMask = 1 << 6; // Selecciona solo la capa 6
+        Collider[] hitColliders = Physics.OverlapSphere(atacPosition, sphereSize / 2, layerMask, QueryTriggerInteraction.UseGlobal);
 
         foreach (Collider hitCollider in hitColliders)
         {
-            if (hitCollider.TryGetComponent<HealthBehaviour>(out HealthBehaviour healthBehaviour))
-            {
-                healthBehaviour.Damage(attackDamage);
-            }
             Debug.Log("Impacto con: " + hitCollider.gameObject.name);
         }
     }
 
     public override void FixedUpdate()
     {
-        currentAttackDelay -= Time.deltaTime;
+        currentAtacDelay -= Time.deltaTime;
 
-        if (currentAttackDelay <= 0)
+        if (currentAtacDelay <= 0)
         {
-            ExecuteAttack();
-            currentAttackDelay = attackDelay;
+            ExecuteAtaque();
+            currentAtacDelay = atacDelay;
             Timers.timer.playerBasicAttackTimer = 0;
         }
         

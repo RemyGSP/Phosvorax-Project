@@ -69,7 +69,7 @@ public class EnemyMeleeAttackState : States
 
     #region Methods
 
-    void Start()
+    public override void Start()
     {
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         currentAttackDelay = attackDelay;
@@ -81,11 +81,11 @@ public class EnemyMeleeAttackState : States
             return;
         }
 
-        attackAreaVisualizer.atacOffset = attackOffset;
+        attackAreaVisualizer.attackOffset = attackOffset;
         attackAreaVisualizer.sphereSize = sphereSize;
     }
 
-    void ExecuteAttack()
+    private void ExecuteAttack()
     {
         Vector3 playerPosition = playerRefrences.GetComponent<PlayerReferences>().GetPlayerCoordinates();
 

@@ -50,7 +50,7 @@ public class EnemyIdleState : States
     #endregion
 
     #region Methods
-    void Start()
+    public override void Start()
     {
         playerSeen = false;
     }

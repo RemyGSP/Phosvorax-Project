@@ -11,12 +11,15 @@ public class BasicAttackState : States
     [SerializeField] private States rollState;
     [SerializeField] LayerMask enemyLayerMask;
     private Rigidbody rigidBody;
+    [SerializeField] float animOffsetRotation;
 
     [SerializeField] private float attackDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
     [SerializeField] private float attackOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
     [SerializeField] private float sphereSize; // Tamaño del área de detección
     [SerializeField] private float attackDamage;
     Animator anim;
+    [SerializeField] float attackTime;
+    float currentAttackTime;
     bool canAttack;
     private float currentAttackDelay;
     private Transform playerTransform;
@@ -32,9 +35,9 @@ public class BasicAttackState : States
     public override States CheckTransitions()
     {
         States newGameState = null;
-         if (Timers.timer.playerBasicAttackTimer < Timers.timer.playerBasicAttackCD){
+         if (currentAttackTime > attackTime){
             if (PlayerInputController.GetPlayerInputDirection() != Vector3.zero){
-            newGameState = Instantiate(moveState);
+                newGameState = Instantiate(moveState);
             }
             if (PlayerInputController.IsRolling() && Timers.timer.rollTimer > Timers.timer.rollCD){
                 newGameState = Instantiate(rollState);
@@ -48,6 +51,7 @@ public class BasicAttackState : States
             newGameState.InitializeState(stateGameObject);
             newGameState.Start();
             rigidBody.velocity = Vector3.zero;
+            stateGameObject.transform.rotation = Quaternion.Euler(stateGameObject.transform.rotation.x , stateGameObject.transform.rotation.y - animOffsetRotation, stateGameObject.transform.rotation.z );
             //animator.SetBool("running",false);
         }
         return newGameState;
@@ -56,6 +60,7 @@ public class BasicAttackState : States
 
     public override void Start()
     {
+        currentAttackTime = 0;
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         anim = stateGameObject.GetComponent<Animator>();
         playerTransform = stateGameObject.GetComponent<Transform>();
@@ -98,6 +103,7 @@ public class BasicAttackState : States
     private void ExecuteAnim()
     {
         anim.SetTrigger("attack");
+        stateGameObject.transform.rotation = Quaternion.Euler(stateGameObject.transform.rotation.x , stateGameObject.transform.rotation.y + animOffsetRotation, stateGameObject.transform.rotation.z );
         currentAttackDelay = attackDelay;
         canAttack = true;
     }
@@ -120,7 +126,7 @@ public class BasicAttackState : States
     public override void FixedUpdate()
     {
         currentAttackDelay -= Time.deltaTime;
-
+        currentAttackTime += Time.deltaTime;
         if (currentAttackDelay <= 0 && canAttack)
         {
             ExecuteAttack();

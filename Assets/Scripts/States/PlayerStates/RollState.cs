@@ -56,7 +56,7 @@ public class RollState : States
             newPlayerState.InitializeState(stateGameObject);
             newPlayerState.Start();
             rigidBody.velocity = Vector3.zero;
-            //animator.SetBool("dashing", false); Comentado porque de momento no tenemos animacion
+            animator.SetBool("dashing", false); 
         }
         return newPlayerState;
     }

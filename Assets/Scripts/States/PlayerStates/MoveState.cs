@@ -54,7 +54,7 @@ public class MoveState : States
             newGameState.InitializeState(stateGameObject);
             newGameState.Start();
             rigidBody.velocity = Vector3.zero;
-            //animator.SetBool("running",false);
+            animator.SetBool("running",false);
         }
         return newGameState;
     }
@@ -96,7 +96,7 @@ public class MoveState : States
     {
         Vector3 PlayerDirection = PlayerInputController.GetPlayerInputDirection();
         rigidBody.velocity = Move(PlayerDirection);
-        stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.position, PlayerDirection);
+        stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerDirection);
     }
     #endregion
 }

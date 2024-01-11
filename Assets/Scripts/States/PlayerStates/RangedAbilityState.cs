@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Timeline;
 
-[CreateAssetMenu(menuName = "States/PlayerBasicAttackState")]
-public class BasicAttackState : States
+public class RangedAbilityState : States
 {
     [SerializeField] private States idleState;
     [SerializeField] private States moveState;
@@ -15,7 +16,7 @@ public class BasicAttackState : States
 
     [SerializeField] private float attackDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
     [SerializeField] private float attackOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
-    [SerializeField] private float sphereSize; // Tama帽o del 谩rea de detecci贸n
+    [SerializeField] private float sphereSize; // Tama駉 del 醨ea de detecci髇
     [SerializeField] private float attackDamage;
     RotateCharacter rotateCharacter;
     Animator anim;
@@ -26,10 +27,7 @@ public class BasicAttackState : States
     private Transform playerTransform;
 
     [SerializeField] private AttackAreaVisualizer attackAreaVisualizer;
-
-    
-
-    public BasicAttackState(GameObject stateGameObject) : base(stateGameObject)
+    public RangedAbilityState(GameObject stateGameObject) : base(stateGameObject)
     {
     }
 
@@ -37,27 +35,30 @@ public class BasicAttackState : States
     {
         States newGameState = null;
 
-         if (currentAttackTime > animationLength){
-            if (PlayerInputController.GetPlayerInputDirection() != Vector3.zero){
-                newGameState = Instantiate(moveState);
-            }
-            if (PlayerInputController.GetPlayerInputDirection() == Vector3.zero){
-                newGameState = Instantiate(idleState);
-            }     
-         }
-        if (PlayerInputController.IsRolling() && PlayerTimers.timer.rollTimer > PlayerTimers.timer.rollCD)
-        {
-            newGameState = Instantiate(rollState);
-        }
-        if (newGameState != null)
-        {
-            newGameState.InitializeState(stateGameObject);
-            newGameState.Start();
-            rigidBody.velocity = Vector3.zero;
-            //stateGameObject.transform.rotation = Quaternion.Euler(stateGameObject.transform.rotation.x , stateGameObject.transform.rotation.y - animOffsetRotation, stateGameObject.transform.rotation.z );
-        }
+        //if (currentAttackTime > animationLength)
+        //{
+        //    if (PlayerInputController.GetPlayerInputDirection() != Vector3.zero)
+        //    {
+        //        newGameState = Instantiate(moveState);
+        //    }
+        //    if (PlayerInputController.GetPlayerInputDirection() == Vector3.zero)
+        //    {
+        //        newGameState = Instantiate(idleState);
+        //    }
+        //}
+        //if (PlayerInputController.IsRolling() && PlayerTimers.timer.rollTimer > PlayerTimers.timer.rollCD)
+        //{
+        //    newGameState = Instantiate(rollState);
+        //}
+        //if (newGameState != null)
+        //{
+        //    newGameState.InitializeState(stateGameObject);
+        //    newGameState.Start();
+        //    rigidBody.velocity = Vector3.zero;
+        //    //stateGameObject.transform.rotation = Quaternion.Euler(stateGameObject.transform.rotation.x , stateGameObject.transform.rotation.y - animOffsetRotation, stateGameObject.transform.rotation.z );
+        //}
         return newGameState;
-        
+
     }
 
     public override void Start()
@@ -74,7 +75,8 @@ public class BasicAttackState : States
         stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
         if (stateGameObject.TryGetComponent<AttackAreaVisualizer>(out AttackAreaVisualizer attAreaVisual))
         {
-            attackAreaVisualizer.DrawAttackArea(1f, 1f );
+            attackAreaVisualizer.DrawAttackArea(new Vector3(0,0,0), 1f);
+
         }
 
         ExecuteAnim();
@@ -84,7 +86,7 @@ public class BasicAttackState : States
     {
         anim.SetTrigger("attack");
         currentAttackTime = 0;
-        animationLength = anim.GetCurrentAnimatorClipInfo(0).Length ;
+        animationLength = anim.GetCurrentAnimatorClipInfo(0).Length;
         //stateGameObject.transform.rotation = Quaternion.Euler(stateGameObject.transform.rotation.x , stateGameObject.transform.rotation.y + animOffsetRotation, stateGameObject.transform.rotation.z );
         currentAttackDelay = attackDelay;
         canAttack = true;
@@ -125,10 +127,10 @@ public class BasicAttackState : States
 
     private Vector3 GetMouseTargetDir()
     {
-        // Obtener la posici贸n del rat贸n en la pantalla
+        // Obtener la posici髇 del rat髇 en la pantalla
         Vector3 mousePos = Input.mousePosition;
 
-        // Calcular la direcci贸n del rat贸n en el mundo
+        // Calcular la direcci髇 del rat髇 en el mundo
         Ray castPoint = Camera.main.ScreenPointToRay(mousePos);
         RaycastHit hit;
         Vector3 targetDir = Vector3.zero;
@@ -145,4 +147,5 @@ public class BasicAttackState : States
         }
         return targetDir;
     }
+
 }

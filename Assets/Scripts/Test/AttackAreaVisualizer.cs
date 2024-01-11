@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class AttackAreaVisualizer : MonoBehaviour
 {
-   public float attackOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
-    public float sphereSize; // Tamaño del área de detección
 
-    private void OnDrawGizmos()
-    {
-        DrawAttackArea();
-    }
-
-    private void DrawAttackArea()
+    public void DrawAttackArea(float attackOffset, float sphereSize)
     {
         Gizmos.color = Color.red;
         Vector3 atacPosition = transform.position + transform.forward * attackOffset;
         Gizmos.DrawWireSphere(atacPosition, sphereSize / 2);
+    }
+
+    public void DrawAttackArea(Vector3 attackDirection, float sphereSize)
+    {
+        Gizmos.color = Color.red;
+        Vector3 attackPostion = attackDirection;
+        Gizmos.DrawWireSphere(attackPostion, sphereSize / 2);
     }
 }

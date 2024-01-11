@@ -35,7 +35,6 @@ public class EnemyMeleeAttackState : States
     [SerializeField] private GameObject playerRefrences;
     #endregion
 
-    #region AbstractMethods
     public override States CheckTransitions()
     {
         States newGameState = null;
@@ -61,12 +60,6 @@ public class EnemyMeleeAttackState : States
 
     }
 
-    public override void InitializeState(GameObject gameObject)
-    {
-        stateGameObject = gameObject;
-    }
-    #endregion
-
     #region Methods
 
     public override void Start()
@@ -81,8 +74,8 @@ public class EnemyMeleeAttackState : States
             return;
         }
 
-        attackAreaVisualizer.attackOffset = attackOffset;
-        attackAreaVisualizer.sphereSize = sphereSize;
+        //attackAreaVisualizer.attackOffset = attackOffset;
+        //attackAreaVisualizer.sphereSize = sphereSize;
     }
 
     private void ExecuteAttack()

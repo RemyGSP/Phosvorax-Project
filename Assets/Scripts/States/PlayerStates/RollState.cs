@@ -30,7 +30,7 @@ public class RollState : States
         if (stateGameObject.TryGetComponent<Animator>(out Animator objectAnimator))
         {
             animator = objectAnimator;
-            animator.SetBool("dashing", true);
+            animator.SetTrigger("roll");
         }
         playerDirection = PlayerInputController.GetPlayerInputDirection();
     }

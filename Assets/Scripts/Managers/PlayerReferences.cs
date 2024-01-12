@@ -11,17 +11,41 @@ public class PlayerReferences : MonoBehaviour
 
     [Header("Position")]
     static Vector3 playerCoordinates;
-
     #endregion
 
 
     #region Methods
-
+    private void Start()
+    {
+        instance = this;
+    }
     public Vector3 GetPlayerCoordinates()
     {
         playerCoordinates = player.transform.position;
         return playerCoordinates;
     }
 
+    public Vector3 GetMouseTargetDir()
+    {
+        // Obtener la posición del ratón en la pantalla
+        Vector3 mousePos = Input.mousePosition;
+
+        // Calcular la dirección del ratón en el mundo
+        Ray castPoint = Camera.main.ScreenPointToRay(mousePos);
+        RaycastHit hit;
+        Vector3 targetDir = Vector3.zero;
+
+        if (Physics.Raycast(castPoint, out hit, Mathf.Infinity))
+        {
+            targetDir = hit.point; // Conseguir la direccion a la que esta apuntando el raton en el mundo
+            targetDir.y = 0f; // Mantener en el plano XY
+        }
+        else
+        {
+            targetDir = castPoint.direction;
+            targetDir.y = 0f; // Mantener en el plano XY
+        }
+        return targetDir;
+    }
     #endregion
 }

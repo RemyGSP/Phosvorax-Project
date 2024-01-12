@@ -69,12 +69,12 @@ public class BasicAttackState : States
 
         //Lo que tardara en ejecutarse el ataque comparado con la animacion
         currentAttackDelay = attackDelay;
-        Vector3 targetDir = GetMouseTargetDir();
+        Vector3 targetDir = PlayerReferences.instance.GetMouseTargetDir() - stateGameObject.transform.position;
 
         stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
         if (stateGameObject.TryGetComponent<AttackAreaVisualizer>(out AttackAreaVisualizer attAreaVisual))
         {
-            attackAreaVisualizer.DrawAttackArea(1f, 1f );
+            attAreaVisual.DrawAttackArea(400f, 400f);
         }
 
         ExecuteAnim();
@@ -123,26 +123,5 @@ public class BasicAttackState : States
         return;
     }
 
-    private Vector3 GetMouseTargetDir()
-    {
-        // Obtener la posición del ratón en la pantalla
-        Vector3 mousePos = Input.mousePosition;
-
-        // Calcular la dirección del ratón en el mundo
-        Ray castPoint = Camera.main.ScreenPointToRay(mousePos);
-        RaycastHit hit;
-        Vector3 targetDir = Vector3.zero;
-
-        if (Physics.Raycast(castPoint, out hit, Mathf.Infinity))
-        {
-            targetDir = hit.point - stateGameObject.transform.position; // Conseguir la direccion a la que esta apuntando el raton en el mundo
-            targetDir.y = 0f; // Mantener en el plano XY
-        }
-        else
-        {
-            targetDir = castPoint.direction;
-            targetDir.y = 0f; // Mantener en el plano XY
-        }
-        return targetDir;
-    }
+ 
 }

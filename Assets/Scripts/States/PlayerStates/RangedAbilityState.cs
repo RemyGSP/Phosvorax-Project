@@ -75,7 +75,7 @@ public class RangedAbilityState : States
         stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
         if (stateGameObject.TryGetComponent<AttackAreaVisualizer>(out AttackAreaVisualizer attAreaVisual))
         {
-            attackAreaVisualizer.DrawAttackArea(new Vector3(0,0,0), 1f);
+            attackAreaVisualizer.DrawAttackArea(1f,1f);
 
         }
 

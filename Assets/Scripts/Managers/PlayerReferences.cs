@@ -17,7 +17,10 @@ public class PlayerReferences : MonoBehaviour
     #region Methods
     private void Start()
     {
-        instance = this;
+        if (instance == null)
+            instance = this;
+        else
+            Debug.Log("Manager PLayerReferences already exists");
     }
     public Vector3 GetPlayerCoordinates()
     {

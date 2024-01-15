@@ -11,17 +11,17 @@ public class BasicAttackState : States
     [SerializeField] private States rollState;
     [SerializeField] LayerMask enemyLayerMask;
     private Rigidbody rigidBody;
-    [SerializeField] float animOffsetRotation;
+    [SerializeField] private float animOffsetRotation;
 
     [SerializeField] private float attackDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
     [SerializeField] private float attackOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
     [SerializeField] private float sphereSize; // Tamaño del área de detección
     [SerializeField] private float attackDamage;
-    RotateCharacter rotateCharacter;
-    Animator anim;
-    float animationLength;
-    float currentAttackTime;
-    bool canAttack;
+    private RotateCharacter rotateCharacter;
+    private Animator anim;
+    private float animationLength;
+    private float currentAttackTime;
+    private bool canAttack;
     private float currentAttackDelay;
     private Transform playerTransform;
 

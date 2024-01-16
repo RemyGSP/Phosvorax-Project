@@ -11,6 +11,9 @@ public class AttackAreaVisualizer : MonoBehaviour
     private bool isCasting;
     private float currentAreaRadius;
     private Vector3 currentCastLimits;
+    private Vector3 lastPosition;
+
+
 
     private void Start()
     {
@@ -23,6 +26,8 @@ public class AttackAreaVisualizer : MonoBehaviour
             ManageCursor();
         }
     }
+
+    //Esto cambia el width y el height de la imagen que contiene el area del ataque
     public void DrawAttackArea(float attackOffset, float attackRange)
     {
         areaFeedback.enabled = true;
@@ -34,7 +39,6 @@ public class AttackAreaVisualizer : MonoBehaviour
     }
 
 
-    //Dandole el height y width activa el canvas de ra
     public void DrawLongRangeAbilityArea(float wideRange, float longRange)
     {
         areaFeedback.enabled = true;
@@ -45,6 +49,7 @@ public class AttackAreaVisualizer : MonoBehaviour
 
     }
 
+    //Activa y le da width y height a la imagen que contiene el cursor 
     public void DrawCursorIndicator(float cursorWidth, float cursorHeight)
     {
         cursorIndicator.SetActive(true);
@@ -55,36 +60,49 @@ public class AttackAreaVisualizer : MonoBehaviour
     {
         areaFeedback.enabled = false;
     }
+
     private void ManageCursor()
     {
         Debug.Log("Siguiendo");
         Vector3 cursorDir = PlayerReferences.instance.GetMouseTargetDir() - PlayerReferences.instance.GetPlayerCoordinates();
         cursorIndicator.transform.position = GetCursorPositionInsideBounds(cursorDir);
+        lastPosition = cursorIndicator.transform.position - PlayerReferences.instance.GetPlayerCoordinates();
     }
 
+    //Esto busca la posicion sin pasarse fuera del circulo del area
     private Vector3 GetCursorPositionInsideBounds(Vector3 targetDir)
     {
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(areaFeedback.rectTransform, new Vector2(currentCastLimits.x, currentCastLimits.z), Camera.main, out Vector3 worldPoint);
-        Vector3 circleCenterWorldPosition = areaFeedback.rectTransform.position;
         Vector3 aux = Vector3.zero;
         Vector3 playerPos = PlayerReferences.instance.GetPlayerCoordinates();
-        aux = new Vector3(Mathf.Clamp(targetDir.x, -currentAreaRadius,currentAreaRadius), 0, Mathf.Clamp(targetDir.z,-currentAreaRadius,  currentAreaRadius));
-        Debug.Log("Area Radius = " + currentAreaRadius + " Center Position = " + circleCenterWorldPosition + " Clamped Position = " + aux + " Cursor Position = " + targetDir);
+
+        float distanceFromCenter = Vector3.Distance(Vector3.zero, targetDir);
+
+        // Check if the cursor is outside the circle
+        if (distanceFromCenter > currentAreaRadius)
+        {
+            // Move the cursor to the nearest point on the circle
+            aux = targetDir.normalized * currentAreaRadius;
+        }
+        else
+        {
+            aux = targetDir;
+        }
+        //Debug.Log("Area Radius = " + currentAreaRadius + " Center Position = " + circleCenterWorldPosition + " Clamped Position = " + aux + " Cursor Position = " + targetDir);
+        aux.y = 0.1f;
+        Debug.Log(targetDir);
         return aux + playerPos;
     }
-     
+
+
+    //Esto crea cuatro puntos y consigue el radio del circulo
     private void CalculateRadiusInWorldCoordinates()
     {
         Vector3[] corners = new Vector3[4];
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(areaFeedback.rectTransform,new Vector2(areaFeedback.rectTransform.rect.x, areaFeedback.rectTransform.rect.y),Camera.main,out corners[0]);
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(areaFeedback.rectTransform, new Vector2(areaFeedback.rectTransform.rect.x, areaFeedback.rectTransform.rect.yMax), Camera.main, out corners[1]);
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(areaFeedback.rectTransform,new Vector2(areaFeedback.rectTransform.rect.xMax, areaFeedback.rectTransform.rect.yMax),Camera.main,out corners[2]);
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(areaFeedback.rectTransform,new Vector2(areaFeedback.rectTransform.rect.xMax, areaFeedback.rectTransform.rect.y),Camera.main,out corners[3]);
+        areaFeedback.rectTransform.GetWorldCorners(corners);
+        float width = Vector3.Distance(corners[0], corners[3]);
+        float height = Vector3.Distance(corners[0], corners[1]);
+        currentAreaRadius = Mathf.Min(width, height) * 0.5f;
 
-        Vector3 bottomLeft = corners[0];
-        Vector3 topRight = corners[2];
-
-        currentAreaRadius = Vector3.Distance(bottomLeft, topRight) * 0.5f;
     }
 }
 

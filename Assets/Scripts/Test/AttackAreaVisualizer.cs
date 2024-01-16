@@ -70,7 +70,7 @@ public class AttackAreaVisualizer : MonoBehaviour
     }
 
     //Esto busca la posicion sin pasarse fuera del circulo del area
-    private Vector3 GetCursorPositionInsideBounds(Vector3 targetDir)
+    public Vector3 GetCursorPositionInsideBounds(Vector3 targetDir)
     {
         Vector3 aux = Vector3.zero;
         Vector3 playerPos = PlayerReferences.instance.GetPlayerCoordinates();
@@ -87,7 +87,6 @@ public class AttackAreaVisualizer : MonoBehaviour
         {
             aux = targetDir;
         }
-        //Debug.Log("Area Radius = " + currentAreaRadius + " Center Position = " + circleCenterWorldPosition + " Clamped Position = " + aux + " Cursor Position = " + targetDir);
         aux.y = 0.1f;
         Debug.Log(targetDir);
         return aux + playerPos;
@@ -103,6 +102,16 @@ public class AttackAreaVisualizer : MonoBehaviour
         float height = Vector3.Distance(corners[0], corners[1]);
         currentAreaRadius = Mathf.Min(width, height) * 0.5f;
 
+    }
+
+    public void ActivateArea()
+    {
+        areaFeedback.gameObject.SetActive(true);
+    }
+
+    public void DeactivateArea()
+    {
+        areaFeedback.gameObject.SetActive(false);
     }
 }
 

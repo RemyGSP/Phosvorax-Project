@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Timeline;
 
+[CreateAssetMenu(menuName ="States/FirstAbilityState")]
 public class RangedAbilityState : States
 {
     [SerializeField] private States idleState;
@@ -22,6 +23,7 @@ public class RangedAbilityState : States
     Animator anim;
     float animationLength;
     float currentAttackTime;
+    Vector3 attackPosition;
     bool canAttack;
     private float currentAttackDelay;
     private Transform playerTransform;
@@ -35,28 +37,28 @@ public class RangedAbilityState : States
     {
         States newGameState = null;
 
-        //if (currentAttackTime > animationLength)
-        //{
-        //    if (PlayerInputController.GetPlayerInputDirection() != Vector3.zero)
-        //    {
-        //        newGameState = Instantiate(moveState);
-        //    }
-        //    if (PlayerInputController.GetPlayerInputDirection() == Vector3.zero)
-        //    {
-        //        newGameState = Instantiate(idleState);
-        //    }
-        //}
-        //if (PlayerInputController.IsRolling() && PlayerTimers.timer.rollTimer > PlayerTimers.timer.rollCD)
-        //{
-        //    newGameState = Instantiate(rollState);
-        //}
-        //if (newGameState != null)
-        //{
-        //    newGameState.InitializeState(stateGameObject);
-        //    newGameState.Start();
-        //    rigidBody.velocity = Vector3.zero;
-        //    //stateGameObject.transform.rotation = Quaternion.Euler(stateGameObject.transform.rotation.x , stateGameObject.transform.rotation.y - animOffsetRotation, stateGameObject.transform.rotation.z );
-        //}
+        if (currentAttackTime > animationLength)
+        {
+            if (PlayerInputController.GetPlayerInputDirection() != Vector3.zero)
+            {
+                newGameState = Instantiate(moveState);
+            }
+            if (PlayerInputController.GetPlayerInputDirection() == Vector3.zero)
+            {
+                newGameState = Instantiate(idleState);
+            }
+        }
+        if (PlayerInputController.IsRolling() && PlayerTimers.timer.rollTimer > PlayerTimers.timer.rollCD)
+        {
+            newGameState = Instantiate(rollState);
+        }
+        if (newGameState != null)
+        {
+            newGameState.InitializeState(stateGameObject);
+            newGameState.Start();
+            rigidBody.velocity = Vector3.zero;
+            //stateGameObject.transform.rotation = Quaternion.Euler(stateGameObject.transform.rotation.x , stateGameObject.transform.rotation.y - animOffsetRotation, stateGameObject.transform.rotation.z );
+        }
         return newGameState;
 
     }
@@ -75,8 +77,8 @@ public class RangedAbilityState : States
         stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
         if (stateGameObject.TryGetComponent<AttackAreaVisualizer>(out AttackAreaVisualizer attAreaVisual))
         {
-            attackAreaVisualizer.DrawAttackArea(1f,1f);
-
+            attAreaVisual.DrawAttackArea(400f, 400f);
+            attackPosition =attAreaVisual.GetCursorPositionInsideBounds(PlayerReferences.instance.GetMouseTargetDir() - PlayerReferences.instance.GetPlayerCoordinates());
         }
 
         ExecuteAnim();
@@ -94,7 +96,6 @@ public class RangedAbilityState : States
 
     void ExecuteAttack()
     {
-        Vector3 attackPosition = playerTransform.position + playerTransform.forward * attackOffset;
         Collider[] hitColliders = Physics.OverlapSphere(attackPosition, sphereSize / 2, enemyLayerMask, QueryTriggerInteraction.UseGlobal);
 
         foreach (Collider hitCollider in hitColliders)

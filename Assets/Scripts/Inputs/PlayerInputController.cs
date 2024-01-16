@@ -5,12 +5,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputController : MonoBehaviour
 {
-    
     static private Vector3 movementDirection;
     static private Vector2 cursorPosition;
     static private bool isRolling;
     static private bool isAttacking;
     static private bool isShooting;
+    static private bool isUsingAbility;
+    static private int abilityPressed;
+
+
     public void OnMove(InputValue moveValue) 
     {
         var temporalMovementDirection = moveValue.Get<Vector2>();
@@ -76,6 +79,23 @@ public class PlayerInputController : MonoBehaviour
         return isAttacking;
     }
     
+    public void OnAbility1(InputValue inputValue)
+    {
+        if (inputValue.isPressed)
+            isUsingAbility = true;
+        else
+            isUsingAbility = false;
+        abilityPressed = 1;
+    }
 
+    static public bool IsUsingAbility()
+    {
+        return isUsingAbility;
+    }
+
+    static public int GetCurrentAbility()
+    {
+        return abilityPressed;
+    }
     
 }

@@ -12,6 +12,10 @@ public class MoveState : States
     [SerializeField] private States idleState;
     [SerializeField] private States rollState;
     [SerializeField] private States basicAttackState;
+    [SerializeField] private States firstAbilityState;
+    [SerializeField] private States secondAbilityState;
+    [SerializeField] private States thirdAbilityState;
+    [SerializeField] private States fourthAbilityState;
 
     private RotateCharacter rotateCharacter;
 
@@ -47,8 +51,15 @@ public class MoveState : States
         }
         if (PlayerInputController.IsAttacking() && PlayerTimers.timer.playerBasicAttackTimer > PlayerTimers.timer.playerBasicAttackCD)
         {
-            newGameState = Instantiate(basicAttackState);
-        }     
+            switch (AbilityManager.instance.GetCurrentAbility())
+            {
+                case 0: newGameState = basicAttackState; break;
+                case 1: newGameState = firstAbilityState; break;
+                case 2: newGameState = secondAbilityState; break;
+                case 3: newGameState = thirdAbilityState; break;
+                case 4: newGameState = fourthAbilityState; break;
+            }
+        }
         if (newGameState != null)
         {
             newGameState.InitializeState(stateGameObject);

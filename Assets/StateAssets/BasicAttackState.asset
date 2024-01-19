@@ -15,7 +15,11 @@ MonoBehaviour:
   idleState: {fileID: 11400000, guid: ea1e15a44a96f6347860d5aad4fc4aa1, type: 2}
   moveState: {fileID: 11400000, guid: bdcd29e445c155343bf6318d7ffd0c4b, type: 2}
   rollState: {fileID: 11400000, guid: 9520aa73a3aaeec4f847863908a65901, type: 2}
-  atacDelay: 0.1
-  atacOffset: 1.7
+  targetHitLayers:
+    serializedVersion: 2
+    m_Bits: 192
+  attackDelay: 0.1
+  attackOffset: 2.5
   sphereSize: 3
+  attackDamage: 1
   attackAreaVisualizer: {fileID: 0}

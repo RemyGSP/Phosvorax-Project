@@ -9,7 +9,8 @@ public class BasicAttackState : States
     [SerializeField] private States idleState;
     [SerializeField] private States moveState;
     [SerializeField] private States rollState;
-    [SerializeField] LayerMask enemyLayerMask;
+    [SerializeField] LayerMask targetHitLayers;
+
     private Rigidbody rigidBody;
 
     [SerializeField] private float attackDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
@@ -98,7 +99,8 @@ public class BasicAttackState : States
     void ExecuteAttack()
     {
         Vector3 attackPosition = playerTransform.position + playerTransform.forward * attackOffset;
-        Collider[] hitColliders = Physics.OverlapSphere(attackPosition, sphereSize / 2, enemyLayerMask, QueryTriggerInteraction.UseGlobal);
+
+        Collider[] hitColliders = Physics.OverlapSphere(attackPosition, sphereSize / 2, targetHitLayers, QueryTriggerInteraction.UseGlobal);
 
         foreach (Collider hitCollider in hitColliders)
         {

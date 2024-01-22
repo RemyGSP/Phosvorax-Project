@@ -5,14 +5,19 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputController : MonoBehaviour
 {
-    static private Vector3 movementDirection;
-    static private Vector2 cursorPosition;
-    static private bool isRolling;
-    static private bool isAttacking;
-    static private bool isShooting;
-    static private bool isUsingAbility;
-    static private int abilityPressed;
+    static public PlayerInputController Instance { get; private set; }
+    private Vector3 movementDirection;
+    private Vector2 cursorPosition;
+    private bool isRolling;
+    private bool isAttacking;
+    private bool isShooting;
+    private bool isUsingAbility;
+    private int abilityPressed;
 
+    private void Start()
+    {
+        Instance = this;
+    }
 
     public void OnMove(InputValue moveValue) 
     {
@@ -28,7 +33,7 @@ public class PlayerInputController : MonoBehaviour
         return skewedInput;
     }
 
-    static public Vector3 GetPlayerInputDirection()
+    public Vector3 GetPlayerInputDirection()
     {
         return movementDirection;
     }
@@ -37,7 +42,7 @@ public class PlayerInputController : MonoBehaviour
     {
         cursorPosition = inputValue.Get<Vector2>();
     }
-    static public Vector2 GetCursorPosition()
+    public Vector2 GetCursorPosition()
     {
         return cursorPosition;
     }
@@ -49,7 +54,7 @@ public class PlayerInputController : MonoBehaviour
         else
             isShooting = false;    
     }
-    static public bool IsShooting()
+    public bool IsShooting()
     {
         return isShooting;
     }
@@ -62,7 +67,7 @@ public class PlayerInputController : MonoBehaviour
         else 
             isRolling = false;
     }    
-    static public bool IsRolling()
+    public bool IsRolling()
     {
         return isRolling;
     }
@@ -74,7 +79,7 @@ public class PlayerInputController : MonoBehaviour
         else 
             isAttacking = false;
     }    
-    static public bool IsAttacking()
+    public bool IsAttacking()
     {
         return isAttacking;
     }
@@ -88,12 +93,12 @@ public class PlayerInputController : MonoBehaviour
         abilityPressed = 1;
     }
 
-    static public bool IsUsingAbility()
+    public bool IsUsingAbility()
     {
         return isUsingAbility;
     }
 
-    static public int GetCurrentAbility()
+    public int GetCurrentAbility()
     {
         return abilityPressed;
     }

@@ -44,13 +44,18 @@ public class HealthBehaviour : MonoBehaviour
     }
 
 
-    public void CheckIfDeath()
+    public bool CheckIfDeath()
     {
+        bool aux = false;
         if (currentHealth <= minHealth)
+        {
+            aux = true;
             onDeath.Invoke();
+        }
+        return aux;
     }
 
-    public void Revive()
+        public void Revive()
     {
         currentHealth = maxHealth;
         onRevive.Invoke();

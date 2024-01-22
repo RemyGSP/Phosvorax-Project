@@ -11,34 +11,35 @@ public class EnemyIdleState : States
     [SerializeField] private States EnemyAttackState;
     [SerializeField] private States EnemyDieState;
 
+
+    [SerializeField] private float maxAttackDistance = 5f;
+    [SerializeField] private float distanceToSeePlayer = 20f;
     #region Constructor
     public EnemyIdleState(GameObject stateGameObject) : base(stateGameObject)
     {
     }
     #endregion
 
-    #region Variables
-    private bool playerSeen;
-    #endregion
-
     #region AbstractMethods
     public override States CheckTransitions()
     {
+        float distance = Vector3.Distance(PlayerReferences.instance.GetPlayerCoordinates(), stateGameObject.transform.position);
         States newEnemyState = null;
 
-        if (playerSeen)
+        if (distance < distanceToSeePlayer)
         {
             newEnemyState = EnemyChaseState;
         }
-        /*if (PlayerInputController.IsRolling() && Timers.timer.rollTimer > Timers.timer.rollCD)
+        if (stateGameObject.GetComponent<HealthBehaviour>().CheckIfDeath())
         {
             newEnemyState = EnemyDieState;
-        }*/
+        }
 
-        /*if (//HACER PARA QUE ATAQUE)
+        if (distance <= maxAttackDistance)
         {
             newEnemyState = EnemyAttackState;
-        }*/
+        }
+
         if (newEnemyState != null)
         {
             newEnemyState.InitializeState(stateGameObject);
@@ -50,9 +51,8 @@ public class EnemyIdleState : States
     #endregion
 
     #region Methods
-    public override void Start()
+    void Start()
     {
-        playerSeen = false;
     }
 
     // Aquí hacer la lógica para cuando el jugador no haga nada, normalmente solo será que haga la animación de idle del objeto
@@ -62,16 +62,6 @@ public class EnemyIdleState : States
         return;
     }
 
-
-    //CAMBIAR ESTO
-
-    /*private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerSeen = true;
-        }
-    }*/
 
     #endregion
 }

@@ -1,19 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.Android;
 
 [CreateAssetMenu(menuName = "States/PlayerIdleState")]
 public class IdleState : States
 {
-    [Header("States")]
-    [SerializeField] private States moveState;
-    [SerializeField] private States rollState;
-    [SerializeField] private States basicAttackState;
-    [SerializeField] private States firstAbilityState;
-    [SerializeField] private States secondAbilityState;
-    [SerializeField] private States thirdAbilityState;
-    [SerializeField] private States fourthAbilityState;
-
 
     #region Constructor
     public IdleState(GameObject stateGameObject) : base(stateGameObject)
@@ -24,31 +16,29 @@ public class IdleState : States
     #region Methods
     public override States CheckTransitions()
     {
+        bool notChanged = true;
+        int counter = 0;
         States newPlayerState = null;
-        if (PlayerInputController.GetPlayerInputDirection() != Vector3.zero)
+
+        while (notChanged)
         {
-            newPlayerState = moveState;
-        }
-        if (PlayerInputController.IsRolling() && PlayerTimers.timer.rollTimer > PlayerTimers.timer.rollCD)
-        {
-            newPlayerState = rollState;
-        }
-        if (PlayerInputController.IsAttacking() && PlayerTimers.timer.playerBasicAttackTimer > PlayerTimers.timer.playerBasicAttackCD)
-        {
-            switch (AbilityManager.instance.GetCurrentAbility())
+            newPlayerState = stateTransitions[counter].GetExitState();
+            if (newPlayerState != null)
             {
-                case 0: newPlayerState = basicAttackState; break;
-                case 1: newPlayerState = firstAbilityState; break;
-                case 2: newPlayerState = secondAbilityState; break;
-                case 3: newPlayerState = thirdAbilityState; break;
-                case 4: newPlayerState = fourthAbilityState; break;
+                notChanged = false;
+                newPlayerState.InitializeState(stateGameObject);
+                newPlayerState.Start();
+            }
+            if (counter < stateTransitions.Length - 1)
+            {
+                counter++;
+            }
+            else
+            {
+                notChanged = false;
             }
         }
-        if (newPlayerState != null)
-        {
-            newPlayerState.InitializeState(stateGameObject);
-            newPlayerState.Start();
-        }
+
         return newPlayerState;
     }
     // Aquí hacer la lógica para cuando el jugador no haga nada, normalmente solo será que haga la animación de idle del objeto

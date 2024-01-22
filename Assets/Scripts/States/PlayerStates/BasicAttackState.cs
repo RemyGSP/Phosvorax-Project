@@ -37,24 +37,30 @@ public class BasicAttackState : States
     {
         States newGameState = null;
 
-         if (currentAttackTime > animationLength){
-            if (PlayerInputController.GetPlayerInputDirection() != Vector3.zero){
-                newGameState = Instantiate(moveState);
+        if (currentAttackTime > animationLength)
+        {
+            bool notChanged = true;
+            int counter = 0;
+
+            while (notChanged)
+            {
+                newGameState = stateTransitions[counter].GetExitState();
+                if (newGameState != null)
+                {
+                    notChanged = false;
+                    newGameState.InitializeState(stateGameObject);
+                    newGameState.Start();
+                    rigidBody.velocity = Vector3.zero;
+                }
+                if (counter < stateTransitions.Length - 1)
+                {
+                    counter++;
+                }
+                else
+                {
+                    notChanged = false;
+                }
             }
-            if (PlayerInputController.GetPlayerInputDirection() == Vector3.zero){
-                newGameState = Instantiate(idleState);
-            }     
-         }
-        if (PlayerInputController.IsRolling() && PlayerTimers.timer.rollTimer > PlayerTimers.timer.rollCD)
-        {
-            newGameState = Instantiate(rollState);
-        }
-        if (newGameState != null)
-        {
-            newGameState.InitializeState(stateGameObject);
-            newGameState.Start();
-            rigidBody.velocity = Vector3.zero;
-            //stateGameObject.transform.rotation = Quaternion.Euler(stateGameObject.transform.rotation.x , stateGameObject.transform.rotation.y - animOffsetRotation, stateGameObject.transform.rotation.z );
         }
         return newGameState;
         

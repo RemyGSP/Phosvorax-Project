@@ -2,17 +2,59 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDieState : MonoBehaviour
+[CreateAssetMenu(menuName = "EnemyStates/EnemyDieState")]
+public class EnemyDieState : States
 {
-    // Start is called before the first frame update
-    void Start()
+    [Header("States")]
+    [SerializeField] private States EnemyIdleState;
+
+    #region Constructor
+    public EnemyDieState(GameObject stateGameObject) : base(stateGameObject)
     {
-        
+    }
+    #endregion
+
+
+    #region Variables
+
+    private bool canRevive;
+    #endregion
+
+    public override States CheckTransitions()
+    {
+        States newGameState = null;
+        if (canRevive)
+        {
+            stateGameObject.SetActive(true);
+            newGameState = Instantiate(EnemyIdleState);
+        }
+        if (newGameState != null)
+        {
+            newGameState.InitializeState(stateGameObject);
+            newGameState.Start();
+        }
+        return newGameState;
+
     }
 
-    // Update is called once per frame
-    void Update()
+    #region Methods
+
+
+    public override void Start()
     {
-        
+        stateGameObject.SetActive(false);
+        canRevive = false;
     }
+
+    public override void FixedUpdate()
+    {
+
+    }
+
+    public override void Update()
+    {
+    }
+
+    #endregion
 }
+

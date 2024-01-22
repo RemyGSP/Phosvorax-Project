@@ -8,14 +8,7 @@ using UnityEngine.EventSystems;
 [CreateAssetMenu(menuName = "States/PlayerMoveState")]
 public class MoveState : States
 {
-    [Header("States")]
-    [SerializeField] private States idleState;
-    [SerializeField] private States rollState;
-    [SerializeField] private States basicAttackState;
-    [SerializeField] private States firstAbilityState;
-    [SerializeField] private States secondAbilityState;
-    [SerializeField] private States thirdAbilityState;
-    [SerializeField] private States fourthAbilityState;
+
 
     private RotateCharacter rotateCharacter;
 
@@ -39,35 +32,33 @@ public class MoveState : States
     #endregion
 
     #region Métodos abstractos
+
     public override States CheckTransitions()
     {
-        States newGameState = null;
-        
-        if (PlayerInputController.IsRolling() && PlayerTimers.timer.rollTimer > PlayerTimers.timer.rollCD){
-            newGameState = Instantiate(rollState);
-        }
-        if (PlayerInputController.GetPlayerInputDirection() == Vector3.zero){
-            newGameState = Instantiate(idleState);
-        }
-        if (PlayerInputController.IsAttacking() && PlayerTimers.timer.playerBasicAttackTimer > PlayerTimers.timer.playerBasicAttackCD)
+        bool notChanged = true;
+        int counter = 0;
+        States newPlayerState = null;
+
+        while (notChanged)
         {
-            switch (AbilityManager.instance.GetCurrentAbility())
+            newPlayerState = stateTransitions[counter].GetExitState();
+            if (newPlayerState != null)
             {
-                case 0: newGameState = basicAttackState; break;
-                case 1: newGameState = firstAbilityState; break;
-                case 2: newGameState = secondAbilityState; break;
-                case 3: newGameState = thirdAbilityState; break;
-                case 4: newGameState = fourthAbilityState; break;
+                notChanged = false;
+                newPlayerState.InitializeState(stateGameObject);
+                newPlayerState.Start();
+            }
+            if (counter < stateTransitions.Length -1 )
+            { 
+                counter++;
+            }
+            else
+            {
+                notChanged = false;
             }
         }
-        if (newGameState != null)
-        {
-            newGameState.InitializeState(stateGameObject);
-            newGameState.Start();
-            rigidBody.velocity = Vector3.zero;
-            animator.SetBool("running",false);
-        }
-        return newGameState;
+
+            return newPlayerState;
     }
     #endregion
 
@@ -105,7 +96,7 @@ public class MoveState : States
 
     public override void FixedUpdate()
     {
-        Vector3 PlayerDirection = PlayerInputController.GetPlayerInputDirection();
+        Vector3 PlayerDirection = PlayerInputController.Instance. GetPlayerInputDirection();
         rigidBody.velocity = Move(PlayerDirection);
         stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerDirection);
     }

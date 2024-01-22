@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 [CreateAssetMenu(menuName = "States/PlayerRollState")]
 public class RollState : States
@@ -32,31 +33,36 @@ public class RollState : States
             animator = objectAnimator;
             animator.SetTrigger("roll");
         }
-        playerDirection = PlayerInputController.GetPlayerInputDirection();
+        playerDirection = PlayerInputController.Instance.GetPlayerInputDirection();
     }
 
+ 
     public override States CheckTransitions()
     {
         States newPlayerState = null;
 
-        if (PlayerTimers.timer.rollTimer < PlayerTimers.timer.rollCD)
+        bool notChanged = true;
+        int counter = 0;
+
+        while (notChanged)
         {
-            
-            if (PlayerInputController.GetPlayerInputDirection() != Vector3.zero){
-                newPlayerState = moveState;
-            }     
-            else{
-                newPlayerState = idleState;
+            newPlayerState = stateTransitions[counter].GetExitState();
+            if (newPlayerState != null)
+            {
+                notChanged = false;
+                newPlayerState.InitializeState(stateGameObject);
+                newPlayerState.Start();
+                rigidBody.velocity = Vector3.zero;
+                animator.SetBool("dashing", false);
             }
-                
-                
-        }
-        if (newPlayerState != null)
-        {
-            newPlayerState.InitializeState(stateGameObject);
-            newPlayerState.Start();
-            rigidBody.velocity = Vector3.zero;
-            animator.SetBool("dashing", false); 
+            if (counter < stateTransitions.Length - 1)
+            {
+                counter++;
+            }
+            else
+            {
+                notChanged = false;
+            }
         }
         return newPlayerState;
     }

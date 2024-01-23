@@ -30,10 +30,13 @@ public class AttackAreaVisualizer : MonoBehaviour
     //Esto cambia el width y el height de la imagen que contiene el area del ataque
     public void DrawAttackArea(float attackOffset, float attackRange)
     {
-        areaFeedback.enabled = true;
         areaFeedback.rectTransform.sizeDelta = new Vector2(attackRange, attackRange);
         currentCastLimits = new Vector3(attackRange, 0, attackRange);
-        DrawCursorIndicator(50f, 50f);
+        if (!AbilityManager.instance.smartCast)
+        {
+            DrawCursorIndicator(50f, 50f);
+            areaFeedback.enabled = true;
+        }
         CalculateRadiusInWorldCoordinates();
 
     }
@@ -41,10 +44,13 @@ public class AttackAreaVisualizer : MonoBehaviour
 
     public void DrawLineRangeAbilityArea(float wideRange, float longRange)
     {
-        areaFeedback.enabled = true;
         areaFeedback.rectTransform.sizeDelta = new Vector2(wideRange, longRange);
         currentCastLimits = new Vector3(wideRange, 0, longRange);
-        DrawCursorIndicator(50f, longRange);
+        if (!AbilityManager.instance.smartCast)
+        {
+            DrawCursorIndicator(50f, longRange);
+            areaFeedback.enabled = true;
+        }
         CalculateRadiusInWorldCoordinates();
 
     }

@@ -13,6 +13,7 @@ public class AbilityManager : MonoBehaviour
     [SerializeField] private Ability[] abilities;
     public bool isCasting;
     public bool throwAbility;
+    public bool smartCast;
     private void Start()
     {
         isCasting = false;
@@ -23,30 +24,48 @@ public class AbilityManager : MonoBehaviour
     //
     private void Update()
     {
-        if (PlayerInputController.Instance.IsUsingAbility())
+        currentAbility = PlayerInputController.Instance.GetCurrentAbility();
+        if (!smartCast)
         {
-            currentAbility = PlayerInputController.Instance.GetCurrentAbility();
-            CallAbilityIndicator();
-            isCasting = true;
+            if (PlayerInputController.Instance.IsUsingAbility() && PlayerTimers.timer.abilityTimers[currentAbility-1] > PlayerTimers.timer.abilityCD[currentAbility-1])
+            {
+                currentAbility = PlayerInputController.Instance.GetCurrentAbility();
+                CallAbilityIndicator();
+                isCasting = true;
+            }
+            else
+            {
+                attAreaVisual.DeactivateArea();
+            }
+            if (PlayerInputController.Instance.IsCanceling())
+            {
+                isCasting = false;
+                PlayerInputController.Instance.StopUsingAbility();
+            }
+            Debug.Log(PlayerInputController.Instance.IsCanceling());
+            if (isCasting && !PlayerInputController.Instance.IsUsingAbility())
+            {
+                throwAbility = true;
+            }
+            else
+            {
+                throwAbility = false;
+            }
         }
         else
         {
-            attAreaVisual.DeactivateArea();
+            if (PlayerInputController.Instance.IsUsingAbility())
+            {
+                throwAbility = true;
+            }
+            else
+            {
+                throwAbility = false;
+            }
         }
-        if (isCasting && !PlayerInputController.Instance.IsUsingAbility())
-        {
-            throwAbility = true;
-        }
-        else
-        {
-            throwAbility = false;
-        }
-    }
-    //0 es el melee y de 1 a 4 son las habilidades en orden
-    public int GetCurrentAbility()
-    {
-        return currentAbility;
-    }
+     }
+
+
 
     public void CallAbilityIndicator()
     {

@@ -13,6 +13,7 @@ public class Ability2Decision : Decision
             int currentAbility = PlayerInputController.Instance.GetCurrentAbility();
             if (currentAbility == 2)
             {
+                HUDManager.instance.AbilityStartCooldown(1);
                 aux = true;
             }
 

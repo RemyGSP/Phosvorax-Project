@@ -12,10 +12,12 @@ public class PlayerInputController : MonoBehaviour
     private bool isAttacking;
     private bool isShooting;
     private bool isUsingAbility;
+    private bool isCanceling;
     private int abilityPressed;
 
     private void Start()
     {
+        abilityPressed = 1;
         Instance = this;
     }
 
@@ -78,7 +80,20 @@ public class PlayerInputController : MonoBehaviour
             isAttacking = true;
         else 
             isAttacking = false;
-    }    
+    }
+
+    public void OnCancel(InputValue inputValue)
+    {
+        if (inputValue.isPressed)
+            isCanceling = true;
+        else
+            isCanceling = false;
+    }
+
+    public bool IsCanceling()
+    {
+        return isCanceling;
+    }
     public bool IsAttacking()
     {
         return isAttacking;
@@ -86,11 +101,15 @@ public class PlayerInputController : MonoBehaviour
     
     public void OnAbility1(InputValue inputValue)
     {
-        if (inputValue.isPressed)
-            isUsingAbility = true;
-        else
+        if (!inputValue.isPressed)
+        {
             isUsingAbility = false;
-        abilityPressed = 1;
+        }
+        else
+        {
+            abilityPressed = 1;
+            isUsingAbility = true;
+        }
     }
 
     public bool IsUsingAbility()
@@ -101,6 +120,11 @@ public class PlayerInputController : MonoBehaviour
     public int GetCurrentAbility()
     {
         return abilityPressed;
+    }
+
+    public void StopUsingAbility()
+    {
+        isUsingAbility = false;
     }
     
 }

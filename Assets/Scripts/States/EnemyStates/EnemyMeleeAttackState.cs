@@ -81,7 +81,7 @@ public class EnemyMeleeAttackState : States
 
     #region Methods
 
-    void Start()
+    public override void Start()
     {
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         anim = stateGameObject.GetComponent<Animator>();

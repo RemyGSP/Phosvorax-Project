@@ -8,7 +8,7 @@ public class IsAttackingDecision : Decision
     public override bool Decide()
     {
         bool aux = false;
-        if (PlayerInputController.Instance.IsAttacking())
+        if (PlayerInputController.Instance.IsAttacking() && !PlayerInputController.Instance.IsUsingAbility())
         {
             aux = true;
         }

@@ -50,6 +50,7 @@ public class RollState : States
                     notChanged = false;
                     newPlayerState.InitializeState(stateGameObject);
                     newPlayerState.Start();
+                    PlayerTimers.timer.rollTimer = 0;
                     rigidBody.velocity = Vector3.zero;
                     //animator.SetBool("dashing", false);
                 }
@@ -72,10 +73,6 @@ public class RollState : States
         {
             Dash();
             currentDashTime += Time.deltaTime;
-        }
-        else
-        {
-            PlayerTimers.timer.rollTimer = 0;
         }
     }
 

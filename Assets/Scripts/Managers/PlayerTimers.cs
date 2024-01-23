@@ -11,25 +11,22 @@ public class PlayerTimers : MonoBehaviour
     public float rollTimer;
     public float rollCD;
 
-    public float ability1Timer;
-    public float ability1CD;
+    public float[] abilityTimers;
+    [SerializeField] public float[] abilityCD;
 
-    public float ability2Timer;
-    public float ability2CD;
-
-    public float ability3Timer;
-    public float ability3CD;
-
-    public float ability4Timer;
-    public float ability4CD;
     private void Start()
     {
+        abilityTimers = new float[4];
         if (timer == null)
+        {
             timer = this;
+        }
     }
+
     private void Update()
     {
+        abilityTimers[0] += Time.deltaTime;
         playerBasicAttackTimer += Time.deltaTime;
         rollTimer += Time.deltaTime;
-    } 
+    }
 }

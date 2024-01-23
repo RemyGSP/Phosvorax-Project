@@ -30,6 +30,7 @@ public class StateMachine : MonoBehaviour
         States newState = currentState.CheckTransitions();
         if (newState is not null)
             currentState = newState;
+        Debug.Log(newState);
     }
 
 }

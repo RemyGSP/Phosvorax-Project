@@ -8,7 +8,7 @@ public class IsRollingDecision : Decision
     public override bool Decide()
     {
         bool aux = false;
-        if (PlayerInputController.Instance.IsRolling())
+        if (PlayerInputController.Instance.IsRolling() && PlayerTimers.timer.rollTimer > PlayerTimers.timer.rollCD)
         {
             aux = true;
         }

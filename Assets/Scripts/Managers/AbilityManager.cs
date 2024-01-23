@@ -10,28 +10,52 @@ public class AbilityManager : MonoBehaviour
     private int currentAbility;
     //[SerializeField] private Attack[] currentAbilityState;
     [SerializeField] private  AttackAreaVisualizer attAreaVisual;
+    [SerializeField] private Ability[] abilities;
+    public bool isCasting;
+    public bool throwAbility;
     private void Start()
     {
+        isCasting = false;
+        throwAbility = false;
         instance = this;
     }
 
-
-    //0 es el melee y de 1 a 4 son las habilidades en orden
-    public int GetCurrentAbility()
+    //
+    private void Update()
     {
         if (PlayerInputController.Instance.IsUsingAbility())
         {
             currentAbility = PlayerInputController.Instance.GetCurrentAbility();
             CallAbilityIndicator();
+            isCasting = true;
         }
         else
-            currentAbility = 0;
+        {
+            attAreaVisual.DeactivateArea();
+        }
+        if (isCasting && !PlayerInputController.Instance.IsUsingAbility())
+        {
+            throwAbility = true;
+        }
+        else
+        {
+            throwAbility = false;
+        }
+    }
+    //0 es el melee y de 1 a 4 son las habilidades en orden
+    public int GetCurrentAbility()
+    {
         return currentAbility;
     }
 
     public void CallAbilityIndicator()
     {
-        //attAreaVisual.DrawAttackArea(currentAbility.range);
+        attAreaVisual.ActivateArea();
+        attAreaVisual.DrawAttackArea(abilities[currentAbility].abilityRange, abilities[currentAbility].abilityRange);
     }
     
+    public void CastedAbility()
+    {
+        isCasting = false;
+    }
 }

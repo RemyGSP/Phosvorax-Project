@@ -47,6 +47,8 @@ public class MoveState : States
                 notChanged = false;
                 newPlayerState.InitializeState(stateGameObject);
                 newPlayerState.Start();
+                animator.SetBool("running", false);
+                rigidBody.velocity = Vector3.zero;
             }
             if (counter < stateTransitions.Length -1 )
             { 

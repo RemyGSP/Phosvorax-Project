@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e769ffc821571b48bf497ed8ae79914, type: 3}
   m_Name: EnemyIdleState
   m_EditorClassIdentifier: 
-  EnemyChaseState: {fileID: 11400000, guid: 6a98714e9545670458ab38c11c94e783, type: 2}
-  EnemyAttackState: {fileID: 11400000, guid: b7ee02d385c938c469bb3171e4e510ea, type: 2}
-  EnemyDieState: {fileID: 11400000, guid: cf0f2c5af742ed540b943fba70834e85, type: 2}
+  stateTransitions: []
+  EnemyChaseState: {fileID: 0}
+  EnemyAttackState: {fileID: 0}
+  EnemyDieState: {fileID: 0}
   maxAttackDistance: 5
   distanceToSeePlayer: 20

@@ -12,16 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972e03664988c9b41b036c3ec68d842d, type: 3}
   m_Name: FirstAbilityState
   m_EditorClassIdentifier: 
-  stateTransitions: []
-  idleState: {fileID: 0}
-  moveState: {fileID: 0}
-  rollState: {fileID: 0}
+  stateTransitions:
+  - decisionToBeMade: {fileID: 11400000, guid: 822dfe0f64e7e6e45a98657d28482221, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: 9520aa73a3aaeec4f847863908a65901,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 0}
+  - decisionToBeMade: {fileID: 11400000, guid: cd1d39069d32b3f419bddb153b7c11d4, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: bdcd29e445c155343bf6318d7ffd0c4b,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 11400000, guid: ea1e15a44a96f6347860d5aad4fc4aa1,
+      type: 2}
+  abilityRange: 400
   enemyLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   animOffsetRotation: 0
-  attackDelay: 0
-  attackOffset: 0
-  sphereSize: 0
-  attackDamage: 0
+  attackDelay: 0.5
+  attackOffset: 2.5
+  sphereSize: 3
+  attackDamage: 5
+  abilityFeedback: {fileID: 2780774166322537487, guid: b498e1ccdf178dd46a7697ac47aa0f2e,
+    type: 3}
   attackAreaVisualizer: {fileID: 0}

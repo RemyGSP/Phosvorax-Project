@@ -6,9 +6,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "States/PlayerBasicAttackState")]
 public class BasicAttackState : States
 {
-    [SerializeField] private States idleState;
-    [SerializeField] private States moveState;
-    [SerializeField] private States rollState;
     [SerializeField] LayerMask enemyLayerMask;
     private Rigidbody rigidBody;
     [SerializeField] private float animOffsetRotation;

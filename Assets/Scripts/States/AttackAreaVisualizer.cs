@@ -39,12 +39,12 @@ public class AttackAreaVisualizer : MonoBehaviour
     }
 
 
-    public void DrawLongRangeAbilityArea(float wideRange, float longRange)
+    public void DrawLineRangeAbilityArea(float wideRange, float longRange)
     {
         areaFeedback.enabled = true;
         areaFeedback.rectTransform.sizeDelta = new Vector2(wideRange, longRange);
         currentCastLimits = new Vector3(wideRange, 0, longRange);
-        DrawCursorIndicator(50f, 50f);
+        DrawCursorIndicator(50f, longRange);
         CalculateRadiusInWorldCoordinates();
 
     }
@@ -63,7 +63,6 @@ public class AttackAreaVisualizer : MonoBehaviour
 
     private void ManageCursor()
     {
-        Debug.Log("Siguiendo");
         Vector3 cursorDir = PlayerReferences.instance.GetMouseTargetDir() - PlayerReferences.instance.GetPlayerCoordinates();
         cursorIndicator.transform.position = GetCursorPositionInsideBounds(cursorDir);
         lastPosition = cursorIndicator.transform.position - PlayerReferences.instance.GetPlayerCoordinates();
@@ -88,7 +87,6 @@ public class AttackAreaVisualizer : MonoBehaviour
             aux = targetDir;
         }
         aux.y = 0.1f;
-        Debug.Log(targetDir);
         return aux + playerPos;
     }
 
@@ -107,11 +105,13 @@ public class AttackAreaVisualizer : MonoBehaviour
     public void ActivateArea()
     {
         areaFeedback.gameObject.SetActive(true);
+        cursorIndicator.gameObject.SetActive(true);
     }
 
     public void DeactivateArea()
     {
         areaFeedback.gameObject.SetActive(false);
+        cursorIndicator.gameObject.SetActive(false);
     }
 }
 

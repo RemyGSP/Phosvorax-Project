@@ -8,7 +8,7 @@ public class Ability1Decision : Decision
     public override bool Decide()
     {
         bool aux = false;
-        if (PlayerInputController.Instance.IsAttacking())
+        if (AbilityManager.instance.throwAbility)
         {
             int currentAbility = PlayerInputController.Instance.GetCurrentAbility();
             if (currentAbility == 1)

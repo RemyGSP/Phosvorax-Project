@@ -6,15 +6,11 @@ using UnityEngine;
 using UnityEngine.Timeline;
 
 [CreateAssetMenu(menuName ="States/FirstAbilityState")]
-public class RangedAbilityState : States
+public class RangedAbilityState : Ability
 {
-    [SerializeField] private States idleState;
-    [SerializeField] private States moveState;
-    [SerializeField] private States rollState;
     [SerializeField] LayerMask enemyLayerMask;
     private Rigidbody rigidBody;
     [SerializeField] float animOffsetRotation;
-
     [SerializeField] private float attackDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
     [SerializeField] private float attackOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
     [SerializeField] private float sphereSize; // Tamaño del área de detección
@@ -27,6 +23,8 @@ public class RangedAbilityState : States
     bool canAttack;
     private float currentAttackDelay;
     private Transform playerTransform;
+    [SerializeField] GameObject abilityFeedback;
+    GameObject currentFeedback;
 
     [SerializeField] private AttackAreaVisualizer attackAreaVisualizer;
     public RangedAbilityState(GameObject stateGameObject) : base(stateGameObject)
@@ -51,6 +49,7 @@ public class RangedAbilityState : States
                     newGameState.InitializeState(stateGameObject);
                     newGameState.Start();
                     rigidBody.velocity = Vector3.zero;
+                    Destroy(currentFeedback);
                 }
                 if (counter < stateTransitions.Length - 1)
                 {
@@ -68,6 +67,7 @@ public class RangedAbilityState : States
 
     public override void Start()
     {
+        AbilityManager.instance.CastedAbility();
         anim = stateGameObject.GetComponent<Animator>();
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
@@ -75,12 +75,11 @@ public class RangedAbilityState : States
 
         //Lo que tardara en ejecutarse el ataque comparado con la animacion
         currentAttackDelay = attackDelay;
-        Vector3 targetDir = GetMouseTargetDir();
+        Vector3 targetDir = PlayerReferences.instance.GetMouseTargetDir();
 
         stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
         if (stateGameObject.TryGetComponent<AttackAreaVisualizer>(out AttackAreaVisualizer attAreaVisual))
         {
-            attAreaVisual.DrawAttackArea(400f, 400f);
             attackPosition =attAreaVisual.GetCursorPositionInsideBounds(PlayerReferences.instance.GetMouseTargetDir() - PlayerReferences.instance.GetPlayerCoordinates());
         }
 
@@ -90,6 +89,8 @@ public class RangedAbilityState : States
     private void ExecuteAnim()
     {
         anim.SetTrigger("attack");
+        currentFeedback = Instantiate(abilityFeedback, attackPosition,Quaternion.identity);
+        
         currentAttackTime = 0;
         animationLength = anim.GetCurrentAnimatorClipInfo(0).Length;
         //stateGameObject.transform.rotation = Quaternion.Euler(stateGameObject.transform.rotation.x , stateGameObject.transform.rotation.y + animOffsetRotation, stateGameObject.transform.rotation.z );
@@ -127,29 +128,6 @@ public class RangedAbilityState : States
     public override void Update()
     {
         return;
-    }
-
-    private Vector3 GetMouseTargetDir()
-    {
-        // Obtener la posición del ratón en la pantalla
-        Vector3 mousePos = Input.mousePosition;
-
-        // Calcular la dirección del ratón en el mundo
-        Ray castPoint = Camera.main.ScreenPointToRay(mousePos);
-        RaycastHit hit;
-        Vector3 targetDir = Vector3.zero;
-
-        if (Physics.Raycast(castPoint, out hit, Mathf.Infinity))
-        {
-            targetDir = hit.point - stateGameObject.transform.position; // Conseguir la direccion a la que esta apuntando el raton en el mundo
-            targetDir.y = 0f; // Mantener en el plano XY
-        }
-        else
-        {
-            targetDir = castPoint.direction;
-            targetDir.y = 0f; // Mantener en el plano XY
-        }
-        return targetDir;
     }
 
 }

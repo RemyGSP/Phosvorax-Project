@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14b9d5a16aa9a840a6b02de3fb17a04, type: 3}
   m_Name: RollState
   m_EditorClassIdentifier: 
-  idleState: {fileID: 11400000, guid: ea1e15a44a96f6347860d5aad4fc4aa1, type: 2}
-  moveState: {fileID: 11400000, guid: bdcd29e445c155343bf6318d7ffd0c4b, type: 2}
-  dashForce: 400
+  stateTransitions:
+  - decisionToBeMade: {fileID: 11400000, guid: cd1d39069d32b3f419bddb153b7c11d4, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: bdcd29e445c155343bf6318d7ffd0c4b,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 11400000, guid: ea1e15a44a96f6347860d5aad4fc4aa1,
+      type: 2}
+  dashForce: 700
   dashTime: 0.15

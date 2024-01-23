@@ -6,9 +6,6 @@ using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCou
 [CreateAssetMenu(menuName = "States/PlayerRollState")]
 public class RollState : States
 {
-    [Header("States")]
-    [SerializeField] private States idleState;
-    [SerializeField] private States moveState;
     #region Variables
     private Rigidbody rigidBody;
     [Header("Dash Variables")]
@@ -31,37 +28,39 @@ public class RollState : States
         if (stateGameObject.TryGetComponent<Animator>(out Animator objectAnimator))
         {
             animator = objectAnimator;
-            animator.SetTrigger("roll");
+            //animator.SetTrigger("roll");
         }
         playerDirection = PlayerInputController.Instance.GetPlayerInputDirection();
     }
 
- 
+
     public override States CheckTransitions()
     {
         States newPlayerState = null;
 
         bool notChanged = true;
         int counter = 0;
-
-        while (notChanged)
+        if (currentDashTime > dashTime)
         {
-            newPlayerState = stateTransitions[counter].GetExitState();
-            if (newPlayerState != null)
+            while (notChanged)
             {
-                notChanged = false;
-                newPlayerState.InitializeState(stateGameObject);
-                newPlayerState.Start();
-                rigidBody.velocity = Vector3.zero;
-                animator.SetBool("dashing", false);
-            }
-            if (counter < stateTransitions.Length - 1)
-            {
-                counter++;
-            }
-            else
-            {
-                notChanged = false;
+                newPlayerState = stateTransitions[counter].GetExitState();
+                if (newPlayerState != null)
+                {
+                    notChanged = false;
+                    newPlayerState.InitializeState(stateGameObject);
+                    newPlayerState.Start();
+                    rigidBody.velocity = Vector3.zero;
+                    //animator.SetBool("dashing", false);
+                }
+                if (counter < stateTransitions.Length - 1)
+                {
+                    counter++;
+                }
+                else
+                {
+                    notChanged = false;
+                }
             }
         }
         return newPlayerState;

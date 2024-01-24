@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.InputSystem;
 
 public class HealthBehaviour : MonoBehaviour
 {
@@ -14,11 +13,10 @@ public class HealthBehaviour : MonoBehaviour
     public UnityEvent<float> onHit;
     public UnityEvent onDeath;
     public UnityEvent onRevive;
+
     private void Start()
     {
-
-
-        currentHealth = maxHealth;
+        currentHealth =maxHealth;
     }
     public bool Damage(float damage)
     {
@@ -27,7 +25,7 @@ public class HealthBehaviour : MonoBehaviour
         {
             currentHealth -= damage;
             onHit.Invoke(currentHealth);
-            CheckIdDead();
+            CheckIfDeath();
             aux = true;
         }
         return aux;
@@ -46,15 +44,10 @@ public class HealthBehaviour : MonoBehaviour
     }
 
 
-    public bool CheckIdDead()
+    public void CheckIfDeath()
     {
-        bool aux = false;
         if (currentHealth <= minHealth)
-        {
-            aux = true;
             onDeath.Invoke();
-        }
-        return aux;
     }
 
     public void Revive()

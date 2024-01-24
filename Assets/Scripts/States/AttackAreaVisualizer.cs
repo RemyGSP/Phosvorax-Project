@@ -82,10 +82,8 @@ public class AttackAreaVisualizer : MonoBehaviour
 
         float distanceFromCenter = Vector3.Distance(Vector3.zero, targetDir);
 
-        // Check if the cursor is outside the circle
         if (distanceFromCenter > currentAreaRadius)
         {
-            // Move the cursor to the nearest point on the circle
             aux = targetDir.normalized * currentAreaRadius;
         }
         else

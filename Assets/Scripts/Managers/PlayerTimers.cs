@@ -11,7 +11,7 @@ public class PlayerTimers : MonoBehaviour
     public float rollTimer;
     public float rollCD;
 
-    public float[] abilityTimers;
+    [HideInInspector]public float[] abilityTimers;
     [SerializeField] public float[] abilityCD;
 
     private void Start()

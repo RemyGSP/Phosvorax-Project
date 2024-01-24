@@ -21,7 +21,6 @@ public class AbilityManager : MonoBehaviour
         instance = this;
     }
 
-    //
     private void Update()
     {
         currentAbility = PlayerInputController.Instance.GetCurrentAbility();
@@ -63,18 +62,17 @@ public class AbilityManager : MonoBehaviour
                 throwAbility = false;
             }
         }
-     }
-
+    }
+    public void CastedAbility()
+    {
+        isCasting = false;
+    }
 
 
     public void CallAbilityIndicator()
     {
+        Debug.Log(abilities[currentAbility].abilityRange) ;
         attAreaVisual.ActivateArea();
         attAreaVisual.DrawAttackArea(abilities[currentAbility].abilityRange, abilities[currentAbility].abilityRange);
-    }
-    
-    public void CastedAbility()
-    {
-        isCasting = false;
     }
 }

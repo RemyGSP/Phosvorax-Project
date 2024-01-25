@@ -22,19 +22,30 @@ public class EnemyDieState : States
 
     public override States CheckTransitions()
     {
-        States newGameState = null;
-        if (canRevive)
-        {
-            stateGameObject.SetActive(true);
-            newGameState = Instantiate(EnemyIdleState);
-        }
-        if (newGameState != null)
-        {
-            newGameState.InitializeState(stateGameObject);
-            newGameState.Start();
-        }
-        return newGameState;
+        bool notChanged = true;
+        int counter = 0;
+        States newPlayerState = null;
 
+        while (notChanged)
+        {
+            newPlayerState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
+            if (newPlayerState != null)
+            {
+                notChanged = false;
+                newPlayerState.InitializeState(stateGameObject);
+                newPlayerState.Start();
+            }
+            if (counter < stateTransitions.Length - 1)
+            {
+                counter++;
+            }
+            else
+            {
+                notChanged = false;
+            }
+        }
+
+        return newPlayerState;
     }
 
     #region Methods

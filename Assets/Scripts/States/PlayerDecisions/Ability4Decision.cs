@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName ="PlayerDecisions/Ability4Decision")]
 public class Ability4Decision : Decision
 {
-    public override bool Decide()
+    public override bool Decide(StateMachine stateMachine)
     {
         bool aux = false;
         if (PlayerInputController.Instance.IsAttacking())

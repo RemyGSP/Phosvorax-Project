@@ -42,7 +42,7 @@ public class RangedAbilityState : Ability
 
             while (notChanged)
             {
-                newGameState = stateTransitions[counter].GetExitState();
+                newGameState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
                 if (newGameState != null)
                 {
                     notChanged = false;

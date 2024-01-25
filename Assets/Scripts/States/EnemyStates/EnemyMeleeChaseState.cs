@@ -25,9 +25,6 @@ public class EnemyMeleeChaseState : States
     [SerializeField] AnimationCurve curveToMaxAcceleration;
     [SerializeField] private float rotationSpeed;
 
-
-    [SerializeField] private float maxAttackDistance = 5f;
-    [SerializeField] private float distanceToSeePlayer = 20f;
     float currentMovementStatusTimer;
     private RotateCharacter rotateCharacter;
     private Rigidbody rigidBody;
@@ -37,31 +34,30 @@ public class EnemyMeleeChaseState : States
 
     public override States CheckTransitions()
     {
-        float distance = Vector3.Distance(PlayerReferences.instance.GetPlayerCoordinates(), stateGameObject.transform.position);
-        States newGameState = null;
-       
-         if (distance <= maxAttackDistance) 
-         {
-             newGameState = Instantiate(EnemyAttackState);
-         }
-         if (stateGameObject.GetComponent<HealthBehaviour>().CheckIfDeath()) //si el enemigo muere
-         {
-            newGameState = Instantiate(EnemyDieState);
-         }
-        if (distance > distanceToSeePlayer)
-        {
-            newGameState = Instantiate(EnemyIdleState);
-        }
-        if (newGameState != null)
-        {
-            newGameState.InitializeState(stateGameObject);
-            newGameState.Start();
-            rigidBody.velocity = Vector3.zero;
-            //animator.SetBool("running",false);
-        }
-        return newGameState;
+        bool notChanged = true;
+        int counter = 0;
+        States newPlayerState = null;
 
+        while (notChanged)
+        {
+            newPlayerState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
+            if (newPlayerState != null)
+            {
+                notChanged = false;
+                newPlayerState.InitializeState(stateGameObject);
+                newPlayerState.Start();
+            }
+            if (counter < stateTransitions.Length - 1)
+            {
+                counter++;
+            }
+            else
+            {
+                notChanged = false;
+            }
+        }
 
+        return newPlayerState;
     }
 
     #region Methods

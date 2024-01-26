@@ -46,31 +46,30 @@ public class EnemyMeleeAttackState : States
     #region AbstractMethods
     public override States CheckTransitions()
     {
-        float distance = Vector3.Distance(PlayerReferences.instance.GetPlayerCoordinates(), stateGameObject.transform.position);
+        bool notChanged = true;
+        int counter = 0;
+        States newEnemyState = null;
 
-        States newGameState = null;
-
-        if (distance > maxAttackDistance) //cambiar a perseeguir si el jugador esta mas lejos del rango maximo del ataque
+        while (notChanged)
         {
-            newGameState = Instantiate(EnemyChaseState);
+            newEnemyState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
+            if (newEnemyState != null)
+            {
+                notChanged = false;
+                newEnemyState.InitializeState(stateGameObject);
+                newEnemyState.Start();
+            }
+            if (counter < stateTransitions.Length - 1)
+            {
+                counter++;
+            }
+            else
+            {
+                notChanged = false;
+            }
         }
-        if (stateGameObject.GetComponent<HealthBehaviour>().CheckIfDeath()) //Si el enemigo muere
-        {
-            newGameState = Instantiate(EnemyDieState);
-        }
 
-        if (newGameState != null)
-        {
-            newGameState.InitializeState(stateGameObject);
-            newGameState.Start();
-            rigidBody.velocity = Vector3.zero;
-            //animator.SetBool("running",false);
-        }
-
-
-
-        return newGameState;
-
+        return newEnemyState;
     }
 
     public override void InitializeState(GameObject gameObject)

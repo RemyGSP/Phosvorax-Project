@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class States : ScriptableObject
 {
-    protected GameObject stateGameObject;
+    [HideInInspector] public GameObject stateGameObject;
     protected List<States> states;
     [SerializeField] protected Transition[] stateTransitions;
     public States(GameObject stateGameObject)
@@ -22,8 +22,8 @@ public abstract class States : ScriptableObject
     public virtual void Start()
     {
 
-    }    
-    
+    }
+
     public virtual void OnTriggerEnter()
     {
 

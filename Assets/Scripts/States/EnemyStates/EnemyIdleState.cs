@@ -23,30 +23,30 @@ public class EnemyIdleState : States
     #region AbstractMethods
     public override States CheckTransitions()
     {
-        float distance = Vector3.Distance(PlayerReferences.instance.GetPlayerCoordinates(), stateGameObject.transform.position);
-        States newEnemyState = null;
+        bool notChanged = true;
+        int counter = 0;
+        States newPlayerState = null;
 
-        if (distance < distanceToSeePlayer)
+        while (notChanged)
         {
-            newEnemyState = EnemyChaseState;
-        }
-        if (stateGameObject.GetComponent<HealthBehaviour>().CheckIfDeath())
-        {
-            newEnemyState = EnemyDieState;
+            newPlayerState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
+            if (newPlayerState != null)
+            {
+                notChanged = false;
+                newPlayerState.InitializeState(stateGameObject);
+                newPlayerState.Start();
+            }
+            if (counter < stateTransitions.Length - 1)
+            {
+                counter++;
+            }
+            else
+            {
+                notChanged = false;
+            }
         }
 
-        if (distance <= maxAttackDistance)
-        {
-            newEnemyState = EnemyAttackState;
-        }
-
-        if (newEnemyState != null)
-        {
-            newEnemyState.InitializeState(stateGameObject);
-            newEnemyState.Start();
-        }
-        return newEnemyState;
-
+        return newPlayerState;
     }
     #endregion
 

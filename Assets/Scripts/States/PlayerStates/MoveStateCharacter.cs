@@ -5,15 +5,15 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-[CreateAssetMenu(menuName = "States/PlayerMoveState")]
-public class MoveState : States
+[CreateAssetMenu(menuName = "States/PlayerMoveStateCharacter")]
+public class MoveStateCharacter : States
 {
 
 
     private RotateCharacter rotateCharacter;
 
     #region Variables
-    private Rigidbody rigidBody;
+    private CharacterController characterController;
 
     [Header("MoveValues")]
     [SerializeField] private float currentSpeed;
@@ -26,12 +26,12 @@ public class MoveState : States
     #endregion
 
     #region Constructor
-    public MoveState(GameObject stateGameObject) : base(stateGameObject)
+    public MoveStateCharacter(GameObject stateGameObject) : base(stateGameObject)
     {
     }
     #endregion
 
-    #region MÃ©todos abstractos
+    #region Métodos abstractos
 
     public override States CheckTransitions()
     {
@@ -48,10 +48,9 @@ public class MoveState : States
                 newPlayerState.InitializeState(stateGameObject);
                 newPlayerState.Start();
                 animator.SetBool("running", false);
-                rigidBody.velocity = Vector3.zero;
             }
-            if (counter < stateTransitions.Length -1 )
-            { 
+            if (counter < stateTransitions.Length - 1)
+            {
                 counter++;
             }
             else
@@ -60,15 +59,15 @@ public class MoveState : States
             }
         }
 
-            return newPlayerState;
+        return newPlayerState;
     }
     #endregion
 
-    #region MÃ©todos concretos
+    #region Métodos concretos
     public override void Start()
     {
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
-        rigidBody = stateGameObject.GetComponent<Rigidbody>();
+        characterController = stateGameObject.GetComponent<CharacterController>();
         currentMovementStatusTimer = 0;
         currentSpeed = 0;
         if (stateGameObject.TryGetComponent<Animator>(out Animator playerAnimator))
@@ -93,15 +92,14 @@ public class MoveState : States
 
     public override void Update()
     {
-        // Implementar lÃ³gica de actualizaciÃ³n si es necesario
+        // Implementar lógica de actualización si es necesario
     }
 
     public override void FixedUpdate()
     {
         Vector3 PlayerDirection = PlayerInputController.Instance.GetPlayerInputDirection();
-        //PlayerDirection.y = Physics.gravity.y * rigidBody.mass;
-        rigidBody.velocity = new Vector3(Move(PlayerDirection).x,Physics.gravity.y * rigidBody.mass,Move(PlayerDirection).z);
-        rigidBody.AddForce(0f, Physics.gravity.y * rigidBody.mass, 0f);
+        PlayerDirection.y = Physics.gravity.y;
+        characterController.Move(PlayerDirection);
         stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerDirection);
     }
     #endregion

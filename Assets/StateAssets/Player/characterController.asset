@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9042de558c3e6d6449aa3861e6e8c46d, type: 3}
-  m_Name: MoveState
+  m_Script: {fileID: 11500000, guid: 7adece2fc15d7b549a5040165e22c92a, type: 3}
+  m_Name: characterController
   m_EditorClassIdentifier: 
   stateTransitions:
   - decisionToBeMade: {fileID: 11400000, guid: 2fd5f936a84cf4840b9620f8a0216698, type: 2}
@@ -29,8 +29,8 @@ MonoBehaviour:
     onDecisionTrueExitState: {fileID: 0}
     onDecisionFalseExitState: {fileID: 11400000, guid: ea1e15a44a96f6347860d5aad4fc4aa1,
       type: 2}
-  currentSpeed: 450
-  maxSpeed: 450
+  currentSpeed: 0
+  maxSpeed: 10
   timeToMaxVelocity: 0.5
   curveToMaxAcceleration:
     serializedVersion: 2
@@ -38,29 +38,20 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 13.020682
-      outSlope: 13.020682
+      inSlope: 1
+      outSlope: 1
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.074766316
-      value: 0.9735085
-      inSlope: 0.045594797
-      outSlope: 0.045594797
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 1
-      outWeight: 0.33333334
+      outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 0.028632252
-      outSlope: 0.028632252
+      inSlope: 1
+      outSlope: 1
       tangentMode: 34
       weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2

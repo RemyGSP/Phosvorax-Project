@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9042de558c3e6d6449aa3861e6e8c46d, type: 3}
   m_Name: MoveState
   m_EditorClassIdentifier: 
+  stateGameObject: {fileID: 0}
   stateTransitions:
   - decisionToBeMade: {fileID: 11400000, guid: 2fd5f936a84cf4840b9620f8a0216698, type: 2}
     onDecisionTrueExitState: {fileID: 11400000, guid: f044212ad6dc00b4aaa2c53add5904d8,
@@ -29,8 +30,8 @@ MonoBehaviour:
     onDecisionTrueExitState: {fileID: 0}
     onDecisionFalseExitState: {fileID: 11400000, guid: ea1e15a44a96f6347860d5aad4fc4aa1,
       type: 2}
-  currentSpeed: 450
-  maxSpeed: 450
+  currentSpeed: 422.04196
+  maxSpeed: 430
   timeToMaxVelocity: 0.5
   curveToMaxAcceleration:
     serializedVersion: 2

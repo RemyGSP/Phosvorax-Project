@@ -25,7 +25,7 @@ public class HealthBehaviour : MonoBehaviour
         {
             currentHealth -= damage;
             onHit.Invoke(currentHealth);
-            CheckIfDeath();
+            CheckIdDead();
             aux = true;
         }
         return aux;
@@ -44,7 +44,7 @@ public class HealthBehaviour : MonoBehaviour
     }
 
 
-    public bool CheckIfDeath()
+    public bool CheckIdDead()
     {
         bool aux = false;
         if (currentHealth <= minHealth)

@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "EnemyDecisions/ChasingDecision")]
-
-public class EnemyIsChasingDecision : Decision
+[CreateAssetMenu(menuName = "EnemyDecisions/IdleDecision")]
+public class EnemyIsIdleDecision : Decision
 {
     public override bool Decide(StateMachine stateMachine)
     {
@@ -12,10 +11,9 @@ public class EnemyIsChasingDecision : Decision
         float distance = Vector3.Distance(PlayerReferences.instance.GetPlayerCoordinates(), enemiePos);
 
         float distanceToSeePlayer = stateMachine.GetComponent<EnemyReferences>().GetDistanceToSeePlayer();
-        float maxAttackDistance = stateMachine.GetComponent<EnemyReferences>().GetMaxAttackPosition();
         bool aux = false;
 
-        if (distance <= distanceToSeePlayer &&  distance > maxAttackDistance)
+        if (distance > distanceToSeePlayer)
         {
             aux = true;
         }

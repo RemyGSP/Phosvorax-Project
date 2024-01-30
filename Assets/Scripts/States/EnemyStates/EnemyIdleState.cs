@@ -6,14 +6,6 @@ using UnityEngine;
 
 public class EnemyIdleState : States
 {
-    [Header("States")]
-    [SerializeField] private States EnemyChaseState;
-    [SerializeField] private States EnemyAttackState;
-    [SerializeField] private States EnemyDieState;
-
-
-    [SerializeField] private float maxAttackDistance = 5f;
-    [SerializeField] private float distanceToSeePlayer = 20f;
     #region Constructor
     public EnemyIdleState(GameObject stateGameObject) : base(stateGameObject)
     {

@@ -6,9 +6,6 @@ using UnityEngine;
 
 public class EnemyMeleeAttackState : States
 {
-    [Header("States")]
-    [SerializeField] private States EnemyChaseState;
-    [SerializeField] private States EnemyDieState;
 
     #region Constructor
     public EnemyMeleeAttackState(GameObject stateGameObject) : base(stateGameObject)
@@ -87,7 +84,6 @@ public class EnemyMeleeAttackState : States
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         currentAttackDelay = attackDelay;
 
-        stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position);
         if (stateGameObject.TryGetComponent<AttackAreaVisualizer>(out AttackAreaVisualizer attAreaVisual))
         {
             attAreaVisual.DrawAttackArea(400f, 400f);
@@ -100,10 +96,10 @@ public class EnemyMeleeAttackState : States
 
     private void ExecuteAnim()
     {
-        anim.SetTrigger("attack");
+        //anim.SetTrigger("attack");
         currentAttackTime = 0;
-        animationLength = anim.GetCurrentAnimatorClipInfo(0).Length;
-        //stateGameObject.transform.rotation = Quaternion.Euler(stateGameObject.transform.rotation.x , stateGameObject.transform.rotation.y + animOffsetRotation, stateGameObject.transform.rotation.z );
+        //animationLength = anim.GetCurrentAnimatorClipInfo(0).Length;
+        stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position);
         currentAttackDelay = attackDelay;
         canAttack = true;
 
@@ -132,16 +128,21 @@ public class EnemyMeleeAttackState : States
     {
         currentAttackDelay -= Time.deltaTime;
         currentAttackTime += Time.deltaTime;
-        if (currentAttackDelay <= 0 && canAttack)
+
+        if (currentAttackDelay <= 0)
         {
-            ExecuteAttack();
-            PlayerTimers.timer.playerBasicAttackTimer = 0;
+            if (canAttack)
+            {
+                ExecuteAttack();
+                PlayerTimers.timer.playerBasicAttackTimer = 0;
+            }
+            currentAttackDelay = attackDelay;
+            canAttack = true;
         }
-
     }
-
     public override void Update()
     {
+        stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position, 0.5f);
         enemyMeleeAttackTimer += Time.deltaTime;
     }
 

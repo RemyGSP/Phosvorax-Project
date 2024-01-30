@@ -41,7 +41,7 @@ public class MoveStateCharacter : States
 
         while (notChanged)
         {
-            newPlayerState = stateTransitions[counter].GetExitState();
+            newPlayerState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
             if (newPlayerState != null)
             {
                 notChanged = false;

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7adece2fc15d7b549a5040165e22c92a, type: 3}
   m_Name: characterController
   m_EditorClassIdentifier: 
+  stateGameObject: {fileID: 0}
   stateTransitions:
   - decisionToBeMade: {fileID: 11400000, guid: 2fd5f936a84cf4840b9620f8a0216698, type: 2}
     onDecisionTrueExitState: {fileID: 11400000, guid: f044212ad6dc00b4aaa2c53add5904d8,

@@ -1,14 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [CreateAssetMenu(menuName = "EnemyStates/EnemyChaseState")]
 public class EnemyMeleeChaseState : States
 {
-    [Header("States")]
-    [SerializeField] private States EnemyAttackState;
-    [SerializeField] private States EnemyDieState;
-    [SerializeField] private States EnemyIdleState;
 
     #region Constructor
     public EnemyMeleeChaseState(GameObject stateGameObject) : base(stateGameObject)
@@ -29,7 +26,7 @@ public class EnemyMeleeChaseState : States
     private RotateCharacter rotateCharacter;
     private Rigidbody rigidBody;
     private Animator anim;
-
+    private NavMeshAgent enemy;
     #endregion
 
     public override States CheckTransitions()
@@ -73,8 +70,9 @@ public class EnemyMeleeChaseState : States
     public override void Update()
     {
         Vector3 playerPosition = PlayerReferences.instance.GetPlayerCoordinates();
-        stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(playerPosition);
-        rigidBody.velocity = Move(playerPosition);
+        stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position, 0.5f);
+        enemy.SetDestination(playerPosition);
+        //rigidBody.velocity = Move(playerPosition);
 
     }
 

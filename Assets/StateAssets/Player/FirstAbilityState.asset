@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 972e03664988c9b41b036c3ec68d842d, type: 3}
   m_Name: FirstAbilityState
   m_EditorClassIdentifier: 
+  stateGameObject: {fileID: 0}
   stateTransitions:
   - decisionToBeMade: {fileID: 11400000, guid: 822dfe0f64e7e6e45a98657d28482221, type: 2}
     onDecisionTrueExitState: {fileID: 11400000, guid: 9520aa73a3aaeec4f847863908a65901,
@@ -22,6 +23,10 @@ MonoBehaviour:
       type: 2}
     onDecisionFalseExitState: {fileID: 11400000, guid: ea1e15a44a96f6347860d5aad4fc4aa1,
       type: 2}
+  - decisionToBeMade: {fileID: 11400000, guid: 113a49612aab8e34b81a8ecad4279e88, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: 8a16e18170a368d40b30fd3c75855f46,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 0}
   abilityRange: 400
   enemyLayerMask:
     serializedVersion: 2

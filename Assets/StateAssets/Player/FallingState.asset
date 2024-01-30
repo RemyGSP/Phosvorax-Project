@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c14b9d5a16aa9a840a6b02de3fb17a04, type: 3}
-  m_Name: RollState
+  m_Script: {fileID: 11500000, guid: 59b32a1cec00450408bc5655915ca075, type: 3}
+  m_Name: FallingState
   m_EditorClassIdentifier: 
   stateGameObject: {fileID: 0}
   stateTransitions:
@@ -19,9 +19,3 @@ MonoBehaviour:
       type: 2}
     onDecisionFalseExitState: {fileID: 11400000, guid: ea1e15a44a96f6347860d5aad4fc4aa1,
       type: 2}
-  - decisionToBeMade: {fileID: 11400000, guid: 113a49612aab8e34b81a8ecad4279e88, type: 2}
-    onDecisionTrueExitState: {fileID: 11400000, guid: 8a16e18170a368d40b30fd3c75855f46,
-      type: 2}
-    onDecisionFalseExitState: {fileID: 0}
-  dashForce: 750000
-  dashTime: 0.15

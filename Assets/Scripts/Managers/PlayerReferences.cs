@@ -7,6 +7,7 @@ public class PlayerReferences : MonoBehaviour
     #region Variables
     [Header("Player")]
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject footPos;
     public static PlayerReferences instance;
 
     [Header("Position")]
@@ -21,7 +22,7 @@ public class PlayerReferences : MonoBehaviour
         if (instance == null)
             instance = this;
         else
-            Debug.Log("Manager PLayerReferences already exists");
+            Debug.Log("Manager PlayerReferences already exists");
     }
     public Vector3 GetPlayerCoordinates()
     {
@@ -29,6 +30,14 @@ public class PlayerReferences : MonoBehaviour
         return playerCoordinates;
     }
 
+    public bool CheckIfGrounded()
+    {
+        // Set the maximum distance for the ray
+        float maxRaycastDistance = 0.1f; // Adjust this value based on your needs
+
+        // Check if a ray from footPos.position downward hits anything within the specified distance
+        return Physics.Raycast(footPos.transform.position, Vector3.down, maxRaycastDistance);
+    }
     public Vector3 GetMouseTargetDir()
     {
         // Obtener la posición del ratón en la pantalla

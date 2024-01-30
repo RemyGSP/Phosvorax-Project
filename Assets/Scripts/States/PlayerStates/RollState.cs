@@ -23,6 +23,7 @@ public class RollState : States
     }
     public override void Start()
     {
+        stateGameObject.GetComponent<Collider>().enabled = false;
         currentDashTime = 0f;
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         if (stateGameObject.TryGetComponent<Animator>(out Animator objectAnimator))
@@ -47,6 +48,7 @@ public class RollState : States
                 newPlayerState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
                 if (newPlayerState != null)
                 {
+                    stateGameObject.GetComponent<Collider>().enabled = true;
                     notChanged = false;
                     newPlayerState.InitializeState(stateGameObject);
                     newPlayerState.Start();

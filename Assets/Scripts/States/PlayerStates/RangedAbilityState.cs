@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Timeline;
 
-[CreateAssetMenu(menuName ="States/FirstAbilityState")]
+[CreateAssetMenu(menuName = "States/FirstAbilityState")]
 public class RangedAbilityState : Ability
 {
     [SerializeField] LayerMask enemyLayerMask;
@@ -35,7 +35,7 @@ public class RangedAbilityState : Ability
     {
         States newGameState = null;
 
-        if (currentAttackTime > animationLength)
+        if (AbilityManager.instance.IsCastingAbility())
         {
             bool notChanged = true;
             int counter = 0;
@@ -62,35 +62,38 @@ public class RangedAbilityState : Ability
             }
         }
         return newGameState;
-        
+
     }
 
     public override void Start()
     {
-        AbilityManager.instance.CastedAbility();
-        anim = stateGameObject.GetComponent<Animator>();
-        rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
-        rigidBody = stateGameObject.GetComponent<Rigidbody>();
-        playerTransform = stateGameObject.GetComponent<Transform>();
-
-        //Lo que tardara en ejecutarse el ataque comparado con la animacion
-        currentAttackDelay = attackDelay;
-        Vector3 targetDir = PlayerReferences.instance.GetMouseTargetDir();
-
-        stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
-        if (stateGameObject.TryGetComponent<AttackAreaVisualizer>(out AttackAreaVisualizer attAreaVisual))
+        if (!PlayerInputController.Instance.IsUsingAbility())
         {
-            attackPosition =attAreaVisual.GetCursorPositionInsideBounds(PlayerReferences.instance.GetMouseTargetDir() - PlayerReferences.instance.GetPlayerCoordinates());
-        }
+            AbilityManager.instance.CastedAbility();
+            anim = stateGameObject.GetComponent<Animator>();
+            rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
+            rigidBody = stateGameObject.GetComponent<Rigidbody>();
+            playerTransform = stateGameObject.GetComponent<Transform>();
 
-        ExecuteAnim();
+            //Lo que tardara en ejecutarse el ataque comparado con la animacion
+            currentAttackDelay = attackDelay;
+            Vector3 targetDir = PlayerReferences.instance.GetMouseTargetDir();
+
+            stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
+            if (stateGameObject.TryGetComponent<AttackAreaVisualizer>(out AttackAreaVisualizer attAreaVisual))
+            {
+                attackPosition = attAreaVisual.GetCursorPositionInsideBounds(PlayerReferences.instance.GetMouseTargetDir() - PlayerReferences.instance.GetPlayerCoordinates());
+            }
+
+            ExecuteAnim();
+        }
     }
 
     private void ExecuteAnim()
     {
         anim.SetTrigger("attack");
-        currentFeedback = Instantiate(abilityFeedback, attackPosition,Quaternion.identity);
-        
+        currentFeedback = Instantiate(abilityFeedback, attackPosition, Quaternion.identity);
+
         currentAttackTime = 0;
         animationLength = anim.GetCurrentAnimatorClipInfo(0).Length;
         //stateGameObject.transform.rotation = Quaternion.Euler(stateGameObject.transform.rotation.x , stateGameObject.transform.rotation.y + animOffsetRotation, stateGameObject.transform.rotation.z );

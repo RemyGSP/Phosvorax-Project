@@ -28,12 +28,14 @@ public class AbilityManager : MonoBehaviour
         {
             if (PlayerInputController.Instance.IsUsingAbility() && PlayerTimers.timer.abilityTimers[currentAbility-1] > PlayerTimers.timer.abilityCD[currentAbility-1])
             {
+                throwAbility = true;
                 currentAbility = PlayerInputController.Instance.GetCurrentAbility();
                 CallAbilityIndicator();
                 isCasting = true;
             }
             else
             {
+                throwAbility = false;
                 attAreaVisual.DeactivateArea();
             }
             if (PlayerInputController.Instance.IsCanceling())
@@ -41,15 +43,8 @@ public class AbilityManager : MonoBehaviour
                 isCasting = false;
                 PlayerInputController.Instance.StopUsingAbility();
             }
-            Debug.Log(PlayerInputController.Instance.IsCanceling());
-            if (isCasting && !PlayerInputController.Instance.IsUsingAbility())
-            {
-                throwAbility = true;
-            }
-            else
-            {
-                throwAbility = false;
-            }
+
+
         }
         else
         {
@@ -68,7 +63,10 @@ public class AbilityManager : MonoBehaviour
         isCasting = false;
     }
 
-
+    public bool IsCastingAbility()
+    {
+        return isCasting;
+    }
     public void CallAbilityIndicator()
     {
         Debug.Log(abilities[currentAbility].abilityRange) ;

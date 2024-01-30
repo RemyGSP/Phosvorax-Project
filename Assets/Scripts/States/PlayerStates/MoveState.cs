@@ -98,10 +98,10 @@ public class MoveState : States
 
     public override void FixedUpdate()
     {
-        Vector3 PlayerDirection = PlayerInputController.Instance.GetPlayerInputDirection();
+        Vector3 PlayerDirection = Move(PlayerInputController.Instance.GetPlayerInputDirection());
         //PlayerDirection.y = Physics.gravity.y * rigidBody.mass;
-        rigidBody.velocity = new Vector3(Move(PlayerDirection).x,Physics.gravity.y * rigidBody.mass,Move(PlayerDirection).z);
-        rigidBody.AddForce(0f, Physics.gravity.y * rigidBody.mass, 0f);
+        PlayerDirection.y = rigidBody.velocity.y;
+        rigidBody.velocity = PlayerDirection;
         stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerDirection);
     }
     #endregion

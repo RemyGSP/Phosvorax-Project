@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [CreateAssetMenu(menuName = "EnemyStates/EnemyIdleState")]
 
@@ -12,6 +13,10 @@ public class EnemyIdleState : States
     }
     #endregion
 
+    #region
+    private NavMeshAgent enemy;
+
+    #endregion
     #region AbstractMethods
     public override States CheckTransitions()
     {
@@ -43,8 +48,10 @@ public class EnemyIdleState : States
     #endregion
 
     #region Methods
-    void Start()
+    public override void Start()
     {
+        enemy = stateGameObject.GetComponent<NavMeshAgent>();
+        enemy.speed = 0;
     }
 
     // Aquí hacer la lógica para cuando el jugador no haga nada, normalmente solo será que haga la animación de idle del objeto

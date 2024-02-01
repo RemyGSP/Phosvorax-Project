@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [CreateAssetMenu(menuName = "EnemyStates/EnemyMeleeAttackState")]
 
@@ -38,6 +39,8 @@ public class EnemyMeleeAttackState : States
     public float enemyMeleeAttackCD;
 
     [SerializeField] private AttackAreaVisualizer attackAreaVisualizer;
+
+    private NavMeshAgent enemy;
     #endregion
 
     #region AbstractMethods
@@ -79,6 +82,8 @@ public class EnemyMeleeAttackState : States
 
     public override void Start()
     {
+        enemy = stateGameObject.GetComponent<NavMeshAgent>();
+        enemy.speed = 0;
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         anim = stateGameObject.GetComponent<Animator>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();

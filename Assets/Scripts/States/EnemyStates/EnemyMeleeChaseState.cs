@@ -16,13 +16,14 @@ public class EnemyMeleeChaseState : States
 
     #region Variables
     [Header("MoveValues")]
-    [SerializeField] private float currentSpeed;
+    [SerializeField] private float enemyNavMeshSpeed;
     [SerializeField] private float maxSpeed;
     [SerializeField] float timeToMaxVelocity;
     [SerializeField] AnimationCurve curveToMaxAcceleration;
     [SerializeField] private float rotationSpeed;
 
     float currentMovementStatusTimer;
+    private bool playerSeen = false;
     private RotateCharacter rotateCharacter;
     private Rigidbody rigidBody;
     private Animator anim;
@@ -61,7 +62,8 @@ public class EnemyMeleeChaseState : States
 
     public override void Start()
     {
-        currentSpeed = 0;
+        enemy = stateGameObject.GetComponent<NavMeshAgent>();
+        enemy.speed = enemyNavMeshSpeed;
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         anim = stateGameObject.GetComponent<Animator>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
@@ -69,25 +71,25 @@ public class EnemyMeleeChaseState : States
 
     public override void Update()
     {
+        RaycastHit hit;
         Vector3 playerPosition = PlayerReferences.instance.GetPlayerCoordinates();
-        stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position, 0.5f);
-        enemy.SetDestination(playerPosition);
-        //rigidBody.velocity = Move(playerPosition);
-
-    }
-
-    private Vector3 Move(Vector3 playerPosition)
-    {
-        Vector3 direction = (playerPosition - stateGameObject.transform.position).normalized;
-
-        if (currentSpeed < maxSpeed)
+        if (Physics.Linecast(stateGameObject.transform.position, playerPosition, out hit))
         {
-            currentSpeed = maxSpeed * curveToMaxAcceleration.Evaluate(currentMovementStatusTimer / timeToMaxVelocity);
+            if (hit.transform != null && hit.transform.position == PlayerReferences.instance.GetPlayerCoordinates())
+            {
+                Debug.Log("El enemigo ve al jugador");
+                playerSeen = true;
+                stateGameObject.GetComponent<EnemyReferences>().SetPlayerSeen(playerSeen);
+                stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, playerPosition - stateGameObject.transform.position, 0.5f);
+                enemy.SetDestination(playerPosition);
+            }
+            else
+            {
+                playerSeen = false;
+                stateGameObject.GetComponent<EnemyReferences>().SetPlayerSeen(playerSeen);
+            }
         }
-        currentMovementStatusTimer += Time.deltaTime;
 
-        return direction * currentSpeed;
     }
-
     #endregion
 }

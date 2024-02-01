@@ -7,8 +7,8 @@ public class EnemyIsIdleDecision : Decision
 {
     public override bool Decide(StateMachine stateMachine)
     {
-        Vector3 enemiePos = stateMachine.GetComponent<EnemyReferences>().GetEnemyCoordinates();
-        float distance = Vector3.Distance(PlayerReferences.instance.GetPlayerCoordinates(), enemiePos);
+        Vector3 enemyPos = stateMachine.GetComponent<EnemyReferences>().GetEnemyCoordinates();
+        float distance = Vector3.Distance(PlayerReferences.instance.GetPlayerCoordinates(), enemyPos);
 
         float distanceToSeePlayer = stateMachine.GetComponent<EnemyReferences>().GetDistanceToSeePlayer();
         bool aux = false;

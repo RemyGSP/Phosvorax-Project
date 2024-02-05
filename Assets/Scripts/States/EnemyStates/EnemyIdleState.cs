@@ -13,7 +13,7 @@ public class EnemyIdleState : States
     }
     #endregion
 
-    #region
+    #region Variables
     private NavMeshAgent enemy;
 
     #endregion

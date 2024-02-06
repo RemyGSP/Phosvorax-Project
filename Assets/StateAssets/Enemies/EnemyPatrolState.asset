@@ -15,6 +15,15 @@ MonoBehaviour:
   stateGameObject: {fileID: 0}
   stateTransitions:
   - decisionToBeMade: {fileID: 11400000, guid: 7b2c8f844fb99094f9b3d5beadc8a4c8, type: 2}
-    onDecisionTrueExitState: {fileID: 11400000}
-    onDecisionFalseExitState: {fileID: 11400000}
-  patrolAreaRange: 50
+    onDecisionTrueExitState: {fileID: 11400000, guid: efbd60ddb5c43044193d39293efa9b4b,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 0}
+  - decisionToBeMade: {fileID: 11400000, guid: 82db58b747055e9409af9a4f4730bfa7, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: 1d862b73b096c74469939f515864ef82,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 0}
+  - decisionToBeMade: {fileID: 11400000, guid: 3e2c1271059576d4ea7fce5384ef0e43, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: dbd99a2dd69e7004cbecbf60b9ccb7ed,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 0}
+  patrolAreaRange: 20

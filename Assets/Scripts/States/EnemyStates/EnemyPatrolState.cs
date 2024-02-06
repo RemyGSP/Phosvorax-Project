@@ -74,7 +74,7 @@ public class EnemyPatrolState : States
         if (enemy.remainingDistance <= enemy.stoppingDistance) //ha acabado de hacer el camino
         {
             Vector3 point;
-            if (RandomPoint(patrolCenterPoint.position, patrolAreaRange, out point)) 
+            if (RandomPoint(patrolCenterPoint.position, patrolAreaRange, out point))
             {
                 //Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //para ver el punto 
                 enemy.SetDestination(point);
@@ -87,7 +87,7 @@ public class EnemyPatrolState : States
 
         Vector3 randomPoint = center + Random.insideUnitSphere * range; //punto random
         NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas)) 
+        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
         {
             //the 1.0f is the max distance from the random point to a point on the navmesh, might want to increase if range is big
             result = hit.position;

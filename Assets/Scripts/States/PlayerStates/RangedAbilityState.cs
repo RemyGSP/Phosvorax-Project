@@ -35,7 +35,7 @@ public class RangedAbilityState : Ability
     {
         States newGameState = null;
 
-        if (AbilityManager.instance.IsCastingAbility())
+        if (currentAttackTime > animationLength)
         {
             bool notChanged = true;
             int counter = 0;
@@ -67,26 +67,23 @@ public class RangedAbilityState : Ability
 
     public override void Start()
     {
-        if (!PlayerInputController.Instance.IsUsingAbility())
+        AbilityManager.instance.CastedAbility();
+        anim = stateGameObject.GetComponent<Animator>();
+        rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
+        rigidBody = stateGameObject.GetComponent<Rigidbody>();
+        playerTransform = stateGameObject.GetComponent<Transform>();
+
+        //Lo que tardara en ejecutarse el ataque comparado con la animacion
+        currentAttackDelay = attackDelay;
+        Vector3 targetDir = PlayerReferences.instance.GetMouseTargetDir();
+
+        stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
+        if (stateGameObject.TryGetComponent<AttackAreaVisualizer>(out AttackAreaVisualizer attAreaVisual))
         {
-            AbilityManager.instance.CastedAbility();
-            anim = stateGameObject.GetComponent<Animator>();
-            rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
-            rigidBody = stateGameObject.GetComponent<Rigidbody>();
-            playerTransform = stateGameObject.GetComponent<Transform>();
-
-            //Lo que tardara en ejecutarse el ataque comparado con la animacion
-            currentAttackDelay = attackDelay;
-            Vector3 targetDir = PlayerReferences.instance.GetMouseTargetDir();
-
-            stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
-            if (stateGameObject.TryGetComponent<AttackAreaVisualizer>(out AttackAreaVisualizer attAreaVisual))
-            {
-                attackPosition = attAreaVisual.GetCursorPositionInsideBounds(PlayerReferences.instance.GetMouseTargetDir() - PlayerReferences.instance.GetPlayerCoordinates());
-            }
-
-            ExecuteAnim();
+            attackPosition = attAreaVisual.GetCursorPositionInsideBounds(PlayerReferences.instance.GetMouseTargetDir() - PlayerReferences.instance.GetPlayerCoordinates());
         }
+
+        ExecuteAnim();
     }
 
     private void ExecuteAnim()

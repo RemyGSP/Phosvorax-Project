@@ -41,7 +41,6 @@ public class FallingState : States
 
     public override void Update()
     {
-        Debug.Log(PlayerReferences.instance.CheckIfGrounded());
     }
 
 }

@@ -28,20 +28,28 @@ public class AbilityManager : MonoBehaviour
         {
             if (PlayerInputController.Instance.IsUsingAbility() && PlayerTimers.timer.abilityTimers[currentAbility-1] > PlayerTimers.timer.abilityCD[currentAbility-1])
             {
-                throwAbility = true;
+                PlayerReferences.instance.canMove = false;
                 currentAbility = PlayerInputController.Instance.GetCurrentAbility();
                 CallAbilityIndicator();
                 isCasting = true;
             }
             else
             {
-                throwAbility = false;
+                PlayerReferences.instance.canMove = true;
                 attAreaVisual.DeactivateArea();
             }
             if (PlayerInputController.Instance.IsCanceling())
             {
                 isCasting = false;
                 PlayerInputController.Instance.StopUsingAbility();
+            }
+            if (!PlayerInputController.Instance.IsUsingAbility() && isCasting)
+            {
+                throwAbility = true;
+            }
+            else
+            {
+                throwAbility = false;
             }
 
 

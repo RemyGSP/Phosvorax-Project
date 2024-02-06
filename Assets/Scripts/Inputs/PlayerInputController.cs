@@ -103,6 +103,7 @@ public class PlayerInputController : MonoBehaviour
     {
         if (!inputValue.isPressed)
         {
+            Debug.Log("AbilityIsNotPressed");
             isUsingAbility = false;
         }
         else

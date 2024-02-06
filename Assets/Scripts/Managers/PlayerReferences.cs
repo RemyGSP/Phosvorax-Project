@@ -9,7 +9,7 @@ public class PlayerReferences : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject footPos;
     public static PlayerReferences instance;
-
+    public bool canMove;
     [Header("Position")]
     static Vector3 playerCoordinates;
     [SerializeField] LayerMask groundMask; 

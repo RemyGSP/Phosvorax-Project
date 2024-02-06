@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateGameObject: {fileID: 0}
   stateTransitions:
+  - decisionToBeMade: {fileID: 11400000, guid: 822dfe0f64e7e6e45a98657d28482221, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: 9520aa73a3aaeec4f847863908a65901,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 0}
   - decisionToBeMade: {fileID: 11400000, guid: cd1d39069d32b3f419bddb153b7c11d4, type: 2}
     onDecisionTrueExitState: {fileID: 11400000, guid: bdcd29e445c155343bf6318d7ffd0c4b,
       type: 2}

@@ -35,12 +35,9 @@ public class HUDManager : MonoBehaviour
     {
         float timer = 0.0f;
 
-        Debug.Log(PlayerTimers.timer.abilityTimers[abilityNumber]);
-        Debug.Log(cooldown);
 
         while (timer < cooldown)
         {
-            Debug.Log("Cooldown Start");
             ability.fillAmount = timer / cooldown;
             abilityVisualCD.text = Mathf.Floor(cooldown - timer).ToString();
             // Increment the timer by the time passed since the last frame

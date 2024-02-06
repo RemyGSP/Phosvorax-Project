@@ -8,7 +8,7 @@ public class IsMovingDecision : Decision
     public override bool Decide(StateMachine stateMachine)
     {
         bool aux = false;
-        if (PlayerInputController.Instance.GetPlayerInputDirection() != Vector3.zero)
+        if (PlayerInputController.Instance.GetPlayerInputDirection() != Vector3.zero && PlayerReferences.instance.canMove)
         {
             aux = true;
         }

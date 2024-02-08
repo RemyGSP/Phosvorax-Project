@@ -26,6 +26,7 @@ public class IdleState : States
             if (newPlayerState != null)
             {
                 notChanged = false;
+                newPlayerState = Instantiate(newPlayerState);
                 newPlayerState.InitializeState(stateGameObject);
                 newPlayerState.Start();
             }

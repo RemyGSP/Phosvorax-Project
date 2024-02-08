@@ -41,6 +41,7 @@ public class EnemyMeleeChaseState : States
             newPlayerState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
             if (newPlayerState != null)
             {
+                newPlayerState = Instantiate(newPlayerState);
                 notChanged = false;
                 newPlayerState.InitializeState(stateGameObject);
                 newPlayerState.Start();

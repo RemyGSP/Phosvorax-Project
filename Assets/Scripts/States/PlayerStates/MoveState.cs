@@ -45,6 +45,7 @@ public class MoveState : States
             if (newPlayerState != null)
             {
                 notChanged = false;
+                newPlayerState = Instantiate(newPlayerState);
                 newPlayerState.InitializeState(stateGameObject);
                 newPlayerState.Start();
                 animator.SetBool("running", false);

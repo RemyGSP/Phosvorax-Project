@@ -28,8 +28,16 @@ public class StateMachine : MonoBehaviour
     private void LateUpdate()
     {
         States newState = currentState.CheckTransitions();
-        if (newState is not null)
+        if (newState != null)
+        {
+            if (currentState != null)
+            {
+                currentState.OnExit();
+                Destroy(currentState);
+            }
             currentState = newState;
+
+        }
     }
 
 }

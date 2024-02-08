@@ -56,6 +56,7 @@ public class EnemyMeleeAttackState : States
             if (newEnemyState != null)
             {
                 notChanged = false;
+                newEnemyState = Instantiate(newEnemyState);
                 newEnemyState.InitializeState(stateGameObject);
                 newEnemyState.Start();
             }

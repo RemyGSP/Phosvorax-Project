@@ -12,7 +12,34 @@ public abstract class States : ScriptableObject
     {
     }
 
-    public abstract States CheckTransitions();
+    public virtual States CheckTransitions()
+    {
+        bool notChanged = true;
+        int counter = 0;
+        States newState = null;
+
+        while (notChanged)
+        {
+            newState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
+            if (newState != null)
+            {
+                notChanged = false;
+                newState = Instantiate(newState);
+                newState.InitializeState(stateGameObject);
+                newState.Start();
+            }
+            if (counter < stateTransitions.Length - 1)
+            {
+                counter++;
+            }
+            else
+            {
+                notChanged = false;
+            }
+        }
+
+        return newState;
+    }
 
     //virtual para que cuando se utilize un objeto de tipo States pero que contenga un hijo 
     public virtual void InitializeState(GameObject gameObject)
@@ -20,6 +47,11 @@ public abstract class States : ScriptableObject
         stateGameObject = gameObject;
     }
     public virtual void Start()
+    {
+
+    }
+
+    public virtual void OnExit()
     {
 
     }

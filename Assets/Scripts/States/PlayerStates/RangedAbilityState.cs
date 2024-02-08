@@ -46,6 +46,7 @@ public class RangedAbilityState : Ability
                 if (newGameState != null)
                 {
                     notChanged = false;
+                    newGameState = Instantiate(newGameState);
                     newGameState.InitializeState(stateGameObject);
                     newGameState.Start();
                     rigidBody.velocity = Vector3.zero;

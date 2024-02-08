@@ -48,6 +48,7 @@ public class RollState : States
                 if (newPlayerState != null)
                 {
                     notChanged = false;
+                    newPlayerState = Instantiate(newPlayerState);
                     newPlayerState.InitializeState(stateGameObject);
                     newPlayerState.Start();
                     PlayerTimers.timer.rollTimer = 0;

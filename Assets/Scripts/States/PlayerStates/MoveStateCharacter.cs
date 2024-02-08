@@ -31,37 +31,6 @@ public class MoveStateCharacter : States
     }
     #endregion
 
-    #region Métodos abstractos
-
-    public override States CheckTransitions()
-    {
-        bool notChanged = true;
-        int counter = 0;
-        States newPlayerState = null;
-
-        while (notChanged)
-        {
-            newPlayerState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
-            if (newPlayerState != null)
-            {
-                notChanged = false;
-                newPlayerState.InitializeState(stateGameObject);
-                newPlayerState.Start();
-                animator.SetBool("running", false);
-            }
-            if (counter < stateTransitions.Length - 1)
-            {
-                counter++;
-            }
-            else
-            {
-                notChanged = false;
-            }
-        }
-
-        return newPlayerState;
-    }
-    #endregion
 
     #region Métodos concretos
     public override void Start()
@@ -101,6 +70,11 @@ public class MoveStateCharacter : States
         PlayerDirection.y = Physics.gravity.y;
         characterController.Move(PlayerDirection);
         stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerDirection);
+    }
+
+    public override void OnExitState()
+    {
+        PlayerReferences.instance.GetPlayerAnimator().SetBool("move", false);
     }
     #endregion
 }

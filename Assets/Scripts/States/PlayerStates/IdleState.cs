@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.Android;
 
@@ -11,36 +12,19 @@ public class IdleState : States
     public IdleState(GameObject stateGameObject) : base(stateGameObject)
     {
     }
+
+    public new void OnEnterState()
+    {
+        base.OnEnterState();
+        PlayerReferences.instance.GetPlayerAnimator().SetBool("idle",true);
+    }
+    public override void OnExitState()
+    {
+        PlayerReferences.instance.GetPlayerAnimator().SetBool("idle", false);
+    }
     #endregion
 
     #region Methods
-    public override States CheckTransitions()
-    {
-        bool notChanged = true;
-        int counter = 0;
-        States newPlayerState = null;
-
-        while (notChanged)
-        {
-            newPlayerState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
-            if (newPlayerState != null)
-            {
-                notChanged = false;
-                newPlayerState.InitializeState(stateGameObject);
-                newPlayerState.Start();
-            }
-            if (counter < stateTransitions.Length - 1)
-            {
-                counter++;
-            }
-            else
-            {
-                notChanged = false;
-            }
-        }
-
-        return newPlayerState;
-    }
     // Aquí hacer la lógica para cuando el jugador no haga nada, normalmente solo será que haga la animación de idle del objeto
     public override void Update()
     {

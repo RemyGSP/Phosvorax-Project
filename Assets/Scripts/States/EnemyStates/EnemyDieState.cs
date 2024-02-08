@@ -66,6 +66,11 @@ public class EnemyDieState : States
     {
     }
 
+    public override void OnExitState()
+    {
+        return;
+    }
+
     #endregion
 }
 

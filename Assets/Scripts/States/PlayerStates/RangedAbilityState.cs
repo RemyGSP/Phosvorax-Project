@@ -33,35 +33,16 @@ public class RangedAbilityState : Ability
 
     public override States CheckTransitions()
     {
-        States newGameState = null;
 
         if (currentAttackTime > animationLength)
         {
-            bool notChanged = true;
-            int counter = 0;
-
-            while (notChanged)
-            {
-                newGameState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
-                if (newGameState != null)
-                {
-                    notChanged = false;
-                    newGameState.InitializeState(stateGameObject);
-                    newGameState.Start();
-                    rigidBody.velocity = Vector3.zero;
-                    Destroy(currentFeedback);
-                }
-                if (counter < stateTransitions.Length - 1)
-                {
-                    counter++;
-                }
-                else
-                {
-                    notChanged = false;
-                }
-            }
+            return base.CheckTransitions();
         }
-        return newGameState;
+        else
+        {
+            return null;
+        }
+
 
     }
 
@@ -130,4 +111,8 @@ public class RangedAbilityState : Ability
         return;
     }
 
+    public override void OnExitState()
+    {
+        throw new System.NotImplementedException();
+    }
 }

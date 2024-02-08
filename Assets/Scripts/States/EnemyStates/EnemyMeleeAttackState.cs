@@ -145,6 +145,11 @@ public class EnemyMeleeAttackState : States
         enemyMeleeAttackTimer += Time.deltaTime;
     }
 
+    public override void OnExitState()
+    {
+        return;
+    }
+
     #endregion
 }
 

@@ -11,32 +11,20 @@ public class FallingState : States
     }
     public override States CheckTransitions()
     {
-        States newPlayerState = null;
 
-        bool notChanged = true;
-        int counter = 0;
         if (PlayerReferences.instance.CheckIfGrounded())
         {
-            while (notChanged)
-            {
-                newPlayerState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
-                if (newPlayerState != null)
-                {
-                    notChanged = false;
-                    newPlayerState.InitializeState(stateGameObject);
-                    newPlayerState.Start();
-                }
-                if (counter < stateTransitions.Length - 1)
-                {
-                    counter++;
-                }
-                else
-                {
-                    notChanged = false;
-                }
-            }
+            return base.CheckTransitions();
         }
-        return newPlayerState;
+        else
+        {
+            return null;
+        }
+    }
+
+    public override void OnExitState()
+    {
+        //PlayerReferences.instance.GetPlayerAnimator().SetBool("idle", true);
     }
 
     public override void Update()

@@ -37,36 +37,14 @@ public class RollState : States
 
     public override States CheckTransitions()
     {
-        States newPlayerState = null;
-
-        bool notChanged = true;
-        int counter = 0;
         if (currentDashTime > dashTime)
         {
-            while (notChanged)
-            {
-                newPlayerState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
-                if (newPlayerState != null)
-                {
-                    stateGameObject.GetComponent<Collider>().enabled = true;
-                    notChanged = false;
-                    newPlayerState.InitializeState(stateGameObject);
-                    newPlayerState.Start();
-                    PlayerTimers.timer.rollTimer = 0;
-                    rigidBody.velocity = Vector3.zero;
-                    //animator.SetBool("dashing", false);
-                }
-                if (counter < stateTransitions.Length - 1)
-                {
-                    counter++;
-                }
-                else
-                {
-                    notChanged = false;
-                }
-            }
+            return base.CheckTransitions();
         }
-        return newPlayerState;
+        else 
+        {
+            return null;
+        }
     }
 
     public override void FixedUpdate()
@@ -93,6 +71,16 @@ public class RollState : States
     public override void Update()
     {
         return;
+    }
+
+    public override void OnExitState()
+    {
+        PlayerReferences.instance.GetPlayerAnimator().SetBool("dash", false);
+    }
+
+    public new void OnEnterState()
+    {
+        PlayerReferences.instance.GetPlayerAnimator().SetBool("dash", true);
     }
     #endregion
 }

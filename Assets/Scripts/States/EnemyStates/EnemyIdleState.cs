@@ -62,6 +62,11 @@ public class EnemyIdleState : States
         return;
     }
 
+    public override void OnExitState()
+    {
+        return;
+    }
+
 
     #endregion
 }

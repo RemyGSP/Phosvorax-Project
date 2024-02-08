@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlayerReferences : MonoBehaviour
 {
     #region Variables
+    public static PlayerReferences instance;
     [Header("Player")]
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject footPos;
-    public static PlayerReferences instance;
+    [SerializeField] private Animator playerAnimator;
     public bool canMove;
     [Header("Position")]
     static Vector3 playerCoordinates;
@@ -20,11 +21,15 @@ public class PlayerReferences : MonoBehaviour
     private void Start()
     {
         if (instance == null)
+        {
             instance = this;
+        }
         else
+        {
             Debug.Log("Manager PlayerReferences already exists");
+        }
     }
-    public Vector3 GetPlayerCoordinates()
+        public Vector3 GetPlayerCoordinates()
     {
         playerCoordinates = player.transform.position;
         return playerCoordinates;
@@ -59,6 +64,11 @@ public class PlayerReferences : MonoBehaviour
             targetDir.y = 0f; // Mantener en el plano XY
         }
         return targetDir;
+    }
+
+    public Animator GetPlayerAnimator()
+    {
+        return playerAnimator;
     }
     #endregion
 }

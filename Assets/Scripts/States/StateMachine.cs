@@ -9,10 +9,9 @@ public class StateMachine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         currentState = Instantiate(entryState);
         currentState.InitializeState(this.gameObject);
-        currentState.Start();
+        currentState.OnEnterState();
     }
 
     // Update is called once per frame
@@ -29,7 +28,13 @@ public class StateMachine : MonoBehaviour
     {
         States newState = currentState.CheckTransitions();
         if (newState is not null)
-            currentState = newState;
+        {
+            currentState.OnExitState();
+            currentState = Instantiate(newState);
+            currentState.OnEnterState();
+            currentState.InitializeState(this.gameObject);
+
+        }
     }
 
 }

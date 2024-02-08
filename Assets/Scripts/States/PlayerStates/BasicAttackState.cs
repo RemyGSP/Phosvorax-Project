@@ -30,36 +30,17 @@ public class BasicAttackState : States
     {
     }
 
-    public override States CheckTransitions()
+    public new States CheckTransitions()
     {
-        States newGameState = null;
 
         if (currentAttackTime > animationLength)
         {
-            bool notChanged = true;
-            int counter = 0;
-
-            while (notChanged)
-            {
-                newGameState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
-                if (newGameState != null)
-                {
-                    notChanged = false;
-                    newGameState.InitializeState(stateGameObject);
-                    newGameState.Start();
-                    rigidBody.velocity = Vector3.zero;
-                }
-                if (counter < stateTransitions.Length - 1)
-                {
-                    counter++;
-                }
-                else
-                {
-                    notChanged = false;
-                }
-            }
+            return base.CheckTransitions();
         }
-        return newGameState;
+        else
+        {
+            return null;
+        }
         
     }
 
@@ -123,5 +104,14 @@ public class BasicAttackState : States
         return;
     }
 
- 
+    public new void OnEnterState()
+    {
+        base.OnEnterState();
+        PlayerReferences.instance.GetPlayerAnimator().SetBool("idle", true);
+    }
+
+    public override void OnExitState()
+    {
+        PlayerReferences.instance.GetPlayerAnimator().SetBool("meleeAtack", false);
+    }
 }

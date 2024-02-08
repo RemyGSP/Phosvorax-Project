@@ -32,33 +32,7 @@ public class EnemyMeleeChaseState : States
 
     #endregion
 
-    public override States CheckTransitions()
-    {
-        bool notChanged = true;
-        int counter = 0;
-        States newPlayerState = null;
 
-        while (notChanged)
-        {
-            newPlayerState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
-            if (newPlayerState != null)
-            {
-                notChanged = false;
-                newPlayerState.InitializeState(stateGameObject);
-                newPlayerState.Start();
-            }
-            if (counter < stateTransitions.Length - 1)
-            {
-                counter++;
-            }
-            else
-            {
-                notChanged = false;
-            }
-        }
-
-        return newPlayerState;
-    }
 
     #region Methods
 
@@ -89,6 +63,11 @@ public class EnemyMeleeChaseState : States
         currentMovementStatusTimer += Time.deltaTime;
 
         return direction * currentSpeed;
+    }
+
+    public override void OnExitState()
+    {
+        throw new System.NotImplementedException();
     }
 
     #endregion

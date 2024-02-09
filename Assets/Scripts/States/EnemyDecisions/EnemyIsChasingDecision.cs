@@ -14,7 +14,7 @@ public class EnemyIsChasingDecision : Decision
         float maxAttackDistance = stateMachine.GetComponent<EnemyReferences>().GetMaxAttackPosition();
         bool aux = false;
 
-        if (distance <= distanceToSeePlayer &&  distance > maxAttackDistance)
+        if (distance <= distanceToSeePlayer && distance > maxAttackDistance)
         {
             aux = true;
         }

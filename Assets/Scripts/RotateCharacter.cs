@@ -15,7 +15,7 @@ public class RotateCharacter : MonoBehaviour
 
     public Quaternion Rotate(Quaternion objectCurrentRotation, Vector3 direction, float rotationSmoothness)
     {
-        Quaternion rotation = Quaternion.Lerp(objectCurrentRotation, Quaternion.LookRotation(direction, Vector3.up), 0.5f);
+        Quaternion rotation = Quaternion.Lerp(objectCurrentRotation, Quaternion.LookRotation(direction, Vector3.up), rotationSmoothness);
         rotation.x = 0;
         rotation.z = 0;
         return rotation;

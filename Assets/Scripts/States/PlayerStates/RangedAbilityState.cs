@@ -113,6 +113,6 @@ public class RangedAbilityState : Ability
 
     public override void OnExitState()
     {
-        throw new System.NotImplementedException();
+        Destroy(currentFeedback);
     }
 }

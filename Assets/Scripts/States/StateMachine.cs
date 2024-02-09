@@ -31,9 +31,8 @@ public class StateMachine : MonoBehaviour
         {
             currentState.OnExitState();
             currentState = Instantiate(newState);
-            currentState.OnEnterState();
             currentState.InitializeState(this.gameObject);
-
+            currentState.OnEnterState();
         }
     }
 

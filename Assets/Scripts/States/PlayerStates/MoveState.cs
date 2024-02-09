@@ -70,12 +70,14 @@ public class MoveState : States
         //PlayerDirection.y = Physics.gravity.y * rigidBody.mass;
         PlayerDirection.y = rigidBody.velocity.y;
         rigidBody.velocity = PlayerDirection;
+        Debug.Log(rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerDirection));
         stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerDirection);
     }
 
     public override void OnExitState()
     {
-        return;
+        rigidBody.velocity = Vector3.zero;
+        animator.SetBool("running",false);
     }
     #endregion
 }

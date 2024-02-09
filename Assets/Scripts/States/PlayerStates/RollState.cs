@@ -64,7 +64,9 @@ public class RollState : States
         }
         //Esto es por si el usuario no tienes ninguna direccion pulsada, asi que pillara la rotacion actual del personaje
         else
+        {
             rigidBody.AddForce(stateGameObject.transform.rotation * Vector3.forward * dashForce * Time.deltaTime, ForceMode.Impulse);
+        }
     }
 
 
@@ -75,6 +77,8 @@ public class RollState : States
 
     public override void OnExitState()
     {
+        rigidBody.velocity = Vector3.zero;
+        stateGameObject.GetComponent<Collider>().enabled = true;
         PlayerReferences.instance.GetPlayerAnimator().SetBool("dash", false);
     }
 

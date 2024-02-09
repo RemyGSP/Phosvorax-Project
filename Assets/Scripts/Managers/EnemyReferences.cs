@@ -14,6 +14,7 @@ public class EnemyReferences : MonoBehaviour
 
     [Header("VisualContact")]
     [SerializeField] float distanceToSeePlayer;
+    [SerializeField] bool playerSeen;
 
     [Header("Attack")]
     [SerializeField] float maxAttackDistance;
@@ -43,6 +44,16 @@ public class EnemyReferences : MonoBehaviour
     public float GetDistanceToSeePlayer()
     {
         return distanceToSeePlayer;
+    }
+
+    public bool GetPlayerSeen()
+    {
+        return playerSeen;
+    }
+
+    public void SetPlayerSeen(bool playerSeen)
+    {
+        this.playerSeen = playerSeen;
     }
     #endregion
 }

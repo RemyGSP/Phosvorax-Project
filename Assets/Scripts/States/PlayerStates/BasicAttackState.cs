@@ -73,6 +73,7 @@ public class BasicAttackState : States
 
     void ExecuteAttack()
     {
+        //stateGameObject.GetComponent<GroundSlashShooter>().OnShoot();
         Vector3 attackPosition = playerTransform.position + playerTransform.forward * attackOffset;
         Collider[] hitColliders = Physics.OverlapSphere(attackPosition, sphereSize / 2, enemyLayerMask, QueryTriggerInteraction.UseGlobal);
 

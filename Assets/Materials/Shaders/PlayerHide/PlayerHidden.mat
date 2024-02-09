@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2434497628201709377
+--- !u!114 &-7231466849752101662
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CartoonWater
-  m_Shader: {fileID: -6465566751694194690, guid: ea491bfeb66d1fa499234e787b548a00,
+  m_Name: PlayerHidden
+  m_Shader: {fileID: -6465566751694194690, guid: c820b353a9e334b41aa50bca6f2ea84a,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -51,21 +51,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _FoamSpeed: 0.4
-    - _Foam_Cutoff: 1
-    - _Foam_Quantity: 0
-    - _Foam_Scale: 30
-    - _MaskScale: 200
+    - _Power: 1.82
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Ripple_Density: 4
-    - _Ripple_Slimness: 8
-    - _Ripple_Speed: 2
-    - _Wave_Scale: 3
-    - _Wave_Speed: 0.5
     m_Colors:
-    - _Base_Color: {r: 0.06132078, g: 0.46256027, b: 1, a: 1}
-    - _Foam_Color: {r: 1.679245, g: 1.679245, b: 1.679245, a: 1}
-    - _Ripple_Color: {r: 0.1981132, g: 0.5812618, b: 2, a: 0}
-    - _WaterColor: {r: 0, g: 0.2688694, b: 1, a: 1}
+    - _Color: {r: 0.2802993, g: 0.27549842, b: 0.38679248, a: 0}
   m_BuildTextureStacks: []

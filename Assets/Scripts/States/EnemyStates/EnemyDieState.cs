@@ -5,8 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "EnemyStates/EnemyDieState")]
 public class EnemyDieState : States
 {
-    [Header("States")]
-    [SerializeField] private States EnemyIdleState;
 
     #region Constructor
     public EnemyDieState(GameObject stateGameObject) : base(stateGameObject)
@@ -32,6 +30,7 @@ public class EnemyDieState : States
             if (newPlayerState != null)
             {
                 notChanged = false;
+                newPlayerState = Instantiate(newPlayerState);
                 newPlayerState.InitializeState(stateGameObject);
                 newPlayerState.Start();
             }

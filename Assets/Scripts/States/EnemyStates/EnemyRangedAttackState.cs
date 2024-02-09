@@ -3,29 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[CreateAssetMenu(menuName = "EnemyStates/EnemyMeleeAttackState")]
+[CreateAssetMenu(menuName = "EnemyStates/EnemyRangedAttackState")]
 
-public class EnemyMeleeAttackState : States
+public class EnemyRangedAttackState : States
 {
 
     #region Constructor
-    public EnemyMeleeAttackState(GameObject stateGameObject) : base(stateGameObject)
+    public EnemyRangedAttackState(GameObject stateGameObject) : base(stateGameObject)
     {
     }
     #endregion
 
 
     #region Variables
+ 
     [SerializeField] LayerMask playerLayerMask;
-
     private RotateCharacter rotateCharacter;
     private Rigidbody rigidBody;
     private Animator anim;
-    [SerializeField] private float attackDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
-    [SerializeField] private float attackOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
-    [SerializeField] private float sphereSize; // Tamaño del área de detección
-    [SerializeField] private float attackDamage;
-
     //controlar que el daño vaya con la animacion
     float animationLength;
     float currentAttackTime;
@@ -34,11 +29,14 @@ public class EnemyMeleeAttackState : States
 
     [SerializeField] private float maxAttackDistance = 5f;
 
-    [Header("Melee Enemy Timers")]
-    public float enemyMeleeAttackTimer;
-    public float enemyMeleeAttackCD;
+    [Header("Ranged Enemy Timers")]
+    [SerializeField] private float enemyRangedAttackTimer;
+    [SerializeField] private float enemyRangedAttackCD;
+    [SerializeField] private float attackDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
 
-    [SerializeField] private AttackAreaVisualizer attackAreaVisualizer;
+    [Header("Bullet")]
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private float bulletSpeed;
 
     private NavMeshAgent enemy;
     #endregion
@@ -113,19 +111,26 @@ public class EnemyMeleeAttackState : States
 
     void ExecuteAttack()
     {
+ 
+        Vector3 directionToPlayer = (PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position).normalized;
 
+        // Instancia el objeto de bala en la posición del enemigo
+        GameObject bulletInstance = Instantiate(bullet, stateGameObject.transform.position, Quaternion.identity);
 
-        Vector3 attackPosition = stateGameObject.transform.position + stateGameObject.transform.forward * attackOffset;
-        Collider[] hitColliders = Physics.OverlapSphere(attackPosition, sphereSize / 2, playerLayerMask, QueryTriggerInteraction.UseGlobal);
+        // Obtén el componente Rigidbody de la bala
+        Rigidbody bulletRigidbody = bulletInstance.GetComponent<Rigidbody>();
 
-        foreach (Collider hitCollider in hitColliders)
+        // Si la bala tiene un componente Rigidbody
+        if (bulletRigidbody != null)
         {
-            if (hitCollider.TryGetComponent<HealthBehaviour>(out HealthBehaviour healthBehaviour))
-            {
-                healthBehaviour.Damage(attackDamage);
-            }
-            Debug.Log("Impacto con: " + hitCollider.gameObject.name);
+            // Aplica fuerza a la bala en la dirección hacia el jugador
+            bulletRigidbody.velocity = directionToPlayer * bulletSpeed; // Ajusta 'bulletSpeed' según lo que necesites
         }
+        else
+        {
+            Debug.LogError("El objeto de bala no tiene un componente Rigidbody.");
+        }
+
         canAttack = false;
     }
 
@@ -149,16 +154,11 @@ public class EnemyMeleeAttackState : States
     public override void Update()
     {
         stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position, 0.5f);
-        enemyMeleeAttackTimer += Time.deltaTime;
+        enemyRangedAttackTimer += Time.deltaTime;
     }
-
-    public override void OnExitState()
-    {
-        return;
-    }
-
     #endregion
 }
+
 
 
 

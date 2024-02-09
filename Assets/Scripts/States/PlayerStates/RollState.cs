@@ -23,14 +23,11 @@ public class RollState : States
     }
     public override void Start()
     {
+        animator = animator = PlayerReferences.instance.GetPlayerAnimator();
         stateGameObject.GetComponent<Collider>().enabled = false;
         currentDashTime = 0f;
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
-        if (stateGameObject.TryGetComponent<Animator>(out Animator objectAnimator))
-        {
-            animator = objectAnimator;
-            //animator.SetTrigger("roll");
-        }
+        PlayerTimers.timer.rollTimer = 0;
         playerDirection = PlayerInputController.Instance.GetPlayerInputDirection();
     }
 
@@ -84,7 +81,6 @@ public class RollState : States
 
     public new void OnEnterState()
     {
-        PlayerReferences.instance.GetPlayerAnimator().SetBool("dash", true);
     }
     #endregion
 }

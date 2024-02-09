@@ -39,11 +39,9 @@ public class MoveState : States
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         currentMovementStatusTimer = 0;
         currentSpeed = 0;
-        if (stateGameObject.TryGetComponent<Animator>(out Animator playerAnimator))
-        {
-            this.animator = playerAnimator;
-            animator.SetBool("running", true);
-        }
+        Debug.Log(PlayerReferences.instance.GetPlayerAnimator());
+        animator = PlayerReferences.instance.GetPlayerAnimator();
+        animator.SetBool("running", true);
     }
 
 
@@ -70,10 +68,13 @@ public class MoveState : States
         //PlayerDirection.y = Physics.gravity.y * rigidBody.mass;
         PlayerDirection.y = rigidBody.velocity.y;
         rigidBody.velocity = PlayerDirection;
-        Debug.Log(rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerDirection));
         stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerDirection);
     }
 
+    public new void OnEnterState()
+    {
+        base.OnEnterState();
+    }
     public override void OnExitState()
     {
         rigidBody.velocity = Vector3.zero;

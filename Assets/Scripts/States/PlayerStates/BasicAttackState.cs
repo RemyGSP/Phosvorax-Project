@@ -46,7 +46,7 @@ public class BasicAttackState : States
 
     public override void Start()
     {
-        anim = stateGameObject.GetComponent<Animator>();
+        anim = PlayerReferences.instance.GetPlayerAnimator() ;
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         playerTransform = stateGameObject.GetComponent<Transform>();
@@ -57,7 +57,7 @@ public class BasicAttackState : States
 
         stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
 
-
+        PlayerReferences.instance.GetPlayerAnimator().SetBool("meleeAttack", true);
         ExecuteAnim();
     }
 
@@ -108,11 +108,11 @@ public class BasicAttackState : States
     public new void OnEnterState()
     {
         base.OnEnterState();
-        PlayerReferences.instance.GetPlayerAnimator().SetBool("idle", true);
+
     }
 
     public override void OnExitState()
     {
-        PlayerReferences.instance.GetPlayerAnimator().SetBool("meleeAtack", false);
+        PlayerReferences.instance.GetPlayerAnimator().SetInteger("meleeAttack", 0);
     }
 }

@@ -10,10 +10,11 @@ public class PlayerReferences : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] private GameObject footPos;
     [SerializeField] private Animator playerAnimator;
+    [SerializeField] private GameObject playerVisuals;
     public bool canMove;
     [Header("Position")]
     static Vector3 playerCoordinates;
-    [SerializeField] LayerMask groundMask; 
+    [SerializeField] LayerMask groundMask;
     #endregion
 
 
@@ -29,7 +30,7 @@ public class PlayerReferences : MonoBehaviour
             Debug.Log("Manager PlayerReferences already exists");
         }
     }
-        public Vector3 GetPlayerCoordinates()
+    public Vector3 GetPlayerCoordinates()
     {
         playerCoordinates = player.transform.position;
         return playerCoordinates;
@@ -38,8 +39,8 @@ public class PlayerReferences : MonoBehaviour
     public bool CheckIfGrounded()
     {
         // Set the maximum distance for the ray
-        float maxRaycastDistance = 0.1f; // Adjust this value based on your needs
-
+        float maxRaycastDistance = 10f; // Adjust this value based on your needs
+        Debug.DrawRay(footPos.transform.position, Vector3.down,Color.red);
         // Check if a ray from footPos.position downward hits anything within the specified distance
         return Physics.Raycast(footPos.transform.position, Vector3.down, maxRaycastDistance);
     }

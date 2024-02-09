@@ -63,11 +63,13 @@ public class EnemyPatrolState : States
 
     public override void Start()
     {
+        Debug.Log(stateGameObject);
         patrolCenterPoint = stateGameObject.transform;
         enemy = stateGameObject.GetComponent<NavMeshAgent>();
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         anim = stateGameObject.GetComponent<Animator>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
+        Debug.Log(enemy);
     }
 
     public override void Update()
@@ -97,6 +99,11 @@ public class EnemyPatrolState : States
 
         result = Vector3.zero;
         return false;
+    }
+
+    public override void OnExitState()
+    {
+        return;
     }
     #endregion
 }

@@ -156,6 +156,11 @@ public class EnemyRangedAttackState : States
         stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position, 0.5f);
         enemyRangedAttackTimer += Time.deltaTime;
     }
+
+    public override void OnExitState()
+    {
+        throw new System.NotImplementedException();
+    }
     #endregion
 }
 

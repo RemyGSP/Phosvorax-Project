@@ -69,6 +69,7 @@ public class AbilityManager : MonoBehaviour
     public void CastedAbility()
     {
         isCasting = false;
+        Debug.Log("Funciona");
     }
 
     public bool IsCastingAbility()

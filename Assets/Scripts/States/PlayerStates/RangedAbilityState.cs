@@ -49,7 +49,7 @@ public class RangedAbilityState : Ability
     public override void Start()
     {
         AbilityManager.instance.CastedAbility();
-        anim = stateGameObject.GetComponent<Animator>();
+        anim = PlayerReferences.instance.GetPlayerAnimator();
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         playerTransform = stateGameObject.GetComponent<Transform>();
@@ -61,8 +61,16 @@ public class RangedAbilityState : Ability
         stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
         if (stateGameObject.TryGetComponent<AttackAreaVisualizer>(out AttackAreaVisualizer attAreaVisual))
         {
-            attackPosition = attAreaVisual.GetCursorPositionInsideBounds(PlayerReferences.instance.GetMouseTargetDir() - PlayerReferences.instance.GetPlayerCoordinates());
+            if (PlayerInputController.Instance.IsUsingKeyboard())
+            {
+                attackPosition = attAreaVisual.GetCursorPositionInsideBounds(PlayerReferences.instance.GetMouseTargetDir() - PlayerReferences.instance.GetPlayerCoordinates());
+            }
+            else
+            {
+                attackPosition = attAreaVisual.GetCursorPosition();
+            }
         }
+
 
         ExecuteAnim();
     }

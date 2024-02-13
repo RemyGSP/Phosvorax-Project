@@ -39,7 +39,6 @@ public class MoveState : States
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         currentMovementStatusTimer = 0;
         currentSpeed = 0;
-        Debug.Log(PlayerReferences.instance.GetPlayerAnimator());
         animator = PlayerReferences.instance.GetPlayerAnimator();
         animator.SetBool("running", true);
     }

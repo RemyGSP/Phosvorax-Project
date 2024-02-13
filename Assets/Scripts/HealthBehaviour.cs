@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class HealthBehaviour : MonoBehaviour
 {
@@ -13,10 +14,11 @@ public class HealthBehaviour : MonoBehaviour
     public UnityEvent<float> onHit;
     public UnityEvent onDeath;
     public UnityEvent onRevive;
-
     private void Start()
     {
-        currentHealth =maxHealth;
+
+
+        currentHealth = maxHealth;
     }
     public bool Damage(float damage)
     {
@@ -55,7 +57,7 @@ public class HealthBehaviour : MonoBehaviour
         return aux;
     }
 
-        public void Revive()
+    public void Revive()
     {
         currentHealth = maxHealth;
         onRevive.Invoke();

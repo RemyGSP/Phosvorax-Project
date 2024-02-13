@@ -7,9 +7,18 @@ public class PlayerReferences : MonoBehaviour
     #region Variables
     [Header("Player")]
     [SerializeField] private GameObject player;
+<<<<<<< Updated upstream
     public static PlayerReferences instance;
 
+=======
+    [SerializeField] private GameObject footPos;
+    [SerializeField] private Animator playerAnimator;
+    [SerializeField] private GameObject playerVisuals;
+    [SerializeField] private GameObject playerVisiblePoint;
+    public bool canMove;
+>>>>>>> Stashed changes
     [Header("Position")]
+    static Vector3 visiblePointCoordinates;
     static Vector3 playerCoordinates;
     [SerializeField] LayerMask groundMask; 
     #endregion
@@ -23,9 +32,16 @@ public class PlayerReferences : MonoBehaviour
         else
             Debug.Log("Manager PLayerReferences already exists");
     }
+
+    public Vector3 GetPlayerVisiblePoint()
+    {
+        visiblePointCoordinates = playerVisiblePoint.transform.position;
+        return visiblePointCoordinates;
+    }
+
     public Vector3 GetPlayerCoordinates()
     {
-        playerCoordinates = player.transform.position;
+        playerCoordinates = playerVisiblePoint.transform.position;
         return playerCoordinates;
     }
 

@@ -12,6 +12,7 @@ public class PlayerReferences : MonoBehaviour
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private GameObject playerVisuals;
     public bool canMove;
+    [SerializeField] private GameObject playerVisiblePoint;
     [Header("Position")]
     static Vector3 playerCoordinates;
     [SerializeField] LayerMask groundMask;
@@ -70,6 +71,11 @@ public class PlayerReferences : MonoBehaviour
     public Animator GetPlayerAnimator()
     {
         return playerAnimator;
+    }
+
+    public Vector3 GetPlayerVisiblePoint()
+    {
+        return playerVisiblePoint.transform.position;
     }
     #endregion
 }

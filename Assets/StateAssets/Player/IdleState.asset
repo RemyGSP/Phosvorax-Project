@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efdacf22cdaa18a4091ea1a3c5dc68cb, type: 3}
   m_Name: IdleState
   m_EditorClassIdentifier: 
-  stateGameObject: {fileID: 0}
   stateTransitions:
   - decisionToBeMade: {fileID: 11400000, guid: 2fd5f936a84cf4840b9620f8a0216698, type: 2}
     onDecisionTrueExitState: {fileID: 11400000, guid: f044212ad6dc00b4aaa2c53add5904d8,
@@ -30,7 +29,11 @@ MonoBehaviour:
     onDecisionTrueExitState: {fileID: 11400000, guid: bdcd29e445c155343bf6318d7ffd0c4b,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}
-  - decisionToBeMade: {fileID: 11400000, guid: 113a49612aab8e34b81a8ecad4279e88, type: 2}
-    onDecisionTrueExitState: {fileID: 11400000, guid: 8a16e18170a368d40b30fd3c75855f46,
+  - decisionToBeMade: {fileID: 11400000, guid: 917c92411cdeac94aa10e0ec316fb4f2, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: 40e5949df45c492429a1841f1ad898cd,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 0}
+  - decisionToBeMade: {fileID: 11400000, guid: 83a92b433f6dc7f4c8b77cf652f275e1, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: e2d7fe2ad90809646a62b78aedac622b,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}

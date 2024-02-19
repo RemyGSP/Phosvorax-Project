@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AbilityManager : MonoBehaviour
 {
-
+    //Tu mama es un primate muy warro
     static public AbilityManager instance;
     private int currentAbility;
     //[SerializeField] private Attack[] currentAbilityState;
@@ -20,22 +20,20 @@ public class AbilityManager : MonoBehaviour
         throwAbility = false;
         instance = this;
     }
-
+    //Esto es 100% chatGPT :)
     private void Update()
     {
         currentAbility = PlayerInputController.Instance.GetCurrentAbility();
         if (!smartCast)
         {
-            if (PlayerInputController.Instance.IsUsingAbility() && PlayerTimers.timer.abilityTimers[currentAbility-1] > PlayerTimers.timer.abilityCD[currentAbility-1])
+            if (PlayerInputController.Instance.IsUsingAbility() && PlayerTimers.Instance.abilityTimers[currentAbility-1] > PlayerTimers.Instance.abilityCD[currentAbility-1])
             {
-                PlayerReferences.instance.canMove = false;
                 currentAbility = PlayerInputController.Instance.GetCurrentAbility();
                 CallAbilityIndicator();
                 isCasting = true;
             }
             else
             {
-                PlayerReferences.instance.canMove = true;
                 attAreaVisual.DeactivateArea();
             }
             if (PlayerInputController.Instance.IsCanceling())
@@ -43,7 +41,8 @@ public class AbilityManager : MonoBehaviour
                 isCasting = false;
                 PlayerInputController.Instance.StopUsingAbility();
             }
-            if (!PlayerInputController.Instance.IsUsingAbility() && isCasting)
+            //Debug.Log(PlayerInputController.Instance.IsCanceling());
+            if (isCasting && !PlayerInputController.Instance.IsUsingAbility())
             {
                 throwAbility = true;
             }
@@ -51,8 +50,6 @@ public class AbilityManager : MonoBehaviour
             {
                 throwAbility = false;
             }
-
-
         }
         else
         {
@@ -69,13 +66,9 @@ public class AbilityManager : MonoBehaviour
     public void CastedAbility()
     {
         isCasting = false;
-        Debug.Log("Funciona");
     }
 
-    public bool IsCastingAbility()
-    {
-        return isCasting;
-    }
+
     public void CallAbilityIndicator()
     {
         Debug.Log(abilities[currentAbility].abilityRange) ;

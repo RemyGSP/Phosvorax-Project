@@ -12,7 +12,7 @@ public class AttackAreaVisualizer : MonoBehaviour
     private float currentAreaRadius;
     private Vector3 currentCastLimits;
     private Vector3 lastPosition;
-    [SerializeField] private float cursorSpeed;
+
 
 
     private void Start()
@@ -23,14 +23,7 @@ public class AttackAreaVisualizer : MonoBehaviour
     {
         if (isCasting)
         {
-            if (PlayerInputController.Instance.IsUsingKeyboard())
-            {
-                ManageCursor();
-            }
-            if (PlayerInputController.Instance.IsUsingGamepad())
-            {
-                ManageCursorGamepad();
-            }
+            ManageCursor();
         }
     }
 
@@ -77,14 +70,7 @@ public class AttackAreaVisualizer : MonoBehaviour
     private void ManageCursor()
     {
         Vector3 cursorDir = PlayerReferences.instance.GetMouseTargetDir() - PlayerReferences.instance.GetPlayerCoordinates();
-        cursorIndicator.transform.position = GetCursorPositionInsideBounds(cursorDir) + PlayerReferences.instance.GetPlayerCoordinates();
-        
-        lastPosition = cursorIndicator.transform.position - PlayerReferences.instance.GetPlayerCoordinates();
-    }
-    private void ManageCursorGamepad()
-    {
-        cursorIndicator.transform.position += (PlayerInputController.Instance.GetPlayerInputDirection() * cursorSpeed * Time.deltaTime).normalized;
-        Debug.Log(PlayerInputController.Instance.GetPlayerInputDirection() * cursorSpeed * Time.deltaTime);
+        cursorIndicator.transform.position = GetCursorPositionInsideBounds(cursorDir);
         lastPosition = cursorIndicator.transform.position - PlayerReferences.instance.GetPlayerCoordinates();
     }
 
@@ -105,7 +91,7 @@ public class AttackAreaVisualizer : MonoBehaviour
             aux = targetDir;
         }
         aux.y = 0.1f;
-        return aux;
+        return aux + playerPos;
     }
 
 
@@ -130,11 +116,6 @@ public class AttackAreaVisualizer : MonoBehaviour
     {
         areaFeedback.gameObject.SetActive(false);
         cursorIndicator.gameObject.SetActive(false);
-    }
-
-    public Vector3 GetCursorPosition()
-    {
-        return cursorIndicator.transform.position;
     }
 }
 

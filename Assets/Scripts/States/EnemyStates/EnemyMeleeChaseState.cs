@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 [CreateAssetMenu(menuName = "EnemyStates/EnemyChaseState")]
 public class EnemyMeleeChaseState : States
 {
+    [Header("States")]
+    [SerializeField] private States EnemyAttackState;
+    [SerializeField] private States EnemyDieState;
+    [SerializeField] private States EnemyIdleState;
 
     #region Constructor
     public EnemyMeleeChaseState(GameObject stateGameObject) : base(stateGameObject)
@@ -16,27 +19,56 @@ public class EnemyMeleeChaseState : States
 
     #region Variables
     [Header("MoveValues")]
-    [SerializeField] private float enemyNavMeshSpeed;
+    [SerializeField] private float currentSpeed;
     [SerializeField] private float maxSpeed;
     [SerializeField] float timeToMaxVelocity;
     [SerializeField] AnimationCurve curveToMaxAcceleration;
     [SerializeField] private float rotationSpeed;
 
+
+    [SerializeField] private float maxAttackDistance = 5f;
+    [SerializeField] private float distanceToSeePlayer = 20f;
     float currentMovementStatusTimer;
-    private bool playerSeen = false;
     private RotateCharacter rotateCharacter;
     private Rigidbody rigidBody;
     private Animator anim;
-    private NavMeshAgent enemy;
+
     #endregion
 
+    public override States CheckTransitions()
+    {
+        float distance = Vector3.Distance(PlayerReferences.instance.GetPlayerCoordinates(), stateGameObject.transform.position);
+        States newGameState = null;
+       
+         if (distance <= maxAttackDistance) 
+         {
+             newGameState = Instantiate(EnemyAttackState);
+         }
+         if (stateGameObject.GetComponent<HealthBehaviour>().CheckIfDeath()) //si el enemigo muere
+         {
+            newGameState = Instantiate(EnemyDieState);
+         }
+        if (distance > distanceToSeePlayer)
+        {
+            newGameState = Instantiate(EnemyIdleState);
+        }
+        if (newGameState != null)
+        {
+            newGameState.InitializeState(stateGameObject);
+            newGameState.Start();
+            rigidBody.velocity = Vector3.zero;
+            //animator.SetBool("running",false);
+        }
+        return newGameState;
+
+
+    }
 
     #region Methods
 
     public override void Start()
     {
-        enemy = stateGameObject.GetComponent<NavMeshAgent>();
-        enemy.speed = enemyNavMeshSpeed;
+        currentSpeed = 0;
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         anim = stateGameObject.GetComponent<Animator>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
@@ -44,33 +76,24 @@ public class EnemyMeleeChaseState : States
 
     public override void Update()
     {
-        RaycastHit hit;
-        Vector3 playerVisiblePosition = PlayerReferences.instance.GetPlayerVisiblePoint(); //Visible point es un empty game object dentro del player que sirve para que el linedraw vaya hacia esa posicion porque con el pivote del player se va al suelo y nunca colisiona con el jugador
         Vector3 playerPosition = PlayerReferences.instance.GetPlayerCoordinates();
-        if (Physics.Linecast(stateGameObject.transform.position, playerVisiblePosition, out hit))
-        {
-            Debug.DrawLine(stateGameObject.transform.position, playerPosition, Color.magenta, 0.2f);
-
-            if (hit.transform != null && hit.transform.position.z == PlayerReferences.instance.GetPlayerCoordinates().z && hit.transform.position.x == PlayerReferences.instance.GetPlayerCoordinates().x)
-            {
-                Debug.Log("El enemigo ve al jugador");
-                playerSeen = true;
-                stateGameObject.GetComponent<EnemyReferences>().SetPlayerSeen(playerSeen);
-                stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, playerPosition - stateGameObject.transform.position, 0.5f);
-                enemy.SetDestination(playerPosition);
-            }
-            else
-            {
-                playerSeen = false;
-                stateGameObject.GetComponent<EnemyReferences>().SetPlayerSeen(playerSeen);
-            }
-        }
+        stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(playerPosition);
+        rigidBody.velocity = Move(playerPosition);
 
     }
 
-    public override void OnExitState()
+    private Vector3 Move(Vector3 playerPosition)
     {
-        return;
+        Vector3 direction = (playerPosition - stateGameObject.transform.position).normalized;
+
+        if (currentSpeed < maxSpeed)
+        {
+            currentSpeed = maxSpeed * curveToMaxAcceleration.Evaluate(currentMovementStatusTimer / timeToMaxVelocity);
+        }
+        currentMovementStatusTimer += Time.deltaTime;
+
+        return direction * currentSpeed;
     }
+
     #endregion
 }

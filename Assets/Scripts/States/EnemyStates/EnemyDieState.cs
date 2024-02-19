@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "EnemyStates/EnemyDieState")]
 public class EnemyDieState : States
 {
+    [Header("States")]
+    [SerializeField] private States EnemyIdleState;
 
     #region Constructor
     public EnemyDieState(GameObject stateGameObject) : base(stateGameObject)
@@ -20,31 +22,19 @@ public class EnemyDieState : States
 
     public override States CheckTransitions()
     {
-        bool notChanged = true;
-        int counter = 0;
-        States newPlayerState = null;
-
-        while (notChanged)
+        States newGameState = null;
+        if (canRevive)
         {
-            newPlayerState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
-            if (newPlayerState != null)
-            {
-                notChanged = false;
-                newPlayerState = Instantiate(newPlayerState);
-                newPlayerState.InitializeState(stateGameObject);
-                newPlayerState.Start();
-            }
-            if (counter < stateTransitions.Length - 1)
-            {
-                counter++;
-            }
-            else
-            {
-                notChanged = false;
-            }
+            stateGameObject.SetActive(true);
+            newGameState = Instantiate(EnemyIdleState);
         }
+        if (newGameState != null)
+        {
+            newGameState.InitializeState(stateGameObject);
+            newGameState.Start();
+        }
+        return newGameState;
 
-        return newPlayerState;
     }
 
     #region Methods
@@ -63,11 +53,6 @@ public class EnemyDieState : States
 
     public override void Update()
     {
-    }
-
-    public override void OnExitState()
-    {
-        return;
     }
 
     #endregion

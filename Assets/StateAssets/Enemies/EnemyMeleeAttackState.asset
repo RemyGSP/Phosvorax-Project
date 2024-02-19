@@ -12,24 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7435d37b55f2bb46b14dac5e5dc0fec, type: 3}
   m_Name: EnemyMeleeAttackState
   m_EditorClassIdentifier: 
-  stateGameObject: {fileID: 0}
-  stateTransitions:
-  - decisionToBeMade: {fileID: 11400000, guid: 7b2c8f844fb99094f9b3d5beadc8a4c8, type: 2}
-    onDecisionTrueExitState: {fileID: 11400000, guid: efbd60ddb5c43044193d39293efa9b4b,
-      type: 2}
-    onDecisionFalseExitState: {fileID: 0}
-  - decisionToBeMade: {fileID: 11400000, guid: 3e2c1271059576d4ea7fce5384ef0e43, type: 2}
-    onDecisionTrueExitState: {fileID: 11400000, guid: dbd99a2dd69e7004cbecbf60b9ccb7ed,
-      type: 2}
-    onDecisionFalseExitState: {fileID: 0}
+  EnemyChaseState: {fileID: 11400000, guid: 6a98714e9545670458ab38c11c94e783, type: 2}
+  EnemyDieState: {fileID: 11400000, guid: cf0f2c5af742ed540b943fba70834e85, type: 2}
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 8
   attackDelay: 1
   attackOffset: 2.5
-  sphereSize: 5
+  sphereSize: 3
   attackDamage: 1
   maxAttackDistance: 5
-  enemyMeleeAttackTimer: 726.3915
+  enemyMeleeAttackTimer: 81.19707
   enemyMeleeAttackCD: 1
   attackAreaVisualizer: {fileID: 0}

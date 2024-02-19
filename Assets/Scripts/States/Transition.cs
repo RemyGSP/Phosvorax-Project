@@ -9,7 +9,7 @@ public class Transition {
     [SerializeField] States onDecisionTrueExitState;
     [SerializeField] States onDecisionFalseExitState;
 
-    public States GetExitState(StateMachine stateMachine) {
-        return decisionToBeMade.Decide(stateMachine) ? onDecisionTrueExitState : onDecisionFalseExitState;
+    public States GetExitState() {
+        return decisionToBeMade.Decide() ? onDecisionTrueExitState : onDecisionFalseExitState;
     }
 }

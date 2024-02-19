@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 [CreateAssetMenu(menuName = "EnemyStates/EnemyMeleeAttackState")]
 
 public class EnemyMeleeAttackState : States
 {
+    [Header("States")]
+    [SerializeField] private States EnemyChaseState;
+    [SerializeField] private States EnemyDieState;
 
     #region Constructor
     public EnemyMeleeAttackState(GameObject stateGameObject) : base(stateGameObject)
@@ -39,38 +41,36 @@ public class EnemyMeleeAttackState : States
     public float enemyMeleeAttackCD;
 
     [SerializeField] private AttackAreaVisualizer attackAreaVisualizer;
-
-    private NavMeshAgent enemy;
     #endregion
 
     #region AbstractMethods
     public override States CheckTransitions()
     {
-        bool notChanged = true;
-        int counter = 0;
-        States newEnemyState = null;
+        float distance = Vector3.Distance(PlayerReferences.instance.GetPlayerCoordinates(), stateGameObject.transform.position);
 
-        while (notChanged)
+        States newGameState = null;
+
+        if (distance > maxAttackDistance) //cambiar a perseeguir si el jugador esta mas lejos del rango maximo del ataque
         {
-            newEnemyState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
-            if (newEnemyState != null)
-            {
-                notChanged = false;
-                newEnemyState = Instantiate(newEnemyState);
-                newEnemyState.InitializeState(stateGameObject);
-                newEnemyState.Start();
-            }
-            if (counter < stateTransitions.Length - 1)
-            {
-                counter++;
-            }
-            else
-            {
-                notChanged = false;
-            }
+            newGameState = Instantiate(EnemyChaseState);
+        }
+        if (stateGameObject.GetComponent<HealthBehaviour>().CheckIfDeath()) //Si el enemigo muere
+        {
+            newGameState = Instantiate(EnemyDieState);
         }
 
-        return newEnemyState;
+        if (newGameState != null)
+        {
+            newGameState.InitializeState(stateGameObject);
+            newGameState.Start();
+            rigidBody.velocity = Vector3.zero;
+            //animator.SetBool("running",false);
+        }
+
+
+
+        return newGameState;
+
     }
 
     public override void InitializeState(GameObject gameObject)
@@ -83,13 +83,12 @@ public class EnemyMeleeAttackState : States
 
     public override void Start()
     {
-        enemy = stateGameObject.GetComponent<NavMeshAgent>();
-        enemy.speed = 0;
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         anim = stateGameObject.GetComponent<Animator>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         currentAttackDelay = attackDelay;
 
+        stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position);
         if (stateGameObject.TryGetComponent<AttackAreaVisualizer>(out AttackAreaVisualizer attAreaVisual))
         {
             attAreaVisual.DrawAttackArea(400f, 400f);
@@ -102,10 +101,10 @@ public class EnemyMeleeAttackState : States
 
     private void ExecuteAnim()
     {
-        //anim.SetTrigger("attack");
+        anim.SetTrigger("attack");
         currentAttackTime = 0;
-        //animationLength = anim.GetCurrentAnimatorClipInfo(0).Length;
-        stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position);
+        animationLength = anim.GetCurrentAnimatorClipInfo(0).Length;
+        //stateGameObject.transform.rotation = Quaternion.Euler(stateGameObject.transform.rotation.x , stateGameObject.transform.rotation.y + animOffsetRotation, stateGameObject.transform.rotation.z );
         currentAttackDelay = attackDelay;
         canAttack = true;
 
@@ -134,27 +133,17 @@ public class EnemyMeleeAttackState : States
     {
         currentAttackDelay -= Time.deltaTime;
         currentAttackTime += Time.deltaTime;
-
-        if (currentAttackDelay <= 0)
+        if (currentAttackDelay <= 0 && canAttack)
         {
-            if (canAttack)
-            {
-                ExecuteAttack();
-                PlayerTimers.timer.playerBasicAttackTimer = 0;
-            }
-            currentAttackDelay = attackDelay;
-            canAttack = true;
+            ExecuteAttack();
+            PlayerTimers.Instance.playerBasicAttackTimer = 0;
         }
+
     }
+
     public override void Update()
     {
-        stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position, 0.5f);
         enemyMeleeAttackTimer += Time.deltaTime;
-    }
-
-    public override void OnExitState()
-    {
-        return;
     }
 
     #endregion

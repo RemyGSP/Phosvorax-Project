@@ -22,22 +22,25 @@ public class HUDManager : MonoBehaviour
     //Ability number puede ir del 0 al 3 este metodo se llama desde las decisiones de cada habilidad
     public void AbilityStartCooldown(int abilityNumber)
     {
-        float cooldown = PlayerTimers.timer.abilityCD[abilityNumber];
-        PlayerTimers.timer.abilityTimers[abilityNumber] = 0f;
+        float cooldown = PlayerTimers.Instance.abilityCD[abilityNumber];
+        PlayerTimers.Instance.abilityTimers[abilityNumber] = 0f;
         if (cooldown > 1)
         { 
             abilitiesVisualCD[abilityNumber].gameObject.SetActive(true);
         }
-            StartCoroutine(DoCooldown(HUDAbilities[abilityNumber], abilitiesVisualCD[abilityNumber], cooldown,abilityNumber));
+          // StartCoroutine(DoCooldown(HUDAbilities[abilityNumber], abilitiesVisualCD[abilityNumber], cooldown,abilityNumber));
     }
 
     private IEnumerator DoCooldown(Image ability,TextMeshProUGUI abilityVisualCD, float cooldown, int abilityNumber)
     {
         float timer = 0.0f;
 
+        Debug.Log(PlayerTimers.Instance.abilityTimers[abilityNumber]);
+        Debug.Log(cooldown);
 
         while (timer < cooldown)
         {
+            Debug.Log("Cooldown Start");
             ability.fillAmount = timer / cooldown;
             abilityVisualCD.text = Mathf.Floor(cooldown - timer).ToString();
             // Increment the timer by the time passed since the last frame

@@ -31,6 +31,42 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Ability1",
+                    "type": "PassThrough",
+                    "id": "d7dcfb26-6fe5-46da-92c1-afdff13f1dc3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Cancel",
+                    "type": "PassThrough",
+                    "id": "127201d2-63b4-40d0-a78c-ddad6d65a62d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ability2",
+                    "type": "PassThrough",
+                    "id": "c03e5766-5324-4cac-aa6f-4cf28d69eb83",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ability3",
+                    "type": "PassThrough",
+                    "id": "864d25f6-dfe7-44da-a859-4b3a5b54d7e1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -135,12 +171,45 @@
                 },
                 {
                     "name": "",
-                    "id": "2bfc0637-115e-4afa-8d7b-f5caf5286d15",
-                    "path": "<Keyboard>/shift",
+                    "id": "488bf800-20a1-465c-b56d-a7bea1f6201c",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "BasicAttack",
+                    "action": "Ability1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "692975fa-e616-4e60-bb7b-693d08ec9c36",
+                    "path": "<Keyboard>/#(C)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c052d475-8ca4-49db-b09b-a5a6feb94399",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ability2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7b802dcd-baee-4ef6-8427-27934f7cb6b0",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ability3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

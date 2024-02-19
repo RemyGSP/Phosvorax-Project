@@ -5,12 +5,22 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputController : MonoBehaviour
 {
-    
-    static private Vector3 movementDirection;
-    static private Vector2 cursorPosition;
-    static private bool isRolling;
-    static private bool isAttacking;
-    static private bool isShooting;
+    static public PlayerInputController Instance { get; private set; }
+    private Vector3 movementDirection;
+    private Vector2 cursorPosition;
+    private bool isRolling;
+    private bool isAttacking;
+    private bool isShooting;
+    private bool isUsingAbility;
+    private bool isCanceling;
+    private int abilityPressed;
+
+    private void Start()
+    {
+        abilityPressed = 1;
+        Instance = this;
+    }
+
     public void OnMove(InputValue moveValue) 
     {
         var temporalMovementDirection = moveValue.Get<Vector2>();
@@ -25,7 +35,7 @@ public class PlayerInputController : MonoBehaviour
         return skewedInput;
     }
 
-    static public Vector3 GetPlayerInputDirection()
+    public Vector3 GetPlayerInputDirection()
     {
         return movementDirection;
     }
@@ -34,7 +44,7 @@ public class PlayerInputController : MonoBehaviour
     {
         cursorPosition = inputValue.Get<Vector2>();
     }
-    static public Vector2 GetCursorPosition()
+    public Vector2 GetCursorPosition()
     {
         return cursorPosition;
     }
@@ -46,7 +56,7 @@ public class PlayerInputController : MonoBehaviour
         else
             isShooting = false;    
     }
-    static public bool IsShooting()
+    public bool IsShooting()
     {
         return isShooting;
     }
@@ -59,7 +69,7 @@ public class PlayerInputController : MonoBehaviour
         else 
             isRolling = false;
     }    
-    static public bool IsRolling()
+    public bool IsRolling()
     {
         return isRolling;
     }
@@ -70,12 +80,75 @@ public class PlayerInputController : MonoBehaviour
             isAttacking = true;
         else 
             isAttacking = false;
-    }    
-    static public bool IsAttacking()
+    }
+
+    public void OnCancel(InputValue inputValue)
+    {
+        if (inputValue.isPressed)
+            isCanceling = true;
+        else
+            isCanceling = false;
+    }
+
+    public bool IsCanceling()
+    {
+        return isCanceling;
+    }
+    public bool IsAttacking()
     {
         return isAttacking;
     }
     
+    public void OnAbility1(InputValue inputValue)
+    {
+        if (!inputValue.isPressed)
+        {
+            isUsingAbility = false;
+        }
+        else
+        {
+            abilityPressed = 1;
+            isUsingAbility = true;
+        }
+    }
+    public void OnAbility2(InputValue inputValue)
+    {
+        if (!inputValue.isPressed)
+        {
+            isUsingAbility = false;
+        }
+        else
+        {
+            abilityPressed = 2;
+            isUsingAbility = true;
+        }
+    }
+    public void OnAbility3(InputValue inputValue)
+    {
+        if (!inputValue.isPressed)
+        {
+            isUsingAbility = false;
+        }
+        else
+        {
+            abilityPressed = 3;
+            isUsingAbility = true;
+        }
+    }
 
+    public bool IsUsingAbility()
+    {
+        return isUsingAbility;
+    }
+
+    public int GetCurrentAbility()
+    {
+        return abilityPressed;
+    }
+
+    public void StopUsingAbility()
+    {
+        isUsingAbility = false;
+    }
     
 }

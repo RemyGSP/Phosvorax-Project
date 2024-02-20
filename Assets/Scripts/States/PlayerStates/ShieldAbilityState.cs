@@ -18,37 +18,18 @@ public class ShieldAbilityState : Ability
     public ShieldAbilityState(GameObject stateGameObject) : base(stateGameObject)
     {
     }
-    public override States CheckTransitions()
+    public new States CheckTransitions()
     {
-        States newGameState = null;
+        
         if (currentParryTime > parryLength)
-        {
-            bool notChanged = true;
-            int counter = 0;
-            AfterParry();
-
-            while (notChanged)
-            {
-                newGameState = stateTransitions[counter].GetExitState();
-                if (newGameState != null)
-                {
-                    notChanged = false;
-                    newGameState.InitializeState(stateGameObject);
-                    newGameState.Start();
-                    rigidBody.velocity = Vector3.zero;
-                }
-                if (counter < stateTransitions.Length - 1)
-                {
-                    counter++;
-                }
-                else
-                {
-                    notChanged = false;
-                }
-            }
+        {  
+                return base.CheckTransitions();   
         }
-            
-        return newGameState;
+        else
+        {
+            return null;
+        }
+
     }
     void ExecuteParry()
     {
@@ -104,5 +85,10 @@ public class ShieldAbilityState : Ability
         yield return new WaitForSeconds(shieldLength);
         playerhealth.SetDamageModifier(1);
         PlayerReferences.instance.shieldObject.SetActive(false);
+    }
+
+    public override void OnExitState()
+    {
+        
     }
 }

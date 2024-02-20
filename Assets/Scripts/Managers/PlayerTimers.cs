@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerTimers : MonoBehaviour
 {
     [Header("PlayerTimers")]
-    static public PlayerTimers timer;
+    static public PlayerTimers Instance;
     public float playerBasicAttackTimer;
     public float playerBasicAttackCD;
     public float rollTimer;
@@ -17,9 +17,9 @@ public class PlayerTimers : MonoBehaviour
     private void Start()
     {
         abilityTimers = new float[4];
-        if (timer == null)
+        if (Instance == null)
         {
-            timer = this;
+            Instance = this;
         }
     }
 

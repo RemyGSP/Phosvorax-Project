@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Windows;
 
 public class PlayerInputController : MonoBehaviour
 {
+
     static public PlayerInputController Instance { get; private set; }
     private Vector3 movementDirection;
     private Vector2 cursorPosition;
@@ -12,16 +14,27 @@ public class PlayerInputController : MonoBehaviour
     private bool isAttacking;
     private bool isShooting;
     private bool isUsingAbility;
+    private bool isKeyboard;
+    private bool isGamepad;
     private bool isCanceling;
     private int abilityPressed;
-
     private void Start()
     {
+
         abilityPressed = 1;
-        Instance = this;
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.Log("Este singleton esta ya puesto en escena: " + gameObject.name);
+            Destroy(gameObject);
+        }
+
     }
 
-    public void OnMove(InputValue moveValue) 
+    public void OnMove(InputValue moveValue)
     {
         var temporalMovementDirection = moveValue.Get<Vector2>();
         Vector3 toConvert = new Vector3(temporalMovementDirection.x, 0, temporalMovementDirection.y);
@@ -54,7 +67,7 @@ public class PlayerInputController : MonoBehaviour
         if (inputValue.isPressed)
             isShooting = true;
         else
-            isShooting = false;    
+            isShooting = false;
     }
     public bool IsShooting()
     {
@@ -66,9 +79,9 @@ public class PlayerInputController : MonoBehaviour
     {
         if (inputValue.isPressed)
             isRolling = true;
-        else 
+        else
             isRolling = false;
-    }    
+    }
     public bool IsRolling()
     {
         return isRolling;
@@ -78,7 +91,7 @@ public class PlayerInputController : MonoBehaviour
     {
         if (inputValue.isPressed)
             isAttacking = true;
-        else 
+        else
             isAttacking = false;
     }
 
@@ -98,7 +111,7 @@ public class PlayerInputController : MonoBehaviour
     {
         return isAttacking;
     }
-    
+
     public void OnAbility1(InputValue inputValue)
     {
         if (!inputValue.isPressed)
@@ -136,6 +149,7 @@ public class PlayerInputController : MonoBehaviour
         }
     }
 
+
     public bool IsUsingAbility()
     {
         return isUsingAbility;
@@ -150,5 +164,35 @@ public class PlayerInputController : MonoBehaviour
     {
         isUsingAbility = false;
     }
-    
+
+    public void OnControlsChanged(PlayerInput playerInput)
+    {
+        Debug.Log("Current control scheme: " + playerInput.currentControlScheme);
+
+        if (playerInput.currentControlScheme.Equals("Keyboard"))
+        {
+            isKeyboard = true;
+            isGamepad = false;
+        }
+        if (playerInput.currentControlScheme.Equals("Gamepad"))
+        {
+            isGamepad = true;
+            isKeyboard = false;
+        }
+        else
+        {
+            Debug.LogWarning("Unknown control scheme: " + playerInput.currentControlScheme);
+        }
+    }
+
+    public bool IsUsingKeyboard()
+    {
+        return isKeyboard;
+    }
+
+    public bool IsUsingGamepad()
+    {
+        return isGamepad;
+    }
 }
+

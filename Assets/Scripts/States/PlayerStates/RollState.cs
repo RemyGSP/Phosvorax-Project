@@ -27,7 +27,7 @@ public class RollState : States
         stateGameObject.GetComponent<Collider>().enabled = false;
         currentDashTime = 0f;
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
-        PlayerTimers.timer.rollTimer = 0;
+        PlayerTimers.Instance.rollTimer = 0;
         playerDirection = PlayerInputController.Instance.GetPlayerInputDirection();
     }
 

@@ -14,38 +14,6 @@ public class ProjectileAbilityState : Ability
     public ProjectileAbilityState(GameObject stateGameObject) : base(stateGameObject)
     {
     }
-    public override States CheckTransitions()
-    {
-        States newGameState = null;
-        
-        
-            bool notChanged = true;
-            int counter = 0;
-           
-
-            while (notChanged)
-            {
-                newGameState = stateTransitions[counter].GetExitState();
-                if (newGameState != null)
-                {
-                    notChanged = false;
-                    newGameState.InitializeState(stateGameObject);
-                    newGameState.Start();
-                    rigidBody.velocity = Vector3.zero;
-                }
-                if (counter < stateTransitions.Length - 1)
-                {
-                    counter++;
-                }
-                else
-                {
-                    notChanged = false;
-                }
-            }
-        
-
-        return newGameState;
-    }
 
     private void ShootProjectile()
     {
@@ -72,6 +40,9 @@ public class ProjectileAbilityState : Ability
     {
         return;
     }
+    public override void OnExitState()
+    {
 
+    }
 
 }

@@ -5,9 +5,12 @@ using UnityEngine;
 public class PlayerReferences : MonoBehaviour
 {
     #region Variables
-    public static PlayerReferences instance;
     [Header("Player")]
     [SerializeField] private GameObject player;
+    [SerializeField] public GameObject shieldObject;
+    [SerializeField] public Renderer shieldObjectRenderer;
+    [SerializeField] public Transform ShotingPoint;
+    public static PlayerReferences instance;
     [SerializeField] private GameObject footPos;
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private GameObject playerVisuals;
@@ -23,13 +26,17 @@ public class PlayerReferences : MonoBehaviour
     private void Start()
     {
         if (instance == null)
-        {
             instance = this;
-        }
         else
-        {
-            Debug.Log("Manager PlayerReferences already exists");
-        }
+            Debug.Log("Manager PLayerReferences already exists");
+    }
+    public bool CheckIfGrounded()
+    {
+        // Set the maximum distance for the ray
+        float maxRaycastDistance = 10f; // Adjust this value based on your needs
+        Debug.DrawRay(footPos.transform.position, Vector3.down, Color.red);
+        // Check if a ray from footPos.position downward hits anything within the specified distance
+        return Physics.Raycast(footPos.transform.position, Vector3.down, maxRaycastDistance);
     }
     public Vector3 GetPlayerCoordinates()
     {
@@ -37,14 +44,6 @@ public class PlayerReferences : MonoBehaviour
         return playerCoordinates;
     }
 
-    public bool CheckIfGrounded()
-    {
-        // Set the maximum distance for the ray
-        float maxRaycastDistance = 10f; // Adjust this value based on your needs
-        Debug.DrawRay(footPos.transform.position, Vector3.down,Color.red);
-        // Check if a ray from footPos.position downward hits anything within the specified distance
-        return Physics.Raycast(footPos.transform.position, Vector3.down, maxRaycastDistance);
-    }
     public Vector3 GetMouseTargetDir()
     {
         // Obtener la posición del ratón en la pantalla
@@ -55,7 +54,7 @@ public class PlayerReferences : MonoBehaviour
         RaycastHit hit;
         Vector3 targetDir = Vector3.zero;
 
-        if (Physics.Raycast(castPoint, out hit, Mathf.Infinity, groundMask))
+        if (Physics.Raycast(castPoint, out hit, Mathf.Infinity))
         {
             targetDir = hit.point; // Conseguir la direccion a la que esta apuntando el raton en el mundo
             targetDir.y = 0f; // Mantener en el plano XY

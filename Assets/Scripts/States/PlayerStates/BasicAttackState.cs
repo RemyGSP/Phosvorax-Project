@@ -95,7 +95,7 @@ public class BasicAttackState : States
         if (currentAttackDelay <= 0 && canAttack)
         {
             ExecuteAttack();
-            PlayerTimers.timer.playerBasicAttackTimer = 0;
+            PlayerTimers.Instance.playerBasicAttackTimer = 0;
         }
 
     }

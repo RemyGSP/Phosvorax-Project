@@ -8,7 +8,7 @@ public class Ability1Decision : Decision
     public override bool Decide(StateMachine stateMachine)
     {
         bool aux = false;
-        if (AbilityManager.instance.throwAbility && PlayerTimers.timer.abilityTimers[0] > PlayerTimers.timer.abilityCD[0])
+        if (AbilityManager.instance.throwAbility && PlayerTimers.Instance.abilityTimers[0] > PlayerTimers.Instance.abilityCD[0])
         {
             int currentAbility = PlayerInputController.Instance.GetCurrentAbility();
             if (currentAbility == 1)

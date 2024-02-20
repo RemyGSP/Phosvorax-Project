@@ -109,7 +109,7 @@ public class RangedAbilityState : Ability
         if (currentAttackDelay <= 0 && canAttack)
         {
             ExecuteAttack();
-            PlayerTimers.timer.playerBasicAttackTimer = 0;
+            PlayerTimers.Instance.playerBasicAttackTimer = 0;
         }
 
     }

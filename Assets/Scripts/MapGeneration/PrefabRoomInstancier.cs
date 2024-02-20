@@ -12,12 +12,12 @@ public class PrefabRoomInstancier : MonoBehaviour
 {
     public List<Roomlist> roomTypes;
     private int[,] roomTypeMatrix;
-    public GameObject[,] prefabRoomsMatrix;
+    public GameObject[,] roomInstancesMatrix;
 
     public void ReceiveMatrix(int[,] matrix)
     {
         roomTypeMatrix = matrix;
-        prefabRoomsMatrix = new GameObject[matrix.GetLength(0), matrix.GetLength(1)];
+        roomInstancesMatrix = new GameObject[matrix.GetLength(0), matrix.GetLength(1)];
         PrintMatrix(roomTypeMatrix);
         InstantiateRooms();
     }
@@ -51,25 +51,26 @@ public class PrefabRoomInstancier : MonoBehaviour
                         GameObject instantiatedRoom = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
 
                         // Establecer el objeto instanciado como hijo de otro objeto (por ejemplo, el objeto que tiene el script)
-                        instantiatedRoom.transform.parent = transform; 
-                        
-                        prefabRoomsMatrix[row, col] = instantiatedRoom;
+                        instantiatedRoom.transform.parent = transform;
+
+                        roomInstancesMatrix[row, col] = instantiatedRoom;
                     }
                 }
             }
         }
         ConnectingRoomDoors();
+        GenerateNavMeshSurfaces();
     }
 
     void ConnectingRoomDoors()
     {
         // Iterar sobre la matriz
-        for (int i = 0; i < prefabRoomsMatrix.GetLength(0); i++)
+        for (int i = 0; i < roomInstancesMatrix.GetLength(0); i++)
         {
-            for (int j = 0; j < prefabRoomsMatrix.GetLength(1); j++)
+            for (int j = 0; j < roomInstancesMatrix.GetLength(1); j++)
             {
                 // Obtener el GameObject en la posición actual de la matriz
-                GameObject currentRoom = prefabRoomsMatrix[i, j];
+                GameObject currentRoom = roomInstancesMatrix[i, j];
 
                 // Verificar si el GameObject tiene el componente RoomDoorManager
                 RoomDoorManager doorManager = currentRoom.GetComponent<RoomDoorManager>();
@@ -90,7 +91,7 @@ public class PrefabRoomInstancier : MonoBehaviour
                                 case 0: // Puerta 4
                                     if (j > 0)
                                     {
-                                        GameObject leftRoom = prefabRoomsMatrix[i, j - 1];
+                                        GameObject leftRoom = roomInstancesMatrix[i, j - 1];
                                         RoomDoorManager leftDoorManager = leftRoom.GetComponent<RoomDoorManager>();
                                         if (leftDoorManager != null && leftDoorManager.DoorList.Count > 2 && leftDoorManager.DoorList[2] != null)
                                         {
@@ -102,7 +103,7 @@ public class PrefabRoomInstancier : MonoBehaviour
                                 case 1: // Puerta 2
                                     if (i > 0)
                                     {
-                                        GameObject aboveRoom = prefabRoomsMatrix[i - 1, j];
+                                        GameObject aboveRoom = roomInstancesMatrix[i - 1, j];
                                         RoomDoorManager aboveDoorManager = aboveRoom.GetComponent<RoomDoorManager>();
                                         if (aboveDoorManager != null && aboveDoorManager.DoorList.Count > 3 && aboveDoorManager.DoorList[3] != null)
                                         {
@@ -112,9 +113,9 @@ public class PrefabRoomInstancier : MonoBehaviour
                                     break;
 
                                 case 2: // Puerta 8
-                                    if (j < prefabRoomsMatrix.GetLength(1) - 1)
+                                    if (j < roomInstancesMatrix.GetLength(1) - 1)
                                     {
-                                        GameObject rightRoom = prefabRoomsMatrix[i, j + 1];
+                                        GameObject rightRoom = roomInstancesMatrix[i, j + 1];
                                         RoomDoorManager rightDoorManager = rightRoom.GetComponent<RoomDoorManager>();
                                         if (rightDoorManager != null && rightDoorManager.DoorList.Count > 0 && rightDoorManager.DoorList[0] != null)
                                         {
@@ -124,9 +125,9 @@ public class PrefabRoomInstancier : MonoBehaviour
                                     break;
 
                                 case 3: // Puerta 1
-                                    if (i < prefabRoomsMatrix.GetLength(0) - 1)
+                                    if (i < roomInstancesMatrix.GetLength(0) - 1)
                                     {
-                                        GameObject belowRoom = prefabRoomsMatrix[i + 1, j];
+                                        GameObject belowRoom = roomInstancesMatrix[i + 1, j];
                                         RoomDoorManager belowDoorManager = belowRoom.GetComponent<RoomDoorManager>();
                                         if (belowDoorManager != null && belowDoorManager.DoorList.Count > 1 && belowDoorManager.DoorList[1] != null)
                                         {
@@ -142,6 +143,17 @@ public class PrefabRoomInstancier : MonoBehaviour
         }
     }
 
+    void GenerateNavMeshSurfaces()
+    {
+        foreach (GameObject go in roomInstancesMatrix)
+        {
+            Unity.AI.Navigation.NavMeshSurface[] surfaces = go.GetComponentsInChildren<Unity.AI.Navigation.NavMeshSurface>();
+            foreach (Unity.AI.Navigation.NavMeshSurface surface in surfaces)
+            {
+                surface.BuildNavMesh();
+            }
+        }
+    }
 
     void PrintMatrix(int[,] matrix)
     {

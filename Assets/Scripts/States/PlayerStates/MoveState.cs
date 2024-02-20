@@ -35,7 +35,6 @@ public class MoveState : States
     #region Métodos concretos
     public override void Start()
     {
-        Debug.Log(base.stateTransitions.Length);
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         currentMovementStatusTimer = 0;

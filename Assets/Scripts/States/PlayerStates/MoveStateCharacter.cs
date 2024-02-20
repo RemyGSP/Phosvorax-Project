@@ -74,7 +74,7 @@ public class MoveStateCharacter : States
 
     public override void OnExitState()
     {
-        PlayerReferences.instance.GetPlayerAnimator().SetBool("running", false);
+        PlayerReferences.instance.GetPlayerAnimator().SetBool("move", false);
     }
     #endregion
 }

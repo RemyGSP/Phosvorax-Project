@@ -5,7 +5,7 @@ using UnityEngine;
 public class StateMachine : MonoBehaviour
 {
     [SerializeField] private States entryState;
-    [SerializeField]private States currentState;
+    [SerializeField] private States currentState;
     // Start is called before the first frame update
     void Start()
     {

@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PlaySounds : MonoBehaviour
 {
-    private StudioBankLoader bankLoader;
     private FMOD.Studio.Bus musicBank;
     private FMOD.Studio.Bus sfxBank;
     private FMOD.Studio.Bus masterBank;

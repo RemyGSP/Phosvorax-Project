@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c14b9d5a16aa9a840a6b02de3fb17a04, type: 3}
   m_Name: RollState
   m_EditorClassIdentifier: 
+  stateGameObject: {fileID: 0}
   stateTransitions:
   - decisionToBeMade: {fileID: 11400000, guid: cd1d39069d32b3f419bddb153b7c11d4, type: 2}
-    onDecisionTrueExitState: {fileID: 11400000, guid: bdcd29e445c155343bf6318d7ffd0c4b,
+    onDecisionTrueExitState: {fileID: 11400000, guid: 8de858c2648c16e4a8dd9de391dd1fde,
       type: 2}
-    onDecisionFalseExitState: {fileID: 11400000, guid: ea1e15a44a96f6347860d5aad4fc4aa1,
+    onDecisionFalseExitState: {fileID: 11400000, guid: 98a7d593610d7fa41a8207f835e69776,
       type: 2}
   dashForce: 850
   dashTime: 0.1

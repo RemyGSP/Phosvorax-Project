@@ -20,6 +20,7 @@ public abstract class States : ScriptableObject
 
         while (notChanged)
         {
+
             newGameState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
             if (newGameState != null)
             {

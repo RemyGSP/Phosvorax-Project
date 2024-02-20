@@ -141,6 +141,26 @@ public class PrefabRoomInstancier : MonoBehaviour
                 }
             }
         }
+        DestroyRooms();
+    }
+
+    private void DestroyRooms()
+    {
+        int numRows = roomInstancesMatrix.GetLength(0);
+        int numCols = roomInstancesMatrix.GetLength(1);
+
+        for (int row = 0; row < numRows; row++)
+        {
+            for (int col = 0; col < numCols; col++)
+            {
+                GameObject roomInstance = roomInstancesMatrix[row, col];
+                if (roomInstance != null && roomInstance.name == "d0t0(Clone)")
+                {
+                    Destroy(roomInstance);
+                    roomInstancesMatrix[row, col] = null; // Limpiar la referencia en la matriz
+                }
+            }
+        }
     }
 
     void GenerateNavMeshSurfaces()

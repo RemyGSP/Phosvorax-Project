@@ -10,6 +10,7 @@ public class Transition {
     [SerializeField] States onDecisionFalseExitState;
 
     public States GetExitState(StateMachine stateMachine) {
+        Debug.Log(decisionToBeMade.Decide(stateMachine) ? onDecisionTrueExitState : onDecisionFalseExitState );
         return decisionToBeMade.Decide(stateMachine) ? onDecisionTrueExitState : onDecisionFalseExitState;
     }
 }

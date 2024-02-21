@@ -12,24 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efdacf22cdaa18a4091ea1a3c5dc68cb, type: 3}
   m_Name: IdleState
   m_EditorClassIdentifier: 
+  stateGameObject: {fileID: 0}
   stateTransitions:
   - decisionToBeMade: {fileID: 11400000, guid: 2fd5f936a84cf4840b9620f8a0216698, type: 2}
     onDecisionTrueExitState: {fileID: 11400000, guid: f044212ad6dc00b4aaa2c53add5904d8,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}
   - decisionToBeMade: {fileID: 11400000, guid: fab5c8332bb911e409e73b76bbc3f4b5, type: 2}
-    onDecisionTrueExitState: {fileID: 11400000, guid: 1929f4bec09dc394f8b8cf8488a5c2fa,
+    onDecisionTrueExitState: {fileID: 11400000, guid: b55bd7a9fdd7bc746be94c4160dec550,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}
   - decisionToBeMade: {fileID: 11400000, guid: 822dfe0f64e7e6e45a98657d28482221, type: 2}
-    onDecisionTrueExitState: {fileID: 11400000, guid: 9520aa73a3aaeec4f847863908a65901,
+    onDecisionTrueExitState: {fileID: 11400000, guid: 5df9734ac44f063448267e0a673dcb58,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}
   - decisionToBeMade: {fileID: 11400000, guid: cd1d39069d32b3f419bddb153b7c11d4, type: 2}
-    onDecisionTrueExitState: {fileID: 11400000, guid: bdcd29e445c155343bf6318d7ffd0c4b,
+    onDecisionTrueExitState: {fileID: 11400000, guid: 8de858c2648c16e4a8dd9de391dd1fde,
       type: 2}
-    onDecisionFalseExitState: {fileID: 0}
-  - decisionToBeMade: {fileID: 11400000, guid: 917c92411cdeac94aa10e0ec316fb4f2, type: 2}
+    onDecisionFalseExitState: {fileID: 11400000}
+  - decisionToBeMade: {fileID: 11400000, guid: 29ac8cb063e752740a6da1539d40c9e4, type: 2}
     onDecisionTrueExitState: {fileID: 11400000, guid: 40e5949df45c492429a1841f1ad898cd,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}

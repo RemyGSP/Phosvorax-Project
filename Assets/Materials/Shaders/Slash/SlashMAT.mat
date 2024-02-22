@@ -64,6 +64,9 @@ Material:
     - _AlphaClip: 1
     - _AlphaToMask: 1
     - _Blend: 0
+    - _BlendModePreserveSpecular: 1
+    - _Boolean: 0
+    - _BorderColorVisible: 1
     - _BorderOpacity: 0.5
     - _Border_Thickness: 0.06
     - _CastShadows: 0
@@ -71,17 +74,21 @@ Material:
     - _CoreSize: 0.5
     - _CoreWidth: 1.18
     - _Cull: 0
+    - _DeactivateScroll: 1
     - _Distorsion: 0.253
     - _DistorsionScale: 25
     - _DstBlend: 0
     - _Height: 0.6
     - _MaskScale: 0.6
+    - _NoiseScale: 100
     - _OuterHeight: 0.64
     - _OuterWidth: 1
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _ReceiveShadows: 1
     - _Roundness: 1
     - _Scroll: -10
+    - _ScrollBoolean: 0
     - _SlashDistorsion: 0
     - _SlashOpacity: 10
     - _SrcBlend: 1
@@ -91,11 +98,12 @@ Material:
     - _UVColorLerp_Z: 0
     - _UV_Scroll_w: 0
     - _Width: 0.5
+    - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 1
     m_Colors:
-    - _BorderColor: {r: 0.95342374, g: 0, b: 0.03695306, a: 0}
+    - _BorderColor: {r: 2, g: 0.084905624, b: 0.16511825, a: 0}
     - _Color: {r: 0.30188674, g: 0, b: 0, a: 0}
     - _CoreColor: {r: 2.6390157, g: 0.511742, b: 0.48547935, a: 0}
     - _Distortion_Tilling: {r: 0.41, g: 5.17, b: 0, a: 0}

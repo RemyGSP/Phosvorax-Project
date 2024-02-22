@@ -33,7 +33,7 @@ public class RangedAbilityState : Ability
 
     public override States CheckTransitions()
     {
-
+        Debug.Log("CurrentAttackTime: " + currentAttackTime + "AnimationLenght: " + animationLength);
         if (currentAttackTime > animationLength)
         {
             return base.CheckTransitions();
@@ -48,6 +48,7 @@ public class RangedAbilityState : Ability
 
     public override void Start()
     {
+        Debug.Log("StartAbility");
         AbilityManager.instance.CastedAbility();
         anim = PlayerReferences.instance.GetPlayerAnimator();
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();

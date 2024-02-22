@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class AbilityManager : MonoBehaviour
 {
-    //Tu mama es un primate muy warro
     static public AbilityManager instance;
     private int currentAbility;
     //[SerializeField] private Attack[] currentAbilityState;
@@ -21,6 +20,9 @@ public class AbilityManager : MonoBehaviour
         instance = this;
     }
     //Esto es 100% chatGPT :)
+    //Esto no es chatGPT esto lo hice yo
+    //Si esta smartcast activado simplemente tira la habilidad, si no esta activado comprueba si esta pulsando le boton de habilidad con Instance.IsUsingAbility()
+    //Luego
     private void Update()
     {
         currentAbility = PlayerInputController.Instance.GetCurrentAbility();
@@ -28,7 +30,6 @@ public class AbilityManager : MonoBehaviour
         {
             if (PlayerInputController.Instance.IsUsingAbility() && PlayerTimers.Instance.abilityTimers[currentAbility-1] > PlayerTimers.Instance.abilityCD[currentAbility-1])
             {
-                currentAbility = PlayerInputController.Instance.GetCurrentAbility();
                 CallAbilityIndicator();
                 isCasting = true;
             }
@@ -71,7 +72,6 @@ public class AbilityManager : MonoBehaviour
 
     public void CallAbilityIndicator()
     {
-        Debug.Log(abilities[currentAbility].abilityRange) ;
         attAreaVisual.ActivateArea();
         attAreaVisual.DrawAttackArea(abilities[currentAbility].abilityRange, abilities[currentAbility].abilityRange);
     }

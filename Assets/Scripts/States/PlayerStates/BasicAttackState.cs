@@ -32,7 +32,7 @@ public class BasicAttackState : States
 
     public new States CheckTransitions()
     {
-
+        Debug.Log("Basic Attack CurrentAttackTime: " + currentAttackTime + "AnimationLenght: " + animationLength);
         if (currentAttackTime > animationLength)
         {
             return base.CheckTransitions();
@@ -57,7 +57,7 @@ public class BasicAttackState : States
 
         stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
 
-        PlayerReferences.instance.GetPlayerAnimator().SetBool("meleeAttack", true);
+        //PlayerReferences.instance.GetPlayerAnimator().SetBool("meleeAttack", true);
         ExecuteAnim();
     }
 
@@ -113,6 +113,7 @@ public class BasicAttackState : States
 
     public override void OnExitState()
     {
-        PlayerReferences.instance.GetPlayerAnimator().SetInteger("meleeAttack", 0);
+
+        //PlayerReferences.instance.GetPlayerAnimator().SetInteger("meleeAttack", 0);
     }
 }

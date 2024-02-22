@@ -77,7 +77,10 @@ public class MoveState : States
     public override void OnExitState()
     {
         rigidBody.velocity = Vector3.zero;
-        animator.SetBool("running",false);
+        if (animator != null)
+        {
+            animator.SetBool("running", false);
+        }
     }
     #endregion
 }

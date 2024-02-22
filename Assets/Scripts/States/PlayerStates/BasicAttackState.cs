@@ -56,6 +56,7 @@ public class BasicAttackState : States
         Vector3 targetDir = PlayerReferences.instance.GetMouseTargetDir() - stateGameObject.transform.position;
 
         stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
+        stateGameObject.GetComponent<SlashGenerator>().GenerateSlash();
 
         PlayerReferences.instance.GetPlayerAnimator().SetBool("meleeAttack", true);
         ExecuteAnim();
@@ -73,6 +74,7 @@ public class BasicAttackState : States
 
     void ExecuteAttack()
     {
+
         //stateGameObject.GetComponent<GroundSlashShooter>().OnShoot();
         Vector3 attackPosition = playerTransform.position + playerTransform.forward * attackOffset;
         Collider[] hitColliders = Physics.OverlapSphere(attackPosition, sphereSize / 2, enemyLayerMask, QueryTriggerInteraction.UseGlobal);

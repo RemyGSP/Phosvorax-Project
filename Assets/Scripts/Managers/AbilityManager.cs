@@ -36,7 +36,7 @@ public class AbilityManager : MonoBehaviour
             else
             {
                 PlayerReferences.instance.canMove = true;
-                attAreaVisual.DeactivateArea();
+                //attAreaVisual.DeactivateArea();
             }
             if (PlayerInputController.Instance.IsCanceling())
             {

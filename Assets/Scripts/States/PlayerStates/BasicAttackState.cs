@@ -56,7 +56,7 @@ public class BasicAttackState : States
         Vector3 targetDir = PlayerReferences.instance.GetMouseTargetDir() - stateGameObject.transform.position;
 
         stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
-        stateGameObject.GetComponent<SlashGenerator>().GenerateSlash();
+        //stateGameObject.GetComponent<SlashGenerator>().GenerateSlash();
 
         //PlayerReferences.instance.GetPlayerAnimator().SetBool("meleeAttack", true);
         ExecuteAnim();

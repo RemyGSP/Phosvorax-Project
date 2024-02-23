@@ -6,7 +6,11 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using static UnityEngine.Rendering.VolumeComponent;
 
@@ -31,11 +35,11 @@ public class ScreenOptions : MonoBehaviour
     {
         CheckIfPlayerPrefsContainsPlayerConfiguration();
         playerPrefOptions = GetCurrentPlayerPrefsOptions();
+        ApplyOptions();
         currentPlayerOptions = new int[3];
         ComproveIfConfigChanged();
         screenModeOptions = new string[2];
-        screenModeOptions[0] = "On";
-        screenModeOptions[1] = "Off";
+        currentScreenModeOption = 0;
         resolutionOptions = new string[Screen.resolutions.Length];
         AddResolutionsToArray();
         currentResolutionOption = 0;
@@ -118,27 +122,13 @@ public class ScreenOptions : MonoBehaviour
         PlayerPrefs.SetInt("RefreshRate", refreshRate[index]);
     }
 
-    public void ChangeScreenModeOption(int direction)
-    {
-        currentScreenModeOption = ChangeOption(direction, currentScreenModeOption, screenModeOptions.Length);
-        currentPlayerOptions[2] = currentScreenModeOption;
-        ComproveIfConfigChanged();
-        screenModeText.text = screenModeOptions[currentScreenModeOption];
-        if (currentScreenModeOption == 0)
-        {
-            SetScreenMode(0);
-        }
-        else
-        {
-            SetScreenMode(1);
-        }
-    }
 
-    public void SetScreenMode(int fullscreen)
+
+    public void SetScreenMode(bool fullscreen)
     {
-        PlayerPrefs.SetInt("currentScreenModeOption", fullscreen);
-        if (fullscreen == 0)
+        if (fullscreen)
         {
+            PlayerPrefs.SetInt("currentScreenModeOption", 0);
             PlayerPrefs.SetInt("Fullscreen", 0);
         }
         else
@@ -214,9 +204,9 @@ public class ScreenOptions : MonoBehaviour
         }
     }
 
-    public void ChangeVsync()
+    public void ChangeVsync(bool option)
     {
-        if (QualitySettings.vSyncCount == 0)
+        if (option)
         {
             QualitySettings.vSyncCount = 1;
         }
@@ -226,15 +216,28 @@ public class ScreenOptions : MonoBehaviour
         }
     }
 
-    public void ChangeAntiAlising()
+    public void ChangeAntiAlising(bool option)
     {
-        if (QualitySettings.antiAliasing == 0)
+        if (option)
         {
-            QualitySettings.vSyncCount = 1;
+            QualitySettings.antiAliasing  = 4;
         }
         else
         {
-            QualitySettings.vSyncCount = 0;
+            QualitySettings.antiAliasing = 0;
+        }
+    }
+
+    public void ChangePixelQuantity()
+    {
+        UniversalRenderPipelineAsset asset = (UniversalRenderPipelineAsset)GraphicsSettings.renderPipelineAsset;
+        List<ScriptableRendererFeature> features =asset.LoadBuiltinRendererData().rendererFeatures;
+        for (int i = 0; i < features.LongCount(); i++)
+        {
+            if (features.ElementAt(i).name.Equals("PixelizeFeature"))
+            {
+                Debug.Log("FeatureEcontrada");
+            }
         }
     }
 }

@@ -13,7 +13,10 @@ public class ProceduralMatrixGenerator : MonoBehaviour
     private int deadEndsCount;
     public int minDeadEnds;
     private PrefabRoomInstancier prefabRoomInstancier;
-  
+    private int maxDeadEndsIteration;
+    private int DeadEndsIteration;
+
+
 
     void Start()
     {
@@ -27,7 +30,8 @@ public class ProceduralMatrixGenerator : MonoBehaviour
         binariMatrix = new int[(int)MapSize.x, (int)MapSize.y];
         roomsPlaced = 0;
         deadEndsCount = 0;
-            PrepareMatrixBeforeFilling();   
+        maxDeadEndsIteration = 1000;
+        PrepareMatrixBeforeFilling();   
     }
 
     void PrepareMatrixBeforeFilling(){
@@ -40,7 +44,7 @@ public class ProceduralMatrixGenerator : MonoBehaviour
         binariMatrix[casillaCentralX, casillaCentralY] = 1;
 
         roomsPlaced++;
-
+        DeadEndsIteration++;
         FillOutTheMatrix();
     }
 
@@ -119,13 +123,20 @@ public class ProceduralMatrixGenerator : MonoBehaviour
                 }
             }
         }
-            //!!!!como se ponga mal el tamaño de la aray o el de las habitaciones esto hace un bucle infinito!!!!!
-            if (deadEndsCount >= minDeadEnds){
-                prefabRoomInstancier.ReceiveMatrix(roomTypeMatrix);
-            }
-            else{
-                Debug.LogError("no tiene suficientes salas de 1 puerta xd");
-            }
+        //!!!!como se ponga mal el tamaño de la aray o el de las habitaciones esto hace un bucle infinito!!!!!
+        if (deadEndsCount >= minDeadEnds)
+        {
+            prefabRoomInstancier.ReceiveMatrix(roomTypeMatrix);
+        }
+        else if (DeadEndsIteration < maxDeadEndsIteration)
+        {
+            StartRoomGeneration();
+            Debug.Log("a generar de nuevo");
+        }
+        else
+        {
+            Debug.Log("liada maxima datos de mapa mal configurados");
+        }
     }
 
     int GetAdjacentConfiguration(int x, int y)

@@ -14,6 +14,7 @@ public class BasicAttackState : States
     [SerializeField] private float attackOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
     [SerializeField] private float sphereSize; // Tamaño del área de detección
     [SerializeField] private float attackDamage;
+    [SerializeField] private float impulse;
     private RotateCharacter rotateCharacter;
     private Animator anim;
     private float animationLength;
@@ -46,6 +47,7 @@ public class BasicAttackState : States
 
     public override void Start()
     {
+        PlayerTimers.Instance.playerBasicAttackTimer = 0;
         anim = PlayerReferences.instance.GetPlayerAnimator() ;
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
@@ -65,16 +67,18 @@ public class BasicAttackState : States
     private void ExecuteAnim()
     {
         anim.SetTrigger("attack");
+        rigidBody.AddForce(stateGameObject.transform.rotation * Vector3.forward * impulse, ForceMode.Impulse);
         currentAttackTime = 0;
         animationLength = anim.GetCurrentAnimatorClipInfo(0).Length ;
         //stateGameObject.transform.rotation = Quaternion.Euler(stateGameObject.transform.rotation.x , stateGameObject.transform.rotation.y + animOffsetRotation, stateGameObject.transform.rotation.z );
         currentAttackDelay = attackDelay;
         canAttack = true;
+        ExecuteAttack();
     }
 
     void ExecuteAttack()
     {
-
+        Debug.Log("Attack");
         //stateGameObject.GetComponent<GroundSlashShooter>().OnShoot();
         Vector3 attackPosition = playerTransform.position + playerTransform.forward * attackOffset;
         Collider[] hitColliders = Physics.OverlapSphere(attackPosition, sphereSize / 2, enemyLayerMask, QueryTriggerInteraction.UseGlobal);
@@ -96,7 +100,7 @@ public class BasicAttackState : States
         currentAttackTime += Time.deltaTime;
         if (currentAttackDelay <= 0 && canAttack)
         {
-            ExecuteAttack();
+            //ExecuteAttack();
             PlayerTimers.Instance.playerBasicAttackTimer = 0;
         }
 

@@ -351,6 +351,99 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &278046230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 278046231}
+  - component: {fileID: 278046233}
+  - component: {fileID: 278046232}
+  m_Layer: 0
+  m_Name: Map
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &278046231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278046230}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -93.6535, y: 135.6994, z: -73.92851}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &278046232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278046230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b767277d3b9536443be754f1d3e25e13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomTypes:
+  - prefabRooms:
+    - {fileID: 1111919837220083903, guid: 011c0fe9c675ae2429749a0d230a2b1f, type: 3}
+  - prefabRooms:
+    - {fileID: 8641918768887791790, guid: 6f37110e6c606fc44bec8c1ef4126531, type: 3}
+  - prefabRooms:
+    - {fileID: 1610736516702500485, guid: f2b86ddf0f3e13146aae003358f99c50, type: 3}
+  - prefabRooms:
+    - {fileID: 5262707985558715031, guid: a4e87366f395b7d4f909db97e1792909, type: 3}
+  - prefabRooms:
+    - {fileID: 5761051478878343349, guid: 53160206305fd9645890afc2dab48814, type: 3}
+  - prefabRooms:
+    - {fileID: 3744771844355603345, guid: 17350462a25bdb04a8715b7b74961796, type: 3}
+  - prefabRooms:
+    - {fileID: 2136790369203283428, guid: 240d3e98d7d7fc2448b5c510eba9ed10, type: 3}
+  - prefabRooms:
+    - {fileID: 1390997330038999109, guid: cdfb02fea0e22434b9c7a19426c5dd29, type: 3}
+  - prefabRooms:
+    - {fileID: 3105604598705517967, guid: 5c8047a4c9d2af741ba0fe5625a458f2, type: 3}
+  - prefabRooms:
+    - {fileID: 3493779274658083168, guid: 07c4d36bf392fe54c941118cc5e0c6c2, type: 3}
+  - prefabRooms:
+    - {fileID: 1639263755603557350, guid: 88ba1b551cf7b4e42974340aab061013, type: 3}
+  - prefabRooms:
+    - {fileID: 3910836403738218524, guid: 60221f6f83f3929418fca073999cf6f7, type: 3}
+  - prefabRooms:
+    - {fileID: 5297209535477098503, guid: 9551c237463f98448804b555566206ff, type: 3}
+  - prefabRooms:
+    - {fileID: 6994636984423168762, guid: f1e0267fe6a211a42af73377dc49b62e, type: 3}
+  - prefabRooms:
+    - {fileID: 5938867464863925217, guid: 50ec8100b8dd0d24991ee4f5fdaa3885, type: 3}
+  - prefabRooms:
+    - {fileID: 2103139542693430024, guid: e67e516db7eabf6459745f1601d78444, type: 3}
+--- !u!114 &278046233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278046230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3dbe142004cd6428628841d184e176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MapSize: {x: 7, y: 7}
+  roomNumberThreshold: {x: 17, y: 23}
+  minDeadEnds: 3
 --- !u!1 &390216966
 GameObject:
   m_ObjectHideFlags: 0
@@ -2383,7 +2476,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 11.453453, y: -0.194, z: 15.34}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 522133059}
@@ -3745,3 +3838,4 @@ SceneRoots:
   - {fileID: 1526502805}
   - {fileID: 977702555}
   - {fileID: 992127168}
+  - {fileID: 278046231}

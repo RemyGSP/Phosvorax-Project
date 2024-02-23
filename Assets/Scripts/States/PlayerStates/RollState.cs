@@ -57,12 +57,12 @@ public class RollState : States
     {
         if (playerDirection != Vector3.zero)
         {
-            rigidBody.AddForce(playerDirection * dashForce * Time.deltaTime, ForceMode.Impulse);
+            rigidBody.AddForce(playerDirection * dashForce, ForceMode.Impulse);
         }
         //Esto es por si el usuario no tienes ninguna direccion pulsada, asi que pillara la rotacion actual del personaje
         else
         {
-            rigidBody.AddForce(stateGameObject.transform.rotation * Vector3.forward * dashForce * Time.deltaTime, ForceMode.Impulse);
+            rigidBody.AddForce(stateGameObject.transform.rotation * Vector3.forward * dashForce, ForceMode.Impulse);
         }
     }
 

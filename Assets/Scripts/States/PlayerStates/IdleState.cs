@@ -5,11 +5,11 @@ using UnityEngine;
 using UnityEngine.InputSystem.Android;
 
 [CreateAssetMenu(menuName = "States/PlayerIdleState")]
-public class IdleState : States
+public class IdleStateDummy : States
 {
     Animator animator;
     #region Constructor
-    public IdleState(GameObject stateGameObject) : base(stateGameObject)
+    public IdleStateDummy(GameObject stateGameObject) : base(stateGameObject)
     {
     }
 

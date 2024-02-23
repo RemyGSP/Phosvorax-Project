@@ -11,11 +11,11 @@ public class HealthBehaviour : MonoBehaviour
     [SerializeField] private float maxHealth;
     [SerializeField] private float minHealth;
     [SerializeField] private float damageModifier;
-    public UnityEvent<float> onHit;
-    public UnityEvent onDeath;
-    public UnityEvent onRevive;
     [SerializeField] private bool parryDamageDetector;
-   
+    public UnityEvent<float> onHit;
+    public UnityEvent onRevive;
+    private bool hasBeenHit;
+
     private void Start()
     {
         currentHealth = maxHealth;
@@ -53,6 +53,7 @@ public class HealthBehaviour : MonoBehaviour
             aux = true;
         }
         SetParrydetectorTrue();
+        hasBeenHit = true;
         return aux;
     }
 
@@ -74,12 +75,11 @@ public class HealthBehaviour : MonoBehaviour
         if (currentHealth <= minHealth)
         {
             aux = true;
-            onDeath.Invoke();
         }
         return aux;
     }
 
-        public void Revive()
+    public void Revive()
     {
         currentHealth = maxHealth;
         onRevive.Invoke();
@@ -88,6 +88,19 @@ public class HealthBehaviour : MonoBehaviour
     public void Revive(float newHealth)
     {
         currentHealth = newHealth;
-        onRevive.Invoke();
+    }
+
+    public bool HasBeenHit()
+    {
+        return hasBeenHit;
+    }
+    public void UndoHit()
+    {
+        hasBeenHit = false;
+    }
+
+    public float GetMaxHealth()
+    {
+        return maxHealth;
     }
 }

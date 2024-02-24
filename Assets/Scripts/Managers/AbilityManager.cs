@@ -73,6 +73,7 @@ public class AbilityManager : MonoBehaviour
     public void CallAbilityIndicator()
     {
         attAreaVisual.ActivateArea();
+        if (abilities[currentAbility] != null)
         attAreaVisual.DrawAttackArea(abilities[currentAbility].abilityRange, abilities[currentAbility].abilityRange);
     }
 }

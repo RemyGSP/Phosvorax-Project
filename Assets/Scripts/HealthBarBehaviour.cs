@@ -35,24 +35,11 @@ public class HealthBarBehaviour : MonoBehaviour
         damage = this.currentHealth - currentHealth;
         targetFillAmount = currentHealth / maxHealth;
         this.currentHealth = currentHealth;
-        DisplayDamage();
         // Start the fill animation coroutine
         StartCoroutine(_FillHealthBar());
     }
 
-    public void DisplayDamage()
-    {
-        damageText.text = damage.ToString();
-        damageText.gameObject.SetActive(true);
-        damageText.gameObject.GetComponent<Animator>().Play("DamageText");
-        StartCoroutine(_DeactivateDamageDisplay());
-    }
 
-    private IEnumerator _DeactivateDamageDisplay()
-    {
-        yield return new WaitForSeconds(damageText.gameObject.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0).Length);
-        damageText.gameObject.SetActive(false);
-    }
 
     public void RestartHealthBar()
     {

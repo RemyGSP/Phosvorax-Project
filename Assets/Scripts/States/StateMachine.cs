@@ -36,4 +36,9 @@ public class StateMachine : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        currentState.OnCollisionEnter(collision);
+    }
+
 }

@@ -28,6 +28,7 @@ public class PlayerTimers : MonoBehaviour
 
         abilityTimers[0] += Time.deltaTime;
         abilityTimers[1] += Time.deltaTime;
+        abilityTimers[2] += Time.deltaTime;
         playerBasicAttackTimer += Time.deltaTime;
         rollTimer += Time.deltaTime;
     }

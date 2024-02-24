@@ -64,6 +64,11 @@ public abstract class States : ScriptableObject
     {
 
     }
+
+    public virtual void OnCollisionEnter(Collision other)
+    {
+
+    }
     public abstract void Update();
 
 }

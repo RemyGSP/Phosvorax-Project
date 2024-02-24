@@ -54,7 +54,7 @@ public class PlayerReferences : MonoBehaviour
         RaycastHit hit;
         Vector3 targetDir = Vector3.zero;
 
-        if (Physics.Raycast(castPoint, out hit, Mathf.Infinity))
+        if (Physics.Raycast(castPoint, out hit, Mathf.Infinity,groundMask))
         {
             targetDir = hit.point; // Conseguir la direccion a la que esta apuntando el raton en el mundo
             targetDir.y = 0f; // Mantener en el plano XY

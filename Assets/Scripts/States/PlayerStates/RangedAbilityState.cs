@@ -33,7 +33,6 @@ public class RangedAbilityState : Ability
 
     public override States CheckTransitions()
     {
-        Debug.Log("CurrentAttackTime: " + currentAttackTime + "AnimationLenght: " + animationLength);
         if (currentAttackTime > animationLength)
         {
             return base.CheckTransitions();
@@ -64,11 +63,11 @@ public class RangedAbilityState : Ability
         {
             if (PlayerInputController.Instance.IsUsingKeyboard())
             {
-                attackPosition = attAreaVisual.GetCursorPositionInsideBounds(PlayerReferences.instance.GetMouseTargetDir() - PlayerReferences.instance.GetPlayerCoordinates());
+                attackPosition = attAreaVisual.GetCursorPositionInsideBounds(PlayerReferences.instance.GetMouseTargetDir() - PlayerReferences.instance.GetPlayerCoordinates()) + PlayerReferences.instance.GetPlayerCoordinates();
             }
             else
             {
-                attackPosition = attAreaVisual.GetCursorPosition();
+                attackPosition = attAreaVisual.GetCursorPositionInsideBounds(PlayerReferences.instance.GetMouseTargetDir() - PlayerReferences.instance.GetPlayerCoordinates()) + PlayerReferences.instance.GetPlayerCoordinates();
             }
         }
 

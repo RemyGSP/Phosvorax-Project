@@ -113,13 +113,14 @@ public class ScreenOptions : MonoBehaviour
         PlayerPrefs.SetInt("currentResolutionOption", index);
         PlayerPrefs.SetInt("ResolutionWidth", selectedResolution.width);
         PlayerPrefs.SetInt("ResolutionHeight", selectedResolution.height);
-
+        ApplyOptions();
     }
 
     public void SetRefreshRate(int index)
     {
         PlayerPrefs.SetInt("currentRefreshRateOption", index);
         PlayerPrefs.SetInt("RefreshRate", refreshRate[index]);
+        ApplyOptions();
     }
 
 
@@ -135,6 +136,7 @@ public class ScreenOptions : MonoBehaviour
         {
             PlayerPrefs.SetInt("Fullscreen", 1);
         }
+        ApplyOptions();
     }
 
     public void ApplyOptions()

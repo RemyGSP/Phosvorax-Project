@@ -119,7 +119,7 @@ public class BasicAttackState : States
 
     public override void OnExitState()
     {
-
+        rigidBody.velocity = Vector3.zero;
         //PlayerReferences.instance.GetPlayerAnimator().SetInteger("meleeAttack", 0);
     }
 }

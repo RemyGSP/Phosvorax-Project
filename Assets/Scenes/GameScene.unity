@@ -2372,28 +2372,13 @@ MonoBehaviour:
   maxHealth: 5
   minHealth: 0
   damageModifier: 0
+  parryDamageDetector: 0
   onHit:
     m_PersistentCalls:
       m_Calls: []
-  onDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 992127169}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   onRevive:
     m_PersistentCalls:
       m_Calls: []
-  parryDamageDetector: 0
 --- !u!54 &992127175
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2539,7 +2524,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 1
 --- !u!65 &1092576559
 BoxCollider:
@@ -2560,8 +2545,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.3425035, y: 4.757535, z: 1.6423626}
-  m_Center: {x: -0.034310818, y: 2.4236588, z: -0.07520962}
+  m_Size: {x: 1.3425035, y: 5.000568, z: 1.6423626}
+  m_Center: {x: -0.034310818, y: 2.3021433, z: -0.07520959}
 --- !u!114 &1092576560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2578,16 +2563,13 @@ MonoBehaviour:
   maxHealth: 10
   minHealth: 0
   damageModifier: 0
+  parryDamageDetector: 0
   onHit:
-    m_PersistentCalls:
-      m_Calls: []
-  onDeath:
     m_PersistentCalls:
       m_Calls: []
   onRevive:
     m_PersistentCalls:
       m_Calls: []
-  parryDamageDetector: 0
 --- !u!114 &1092576561
 MonoBehaviour:
   m_ObjectHideFlags: 0

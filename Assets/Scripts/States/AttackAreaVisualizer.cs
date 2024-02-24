@@ -77,14 +77,16 @@ public class AttackAreaVisualizer : MonoBehaviour
     private void ManageCursor()
     {
         Vector3 cursorDir = PlayerReferences.instance.GetMouseTargetDir() - PlayerReferences.instance.GetPlayerCoordinates();
-        cursorIndicator.transform.position = GetCursorPositionInsideBounds(cursorDir) + PlayerReferences.instance.GetPlayerCoordinates();
+        Vector3 directionInsideBounds = GetCursorPositionInsideBounds(cursorDir) + PlayerReferences.instance.GetPlayerCoordinates();
+        directionInsideBounds.y = 0.1f;
+        cursorIndicator.transform.position = directionInsideBounds;
 
         lastPosition = cursorIndicator.transform.position - PlayerReferences.instance.GetPlayerCoordinates();
     }
     private void ManageCursorGamepad()
     {
-        cursorIndicator.transform.position += (PlayerInputController.Instance.GetPlayerInputDirection() * cursorSpeed * Time.deltaTime).normalized;
-        Debug.Log(PlayerInputController.Instance.GetPlayerInputDirection() * cursorSpeed * Time.deltaTime);
+        //cursorIndicator.transform.position += (PlayerInputController.Instance.GetPlayerInputDirection() * cursorSpeed * Time.deltaTime).normalized;
+        Debug.Log("Gamepad");
         lastPosition = cursorIndicator.transform.position - PlayerReferences.instance.GetPlayerCoordinates();
     }
 

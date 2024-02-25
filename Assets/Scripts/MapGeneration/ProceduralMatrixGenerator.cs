@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-
+using System;
 public class ProceduralMatrixGenerator : MonoBehaviour
 {
     public Vector2Int MapSize;
@@ -13,6 +13,7 @@ public class ProceduralMatrixGenerator : MonoBehaviour
     private int deadEndsCount;
     public int minDeadEnds;
     private PrefabRoomInstancier prefabRoomInstancier;
+    private PathfindingCalculations pathfindingCalculations;
     private int maxDeadEndsIteration;
     private int DeadEndsIteration;
 
@@ -22,6 +23,7 @@ public class ProceduralMatrixGenerator : MonoBehaviour
     {
 
         prefabRoomInstancier = GetComponent<PrefabRoomInstancier>();
+        pathfindingCalculations = GetComponent<PathfindingCalculations>();
         StartRoomGeneration();
     }
 
@@ -35,7 +37,7 @@ public class ProceduralMatrixGenerator : MonoBehaviour
     }
 
     void PrepareMatrixBeforeFilling(){
-        finalRoomNumber = Random.Range((int)roomNumberThreshold.x, (int)roomNumberThreshold.y + 1);
+        finalRoomNumber = UnityEngine.Random.Range((int)roomNumberThreshold.x, (int)roomNumberThreshold.y + 1);
         Debug.Log(finalRoomNumber);
         
         int casillaCentralX = MapSize.x / 2;
@@ -67,7 +69,7 @@ public class ProceduralMatrixGenerator : MonoBehaviour
                         // Agrega las condiciones adicionales que deseas
                         if (adjacentOnes == 1)
                         {
-                            float randomProbability = Random.value;
+                            float randomProbability = UnityEngine.Random.value;
                             float probabilityThreshold = 0.5f;
 
                             if (randomProbability <= probabilityThreshold)
@@ -89,7 +91,7 @@ public class ProceduralMatrixGenerator : MonoBehaviour
             // Puedes manejar la situación de generación fallida aquí.
         }
            MatrixRoomTypeReEnumeration(); 
-           GenerateRoomHeatmapMatrix();
+           
     }
 
     void MatrixRoomTypeReEnumeration(){
@@ -127,6 +129,7 @@ public class ProceduralMatrixGenerator : MonoBehaviour
         if (deadEndsCount >= minDeadEnds)
         {
             prefabRoomInstancier.ReceiveMatrix(roomTypeMatrix);
+            pathfindingCalculations.ReceiveMatrix2(roomTypeMatrix);
         }
         else if (DeadEndsIteration < maxDeadEndsIteration)
         {
@@ -167,26 +170,8 @@ public class ProceduralMatrixGenerator : MonoBehaviour
         return count;
     }
 
-    void GenerateRoomHeatmapMatrix()
-    {
-        
-    }
+   
 
-
-    void PrintMatrix(int[,] matrix)
-    {
-        string matrixString = "Matriz de calor:\n";
-
-        for (int i = 0; i < matrix.GetLength(0); i++)
-        {
-            for (int j = 0; j < matrix.GetLength(1); j++)
-            {
-                matrixString += matrix[i, j] + " ";
-            }
-            matrixString += "\n";
-        }
-
-        Debug.Log(matrixString);
-    }
+   
 
 }

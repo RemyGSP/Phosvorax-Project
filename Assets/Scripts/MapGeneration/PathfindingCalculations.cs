@@ -4,8 +4,16 @@ using UnityEngine;
 
 public class PathfindingCalculations : MonoBehaviour
 {
+
+    private PrefabRoomInstancier prefabRoomInstancier;
+
+    
+
     public void ReceiveMatrix2(int[,] matrix)
     {
+
+        prefabRoomInstancier = GetComponent<PrefabRoomInstancier>();
+
         Vector2Int center = CalculateCenter(matrix);
 
         // Ejemplo de llamada con 1 habitación
@@ -20,7 +28,14 @@ public class PathfindingCalculations : MonoBehaviour
         Debug.Log("First Farthest Room: " + firstFarthestRoom);
         Debug.Log("Second Farthest Room: " + secondFarthestRoom);
         Debug.Log("Third Farthest Room: " + thirdFarthestRoom);
-        // Puedes continuar con más pasos según sea necesario
+
+        CallRoomInstancier(matrix, firstFarthestRoom, secondFarthestRoom);
+
+    }
+
+    public void CallRoomInstancier(int[,] matrix, Vector2Int firstRoom, Vector2Int secondRoom)
+    {
+        prefabRoomInstancier.ReceiveMatrix(matrix, firstRoom, secondRoom);
     }
 
     private Vector2Int CalculateCenter(int[,] matrix)
@@ -119,4 +134,6 @@ public class PathfindingCalculations : MonoBehaviour
 
         return room.x >= 0 && room.x < rows && room.y >= 0 && room.y < cols;
     }
+
+   
 }

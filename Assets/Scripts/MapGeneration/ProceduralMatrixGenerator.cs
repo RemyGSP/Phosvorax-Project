@@ -12,7 +12,7 @@ public class ProceduralMatrixGenerator : MonoBehaviour
     private int roomsPlaced;
     private int deadEndsCount;
     public int minDeadEnds;
-    private PrefabRoomInstancier prefabRoomInstancier;
+
     private PathfindingCalculations pathfindingCalculations;
     private int maxDeadEndsIteration;
     private int DeadEndsIteration;
@@ -22,7 +22,7 @@ public class ProceduralMatrixGenerator : MonoBehaviour
     void Start()
     {
 
-        prefabRoomInstancier = GetComponent<PrefabRoomInstancier>();
+        
         pathfindingCalculations = GetComponent<PathfindingCalculations>();
         StartRoomGeneration();
     }
@@ -38,7 +38,6 @@ public class ProceduralMatrixGenerator : MonoBehaviour
 
     void PrepareMatrixBeforeFilling(){
         finalRoomNumber = UnityEngine.Random.Range((int)roomNumberThreshold.x, (int)roomNumberThreshold.y + 1);
-        Debug.Log(finalRoomNumber);
         
         int casillaCentralX = MapSize.x / 2;
         int casillaCentralY = MapSize.y / 2;
@@ -128,7 +127,7 @@ public class ProceduralMatrixGenerator : MonoBehaviour
         //!!!!como se ponga mal el tamaño de la aray o el de las habitaciones esto hace un bucle infinito!!!!!
         if (deadEndsCount >= minDeadEnds)
         {
-            prefabRoomInstancier.ReceiveMatrix(roomTypeMatrix);
+            
             pathfindingCalculations.ReceiveMatrix2(roomTypeMatrix);
         }
         else if (DeadEndsIteration < maxDeadEndsIteration)

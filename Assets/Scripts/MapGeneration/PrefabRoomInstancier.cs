@@ -10,11 +10,14 @@ public class Roomlist
 
 public class PrefabRoomInstancier : MonoBehaviour
 {
-    public List<Roomlist> roomTypes;
+    public List<Roomlist> prefabRooms;
     private int[,] roomTypeMatrix;
     public GameObject[,] roomInstancesMatrix;
 
-    public void ReceiveMatrix(int[,] matrix)
+    public Vector2Int endRoom;
+    public Vector2Int spawnRoom;
+
+    public void ReceiveMatrix(int[,] matrix, Vector2Int eroom, Vector2Int sroom)
     {
         roomTypeMatrix = matrix;
         roomInstancesMatrix = new GameObject[matrix.GetLength(0), matrix.GetLength(1)];
@@ -24,7 +27,7 @@ public class PrefabRoomInstancier : MonoBehaviour
 
     public void InstantiateRooms()
     {
-        if (roomTypeMatrix == null || roomTypes == null || roomTypes.Count == 0 || roomTypes[0].prefabRooms.Count == 0)
+        if (roomTypeMatrix == null || prefabRooms == null || prefabRooms.Count == 0 || prefabRooms[0].prefabRooms.Count == 0)
         {
             Debug.LogError("Matrix or prefabRooms not set properly.");
             return;
@@ -39,9 +42,9 @@ public class PrefabRoomInstancier : MonoBehaviour
             for (int col = 0; col < numCols; col++)
             {
                 int roomTypeIndex = roomTypeMatrix[row, col];
-                if (roomTypeIndex >= 0 && roomTypeIndex < roomTypes.Count)
+                if (roomTypeIndex >= 0 && roomTypeIndex < prefabRooms.Count)
                 {
-                    List<GameObject> roomTypePrefabs = roomTypes[roomTypeIndex].prefabRooms;
+                    List<GameObject> roomTypePrefabs = prefabRooms[roomTypeIndex].prefabRooms;
                     if (roomTypePrefabs.Count > 0)
                     {
                         GameObject selectedPrefab = roomTypePrefabs[Random.Range(0, roomTypePrefabs.Count)];

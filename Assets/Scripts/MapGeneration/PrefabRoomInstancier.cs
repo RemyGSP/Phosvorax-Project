@@ -73,7 +73,7 @@ public class PrefabRoomInstancier : MonoBehaviour
                 GameObject currentRoom = roomInstancesMatrix[i, j];
 
                 // Verificar si el GameObject tiene el componente RoomDoorManager
-                RoomDoorManager doorManager = currentRoom.GetComponent<RoomDoorManager>();
+                RooomController doorManager = currentRoom.GetComponent<RooomController>();
 
                 // Si tiene el componente RoomDoorManager
                 if (doorManager != null)
@@ -92,7 +92,7 @@ public class PrefabRoomInstancier : MonoBehaviour
                                     if (j > 0)
                                     {
                                         GameObject leftRoom = roomInstancesMatrix[i, j - 1];
-                                        RoomDoorManager leftDoorManager = leftRoom.GetComponent<RoomDoorManager>();
+                                        RooomController leftDoorManager = leftRoom.GetComponent<RooomController>();
                                         if (leftDoorManager != null && leftDoorManager.DoorList.Count > 2 && leftDoorManager.DoorList[2] != null)
                                         {
                                             doorManager.DoorList[k].GetComponent<DoorTpController>().destinationObject = leftDoorManager.DoorList[2];
@@ -104,7 +104,7 @@ public class PrefabRoomInstancier : MonoBehaviour
                                     if (i > 0)
                                     {
                                         GameObject aboveRoom = roomInstancesMatrix[i - 1, j];
-                                        RoomDoorManager aboveDoorManager = aboveRoom.GetComponent<RoomDoorManager>();
+                                        RooomController aboveDoorManager = aboveRoom.GetComponent<RooomController>();
                                         if (aboveDoorManager != null && aboveDoorManager.DoorList.Count > 3 && aboveDoorManager.DoorList[3] != null)
                                         {
                                             doorManager.DoorList[k].GetComponent<DoorTpController>().destinationObject = aboveDoorManager.DoorList[3];
@@ -116,7 +116,7 @@ public class PrefabRoomInstancier : MonoBehaviour
                                     if (j < roomInstancesMatrix.GetLength(1) - 1)
                                     {
                                         GameObject rightRoom = roomInstancesMatrix[i, j + 1];
-                                        RoomDoorManager rightDoorManager = rightRoom.GetComponent<RoomDoorManager>();
+                                        RooomController rightDoorManager = rightRoom.GetComponent<RooomController>();
                                         if (rightDoorManager != null && rightDoorManager.DoorList.Count > 0 && rightDoorManager.DoorList[0] != null)
                                         {
                                             doorManager.DoorList[k].GetComponent<DoorTpController>().destinationObject = rightDoorManager.DoorList[0];
@@ -128,7 +128,7 @@ public class PrefabRoomInstancier : MonoBehaviour
                                     if (i < roomInstancesMatrix.GetLength(0) - 1)
                                     {
                                         GameObject belowRoom = roomInstancesMatrix[i + 1, j];
-                                        RoomDoorManager belowDoorManager = belowRoom.GetComponent<RoomDoorManager>();
+                                        RooomController belowDoorManager = belowRoom.GetComponent<RooomController>();
                                         if (belowDoorManager != null && belowDoorManager.DoorList.Count > 1 && belowDoorManager.DoorList[1] != null)
                                         {
                                             doorManager.DoorList[k].GetComponent<DoorTpController>().destinationObject = belowDoorManager.DoorList[1];

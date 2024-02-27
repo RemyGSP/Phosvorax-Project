@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 [CreateAssetMenu(menuName = "States/PlayerMoveState")]
 public class MoveState : States
 {
-
-
     private RotateCharacter rotateCharacter;
 
     #region Variables

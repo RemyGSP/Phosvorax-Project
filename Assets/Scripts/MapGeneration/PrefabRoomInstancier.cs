@@ -157,7 +157,7 @@ public class PrefabRoomInstancier : MonoBehaviour
             for (int col = 0; col < numCols; col++)
             {
                 GameObject roomInstance = roomInstancesMatrix[row, col];
-                if (roomInstance != null && roomInstance.name == "d0t0(Clone)")
+                if (roomInstance != null && roomInstance.name == "0(Clone)")
                 {
                     Destroy(roomInstance);
                     roomInstancesMatrix[row, col] = null; // Limpiar la referencia en la matriz

@@ -4,11 +4,10 @@ using System;
 public class ProceduralMatrixGenerator : MonoBehaviour
 {
     public Vector2Int MapSize;
-    public Vector2Int roomNumberThreshold;
     private int[,] binariMatrix;
     private int[,] roomTypeMatrix;
     private int[,] roomHeatmapMatrix;
-    private int finalRoomNumber;
+    public int RoomQuantity;
     private int roomsPlaced;
     private int deadEndsCount;
     public int minDeadEnds;
@@ -37,7 +36,6 @@ public class ProceduralMatrixGenerator : MonoBehaviour
     }
 
     void PrepareMatrixBeforeFilling(){
-        finalRoomNumber = UnityEngine.Random.Range((int)roomNumberThreshold.x, (int)roomNumberThreshold.y + 1);
         
         int casillaCentralX = MapSize.x / 2;
         int casillaCentralY = MapSize.y / 2;
@@ -55,13 +53,13 @@ public class ProceduralMatrixGenerator : MonoBehaviour
         int maxIterations = 10000; // Ajusta según sea necesario
         int iterationCount = 0;
 
-        while (roomsPlaced < finalRoomNumber && iterationCount < maxIterations)
+        while (roomsPlaced < RoomQuantity && iterationCount < maxIterations)
         {
             for (int i = 0; i < MapSize.x; i++)
             {
                 for (int j = 0; j < MapSize.y; j++)
                 {
-                    if (roomsPlaced < finalRoomNumber && binariMatrix[i, j] == 0)
+                    if (roomsPlaced < RoomQuantity && binariMatrix[i, j] == 0)
                     {
                         int adjacentOnes = CountAdjacentOnes(i, j);
 

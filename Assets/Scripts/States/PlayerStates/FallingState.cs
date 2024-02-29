@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "PlayerStates/FallingState")]
+[CreateAssetMenu(menuName = "States/FallingState")]
 public class FallingState : States
 {
     public FallingState(GameObject stateGameObject) : base(stateGameObject)

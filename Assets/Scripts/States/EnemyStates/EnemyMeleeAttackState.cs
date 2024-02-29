@@ -140,7 +140,7 @@ public class EnemyMeleeAttackState : States
             if (canAttack)
             {
                 ExecuteAttack();
-                PlayerTimers.timer.playerBasicAttackTimer = 0;
+                PlayerTimers.Instance.playerBasicAttackTimer = 0;
             }
             currentAttackDelay = attackDelay;
             canAttack = true;

@@ -22,7 +22,6 @@ public class SlashGenerator : MonoBehaviour
     {
         float startScrollValue = 5f;
         float targetScrollValue = -10f;
-        duration = 0.5f; // Duración en segundos para el cambio gradual
 
         float elapsedTime = 0f;
 

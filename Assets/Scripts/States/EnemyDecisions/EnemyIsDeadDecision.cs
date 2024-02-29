@@ -8,7 +8,7 @@ public class EnemyIsDeadDecision : Decision
 {
     public override bool Decide(StateMachine stateMachine)
     {
-        bool isDead = stateMachine.GetComponent<HealthBehaviour>().CheckIdDead();
+        bool isDead = stateMachine.GetComponent<HealthBehaviour>().CheckIfDeath();
         bool aux = false;
 
         if (isDead)

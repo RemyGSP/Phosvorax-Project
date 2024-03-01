@@ -3,25 +3,29 @@ using System.Collections.Generic;
 using System;
 public class ProceduralMatrixGenerator : MonoBehaviour
 {
+
     public Vector2Int MapSize;
-    private int[,] binariMatrix;
-    private int[,] roomTypeMatrix;
-    private int[,] roomHeatmapMatrix;
     public int RoomQuantity;
-    private int roomsPlaced;
-    private int deadEndsCount;
     public int minDeadEnds;
 
-    private PathfindingCalculations pathfindingCalculations;
     private int maxDeadEndsIteration;
     private int DeadEndsIteration;
+    private int roomsPlaced;
+    private int deadEndsCount;
 
+    private int[,] binariMatrix;
+    private int[,] roomLayoutTypeMatrix;
+    private int[,] roomTypeMatrix;
+
+    
+
+    private PathfindingCalculations pathfindingCalculations;
+    private PrefabRoomInstancier prefabRoomInstancier;
 
 
     void Start()
     {
-
-        
+        prefabRoomInstancier = GetComponent<PrefabRoomInstancier>();
         pathfindingCalculations = GetComponent<PathfindingCalculations>();
         StartRoomGeneration();
     }
@@ -87,13 +91,13 @@ public class ProceduralMatrixGenerator : MonoBehaviour
             Debug.LogError("Generación de mapa fallida. Se alcanzó el límite de iteraciones.");
             // Puedes manejar la situación de generación fallida aquí.
         }
-           MatrixRoomTypeReEnumeration(); 
+           MatrixRoomLayoutTypeReEnumeration(); 
            
     }
 
-    void MatrixRoomTypeReEnumeration(){
+    void MatrixRoomLayoutTypeReEnumeration(){
 
-        roomTypeMatrix = new int[MapSize.x, MapSize.y];
+        roomLayoutTypeMatrix = new int[MapSize.x, MapSize.y];
 
         for (int i = 0; i < MapSize.x; i++)
         {
@@ -105,28 +109,29 @@ public class ProceduralMatrixGenerator : MonoBehaviour
                 if (binariMatrix[i, j] == 1)
                 {
                     if (adjacentOnes == 4)
-                        roomTypeMatrix[i, j] = 15;
+                        roomLayoutTypeMatrix[i, j] = 15;
                     else if (adjacentOnes == 3)
-                        roomTypeMatrix[i, j] = GetAdjacentConfiguration(i, j);
+                        roomLayoutTypeMatrix[i, j] = GetAdjacentConfiguration(i, j);
                     else if (adjacentOnes == 2)
-                        roomTypeMatrix[i, j] = GetAdjacentConfiguration(i, j);
+                        roomLayoutTypeMatrix[i, j] = GetAdjacentConfiguration(i, j);
                     else{
-                        roomTypeMatrix[i, j] = GetAdjacentConfiguration(i, j);
+                        roomLayoutTypeMatrix[i, j] = GetAdjacentConfiguration(i, j);
                         deadEndsCount++;
                     }
                         
                 }
                 else
                 {
-                    roomTypeMatrix[i, j] = 0;
+                    roomLayoutTypeMatrix[i, j] = 0;
                 }
             }
         }
-        //!!!!como se ponga mal el tamaño de la aray o el de las habitaciones esto hace un bucle infinito!!!!!
         if (deadEndsCount >= minDeadEnds)
         {
+
             
-            pathfindingCalculations.ReceiveMatrix2(roomTypeMatrix);
+            DecideRoomType();
+            
         }
         else if (DeadEndsIteration < maxDeadEndsIteration)
         {
@@ -137,6 +142,21 @@ public class ProceduralMatrixGenerator : MonoBehaviour
         {
             Debug.Log("liada maxima datos de mapa mal configurados");
         }
+    }
+
+    void DecideRoomType()
+    {
+
+        
+        List<Vector2Int> farthestRooms = PathfindingCalculations.FindFarthestRooms(roomLayoutTypeMatrix);
+
+        foreach (var room in farthestRooms)
+        {
+            Debug.Log("Farthest Room: " + room.x + ", " + room.y);
+        }
+
+        prefabRoomInstancier.ReceiveMatrix(roomLayoutTypeMatrix);
+
     }
 
     int GetAdjacentConfiguration(int x, int y)

@@ -17,7 +17,7 @@ public class PrefabRoomInstancier : MonoBehaviour
     public Vector2Int endRoom;
     public Vector2Int spawnRoom;
 
-    public void ReceiveMatrix(int[,] matrix, Vector2Int eroom, Vector2Int sroom)
+    public void ReceiveMatrix(int[,] matrix)
     {
         roomTypeMatrix = matrix;
         roomInstancesMatrix = new GameObject[matrix.GetLength(0), matrix.GetLength(1)];
@@ -144,7 +144,7 @@ public class PrefabRoomInstancier : MonoBehaviour
                 }
             }
         }
-        DestroyRooms();
+
     }
 
     private void DestroyRooms()
@@ -176,6 +176,7 @@ public class PrefabRoomInstancier : MonoBehaviour
                 surface.BuildNavMesh();
             }
         }
+        DestroyRooms();
     }
 
     void PrintMatrix(int[,] matrix)

@@ -11,6 +11,7 @@ public class CrystalBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(_Delete());
         canStartMoving = false;
         rb = GetComponent<Rigidbody>();
     }
@@ -65,5 +66,14 @@ public class CrystalBehaviour : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         canStartMoving = true;
 
+    }
+
+    private IEnumerator _Delete()
+    {
+        yield return new WaitForSeconds(60f);
+        if (this != null)
+        {
+            Destroy (this.gameObject);
+        }
     }
 }

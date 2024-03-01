@@ -15,7 +15,6 @@ public class CrystalDrop : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -42,6 +41,7 @@ public class CrystalDrop : MonoBehaviour
             position.y += heightOffset;
             crystal.transform.position = position;
             crystal.GetComponent<CrystalBehaviour>().SetCrystalValue(dropValue);
+            crystal.GetComponent<Rigidbody>().AddTorque((Vector3.up - Vector3.right) * 10);
             crystal.GetComponent<Rigidbody>().AddForce(ClampForce(dropForce), ForceMode.Impulse);
         }
     }

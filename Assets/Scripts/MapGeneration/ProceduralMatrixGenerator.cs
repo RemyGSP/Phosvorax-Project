@@ -147,16 +147,26 @@ public class ProceduralMatrixGenerator : MonoBehaviour
     void DecideRoomType()
     {
 
-        
+
         List<Vector2Int> farthestRooms = PathfindingCalculations.FindFarthestRooms(roomLayoutTypeMatrix);
 
-        foreach (var room in farthestRooms)
+        roomTypeMatrix = new int[MapSize.x, MapSize.y];
+
+        // Copia roomLayoutTypeMatrix en roomTypeMatrix
+        int rows = MapSize.x;
+        int cols = MapSize.y;
+
+        for (int i = 0; i < rows; i++)
         {
-            Debug.Log("Farthest Room: " + room.x + ", " + room.y);
+            Array.Copy(roomLayoutTypeMatrix, i * cols, roomTypeMatrix, i * cols, cols);
         }
 
-        prefabRoomInstancier.ReceiveMatrix(roomLayoutTypeMatrix);
 
+    }
+
+    void SendMatrix()
+    {
+        prefabRoomInstancier.ReceiveMatrix(roomLayoutTypeMatrix);
     }
 
     int GetAdjacentConfiguration(int x, int y)

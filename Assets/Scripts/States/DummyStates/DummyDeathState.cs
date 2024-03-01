@@ -27,6 +27,7 @@ public class DummyDeathState : States
     // Start is called before the first frame update
     public override void Start()
     {
+        stateGameObject.GetComponent<CrystalDrop>().Drop();
         animator = stateGameObject.GetComponent<Animator>();
         animator.SetBool("dead", true);
         animationClipDuration = animator.GetCurrentAnimatorClipInfo(0).Length;

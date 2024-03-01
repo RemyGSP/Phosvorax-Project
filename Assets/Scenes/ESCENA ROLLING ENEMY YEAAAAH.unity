@@ -2452,6 +2452,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7647991264935412707, guid: 3dc0eb2909b521a4ab749503653bc0c5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.27
+      objectReference: {fileID: 0}
     - target: {fileID: 7911110690215544972, guid: 3dc0eb2909b521a4ab749503653bc0c5,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -2465,7 +2470,7 @@ PrefabInstance:
     - target: {fileID: 8205291948700660381, guid: 3dc0eb2909b521a4ab749503653bc0c5,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.42
+      value: 0.12
       objectReference: {fileID: 0}
     - target: {fileID: 8205291948700660381, guid: 3dc0eb2909b521a4ab749503653bc0c5,
         type: 3}
@@ -2554,7 +2559,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992127169}
   m_Enabled: 1
-  m_AgentTypeID: -334000983
+  m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
@@ -2582,7 +2587,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceToSeePlayer: 25
   playerSeen: 0
-  maxAttackDistance: 10
+  maxAttackDistance: 5
 --- !u!114 &992127172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3200,7 +3205,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 522133061}
   playerVisuals: {fileID: 522133060}
   canMove: 1
-  playerVisiblePoint: {fileID: 0}
+  playerVisiblePoint: {fileID: 1892208723}
   groundMask:
     serializedVersion: 2
     m_Bits: 768

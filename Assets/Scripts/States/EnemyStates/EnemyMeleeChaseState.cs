@@ -53,7 +53,6 @@ public class EnemyMeleeChaseState : States
 
             if (hit.transform != null && hit.transform.position.z == PlayerReferences.instance.GetPlayerCoordinates().z && hit.transform.position.x == PlayerReferences.instance.GetPlayerCoordinates().x)
             {
-                Debug.Log("El enemigo ve al jugador");
                 playerSeen = true;
                 stateGameObject.GetComponent<EnemyReferences>().SetPlayerSeen(playerSeen);
                 stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, playerPosition - stateGameObject.transform.position, 0.5f);
@@ -65,7 +64,6 @@ public class EnemyMeleeChaseState : States
                 stateGameObject.GetComponent<EnemyReferences>().SetPlayerSeen(playerSeen);
             }
         }
-
     }
 
     public override void OnExitState()

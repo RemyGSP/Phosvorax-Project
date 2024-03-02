@@ -21,11 +21,12 @@ public class RooomController : MonoBehaviour
     public List<GameObject> DoorList => _doorList;
 
     // Enumeración de tipos de vegetales
-    public enum RoomType
+   public enum RoomType
     {
-        multipurpose,
-        boss,
-        hability
+        Type0 = 0,
+        Type1 = 1,
+        Type2 = 2,
+        Type3 = 3
     }
 
     // Variable para almacenar la opción seleccionada

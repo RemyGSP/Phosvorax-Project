@@ -128,8 +128,7 @@ public class ProceduralMatrixGenerator : MonoBehaviour
         }
         if (deadEndsCount >= minDeadEnds)
         {
-
-            
+ 
             DecideRoomType();
             
         }
@@ -146,9 +145,7 @@ public class ProceduralMatrixGenerator : MonoBehaviour
 
     void DecideRoomType()
     {
-
-
-        List<Vector2Int> farthestRooms = PathfindingCalculations.FindFarthestRooms(roomLayoutTypeMatrix);
+        List<Vector2Int> farthestRooms = PathfindingCalculations.FindFarthestRooms(roomLayoutTypeMatrix, 1);
 
         roomTypeMatrix = new int[MapSize.x, MapSize.y];
 
@@ -161,12 +158,41 @@ public class ProceduralMatrixGenerator : MonoBehaviour
             Array.Copy(roomLayoutTypeMatrix, i * cols, roomTypeMatrix, i * cols, cols);
         }
 
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                if (roomTypeMatrix[i, j] != 0)
+                {
+                    double randomValue = UnityEngine.Random.value;
+                    roomTypeMatrix[i, j] = randomValue < 0.9 ? 4 : 5;
+                }
+            }
+        }
 
+        int[] customValues = { 2, 1, 3,};
+
+        for (int i = 0; i < farthestRooms.Count; i++)
+        {
+            Vector2Int position = farthestRooms[i];
+            int row = position.x;
+            int col = position.y;
+
+            // Asegurarse de que la posición esté dentro de los límites de la matriz
+            if (row >= 0 && row < roomTypeMatrix.GetLength(0) && col >= 0 && col < roomTypeMatrix.GetLength(1))
+            {
+                // Asignar el valor correspondiente desde el arreglo customValues
+                roomTypeMatrix[row, col] = customValues[i];
+            }
+        }
+
+        SendMatrix();
     }
+
 
     void SendMatrix()
     {
-        prefabRoomInstancier.ReceiveMatrix(roomLayoutTypeMatrix);
+        prefabRoomInstancier.ReceiveMatrix(roomLayoutTypeMatrix, roomTypeMatrix);
     }
 
     int GetAdjacentConfiguration(int x, int y)

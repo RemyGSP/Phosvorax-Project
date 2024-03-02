@@ -124,7 +124,7 @@ MonoBehaviour:
   door2: {fileID: 0}
   door8: {fileID: 0}
   door1: {fileID: 1421092571781134398}
-  typeSelected: 0
+  typeSelected: 1
 --- !u!1001 &7820791139498217785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -133,6 +133,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2437727263919705556}
     m_Modifications:
+    - target: {fileID: 2823914154418656841, guid: f468be15a6f7ad84f995cc00229e3217,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2823914154418656841, guid: f468be15a6f7ad84f995cc00229e3217,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2823914154418656841, guid: f468be15a6f7ad84f995cc00229e3217,
         type: 3}
       propertyPath: m_LocalPosition.x

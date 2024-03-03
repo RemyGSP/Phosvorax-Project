@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5908189738936443374}
   - component: {fileID: -6427598583794717574}
   - component: {fileID: 9203178400136712944}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: 10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,6 +126,7 @@ MonoBehaviour:
   door2: {fileID: 4281624714715168728}
   door8: {fileID: 6163965029433169739}
   door1: {fileID: 0}
+  typeSelected: 0
 --- !u!114 &9203178400136712944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +231,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: DoorTpPrefab (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 9165304838310177031, guid: f468be15a6f7ad84f995cc00229e3217,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -319,6 +325,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DoorTpPrefab (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9165304838310177031, guid: f468be15a6f7ad84f995cc00229e3217,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

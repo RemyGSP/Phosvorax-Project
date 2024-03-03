@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class DoorTpController : MonoBehaviour
 {
-   public GameObject destinationObject; // Asigna el objeto de destino desde el Inspector.
+    private GameObject destinationObject; // Asigna el objeto de destino desde el Inspector.
+
+    void Awake()
+    {
+        Debug.Log("f 0");
+        gameObject.SetActive(false);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
@@ -12,6 +19,9 @@ public class DoorTpController : MonoBehaviour
             if (destinationObject != null)
             {
                 other.transform.position = destinationObject.transform.position;
+
+                // Activa el objeto al teleportar al jugador.
+                gameObject.SetActive(true);
             }
             else
             {
@@ -20,4 +30,12 @@ public class DoorTpController : MonoBehaviour
         }
     }
 
+    public void SetDestination(GameObject newDestination)
+    {
+        destinationObject = newDestination;
+
+        Debug.Log("funcion puerta");
+        gameObject.SetActive(true);
+    }
 }
+

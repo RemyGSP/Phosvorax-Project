@@ -169,7 +169,7 @@ public class PrefabRoomInstancier : MonoBehaviour
                                         RooomController leftDoorManager = leftRoom.GetComponent<RooomController>();
                                         if (leftDoorManager != null && leftDoorManager.DoorList.Count > 2 && leftDoorManager.DoorList[2] != null)
                                         {
-                                            doorManager.DoorList[k].GetComponent<DoorTpController>().destinationObject = leftDoorManager.DoorList[2];
+                                            doorManager.DoorList[k].GetComponent<DoorTpController>().SetDestination(leftDoorManager.DoorList[2]);
                                         }
                                     }
                                     break;
@@ -181,7 +181,7 @@ public class PrefabRoomInstancier : MonoBehaviour
                                         RooomController aboveDoorManager = aboveRoom.GetComponent<RooomController>();
                                         if (aboveDoorManager != null && aboveDoorManager.DoorList.Count > 3 && aboveDoorManager.DoorList[3] != null)
                                         {
-                                            doorManager.DoorList[k].GetComponent<DoorTpController>().destinationObject = aboveDoorManager.DoorList[3];
+                                            doorManager.DoorList[k].GetComponent<DoorTpController>().SetDestination(aboveDoorManager.DoorList[3]);
                                         }
                                     }
                                     break;
@@ -193,7 +193,7 @@ public class PrefabRoomInstancier : MonoBehaviour
                                         RooomController rightDoorManager = rightRoom.GetComponent<RooomController>();
                                         if (rightDoorManager != null && rightDoorManager.DoorList.Count > 0 && rightDoorManager.DoorList[0] != null)
                                         {
-                                            doorManager.DoorList[k].GetComponent<DoorTpController>().destinationObject = rightDoorManager.DoorList[0];
+                                            doorManager.DoorList[k].GetComponent<DoorTpController>().SetDestination(rightDoorManager.DoorList[0]);
                                         }
                                     }
                                     break;
@@ -205,7 +205,7 @@ public class PrefabRoomInstancier : MonoBehaviour
                                         RooomController belowDoorManager = belowRoom.GetComponent<RooomController>();
                                         if (belowDoorManager != null && belowDoorManager.DoorList.Count > 1 && belowDoorManager.DoorList[1] != null)
                                         {
-                                            doorManager.DoorList[k].GetComponent<DoorTpController>().destinationObject = belowDoorManager.DoorList[1];
+                                            doorManager.DoorList[k].GetComponent<DoorTpController>().SetDestination(belowDoorManager.DoorList[1]);
                                         }
                                     }
                                     break;

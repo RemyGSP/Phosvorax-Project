@@ -22,6 +22,7 @@ public class DamageDisplay : MonoBehaviour
         damageText.text = damage.ToString();
         damageText.gameObject.SetActive(true);
         damageText.gameObject.GetComponent<Animator>().Play("DamageText");
+
         StartCoroutine(_DeactivateDamageDisplay());
         this.currentHealth = currentHealth;
 

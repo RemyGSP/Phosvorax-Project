@@ -23,6 +23,7 @@ public class DummyIdleState : States
     public override void OnExitState()
     {
         animator.SetBool("Idle", false);
+
     }
 
     public override void Update()

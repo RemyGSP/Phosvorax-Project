@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class CrystalController : MonoBehaviour
 {
-
+    [SerializeField] TextMeshProUGUI crystalDisplay;
     private int crystalAmount;
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,7 @@ public class CrystalController : MonoBehaviour
     public void AddCrystals(int crystalAmount)
     {
         this.crystalAmount += crystalAmount;
+        crystalDisplay.text = this.crystalAmount.ToString();
     }
 
     /// <summary>
@@ -45,7 +47,10 @@ public class CrystalController : MonoBehaviour
         {
             aux = true;
             this.crystalAmount -= crystalAmount;
+            crystalDisplay.text = this.crystalAmount.ToString();
         }
         return aux;
-        }
     }
+
+
+}

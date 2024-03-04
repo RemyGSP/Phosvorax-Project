@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem.Android;
 
 [CreateAssetMenu(menuName = "States/PlayerIdleState")]
 public class IdleStateDummy : States

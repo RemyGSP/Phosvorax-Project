@@ -6,7 +6,7 @@ using UnityEngine;
 public class DamageDisplay : MonoBehaviour
 {
     [SerializeField] private HealthBehaviour healthBehaviour;
-    [SerializeField] private TextMeshProUGUI damageText;
+    [SerializeField] private GameObject damagePrefab;
     private float damage;
     private float maxHealth;
     private float currentHealth;
@@ -19,18 +19,26 @@ public class DamageDisplay : MonoBehaviour
     public void DisplayDamage(float currentHealth)
     {
         damage = this.currentHealth - currentHealth;
-        damageText.text = damage.ToString();
-        damageText.gameObject.SetActive(true);
-        damageText.gameObject.GetComponent<Animator>().Play("DamageText");
-        StartCoroutine(_DeactivateDamageDisplay());
+        GameObject b = Instantiate(damagePrefab);
+        b.GetComponent<RectTransform>().sizeDelta = new Vector2(1,1);
+        Debug.Log(b.GetComponentInChildren<Animator>());
+        b.GetComponentInChildren<Animator>().Play("DamageText");
+        b.GetComponentInChildren<TextMeshProUGUI>().text = damage.ToString();
+        b.transform.position = transform.position;
+        StartCoroutine(_DeactivateDamageDisplay(b.GetComponentInChildren<Animator>()));
         this.currentHealth = currentHealth;
 
     }
 
-
-    private IEnumerator _DeactivateDamageDisplay()
+    public void ResetHP()
     {
-        yield return new WaitForSeconds(damageText.gameObject.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0).Length);
-        damageText.gameObject.SetActive(false);
+        currentHealth = maxHealth;
+    }
+
+
+    private IEnumerator _DeactivateDamageDisplay(Animator animator)
+    {
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorClipInfo(0).Length);
+        Destroy(animator.transform.parent.gameObject);
     }
 }

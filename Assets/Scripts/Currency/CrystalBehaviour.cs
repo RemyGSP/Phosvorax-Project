@@ -28,7 +28,7 @@ public class CrystalBehaviour : MonoBehaviour
         }
         else
         {
-            rb.AddForce(new Vector3(0f,2f,0f));
+            rb.AddForce(new Vector3(0f,-100f,0f),ForceMode.Force);
         }
 
     }

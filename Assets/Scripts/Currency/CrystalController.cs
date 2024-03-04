@@ -6,7 +6,6 @@ using UnityEngine;
 public class CrystalController : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI crystalDisplay;
-    [SerializeField] private Animator crystalAnimator;
     private int crystalAmount;
     // Start is called before the first frame update
     void Start()
@@ -32,8 +31,7 @@ public class CrystalController : MonoBehaviour
     public void AddCrystals(int crystalAmount)
     {
         this.crystalAmount += crystalAmount;
-        crystalDisplay.text = crystalAmount.ToString();
-        UpdateDisplayAnimation();
+        crystalDisplay.text = this.crystalAmount.ToString();
     }
 
     /// <summary>
@@ -49,14 +47,10 @@ public class CrystalController : MonoBehaviour
         {
             aux = true;
             this.crystalAmount -= crystalAmount;
-            crystalDisplay.text = crystalAmount.ToString();
-            UpdateDisplayAnimation();
+            crystalDisplay.text = this.crystalAmount.ToString();
         }
         return aux;
     }
 
-    public void UpdateDisplayAnimation()
-    {
-        crystalAnimator.speed = 1 + (0.1f * crystalAmount);
-    }
+
 }

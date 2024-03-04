@@ -79,7 +79,7 @@ public class RangedAbilityState : Ability
     {
         anim.SetTrigger("attack");
         currentFeedback = Instantiate(abilityFeedback, attackPosition, Quaternion.identity);
-
+        currentFeedback.transform.position = attackPosition;
         currentAttackTime = 0;
         animationLength = anim.GetCurrentAnimatorClipInfo(0).Length;
         //stateGameObject.transform.rotation = Quaternion.Euler(stateGameObject.transform.rotation.x , stateGameObject.transform.rotation.y + animOffsetRotation, stateGameObject.transform.rotation.z );
@@ -121,6 +121,5 @@ public class RangedAbilityState : Ability
 
     public override void OnExitState()
     {
-        Destroy(currentFeedback);
     }
 }

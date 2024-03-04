@@ -19,7 +19,7 @@ public class EnemyMeleeChaseState : States
     [SerializeField] private float enemyNavMeshSpeed;
     [SerializeField] private float maxSpeed;
     [SerializeField] float timeToMaxVelocity;
-    [SerializeField] AnimationCurve curveToMaxAcceleration;
+    SerializeField] AnimationCurve curveToMaxAcceleration; //añadir que se use
     [SerializeField] private float rotationSpeed;
 
     float currentMovementStatusTimer;

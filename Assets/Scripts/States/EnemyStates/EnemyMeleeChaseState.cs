@@ -19,7 +19,6 @@ public class EnemyMeleeChaseState : States
     [SerializeField] private float enemyNavMeshSpeed;
     [SerializeField] private float maxSpeed;
     [SerializeField] float timeToMaxVelocity;
-    SerializeField] AnimationCurve curveToMaxAcceleration; //añadir que se use
     [SerializeField] private float rotationSpeed;
 
     float currentMovementStatusTimer;
@@ -47,9 +46,10 @@ public class EnemyMeleeChaseState : States
         RaycastHit hit;
         Vector3 playerVisiblePosition = PlayerReferences.instance.GetPlayerVisiblePoint(); //Visible point es un empty game object dentro del player que sirve para que el linedraw vaya hacia esa posicion porque con el pivote del player se va al suelo y nunca colisiona con el jugador
         Vector3 playerPosition = PlayerReferences.instance.GetPlayerCoordinates();
-        if (Physics.Linecast(stateGameObject.transform.position, playerVisiblePosition, out hit))
+        Vector3 vecToPlayer = playerVisiblePosition - stateGameObject.transform.position;
+        if (Physics.Raycast(stateGameObject.transform.position, vecToPlayer, out hit, vecToPlayer.magnitude))
         {
-            Debug.DrawLine(stateGameObject.transform.position, playerPosition, Color.magenta, 0.2f);
+            Debug.DrawLine(stateGameObject.transform.position, playerVisiblePosition, Color.magenta, 1.2f);
 
             if (hit.transform != null && hit.transform.position.z == PlayerReferences.instance.GetPlayerCoordinates().z && hit.transform.position.x == PlayerReferences.instance.GetPlayerCoordinates().x)
             {
@@ -63,6 +63,10 @@ public class EnemyMeleeChaseState : States
                 playerSeen = false;
                 stateGameObject.GetComponent<EnemyReferences>().SetPlayerSeen(playerSeen);
             }
+        }
+        else
+        {
+            Debug.Log("LineCastFalse");
         }
     }
 

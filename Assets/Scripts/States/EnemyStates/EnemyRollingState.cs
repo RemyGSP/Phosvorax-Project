@@ -5,11 +5,11 @@ using UnityEngine.AI;
 
 
 [CreateAssetMenu(menuName = "EnemyStates/EnemyRollingState")]
-public class EnemyRollingState : States
+public class TESTSCRIPT : States
 {
 
     #region Constructor
-    public EnemyRollingState(GameObject stateGameObject) : base(stateGameObject)
+    public TESTSCRIPT(GameObject stateGameObject) : base(stateGameObject)
     {
     }
     #endregion
@@ -17,12 +17,17 @@ public class EnemyRollingState : States
     #region Variables
 
     [Header("MoveValues")]
-    [SerializeField] private float currentRollingSpeed;
+    private float currentRollingSpeed;
     [SerializeField] private float maxRollingSpeed;
     [SerializeField] AnimationCurve curveToMaxAcceleration;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float timeToSpendRolling;
 
+
+    [Header("Raycast Values")]
+    [SerializeField] private float maxRaycastDistance;
+
+    private float elapsedTime = 0f;
     private RotateCharacter rotateCharacter;
     private Rigidbody rigidBody;
     private Animator anim;
@@ -38,25 +43,45 @@ public class EnemyRollingState : States
         anim = stateGameObject.GetComponent<Animator>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
 
-        StartRolling();
     }
 
     public override void Update()
     {
-        throw new System.NotImplementedException();
+        RaycastHit hit;
+        Vector3 direction = stateGameObject.transform.forward;
+        if (Physics.Linecast(stateGameObject.transform.position, stateGameObject.transform.position + direction * maxRaycastDistance, out hit))
+        {
+            Debug.DrawLine(stateGameObject.transform.position, stateGameObject.transform.position + direction * maxRaycastDistance, Color.green, 0.2f);
+
+            if (hit.collider.CompareTag("Player"))
+            {
+              
+            }
+            else 
+            {
+                direction = Vector3.ProjectOnPlane(direction, hit.normal).normalized;
+                rotateCharacter.Rotate(stateGameObject.transform.rotation, direction);
+            }
+        }
+
+        elapsedTime += Time.deltaTime;
+
+        if (elapsedTime < timeToSpendRolling)
+        {
+            float t = Mathf.Clamp01(elapsedTime / timeToSpendRolling);
+
+            float curveValue = curveToMaxAcceleration.Evaluate(t);
+
+            float targetSpeed = curveValue * maxRollingSpeed;
+
+            rigidBody.velocity = rigidBody.velocity.normalized * targetSpeed;
+        }
     }
 
-    public void StartRolling()
-    {
-        //AÑADIR ANIMATOR PARA QUE CAMBIE A HACERSE LA BOLA
 
-        Vector3 direction = PlayerReferences.instance.GetPlayerCoordinates();
-        rigidBody.velocity = 
-    }
 
     public override void OnExitState()
     {
-        throw new System.NotImplementedException();
     }
 
 

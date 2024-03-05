@@ -5,12 +5,21 @@ using UnityEngine;
 
 public class CrystalController : MonoBehaviour
 {
+    public static CrystalController instance;
     [SerializeField] TextMeshProUGUI crystalDisplay;
     private int crystalAmount;
     // Start is called before the first frame update
     void Start()
     {
-        
+        if  (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.Log("El singleton CrystalController ya existe borrando objeto: " + gameObject.name);
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame

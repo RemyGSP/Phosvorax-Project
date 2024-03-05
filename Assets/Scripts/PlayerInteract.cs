@@ -10,7 +10,7 @@ public class PlayerInteract : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        interactableList = new List<IInteractable>();
     }
 
     // Update is called once per frame
@@ -21,11 +21,14 @@ public class PlayerInteract : MonoBehaviour
 
     public void AddInteractable(IInteractable interactable)
     {
+        Debug.Log("Add");
+
         interactableList.Add(interactable);
     }
 
     public void RemoveInteractable(IInteractable interactable)
     {
+        Debug.Log("Remove");
         interactableList.Remove(interactable);
     }
 

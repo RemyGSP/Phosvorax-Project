@@ -69,7 +69,10 @@ public class HealthBehaviour : MonoBehaviour
 
     }
 
-
+    public void SetHP(float newHpAmount)
+    {
+        maxHealth = newHpAmount;
+    }
     public bool CheckIfDeath()
     {
         bool aux = false;

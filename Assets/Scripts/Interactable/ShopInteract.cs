@@ -26,18 +26,26 @@ public class ShopInteract : MonoBehaviour, IInteractable
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Hola");
-        other.gameObject.GetComponent<PlayerInteract>().AddInteractable(this);
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Hola");
+            other.gameObject.GetComponent<PlayerInteract>().AddInteractable(this);
 
-        interactableTooltip.SetActive(true);
+            interactableTooltip.SetActive(true);
+        }
+
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("Adios");
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Adios");
 
-        other.gameObject.GetComponent<PlayerInteract>().RemoveInteractable(this);
-        interactableTooltip.SetActive(false);
+            other.gameObject.GetComponent<PlayerInteract>().RemoveInteractable(this);
+            interactableTooltip.SetActive(false);
+        }
+
     }
 
     public void StopInteract()

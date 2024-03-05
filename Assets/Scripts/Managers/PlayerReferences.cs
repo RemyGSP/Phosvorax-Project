@@ -19,6 +19,7 @@ public class PlayerReferences : MonoBehaviour
     [Header("Position")]
     static Vector3 playerCoordinates;
     [SerializeField] LayerMask groundMask;
+    [SerializeField] private HealthBehaviour healthBehaviour;
     #endregion
 
 

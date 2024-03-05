@@ -12,6 +12,7 @@ public class PlayerInputController : MonoBehaviour
     private Vector2 cursorPosition;
     private bool isRolling;
     private bool isAttacking;
+    private bool isInteracting;
     private bool isShooting;
     private bool isUsingAbility;
     private bool isKeyboard;
@@ -63,7 +64,21 @@ public class PlayerInputController : MonoBehaviour
     }
 
    
+    public void OnInteract()
+    {
+        isInteracting = true;
+    }
 
+    public bool TryToInteract()
+    {
+        bool aux = false;
+        if (isInteracting)
+        {
+            aux = true;
+            isInteracting = false;
+        }
+        return aux;
+    }
 
     public void OnRoll(InputValue inputValue)
     {

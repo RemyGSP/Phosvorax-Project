@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "States/ShieldAbilityState")]
-public class ShieldAbilityState : Ability
+public class AbilityState2 : Ability
 {
     private Rigidbody rigidBody;
     [SerializeField] private float parryLength;
@@ -15,7 +15,7 @@ public class ShieldAbilityState : Ability
 
 
 
-    public ShieldAbilityState(GameObject stateGameObject) : base(stateGameObject)
+    public AbilityState2(GameObject stateGameObject) : base(stateGameObject)
     {
     }
     public override States CheckTransitions()

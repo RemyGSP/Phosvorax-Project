@@ -69,6 +69,7 @@ public class PlayerInputController : MonoBehaviour
         isInteracting = true;
     }
 
+    //Returns true if interact and makes it false so it doesnt execute twice
     public bool TryToInteract()
     {
         bool aux = false;
@@ -141,19 +142,6 @@ public class PlayerInputController : MonoBehaviour
             isUsingAbility = true;
         }
     }
-    public void OnAbility3(InputValue inputValue)
-    {
-        if (!inputValue.isPressed)
-        {
-            isUsingAbility = false;
-        }
-        else
-        {
-            abilityPressed = 3;
-            isUsingAbility = true;
-        }
-    }
-
 
     public bool IsUsingAbility()
     {

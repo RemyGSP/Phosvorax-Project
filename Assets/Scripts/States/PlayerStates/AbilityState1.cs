@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Timeline;
 
 [CreateAssetMenu(menuName = "States/FirstAbilityState")]
-public class RangedAbilityState : Ability
+public class AbilityState1 : Ability
 {
     [SerializeField] LayerMask enemyLayerMask;
     private Rigidbody rigidBody;
@@ -27,7 +27,7 @@ public class RangedAbilityState : Ability
     GameObject currentFeedback;
 
     [SerializeField] private AttackAreaVisualizer attackAreaVisualizer;
-    public RangedAbilityState(GameObject stateGameObject) : base(stateGameObject)
+    public AbilityState1(GameObject stateGameObject) : base(stateGameObject)
     {
     }
 

@@ -1,0 +1,47 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ShopInteract : MonoBehaviour, IInteractable
+{
+
+    [SerializeField] private GameObject shopCanvas;
+    [SerializeField] private GameObject interactableTooltip;
+    public void Interact(PlayerInteract player)
+    {
+        shopCanvas.SetActive(true);   
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        interactableTooltip.SetActive(false);   
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Hola");
+        other.gameObject.GetComponent<PlayerInteract>().AddInteractable(this);
+
+        interactableTooltip.SetActive(true);
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log("Adios");
+
+        other.gameObject.GetComponent<PlayerInteract>().RemoveInteractable(this);
+        interactableTooltip.SetActive(false);
+    }
+
+    public void StopInteract()
+    {
+        shopCanvas.SetActive(false);
+    }
+}

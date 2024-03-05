@@ -12,6 +12,7 @@ public class PlayerInputController : MonoBehaviour
     private Vector2 cursorPosition;
     private bool isRolling;
     private bool isAttacking;
+    private bool isInteracting;
     private bool isShooting;
     private bool isUsingAbility;
     private bool isKeyboard;
@@ -62,18 +63,23 @@ public class PlayerInputController : MonoBehaviour
         return cursorPosition;
     }
 
-    public void OnFire(InputValue inputValue)
+   
+    public void OnInteract()
     {
-        if (inputValue.isPressed)
-            isShooting = true;
-        else
-            isShooting = false;
-    }
-    public bool IsShooting()
-    {
-        return isShooting;
+        isInteracting = true;
     }
 
+    //Returns true if interact and makes it false so it doesnt execute twice
+    public bool TryToInteract()
+    {
+        bool aux = false;
+        if (isInteracting)
+        {
+            aux = true;
+            isInteracting = false;
+        }
+        return aux;
+    }
 
     public void OnRoll(InputValue inputValue)
     {
@@ -136,19 +142,6 @@ public class PlayerInputController : MonoBehaviour
             isUsingAbility = true;
         }
     }
-    public void OnAbility3(InputValue inputValue)
-    {
-        if (!inputValue.isPressed)
-        {
-            isUsingAbility = false;
-        }
-        else
-        {
-            abilityPressed = 3;
-            isUsingAbility = true;
-        }
-    }
-
 
     public bool IsUsingAbility()
     {

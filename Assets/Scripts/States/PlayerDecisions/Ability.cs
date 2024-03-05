@@ -8,5 +8,5 @@ public abstract class Ability : States
     protected Ability(GameObject stateGameObject) : base(stateGameObject)
     {
     }
-    
+
 }

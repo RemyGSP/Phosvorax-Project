@@ -62,17 +62,7 @@ public class PlayerInputController : MonoBehaviour
         return cursorPosition;
     }
 
-    public void OnFire(InputValue inputValue)
-    {
-        if (inputValue.isPressed)
-            isShooting = true;
-        else
-            isShooting = false;
-    }
-    public bool IsShooting()
-    {
-        return isShooting;
-    }
+   
 
 
     public void OnRoll(InputValue inputValue)

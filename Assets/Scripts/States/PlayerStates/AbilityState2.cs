@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "States/ShieldAbilityState")]
+[CreateAssetMenu(menuName = "States/AbilityState2")]
 public class AbilityState2 : Ability
 {
     private Rigidbody rigidBody;

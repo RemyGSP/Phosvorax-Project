@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Timeline;
 
-[CreateAssetMenu(menuName = "States/FirstAbilityState")]
+[CreateAssetMenu(menuName = "States/AbilityState1")]
 public class AbilityState1 : Ability
 {
     [SerializeField] LayerMask enemyLayerMask;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShopButtonController : MonoBehaviour
 {
-    // Start is called before the first frame update
+   
     void Start()
     {
         
@@ -15,4 +15,14 @@ public class ShopButtonController : MonoBehaviour
     {
         
     }
+
+    public void AddButton()
+    {
+
+    }
+    public void ComproveBuyAvailability(GameObject button)
+    {
+
+    }
+
 }

@@ -81,54 +81,64 @@ public class ShopController : MonoBehaviour
     //Los siguientes metodos se dedican a controlar cuanto compras y a iluminar los cuadrados que marcan los niveles
     public void BuyHealth()
     {
-        healthQuares[healthLevel] = leveledUp;
-        AddToBasket((int)Mathf.Floor(ShopManager.instance.GetHealthLevel() * 1.75f * 50 + 50));
-        healthLevel++;
+        if (healthLevel < healthQuares.Length)
+        {
+            healthQuares[healthLevel] = leveledUp;
+            healthLevel++;
+            AddToBasket((int)Mathf.Floor(healthLevel * 1.75f * 50 + 50));
+        }
     }
     public void BuySpeed()
     {
-        speedSquares[speedLevel] = leveledUp;
-        AddToBasket((int)Mathf.Floor(ShopManager.instance.GetSpeedLevel() * 1.75f * 50 + 50));
-        speedLevel++;
+        if (speedLevel < speedSquares.Length)
+        {
+            speedSquares[speedLevel] = leveledUp;
+            speedLevel++;
+            AddToBasket((int)Mathf.Floor(speedLevel * 1.75f * 50 + 50));
+        }
     }
 
     public void BuyDamage()
     {
-
-        damageSquares[damageLevel] = leveledUp;
-        AddToBasket((int)Mathf.Floor(ShopManager.instance.GetDamageLevel() * 1.75f * 50 + 50));
-        damageLevel++;
+        if (damageLevel < damageSquares.Length)
+        {
+            damageSquares[damageLevel] = leveledUp;
+            damageLevel++;
+            AddToBasket((int)Mathf.Floor(damageLevel * 1.75f * 50 + 50));
+        }
     }
 
     public void ReduceDamage()
     {
-        if (damageLevel > ShopManager.instance.GetDamageLevel())
+        if (damageLevel > ShopManager.instance.GetDamageLevel() && damageLevel > 0)
         {
             damageSquares[damageLevel] = notLevelUp;
-            AddToBasket(-(int)Mathf.Floor(ShopManager.instance.GetDamageLevel() * 1.75f * 50 + 50));
             damageLevel--;
+            AddToBasket(-(int)Mathf.Floor(damageLevel++ * 1.75f * 50 + 50));
+
         }
 
     }
 
     public void ReduceSpeed()
     {
-        if (speedLevel > ShopManager.instance.GetSpeedLevel())
+        if (speedLevel > ShopManager.instance.GetSpeedLevel() && speedLevel > 0)
         {
             speedSquares[speedLevel] = notLevelUp;
-            AddToBasket(-(int)Mathf.Floor(ShopManager.instance.GetSpeedLevel() * 1.75f * 50 + 50));
             speedLevel--;
+            AddToBasket(-(int)Mathf.Floor(speedLevel++ * 1.75f * 50 + 50));
         }
 
     }
 
     public void ReduceHealth()
     {
-        if (healthLevel > ShopManager.instance.GetHealthLevel())
+        if (healthLevel > ShopManager.instance.GetHealthLevel() && healthLevel > 0)
         {
             healthQuares[healthLevel] = notLevelUp;
-            AddToBasket((int)Mathf.Floor(ShopManager.instance.GetHealthLevel() * 1.75f * 50 + 50));
-            healthLevel--;
+            healthLevel--; // Decrement healthLevel
+            AddToBasket(-(int)Mathf.Floor(healthLevel++ * 1.75f * 50 + 50));
+            Debug.Log(healthLevel);
         }
 
     }

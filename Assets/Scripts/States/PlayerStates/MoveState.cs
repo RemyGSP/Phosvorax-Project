@@ -46,7 +46,7 @@ public class MoveState : States
 
     private Vector3 Move(Vector3 playerDirection)
     {
-        if (currentSpeed < maxSpeed)
+        if (currentSpeed < maxSpeed +  ShopManager.instance.GetSpeedLevel() * maxSpeed * 0.2f)
         {
             currentSpeed = maxSpeed * curveToMaxAcceleration.Evaluate(currentMovementStatusTimer / timeToMaxVelocity);
         }

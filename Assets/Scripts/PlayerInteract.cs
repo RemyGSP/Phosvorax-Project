@@ -16,7 +16,10 @@ public class PlayerInteract : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (PlayerInputController.Instance.TryToInteract())
+        {
+            TryInteract();
+        }
     }
 
     public void AddInteractable(IInteractable interactable)

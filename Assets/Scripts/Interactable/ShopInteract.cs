@@ -9,7 +9,8 @@ public class ShopInteract : MonoBehaviour, IInteractable
     [SerializeField] private GameObject interactableTooltip;
     public void Interact(PlayerInteract player)
     {
-        shopCanvas.SetActive(true);   
+        shopCanvas.SetActive(true);
+        PlayerReferences.instance.canMove = false;
     }
 
     // Start is called before the first frame update
@@ -40,8 +41,6 @@ public class ShopInteract : MonoBehaviour, IInteractable
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Adios");
-
             other.gameObject.GetComponent<PlayerInteract>().RemoveInteractable(this);
             interactableTooltip.SetActive(false);
         }
@@ -51,5 +50,7 @@ public class ShopInteract : MonoBehaviour, IInteractable
     public void StopInteract()
     {
         shopCanvas.SetActive(false);
+        PlayerReferences.instance.canMove = true;
+        GetComponent<ShopController>().RestartState();
     }
 }

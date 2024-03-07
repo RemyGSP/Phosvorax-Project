@@ -9,8 +9,8 @@ using UnityEngine.UI;
 //TODA LA INFORMACION DE LAS MEJORAS COMPRADAS SE SACA DE ShopManager, TODAS LAS VARIABLES DE NIVEL EN ESTE SCRIPT SON PARA CONTROLAR PRECIOS Y COSAS VISUALES
 public class ShopController : MonoBehaviour
 {
-    [SerializeField] private Image leveledUp;
-    [SerializeField] private Image notLevelUp;
+    [SerializeField] private Sprite leveledUp;
+    [SerializeField] private Sprite notLevelUp;
     [SerializeField] private GameObject healthSquareContainer;
     [SerializeField] private GameObject damageSquareContainer;
     [SerializeField] private GameObject speedSquareContainer;
@@ -41,21 +41,21 @@ public class ShopController : MonoBehaviour
         healthCost.text = healthlvlCost.ToString();
         damageCost.text = damagelvlCost.ToString();
         speedCost.text = speedlvlCost.ToString();
-        speedSquares = healthSquareContainer.GetComponentsInChildren<Image>();
+        speedSquares = speedSquareContainer.GetComponentsInChildren<Image>();
         damageSquares = damageSquareContainer.GetComponentsInChildren<Image>();
         healthQuares = healthSquareContainer.GetComponentsInChildren<Image>();
-        Debug.Log(damageSquares.Length);
+        notLevelUp = healthQuares[0].sprite;
         for (int i = 0; i < ShopManager.instance.GetHealthLevel(); i++)
         {
-            healthQuares[i] = leveledUp;
+            healthQuares[i].sprite = leveledUp;
         }
         for (int i = 0; i < ShopManager.instance.GetSpeedLevel(); i++)
         {
-            speedSquares[i] = leveledUp;
+            speedSquares[i].sprite = leveledUp;
         }
         for (int i = 0; i < ShopManager.instance.GetDamageLevel(); i++)
         {
-            damageSquares[i] = leveledUp;
+            damageSquares[i].sprite = leveledUp;
         }
 
     }
@@ -83,18 +83,20 @@ public class ShopController : MonoBehaviour
     {
         if (healthLevel < healthQuares.Length)
         {
-            healthQuares[healthLevel] = leveledUp;
-            healthLevel++;
             AddToBasket((int)Mathf.Floor(healthLevel * 1.75f * 50 + 50));
+
+            healthQuares[healthLevel].sprite = leveledUp;
+            healthLevel += 1;
         }
     }
     public void BuySpeed()
     {
         if (speedLevel < speedSquares.Length)
         {
-            speedSquares[speedLevel] = leveledUp;
-            speedLevel++;
             AddToBasket((int)Mathf.Floor(speedLevel * 1.75f * 50 + 50));
+
+            speedSquares[speedLevel].sprite = leveledUp;
+            speedLevel++;
         }
     }
 
@@ -102,9 +104,9 @@ public class ShopController : MonoBehaviour
     {
         if (damageLevel < damageSquares.Length)
         {
-            damageSquares[damageLevel] = leveledUp;
-            damageLevel++;
             AddToBasket((int)Mathf.Floor(damageLevel * 1.75f * 50 + 50));
+            damageSquares[damageLevel].sprite = leveledUp;
+            damageLevel++;
         }
     }
 
@@ -112,9 +114,9 @@ public class ShopController : MonoBehaviour
     {
         if (damageLevel > ShopManager.instance.GetDamageLevel() && damageLevel > 0)
         {
-            damageSquares[damageLevel] = notLevelUp;
+            damageSquares[damageLevel - 1].sprite = notLevelUp;
             damageLevel--;
-            AddToBasket(-(int)Mathf.Floor(damageLevel++ * 1.75f * 50 + 50));
+            AddToBasket(-(int)Mathf.Floor(damageLevel * 1.75f * 50 + 50));
 
         }
 
@@ -124,20 +126,21 @@ public class ShopController : MonoBehaviour
     {
         if (speedLevel > ShopManager.instance.GetSpeedLevel() && speedLevel > 0)
         {
-            speedSquares[speedLevel] = notLevelUp;
+            speedSquares[speedLevel -1].sprite = notLevelUp;
             speedLevel--;
-            AddToBasket(-(int)Mathf.Floor(speedLevel++ * 1.75f * 50 + 50));
+            AddToBasket(-(int)Mathf.Floor(speedLevel* 1.75f * 50 + 50));
         }
 
     }
 
     public void ReduceHealth()
     {
+
         if (healthLevel > ShopManager.instance.GetHealthLevel() && healthLevel > 0)
         {
-            healthQuares[healthLevel] = notLevelUp;
-            healthLevel--; // Decrement healthLevel
-            AddToBasket(-(int)Mathf.Floor(healthLevel++ * 1.75f * 50 + 50));
+            healthQuares[healthLevel-1 ].sprite = notLevelUp;
+            healthLevel -= 1; 
+            AddToBasket(-(int)Mathf.Floor(healthLevel * 1.75f * 50 + 50));
             Debug.Log(healthLevel);
         }
 
@@ -148,6 +151,9 @@ public class ShopController : MonoBehaviour
         if (currentCost < CrystalController.instance.GetCrystalAmount())
         {
             CrystalController.instance.ReduceCrystals(currentCost);
+            currentCost = 0;
+            totalCost.text = currentCost.ToString();
+            totalCost.color = Color.white;
             ShopManager.instance.SetSpeedLevel(speedLevel);
             ShopManager.instance.SetDamageLevel(damageLevel);
             ShopManager.instance.SetHealthLevel(healthLevel);
@@ -160,6 +166,28 @@ public class ShopController : MonoBehaviour
         speedLevel = ShopManager.instance.GetSpeedLevel();
         damageLevel = ShopManager.instance.GetDamageLevel();
         healthLevel = ShopManager.instance.GetHealthLevel();
+    }
+
+    public void RestartState()
+    {
+        currentCost = 0;
+        totalCost.text = currentCost.ToString();
+        totalCost.color = Color.white;
+        for (int i = 0; i < damageSquares.Length; i++)
+        {
+            if (damageSquares[i].sprite == leveledUp && i >= ShopManager.instance.GetDamageLevel())
+            {
+                damageSquares[i].sprite = notLevelUp;
+            }
+            if (speedSquares[i].sprite == leveledUp && i >= ShopManager.instance.GetSpeedLevel())
+            {
+                speedSquares[i].sprite = notLevelUp;
+            }
+            if (healthQuares[i].sprite == leveledUp && i >= ShopManager.instance.GetHealthLevel())
+            {
+                healthQuares[i].sprite = notLevelUp;
+            }
+        }
     }
 
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 
 public class DamageDisplay : MonoBehaviour
 {
@@ -27,6 +28,10 @@ public class DamageDisplay : MonoBehaviour
         b.transform.position = transform.position;
         StartCoroutine(_DeactivateDamageDisplay(b.GetComponentInChildren<Animator>()));
         this.currentHealth = currentHealth;
+        if (currentHealth == 0)
+        {
+            ResetHP();
+        }
 
     }
 

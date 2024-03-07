@@ -21,7 +21,6 @@ public class DummyDeathState : States
     public override void Update()
     {
         animationTimer = Time.deltaTime;
-        Revive();
     }
 
     // Start is called before the first frame update
@@ -32,6 +31,7 @@ public class DummyDeathState : States
         animator.SetBool("dead", true);
         animationClipDuration = animator.GetCurrentAnimatorClipInfo(0).Length;
         Debug.Log(animationClipDuration);
+        Revive();
     }
 
     private void Revive()

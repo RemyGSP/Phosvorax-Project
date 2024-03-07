@@ -1,13 +1,16 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CrystalBehaviour : MonoBehaviour
 {
     private Rigidbody rb;
     private int crystalValue;
-    [SerializeField] private float speed = 1000;
+    [SerializeField] private float maxSpeed = 1000;
+    [SerializeField] private AnimationCurve speedCurve;
     private bool canStartMoving;
+
+    private float elapsedTime = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,19 +22,24 @@ public class CrystalBehaviour : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
         if (canStartMoving)
         {
-            Vector3 directionToPlayer = (PlayerReferences.instance.GetPlayerVisiblePoint() - transform.position).normalized;
+            // Increment elapsed time
+            elapsedTime += Time.fixedDeltaTime;
 
-            rb.velocity = (directionToPlayer * speed);
+            // Evaluate speed using animation curve
+            float curveValue = speedCurve.Evaluate(elapsedTime);
+            float currentSpeed = curveValue * maxSpeed;
+
+            Vector3 directionToPlayer = (PlayerReferences.instance.GetPlayerVisiblePoint() - transform.position).normalized;
+            rb.velocity = (directionToPlayer * currentSpeed);
         }
         else
         {
-            rb.AddForce(new Vector3(0f,-100f,0f),ForceMode.Force);
+            rb.AddForce(new Vector3(0f, -300f, 0f), ForceMode.Force);
         }
-
     }
+
 
     public void SetCrystalValue(int crystalValue)
     {
@@ -42,14 +50,12 @@ public class CrystalBehaviour : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-
             if (collision.gameObject.TryGetComponent(out CrystalController cryst))
             {
                 cryst.AddCrystals(crystalValue);
                 Destroy(this.gameObject);
             }
         }
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -57,15 +63,13 @@ public class CrystalBehaviour : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             StartCoroutine(_StartMoving());
-
         }
     }
 
     private IEnumerator _StartMoving()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.9f);
         canStartMoving = true;
-
     }
 
     private IEnumerator _Delete()
@@ -73,7 +77,7 @@ public class CrystalBehaviour : MonoBehaviour
         yield return new WaitForSeconds(60f);
         if (this != null)
         {
-            Destroy (this.gameObject);
+            Destroy(this.gameObject);
         }
     }
 }

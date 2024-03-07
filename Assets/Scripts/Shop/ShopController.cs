@@ -173,6 +173,9 @@ public class ShopController : MonoBehaviour
         currentCost = 0;
         totalCost.text = currentCost.ToString();
         totalCost.color = Color.white;
+        healthLevel = ShopManager.instance.GetHealthLevel();
+        speedLevel = ShopManager.instance.GetSpeedLevel();
+        damageLevel = ShopManager.instance.GetDamageLevel();
         for (int i = 0; i < damageSquares.Length; i++)
         {
             if (damageSquares[i].sprite == leveledUp && i >= ShopManager.instance.GetDamageLevel())

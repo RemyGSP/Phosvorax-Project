@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "States/AbilityState2")]
-public class AbilityStateSlot2 : Ability
+public class AbilityStateSlot2 : States
 {
 
     public AbilityList abilityListObj;

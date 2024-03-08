@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Timeline;
 
 [CreateAssetMenu(menuName = "States/AbilityState1")]
-public class AbilityStateSlot1 : Ability
+public class AbilityStateSlot1 : States
 {
     public AbilityList abilityListObj;
     public AbilityStateSlot1(GameObject stateGameObject) : base(stateGameObject)

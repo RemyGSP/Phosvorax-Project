@@ -4405,8 +4405,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0162a95808fdcb24dac08b16a10fa7bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leveledUp: {fileID: 21300000, guid: 1d5a01d0044796c45bb882fd3a8159af, type: 3}
-  notLevelUp: {fileID: 0}
+  leveledUpSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  notLevelUpSprite: {fileID: 21300000, guid: 1d5a01d0044796c45bb882fd3a8159af, type: 3}
   healthSquareContainer: {fileID: 4374252716191199469}
   damageSquareContainer: {fileID: 4769903782896090516}
   speedSquareContainer: {fileID: 663255577863382397}
@@ -4415,6 +4415,7 @@ MonoBehaviour:
   damageCost: {fileID: 6420903086188460900}
   totalCost: {fileID: 588345492508616993}
   purchaseButton: {fileID: 4598967754420957055}
+  upgradeables: []
 --- !u!1 &7555213993708924683
 GameObject:
   m_ObjectHideFlags: 0

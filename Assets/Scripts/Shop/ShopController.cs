@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,53 +10,84 @@ using UnityEngine.UI;
 //TODA LA INFORMACION DE LAS MEJORAS COMPRADAS SE SACA DE ShopManager, TODAS LAS VARIABLES DE NIVEL EN ESTE SCRIPT SON PARA CONTROLAR PRECIOS Y COSAS VISUALES
 public class ShopController : MonoBehaviour
 {
-    [SerializeField] private Sprite leveledUp;
-    [SerializeField] private Sprite notLevelUp;
-    [SerializeField] private GameObject healthSquareContainer;
-    [SerializeField] private GameObject damageSquareContainer;
-    [SerializeField] private GameObject speedSquareContainer;
-    [SerializeField] private TextMeshProUGUI healthCost;
-    [SerializeField] private TextMeshProUGUI speedCost;
-    [SerializeField] private TextMeshProUGUI damageCost;
+    [SerializeField] private Sprite leveledUpSprite;
+    [SerializeField] private Sprite notLevelUpSprite;
     [SerializeField] private TextMeshProUGUI totalCost;
     [SerializeField] private Button purchaseButton;
-    private int healthlvlCost;
-    private int speedlvlCost;
-    private int damagelvlCost;
+
     private int currentCost;
-    private int healthLevel;
-    private int damageLevel;
-    private int speedLevel;
-    Image[] healthQuares;
-    Image[] damageSquares;
-    Image[] speedSquares;
+
+
+    [SerializeField] Upgradeable[] upgradeables;
+
+
+    public enum UpgradeableType { HEALTH, DAMAGE, SPEED };
+
+    [System.Serializable]
+    public class Upgradeable
+    {
+        public int[] levelCosts;
+        public UpgradeableType type;
+        [SerializeField] GameObject squareContainer;
+        [SerializeField] protected TextMeshProUGUI upgradeCostUI;
+        [SerializeField] protected int upgradeCost;
+        protected int currentLevel;
+        protected Image[] levelSquares;
+        public int GetLevel()
+        {
+            return currentLevel;
+        }
+
+        public void SetLevel(int newLevel)
+        {
+            currentLevel = newLevel;
+        }
+
+        public void FillInfo(Sprite leveledUpSprite, Sprite notLeveledUpSprite)
+        {
+            float specificCost = 0;
+            switch (type)
+            {
+                case UpgradeableType.HEALTH:
+                    specificCost = ShopManager.instance.GetHealthLevel();
+                    currentLevel = ShopManager.instance.GetHealthLevel();
+                    break;
+                case UpgradeableType.DAMAGE:
+                    specificCost = ShopManager.instance.GetDamageLevel();
+                    currentLevel = ShopManager.instance.GetDamageLevel();
+                    break;
+                case UpgradeableType.SPEED:
+                    specificCost = ShopManager.instance.GetSpeedLevel();
+                    currentLevel = ShopManager.instance.GetSpeedLevel();
+                    break;
+            }
+
+            float commmonCost = 1.75f * 50 + 50;
+            upgradeCost = (int)Mathf.Floor(specificCost * commmonCost);
+            upgradeCostUI.text = upgradeCost.ToString();
+            levelSquares = squareContainer.GetComponentsInChildren<Image>();
+
+            for (int i = 0; i < currentLevel; i++)
+            {
+                levelSquares[i].sprite = leveledUpSprite;
+            }
+
+        }
+
+        public Image[] GetSquares()
+        {
+            return levelSquares;
+        }
+    }
+
     void Start()
     {
         currentCost = 0;
-        damageLevel = ShopManager.instance.GetDamageLevel();
-        healthLevel = ShopManager.instance.GetHealthLevel();
-        speedLevel = ShopManager.instance.GetSpeedLevel();
-        healthlvlCost = (int)Mathf.Floor(ShopManager.instance.GetHealthLevel() * 1.75f * 50 + 50);
-        damagelvlCost = (int)Mathf.Floor(ShopManager.instance.GetDamageLevel() * 1.75f * 50 + 50);
-        speedlvlCost = (int)Mathf.Floor(ShopManager.instance.GetSpeedLevel() * 1.75f * 50 + 50);
-        healthCost.text = healthlvlCost.ToString();
-        damageCost.text = damagelvlCost.ToString();
-        speedCost.text = speedlvlCost.ToString();
-        speedSquares = speedSquareContainer.GetComponentsInChildren<Image>();
-        damageSquares = damageSquareContainer.GetComponentsInChildren<Image>();
-        healthQuares = healthSquareContainer.GetComponentsInChildren<Image>();
-        notLevelUp = healthQuares[0].sprite;
-        for (int i = 0; i < ShopManager.instance.GetHealthLevel(); i++)
+
+
+        for (int i = 0; i < upgradeables.Length; i++)
         {
-            healthQuares[i].sprite = leveledUp;
-        }
-        for (int i = 0; i < ShopManager.instance.GetSpeedLevel(); i++)
-        {
-            speedSquares[i].sprite = leveledUp;
-        }
-        for (int i = 0; i < ShopManager.instance.GetDamageLevel(); i++)
-        {
-            damageSquares[i].sprite = leveledUp;
+            upgradeables[i].FillInfo(leveledUpSprite, notLevelUpSprite);
         }
 
     }
@@ -78,73 +110,40 @@ public class ShopController : MonoBehaviour
     }
 
 
-    //Los siguientes metodos se dedican a controlar cuanto compras y a iluminar los cuadrados que marcan los niveles
-    public void BuyHealth()
+    public void BuyUpgrade(UpgradeableType upgradeableType)
     {
-        if (healthLevel < healthQuares.Length)
-        {
-            AddToBasket((int)Mathf.Floor(healthLevel * 1.75f * 50 + 50));
-
-            healthQuares[healthLevel].sprite = leveledUp;
-            healthLevel += 1;
-        }
+        BuyUpgrade((int)upgradeableType);
     }
-    public void BuySpeed()
-    {
-        if (speedLevel < speedSquares.Length)
-        {
-            AddToBasket((int)Mathf.Floor(speedLevel * 1.75f * 50 + 50));
 
-            speedSquares[speedLevel].sprite = leveledUp;
-            speedLevel++;
+    public void BuyUpgrade(int upgradeIndex)
+    {
+        Upgradeable upgradeable = upgradeables[upgradeIndex];
+        int level = upgradeable.GetLevel();
+        Debug.Log(upgradeable.GetLevel());
+        if (level < upgradeable.GetSquares().Length)
+        {
+            AddToBasket((int)Mathf.Floor(level * 1.75f * 50 + 50));
+
+            upgradeable.GetSquares()[level].sprite = leveledUpSprite;
+            upgradeable.SetLevel(level + 1);
         }
     }
 
-    public void BuyDamage()
+    public void ReduceUpgrade(int upgradeIndex)
     {
-        if (damageLevel < damageSquares.Length)
+        Upgradeable upgradeable = upgradeables[upgradeIndex];
+        int level = upgradeable.GetLevel();
+        Debug.Log(upgradeable.GetLevel());
+        if ( level > ShopManager.instance.GetDamageLevel() && level > 0)
         {
-            AddToBasket((int)Mathf.Floor(damageLevel * 1.75f * 50 + 50));
-            damageSquares[damageLevel].sprite = leveledUp;
-            damageLevel++;
+            AddToBasket(-(int)Mathf.Floor((level - 1) * 1.75f * 50 + 50));
+            upgradeable.GetSquares()[level - 1].sprite = leveledUpSprite;
+            upgradeable.SetLevel(level - 1);
+            
         }
     }
 
-    public void ReduceDamage()
-    {
-        if (damageLevel > ShopManager.instance.GetDamageLevel() && damageLevel > 0)
-        {
-            damageSquares[damageLevel - 1].sprite = notLevelUp;
-            damageLevel--;
-            AddToBasket(-(int)Mathf.Floor(damageLevel * 1.75f * 50 + 50));
 
-        }
-
-    }
-
-    public void ReduceSpeed()
-    {
-        if (speedLevel > ShopManager.instance.GetSpeedLevel() && speedLevel > 0)
-        {
-            speedSquares[speedLevel -1].sprite = notLevelUp;
-            speedLevel--;
-            AddToBasket(-(int)Mathf.Floor(speedLevel* 1.75f * 50 + 50));
-        }
-
-    }
-
-    public void ReduceHealth()
-    {
-
-        if (healthLevel > ShopManager.instance.GetHealthLevel() && healthLevel > 0)
-        {
-            healthQuares[healthLevel-1 ].sprite = notLevelUp;
-            healthLevel -= 1; 
-            AddToBasket(-(int)Mathf.Floor(healthLevel * 1.75f * 50 + 50));
-            Debug.Log(healthLevel);
-        }
-
-    }
     public void ConfirmPurchase()
     {
 
@@ -154,18 +153,19 @@ public class ShopController : MonoBehaviour
             currentCost = 0;
             totalCost.text = currentCost.ToString();
             totalCost.color = Color.white;
-            ShopManager.instance.SetSpeedLevel(speedLevel);
-            ShopManager.instance.SetDamageLevel(damageLevel);
-            ShopManager.instance.SetHealthLevel(healthLevel);
+            ShopManager.instance.SetSpeedLevel(upgradeables[1].GetLevel());
+            ShopManager.instance.SetDamageLevel(upgradeables[2].GetLevel());
+            ShopManager.instance.SetHealthLevel(upgradeables[0].GetLevel());
         }
     }
 
 
     public void CancelPurchase()
     {
-        speedLevel = ShopManager.instance.GetSpeedLevel();
-        damageLevel = ShopManager.instance.GetDamageLevel();
-        healthLevel = ShopManager.instance.GetHealthLevel();
+
+        upgradeables[0].SetLevel(ShopManager.instance.GetHealthLevel());
+        upgradeables[1].SetLevel(ShopManager.instance.GetSpeedLevel());
+        upgradeables[2].SetLevel(ShopManager.instance.GetDamageLevel());
     }
 
     public void RestartState()
@@ -173,22 +173,19 @@ public class ShopController : MonoBehaviour
         currentCost = 0;
         totalCost.text = currentCost.ToString();
         totalCost.color = Color.white;
-        healthLevel = ShopManager.instance.GetHealthLevel();
-        speedLevel = ShopManager.instance.GetSpeedLevel();
-        damageLevel = ShopManager.instance.GetDamageLevel();
-        for (int i = 0; i < damageSquares.Length; i++)
+        upgradeables[0].SetLevel(ShopManager.instance.GetHealthLevel());
+        upgradeables[1].SetLevel(ShopManager.instance.GetSpeedLevel());
+        upgradeables[2].SetLevel(ShopManager.instance.GetDamageLevel());
+        for (int i = 0; i < upgradeables.Length; i++)
         {
-            if (damageSquares[i].sprite == leveledUp && i >= ShopManager.instance.GetDamageLevel())
+            Upgradeable upgradeable = upgradeables[i];
+            int level = upgradeable.GetLevel();
+            for (int a = 0; i < upgradeable.GetSquares().Length; a++)
             {
-                damageSquares[i].sprite = notLevelUp;
-            }
-            if (speedSquares[i].sprite == leveledUp && i >= ShopManager.instance.GetSpeedLevel())
-            {
-                speedSquares[i].sprite = notLevelUp;
-            }
-            if (healthQuares[i].sprite == leveledUp && i >= ShopManager.instance.GetHealthLevel())
-            {
-                healthQuares[i].sprite = notLevelUp;
+                if (upgradeable.GetSquares()[a].sprite == leveledUpSprite && a >= ShopManager.instance.GetDamageLevel())
+                {
+                    upgradeable.GetSquares()[a].sprite = notLevelUpSprite;
+                }
             }
         }
     }

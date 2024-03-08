@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Ability : States
+public abstract class Ability 
 {
     [SerializeField] public float abilityRange;
-    protected Ability(GameObject stateGameObject) : base(stateGameObject)
-    {
-    }
+   
 
 }

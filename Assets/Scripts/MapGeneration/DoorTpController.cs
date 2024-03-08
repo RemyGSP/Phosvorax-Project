@@ -8,7 +8,6 @@ public class DoorTpController : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("f 0");
         gameObject.SetActive(false);
     }
 

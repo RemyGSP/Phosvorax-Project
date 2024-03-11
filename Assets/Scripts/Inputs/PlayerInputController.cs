@@ -14,7 +14,8 @@ public class PlayerInputController : MonoBehaviour
     private bool isAttacking;
     private bool isInteracting;
     private bool isShooting;
-    private bool isUsingAbility;
+    private bool isUsingAbility1;
+    private bool isUsingAbility2;
     private bool isKeyboard;
     private bool isGamepad;
     private bool isCanceling;
@@ -100,6 +101,10 @@ public class PlayerInputController : MonoBehaviour
         else
             isAttacking = false;
     }
+    public bool IsAttacking()
+    {
+        return isAttacking;
+    }
 
     public void OnCancel(InputValue inputValue)
     {
@@ -113,39 +118,40 @@ public class PlayerInputController : MonoBehaviour
     {
         return isCanceling;
     }
-    public bool IsAttacking()
-    {
-        return isAttacking;
-    }
+    
 
     public void OnAbility1(InputValue inputValue)
     {
         if (!inputValue.isPressed)
         {
-            isUsingAbility = false;
+            isUsingAbility1 = false;
         }
         else
         {
             abilityPressed = 1;
-            isUsingAbility = true;
+            isUsingAbility1 = true;
         }
     }
     public void OnAbility2(InputValue inputValue)
     {
         if (!inputValue.isPressed)
         {
-            isUsingAbility = false;
+            isUsingAbility2 = false;
         }
         else
         {
             abilityPressed = 2;
-            isUsingAbility = true;
+            isUsingAbility2 = true;
         }
     }
 
-    public bool IsUsingAbility()
+    public bool IsUsingAbility1()
     {
-        return isUsingAbility;
+        return isUsingAbility1;
+    }
+    public bool IsUsingAbility2()
+    {
+        return isUsingAbility2;
     }
 
     public int GetCurrentAbility()
@@ -155,7 +161,8 @@ public class PlayerInputController : MonoBehaviour
 
     public void StopUsingAbility()
     {
-        isUsingAbility = false;
+        isUsingAbility1 = false;
+        isUsingAbility2 = false;
     }
 
     public void OnControlsChanged(PlayerInput playerInput)

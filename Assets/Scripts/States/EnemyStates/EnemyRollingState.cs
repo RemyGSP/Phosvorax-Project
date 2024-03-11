@@ -3,26 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
 [CreateAssetMenu(menuName = "EnemyStates/EnemyRollingState")]
-public class TESTSCRIPT : States
+public class EnemyRollingState : States
 {
-
-    #region Constructor
-    public TESTSCRIPT(GameObject stateGameObject) : base(stateGameObject)
-    {
-    }
-    #endregion
-
     #region Variables
 
     [Header("MoveValues")]
-    private float currentRollingSpeed;
     [SerializeField] private float maxRollingSpeed;
-    [SerializeField] AnimationCurve curveToMaxAcceleration;
+    [SerializeField] private AnimationCurve curveToMaxAcceleration;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float timeToSpendRolling;
-
 
     [Header("Raycast Values")]
     [SerializeField] private float maxRaycastDistance;
@@ -30,37 +20,50 @@ public class TESTSCRIPT : States
     private float elapsedTime = 0f;
     private RotateCharacter rotateCharacter;
     private Rigidbody rigidBody;
-    private Animator anim;
     private NavMeshAgent enemy;
+    private Vector3 direction;
+
+    #endregion
+
+    #region Constructor
+    public EnemyRollingState(GameObject stateGameObject) : base(stateGameObject)
+    {
+    }
     #endregion
 
     #region Methods
+
     public override void Start()
     {
         enemy = stateGameObject.GetComponent<NavMeshAgent>();
-        enemy.speed = 0; //poner la velocidad del navmesh a 0 para que no se siga moviendo al entrar a este estado
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
-        anim = stateGameObject.GetComponent<Animator>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
-
+        direction = stateGameObject.transform.forward;
     }
 
     public override void Update()
     {
+        
         RaycastHit hit;
-        Vector3 direction = stateGameObject.transform.forward;
-        if (Physics.Linecast(stateGameObject.transform.position, stateGameObject.transform.position + direction * maxRaycastDistance, out hit))
-        {
-            Debug.DrawLine(stateGameObject.transform.position, stateGameObject.transform.position + direction * maxRaycastDistance, Color.green, 0.2f);
 
-            if (hit.collider.CompareTag("Player"))
+        if (Physics.Linecast(stateGameObject.transform.position, stateGameObject.transform.position + direction * 5f, out hit))
+        {
+            Debug.DrawRay(stateGameObject.transform.position, direction * 5f, Color.red);
+
+            if (!hit.collider.CompareTag("Player"))
             {
-              
-            }
-            else 
-            {
-                direction = Vector3.ProjectOnPlane(direction, hit.normal).normalized;
-                rotateCharacter.Rotate(stateGameObject.transform.rotation, direction);
+                Debug.DrawRay(stateGameObject.transform.position, direction * 5f, Color.red);
+
+                Vector3 normal = hit.normal;
+
+                direction = Vector3.Reflect(direction, normal).normalized;
+
+                float angle = Vector3.SignedAngle(stateGameObject.transform.forward, direction, Vector3.up);
+
+                stateGameObject.transform.rotation *= Quaternion.Euler(0, angle, 0);
+
+                Debug.Log("Hit object: " + hit.collider.name);
+
             }
         }
 
@@ -69,13 +72,13 @@ public class TESTSCRIPT : States
         if (elapsedTime < timeToSpendRolling)
         {
             float t = Mathf.Clamp01(elapsedTime / timeToSpendRolling);
-
             float curveValue = curveToMaxAcceleration.Evaluate(t);
-
             float targetSpeed = curveValue * maxRollingSpeed;
 
-            rigidBody.velocity = rigidBody.velocity.normalized * targetSpeed;
+            rigidBody.velocity = stateGameObject.transform.forward * targetSpeed;
         }
+
+        Debug.Log(rigidBody.velocity);
     }
 
 
@@ -84,11 +87,5 @@ public class TESTSCRIPT : States
     {
     }
 
-
     #endregion
-
-
-
 }
-
-

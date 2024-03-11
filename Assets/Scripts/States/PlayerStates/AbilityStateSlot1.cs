@@ -12,11 +12,20 @@ public class AbilityStateSlot1 : States
     public AbilityStateSlot1(GameObject stateGameObject) : base(stateGameObject)
     {
     }
+    public override States CheckTransitions()
+    {
+        States newGameState = null;
+        if (0 == 0)
+        {
+            newGameState = base.CheckTransitions();
+        }
 
+        return newGameState;
+    }
     public override void Start()
     {
-        
 
+        Debug.Log("lakingsli");
 
     }
 

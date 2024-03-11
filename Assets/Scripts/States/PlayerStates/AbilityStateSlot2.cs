@@ -24,7 +24,7 @@ public class AbilityStateSlot2 : States
 
     public override void Start()
     {
-      
+        Debug.Log("perrosanchez");
     }
     public override void FixedUpdate()
     {

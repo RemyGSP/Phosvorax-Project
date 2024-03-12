@@ -73,7 +73,6 @@ public class BichoPinchoAttackState : States
         }
         if (Vector3.Distance(stateGameObject.transform.position, targetPosition) < 0.3f)
         {
-            Debug.Log("Funca");
             reached = true;
         }
     }

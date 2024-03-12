@@ -23,6 +23,8 @@ public class EnemyRollingState : States
     private NavMeshAgent enemy;
     private Vector3 direction;
 
+    Vector3 targetSpeed;
+
     #endregion
 
     #region Constructor
@@ -41,12 +43,13 @@ public class EnemyRollingState : States
         direction = stateGameObject.transform.forward;
     }
 
+
     public override void Update()
     {
-        
+
         RaycastHit hit;
 
-        if (Physics.Linecast(stateGameObject.transform.position, stateGameObject.transform.position + direction * 5f, out hit))
+        if (Physics.Linecast(stateGameObject.transform.position, stateGameObject.transform.position + direction * 7f, out hit))
         {
             Debug.DrawRay(stateGameObject.transform.position, direction * 5f, Color.red);
 
@@ -59,9 +62,9 @@ public class EnemyRollingState : States
                 direction = Vector3.Reflect(direction, normal).normalized;
 
                 float angle = Vector3.SignedAngle(stateGameObject.transform.forward, direction, Vector3.up);
-
-                stateGameObject.transform.rotation *= Quaternion.Euler(0, angle, 0);
-
+                Quaternion quat = Quaternion.Euler(0, angle, 0);
+                stateGameObject.transform.rotation *= quat;
+                targetSpeed = quat * targetSpeed;
                 Debug.Log("Hit object: " + hit.collider.name);
 
             }
@@ -73,9 +76,9 @@ public class EnemyRollingState : States
         {
             float t = Mathf.Clamp01(elapsedTime / timeToSpendRolling);
             float curveValue = curveToMaxAcceleration.Evaluate(t);
-            float targetSpeed = curveValue * maxRollingSpeed;
-
-            rigidBody.velocity = stateGameObject.transform.forward * targetSpeed;
+            float targetAcceleration = curveValue * maxRollingSpeed;
+            targetSpeed += stateGameObject.transform.forward * targetAcceleration * Time.deltaTime;
+            rigidBody.velocity = targetSpeed;
         }
 
         Debug.Log(rigidBody.velocity);

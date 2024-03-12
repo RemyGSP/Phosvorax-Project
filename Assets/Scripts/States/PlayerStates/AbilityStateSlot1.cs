@@ -8,14 +8,17 @@ using UnityEngine.Timeline;
 [CreateAssetMenu(menuName = "States/AbilityState1")]
 public class AbilityStateSlot1 : States
 {
-    public AbilityList abilityListObj;
+    [SerializeField] private AbilityList abilityListObj;
+    [SerializeField] private int usingAbilityNumber;
+    private float statetime;
+    private float statetimecount;
     public AbilityStateSlot1(GameObject stateGameObject) : base(stateGameObject)
     {
     }
     public override States CheckTransitions()
     {
         States newGameState = null;
-        if (0 == 0)
+        if (statetimecount > statetime)
         {
             newGameState = base.CheckTransitions();
         }
@@ -24,14 +27,15 @@ public class AbilityStateSlot1 : States
     }
     public override void Start()
     {
-
-        Debug.Log("lakingsli");
-
+        statetimecount = 0;
+        statetime = abilityListObj.abilityList[usingAbilityNumber].onststetime;
+        abilityListObj.abilityList[usingAbilityNumber].OnEnterState(stateGameObject);
     }
 
     public override void FixedUpdate()
     {
-
+        statetimecount += Time.deltaTime;
+        abilityListObj.abilityList[usingAbilityNumber].AbilityUpdate();
     }
     public override void Update()
     {
@@ -40,6 +44,6 @@ public class AbilityStateSlot1 : States
 
     public override void OnExitState()
     {
-        return;
+        abilityListObj.abilityList[usingAbilityNumber].OnExitState();
     }
 }

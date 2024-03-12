@@ -7,7 +7,7 @@ public abstract class Ability : ScriptableObject{
     [SerializeField] protected float abilityBaseDamage;
     [SerializeField] protected float abilityScaling;
     [SerializeField] protected float abilityCD;
-    [SerializeField] protected float stateTimer;
+    [SerializeField] protected float onststetime;
 
     public abstract void OnEnterState(GameObject stateGameObject);
     public abstract void AbilityUpdate();

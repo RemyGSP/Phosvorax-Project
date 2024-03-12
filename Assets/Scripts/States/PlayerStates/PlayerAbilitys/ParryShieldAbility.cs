@@ -41,7 +41,7 @@ public class ParryShieldAbility : Ability
 
     public override void AbilityUpdate()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     void ChangeColor(Color newColor)

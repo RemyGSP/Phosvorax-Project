@@ -16,7 +16,8 @@ public class BichoPinchoAttackState : States
     private float stopTimer = 0f;
     private float currentTime = 0f;
     [SerializeField] private  AnimationCurve accelerationCurve;
-
+    [SerializeField] GameObject feedback;
+    Vector3 rotationPoint;
     public BichoPinchoAttackState(GameObject stateGameObject) : base(stateGameObject)
     {
     }
@@ -42,6 +43,9 @@ public class BichoPinchoAttackState : States
         targetPosition = PlayerReferences.instance.GetPlayerCoordinates();
         targetPosition.y = stateGameObject.transform.position.y;
         stateGameObject.transform.LookAt(targetPosition);
+        rotationPoint = stateGameObject.GetComponent<RotateFromPosition>().rotationPoint.position;
+        Instantiate(feedback, stateGameObject.GetComponent<FeedbackPosition>().GetFeedbackSpawnPos(),Quaternion.identity);
+
     }
 
     public override void Update()
@@ -53,22 +57,23 @@ public class BichoPinchoAttackState : States
         if (reached)
         {
             stopTimer += Time.deltaTime;
+
         }
         else
         {
             rb.velocity = (targetPosition - stateGameObject.transform.position) * force * acceleration;
             stateGameObject.transform.LookAt(targetPosition);
-            Vector3 directionToLook = stateGameObject.GetComponent<RotateFromPosition>().rotationPoint.position - stateGameObject.transform.position;
 
-            // Rotate towards the rotation point
-            Quaternion targetRotation = Quaternion.LookRotation(directionToLook);
-            Vector3 rotationPoint = stateGameObject.GetComponent<RotateFromPosition>().rotationPoint.position;
-            Vector3 rotationAxis = rotationPoint - stateGameObject.transform.position;
-            stateGameObject.transform.RotateAround(rotationPoint,rotationAxis,targetRotation.y);
+            Vector3 direction = stateGameObject.transform.position - rotationPoint;
+
+            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+
+            stateGameObject.transform.rotation = targetRotation;
 
         }
         if (Vector3.Distance(stateGameObject.transform.position, targetPosition) < 0.3f)
         {
+            Debug.Log("Funca");
             reached = true;
         }
     }

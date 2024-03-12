@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
+using static UnityEngine.GridBrushBase;
 
 [CreateAssetMenu(menuName = "EnemyStates/BichoPinchoAttack")]
 public class BichoPinchoAttackState : States
@@ -16,6 +17,7 @@ public class BichoPinchoAttackState : States
     private float stopTimer = 0f;
     private float currentTime = 0f;
     [SerializeField] private  AnimationCurve accelerationCurve;
+    [SerializeField] private AnimationCurve deccelerationCurve;
     [SerializeField] GameObject feedback;
     Vector3 rotationPoint;
     public BichoPinchoAttackState(GameObject stateGameObject) : base(stateGameObject)
@@ -38,6 +40,7 @@ public class BichoPinchoAttackState : States
 
     public override void Start()
     {
+        stateGameObject.GetComponent<Animator>().SetTrigger("attack");
         rb = stateGameObject.GetComponent<Rigidbody>();
         reached = false;
         targetPosition = PlayerReferences.instance.GetPlayerCoordinates();
@@ -53,25 +56,21 @@ public class BichoPinchoAttackState : States
         currentTime += Time.deltaTime;
 
         float acceleration = accelerationCurve.Evaluate(currentTime);
-
+        Debug.Log("Reached " + reached + " Timer: " + stopTimer + " Distance: " + Vector3.Distance(stateGameObject.transform.position, targetPosition));
         if (reached)
         {
+            Vector3 lastPos = rb.velocity;
             stopTimer += Time.deltaTime;
+            float decceleration = deccelerationCurve.Evaluate(stopTimer);
+            rb.velocity = (lastPos / force / acceleration).normalized * force * decceleration;
 
         }
         else
         {
-            rb.velocity = (targetPosition - stateGameObject.transform.position) * force * acceleration;
-            stateGameObject.transform.LookAt(targetPosition);
-
-            Vector3 direction = stateGameObject.transform.position - rotationPoint;
-
-            Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
-
-            stateGameObject.transform.rotation = targetRotation;
+            rb.velocity = (targetPosition - stateGameObject.transform.position).normalized * force * acceleration;
 
         }
-        if (Vector3.Distance(stateGameObject.transform.position, targetPosition) < 0.3f)
+        if (Vector3.Distance(stateGameObject.transform.position, targetPosition) < 0.5f)
         {
             reached = true;
         }

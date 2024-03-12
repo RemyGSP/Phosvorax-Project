@@ -562,7 +562,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3181308096610004320}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6584202941537135033}
+        m_TargetAssemblyTypeName: ShopController, Assembly-CSharp
+        m_MethodName: ConfirmPurchase
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1733028675901573858
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,12 +848,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6584202941537135033}
         m_TargetAssemblyTypeName: ShopController, Assembly-CSharp
-        m_MethodName: BuyDamage
-        m_Mode: 1
+        m_MethodName: BuyUpgrade
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1044,12 +1056,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6584202941537135033}
         m_TargetAssemblyTypeName: ShopController, Assembly-CSharp
-        m_MethodName: ReduceSpeed
-        m_Mode: 1
+        m_MethodName: ReduceUpgrade
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -1921,12 +1933,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6584202941537135033}
         m_TargetAssemblyTypeName: ShopController, Assembly-CSharp
-        m_MethodName: BuySpeed
-        m_Mode: 1
+        m_MethodName: BuyUpgrade
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2054,12 +2066,12 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6584202941537135033}
         m_TargetAssemblyTypeName: ShopController, Assembly-CSharp
-        m_MethodName: ReduceDamage
-        m_Mode: 1
+        m_MethodName: ReduceUpgrade
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -2412,8 +2424,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6584202941537135033}
         m_TargetAssemblyTypeName: ShopController, Assembly-CSharp
-        m_MethodName: BuyHealth
-        m_Mode: 1
+        m_MethodName: BuyUpgrade
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2792,7 +2804,7 @@ GameObject:
   - component: {fileID: 6624368670636672815}
   - component: {fileID: 1198643199188647624}
   m_Layer: 0
-  m_Name: DamageText
+  m_Name: HealthText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4407,15 +4419,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leveledUpSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   notLevelUpSprite: {fileID: 21300000, guid: 1d5a01d0044796c45bb882fd3a8159af, type: 3}
-  healthSquareContainer: {fileID: 4374252716191199469}
-  damageSquareContainer: {fileID: 4769903782896090516}
-  speedSquareContainer: {fileID: 663255577863382397}
-  healthCost: {fileID: 66024224657894353}
-  speedCost: {fileID: 2181975667014266194}
-  damageCost: {fileID: 6420903086188460900}
   totalCost: {fileID: 588345492508616993}
   purchaseButton: {fileID: 4598967754420957055}
-  upgradeables: []
+  upgradeables:
+  - levelCosts: 
+    type: 0
+    squareContainer: {fileID: 4374252716191199469}
+    upgradeCostUI: {fileID: 66024224657894353}
+    upgradeCost: 50
+  - levelCosts: 
+    type: 2
+    squareContainer: {fileID: 663255577863382397}
+    upgradeCostUI: {fileID: 2181975667014266194}
+    upgradeCost: 50
+  - levelCosts: 
+    type: 1
+    squareContainer: {fileID: 4769903782896090516}
+    upgradeCostUI: {fileID: 6420903086188460900}
+    upgradeCost: 50
 --- !u!1 &7555213993708924683
 GameObject:
   m_ObjectHideFlags: 0
@@ -5252,8 +5273,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6584202941537135033}
         m_TargetAssemblyTypeName: ShopController, Assembly-CSharp
-        m_MethodName: ReduceHealth
-        m_Mode: 1
+        m_MethodName: ReduceUpgrade
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5349,7 +5370,7 @@ GameObject:
   - component: {fileID: 3439066012271811816}
   - component: {fileID: 3127969693056586088}
   m_Layer: 0
-  m_Name: DamageText
+  m_Name: SpeedText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

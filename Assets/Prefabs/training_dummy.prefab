@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3662644842049063746}
   - component: {fileID: 4433261185524646793}
-  - component: {fileID: 6319979113422286328}
   - component: {fileID: 6871871389910503532}
   - component: {fileID: 6673828568977278632}
   m_Layer: 5
@@ -63,21 +62,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &6319979113422286328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1478515981832172196}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81f3d0363559bee4082e85dd1182d4f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBehaviour: {fileID: 3841608278678365490}
-  damagePrefab: {fileID: 5903100796543579690, guid: bebd230af3fd32945bbdfa4b78cfd1d0,
-    type: 3}
 --- !u!114 &6871871389910503532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,6 +211,8 @@ GameObject:
   - component: {fileID: 3841608278678365490}
   - component: {fileID: 2595741549642505742}
   - component: {fileID: 2586276983033023295}
+  - component: {fileID: 5053571556393018717}
+  - component: {fileID: 102844646269750371}
   m_Layer: 6
   m_Name: training_dummy
   m_TagString: Untagged
@@ -319,7 +305,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 6319979113422286328}
+      - m_Target: {fileID: 102844646269750371}
         m_TargetAssemblyTypeName: DamageDisplay, Assembly-CSharp
         m_MethodName: DisplayDamage
         m_Mode: 0
@@ -386,6 +372,36 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1.0197918
   m_Center: {x: 0, y: 0.9370908, z: 0}
+--- !u!114 &5053571556393018717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697017240656324050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81f3d0363559bee4082e85dd1182d4f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBehaviour: {fileID: 3841608278678365490}
+  damagePrefab: {fileID: 5903100796543579690, guid: bebd230af3fd32945bbdfa4b78cfd1d0,
+    type: 3}
+--- !u!114 &102844646269750371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697017240656324050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81f3d0363559bee4082e85dd1182d4f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBehaviour: {fileID: 3841608278678365490}
+  damagePrefab: {fileID: 5903100796543579690, guid: bebd230af3fd32945bbdfa4b78cfd1d0,
+    type: 3}
 --- !u!1 &6774080502169825540
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,6 +602,7 @@ GameObject:
   - component: {fileID: 3204072302232079936}
   - component: {fileID: 8516472573422780703}
   - component: {fileID: 8929788648521055813}
+  - component: {fileID: 4626506747588930020}
   m_Layer: 5
   m_Name: healthBar
   m_TagString: Untagged
@@ -665,6 +682,18 @@ MonoBehaviour:
   healthBehaviour: {fileID: 3841608278678365490}
   fillSpeed: 10
   damageText: {fileID: 0}
+--- !u!114 &4626506747588930020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7531916591484995895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08705a9eedddec74a9b7c39ac46d8a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7533163476571990239
 GameObject:
   m_ObjectHideFlags: 0

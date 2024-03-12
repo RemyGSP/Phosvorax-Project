@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 7342269075096781102}
   - component: {fileID: 9010398206959219582}
   - component: {fileID: 6372215883572015367}
+  - component: {fileID: 7214701514301214064}
   m_Layer: 5
   m_Name: healthBar
   m_TagString: Untagged
@@ -122,6 +123,18 @@ MonoBehaviour:
   healthBehaviour: {fileID: 0}
   fillSpeed: 10
   damageText: {fileID: 0}
+--- !u!114 &7214701514301214064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1670828676371713726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08705a9eedddec74a9b7c39ac46d8a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1728056717686730391
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,8 +148,10 @@ GameObject:
   - component: {fileID: 4974840870385779408}
   - component: {fileID: 3826171988701231447}
   - component: {fileID: 1744505785339243572}
+  - component: {fileID: 1447323720360917933}
   - component: {fileID: 2665370193748559192}
   - component: {fileID: 8942571265662715220}
+  - component: {fileID: 8100049870051296642}
   m_Layer: 0
   m_Name: bichopinxo
   m_TagString: Untagged
@@ -233,6 +248,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPos: {fileID: 7302421638588732131}
+--- !u!114 &1447323720360917933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728056717686730391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81f3d0363559bee4082e85dd1182d4f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBehaviour: {fileID: 2665370193748559192}
+  damagePrefab: {fileID: 0}
 --- !u!114 &2665370193748559192
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,7 +282,7 @@ MonoBehaviour:
   onHit:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1670828676371713726}
+      - m_Target: {fileID: 6372215883572015367}
         m_TargetAssemblyTypeName: HealthBarBehaviour, Assembly-CSharp
         m_MethodName: UpdateHealthBar
         m_Mode: 0
@@ -265,7 +294,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1728056717686730391}
+      - m_Target: {fileID: 1447323720360917933}
         m_TargetAssemblyTypeName: DamageDisplay, Assembly-CSharp
         m_MethodName: DisplayDamage
         m_Mode: 0
@@ -280,7 +309,7 @@ MonoBehaviour:
   onRevive:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1670828676371713726}
+      - m_Target: {fileID: 6372215883572015367}
         m_TargetAssemblyTypeName: HealthBarBehaviour, Assembly-CSharp
         m_MethodName: RestartHealthBar
         m_Mode: 1
@@ -304,12 +333,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 050ac25646912184b9504a8fa8a0a7dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToDrop: {fileID: 0}
-  dropAmount: 0
-  dropValue: 0
-  mindropForce: {x: 0, y: 0, z: 0}
-  maxdropForce: {x: 0, y: 0, z: 0}
-  heightOffset: 0
+  objectToDrop: {fileID: 8801671786593593430, guid: 6a9ed0591085ff6439074399f05355f5,
+    type: 3}
+  dropAmount: 5
+  dropValue: 1
+  mindropForce: {x: -60, y: 90, z: -60}
+  maxdropForce: {x: 60, y: 150, z: 60}
+  heightOffset: 1
+--- !u!65 &8100049870051296642
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728056717686730391}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 11.133559, y: 25.72688, z: 3.020457}
+  m_Center: {x: 3.0529804, y: -5.637239, z: 0.22323012}
 --- !u!1 &2365529270750695669
 GameObject:
   m_ObjectHideFlags: 0

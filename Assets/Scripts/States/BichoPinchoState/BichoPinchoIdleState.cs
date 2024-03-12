@@ -26,7 +26,7 @@ public class BichoPinchoIdleState : States
     public override void FixedUpdate()
     {
         Vector3 velocity = new Vector3(Mathf.Cos(Time.time * speed), 0, Mathf.Sin(Time.time * speed));
-
+        stateGameObject.transform.LookAt(velocity);
         rb.velocity = velocity.normalized * speed;
     }
 

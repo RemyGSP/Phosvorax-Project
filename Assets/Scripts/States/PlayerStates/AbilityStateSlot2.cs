@@ -6,29 +6,34 @@ using UnityEngine;
 public class AbilityStateSlot2 : States
 {
 
-    public AbilityList abilityListObj;
+   [SerializeField] private AbilityList abilityListObj;
+    [SerializeField] private int usingAbilityNumber;
+    private float statetime;
+    private float statetimecount;
     public AbilityStateSlot2(GameObject stateGameObject) : base(stateGameObject)
     {
-
     }
     public override States CheckTransitions()
     {
         States newGameState = null;
-        if (0==0)
-        {    
+        if (statetimecount > statetime)
+        {
             newGameState = base.CheckTransitions();
         }
 
         return newGameState;
     }
-
     public override void Start()
     {
-        Debug.Log("perrosanchez");
+        statetimecount = 0;
+        statetime = abilityListObj.abilityList[usingAbilityNumber].onststetime;
+        abilityListObj.abilityList[usingAbilityNumber].OnEnterState(stateGameObject);
     }
+
     public override void FixedUpdate()
     {
-      
+        statetimecount += Time.deltaTime;
+        abilityListObj.abilityList[usingAbilityNumber].AbilityUpdate();
     }
     public override void Update()
     {
@@ -37,6 +42,6 @@ public class AbilityStateSlot2 : States
 
     public override void OnExitState()
     {
-        return;
+        abilityListObj.abilityList[usingAbilityNumber].OnExitState();
     }
 }

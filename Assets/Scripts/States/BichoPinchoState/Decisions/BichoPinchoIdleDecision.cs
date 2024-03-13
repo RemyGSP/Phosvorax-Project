@@ -7,7 +7,15 @@ public class BichoPinchoIdleDecision : Decision
 {
     public override bool Decide(StateMachine stateMachine)
     {
-        return true;
+        BichoPinchoReferences infoContainer = stateMachine.gameObject.GetComponent<BichoPinchoReferences>();
+        if (infoContainer.CheckAttackTimer() && !infoContainer.CheckIfStunned() && !infoContainer.IsAttacking())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
 
     }
 }

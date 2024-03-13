@@ -19,34 +19,37 @@ public class BichoPinchoAttackState : States
     [SerializeField] private  AnimationCurve accelerationCurve;
     [SerializeField] private AnimationCurve deccelerationCurve;
     [SerializeField] GameObject feedback;
-    Vector3 rotationPoint;
+    //En este script es donde guardo informacion que transciende los estados para que lo puedan usar las decisiones etc
+    private BichoPinchoReferences infoContainer;
     public BichoPinchoAttackState(GameObject stateGameObject) : base(stateGameObject)
     {
     }
 
     public override States CheckTransitions()
     {
-        States aux = null;
-        if (stopTimer > stopTime)
-        {
-            aux = base.CheckTransitions();
-        }
-        return aux;
+        Debug.Log(base.CheckTransitions());
+        return base.CheckTransitions();
     }
     public override void OnExitState()
     {
+        Debug.Log("Exit");
+        infoContainer.StopAttack();
+        infoContainer.StartAttackTimer();
         return;
     }
 
     public override void Start()
     {
-        stateGameObject.GetComponent<Animator>().SetTrigger("attack");
+        Debug.Log("Hola");
+        infoContainer = stateGameObject.GetComponent<BichoPinchoReferences>();
+        infoContainer.StopAttackTimer();
+        infoContainer.RestartAttackTimer();
+        infoContainer.Attack();
         rb = stateGameObject.GetComponent<Rigidbody>();
         reached = false;
         targetPosition = PlayerReferences.instance.GetPlayerCoordinates();
         targetPosition.y = stateGameObject.transform.position.y;
         stateGameObject.transform.LookAt(targetPosition);
-        rotationPoint = stateGameObject.GetComponent<RotateFromPosition>().rotationPoint.position;
         Instantiate(feedback, stateGameObject.GetComponent<FeedbackPosition>().GetFeedbackSpawnPos(),Quaternion.identity);
 
     }
@@ -56,12 +59,14 @@ public class BichoPinchoAttackState : States
         currentTime += Time.deltaTime;
 
         float acceleration = accelerationCurve.Evaluate(currentTime);
-        Debug.Log("Reached " + reached + " Timer: " + stopTimer + " Distance: " + Vector3.Distance(stateGameObject.transform.position, targetPosition));
         if (reached)
         {
-            Vector3 lastPos = rb.velocity;
             stopTimer += Time.deltaTime;
+            infoContainer.StopAttack();
+            infoContainer.StartAttackTimer();
+            Vector3 lastPos = rb.velocity;
             float decceleration = deccelerationCurve.Evaluate(stopTimer);
+            Debug.Log("Deceleration " + decceleration + " Velocity: " + rb.velocity);
             rb.velocity = (lastPos / force / acceleration).normalized * force * decceleration;
 
         }
@@ -73,6 +78,14 @@ public class BichoPinchoAttackState : States
         if (Vector3.Distance(stateGameObject.transform.position, targetPosition) < 0.5f)
         {
             reached = true;
+        }
+    }
+
+    public override void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.gameObject.GetComponent<HealthBehaviour>().Damage(infoContainer.GetDamage());
         }
     }
 

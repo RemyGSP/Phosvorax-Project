@@ -41,4 +41,10 @@ public class StateMachine : MonoBehaviour
         currentState.OnCollisionEnter(collision);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        currentState.OnTriggerEnter(other);
+
+    }
+
 }

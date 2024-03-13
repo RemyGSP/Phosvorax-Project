@@ -25,7 +25,6 @@ public class BichoPinchoIdleState : States
 
     public override void FixedUpdate()
     {
-
     }
 
     // Start is called before the first frame update

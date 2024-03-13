@@ -18,6 +18,10 @@ MonoBehaviour:
     onDecisionTrueExitState: {fileID: 11400000, guid: 63ad6c8eb74c85242b0a1a8988628b15,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}
+  - decisionToBeMade: {fileID: 11400000, guid: a350cd000a99817468eb47a9a26df358, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: d4dd6dbbb3170894b938a405c021e1a3,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 0}
   force: 30
   stopTime: 4
   accelerationCurve:
@@ -68,17 +72,17 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: -1.4279742
-      outSlope: -1.4279742
+      inSlope: -1.6774131
+      outSlope: -1.6774131
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.51742184
-      value: 0.26113492
-      inSlope: -0.96809435
-      outSlope: -0.96809435
+      time: 0.34875605
+      value: 0.41499203
+      inSlope: -1.1427327
+      outSlope: -1.1427327
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -86,8 +90,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1.03125
       value: 0
-      inSlope: -0.50821453
-      outSlope: -0.50821453
+      inSlope: -0.6080524
+      outSlope: -0.6080524
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334

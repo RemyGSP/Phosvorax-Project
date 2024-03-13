@@ -2559,9 +2559,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f47a69741abf424c9f24e32bff27374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  areaFeedback: {fileID: 1742575975}
-  cursorIndicator: {fileID: 1634808384}
-  cursorSpeed: 1
 --- !u!114 &1092576557
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2945,15 +2942,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c97978f3fff03824b8e75f55ad72edca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attAreaVisual: {fileID: 1092576556}
-  abilities:
-  - {fileID: 11400000, guid: f044212ad6dc00b4aaa2c53add5904d8, type: 2}
-  - {fileID: 11400000, guid: f044212ad6dc00b4aaa2c53add5904d8, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  isCasting: 0
-  throwAbility: 0
-  smartCast: 0
 --- !u!114 &1459398730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3013,8 +3001,6 @@ MonoBehaviour:
   rollCD: 1
   abilityTimers: []
   abilityCD:
-  - 1
-  - 1
   - 1
   - 1
 --- !u!114 &1459398734

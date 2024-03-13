@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fb6a3cb92e3162488344e775a432c9f, type: 3}
   m_Name: New Area Damage Ability
   m_EditorClassIdentifier: 
-  abilityRange: 0
-  abilityBaseDamage: 0
-  abilityScaling: 0
-  abilityCD: 0
+  abilityRange: 29
+  abilityBaseDamage: 50
+  abilityScaling: 70
+  abilityCD: 2
   onststetime: 0
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 64

@@ -72,6 +72,7 @@ public class BichoPinchoAttackState : States
         }
         else
         {
+            stateGameObject.transform.LookAt(targetPosition);
             rb.velocity = (targetPosition - stateGameObject.transform.position).normalized * force * acceleration;
 
         }

@@ -1273,6 +1273,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3311975722380268016, guid: 0331b169005eb1d469455efaa6b9024a,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3311975722380268016, guid: 0331b169005eb1d469455efaa6b9024a,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3311975722380268016, guid: 0331b169005eb1d469455efaa6b9024a,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4697017240656324050, guid: 0331b169005eb1d469455efaa6b9024a,
         type: 3}
       propertyPath: m_Name
@@ -1824,79 +1839,6 @@ MonoBehaviour:
   m_AmplitudeGain: 0
   m_FrequencyGain: 0
   mNoiseOffsets: {x: 0, y: 0, z: 0}
---- !u!1001 &1718089353
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3416000307003526194, guid: 0331b169005eb1d469455efaa6b9024a,
-        type: 3}
-      propertyPath: healthBehaviour
-      value: 
-      objectReference: {fileID: 700333435}
-    - target: {fileID: 4697017240656324050, guid: 0331b169005eb1d469455efaa6b9024a,
-        type: 3}
-      propertyPath: m_Name
-      value: training_dummy (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5360683131785772904, guid: 0331b169005eb1d469455efaa6b9024a,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 29.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 5360683131785772904, guid: 0331b169005eb1d469455efaa6b9024a,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5360683131785772904, guid: 0331b169005eb1d469455efaa6b9024a,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 17.82
-      objectReference: {fileID: 0}
-    - target: {fileID: 5360683131785772904, guid: 0331b169005eb1d469455efaa6b9024a,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.8618107
-      objectReference: {fileID: 0}
-    - target: {fileID: 5360683131785772904, guid: 0331b169005eb1d469455efaa6b9024a,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5360683131785772904, guid: 0331b169005eb1d469455efaa6b9024a,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.50723016
-      objectReference: {fileID: 0}
-    - target: {fileID: 5360683131785772904, guid: 0331b169005eb1d469455efaa6b9024a,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5360683131785772904, guid: 0331b169005eb1d469455efaa6b9024a,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5360683131785772904, guid: 0331b169005eb1d469455efaa6b9024a,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 60.959
-      objectReference: {fileID: 0}
-    - target: {fileID: 5360683131785772904, guid: 0331b169005eb1d469455efaa6b9024a,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0331b169005eb1d469455efaa6b9024a, type: 3}
 --- !u!1 &1726681177
 GameObject:
   m_ObjectHideFlags: 0
@@ -2241,6 +2183,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2345252906728925867, guid: b512993666e602e409c2175bd6f93cba,
         type: 3}
+      propertyPath: maxHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2345252906728925867, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
       propertyPath: onHit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 855069380}
@@ -2453,6 +2400,5 @@ SceneRoots:
   - {fileID: 1526502805}
   - {fileID: 992127168}
   - {fileID: 1324789030}
-  - {fileID: 1718089353}
   - {fileID: 3685452977962286489}
   - {fileID: 7764177291827488849}

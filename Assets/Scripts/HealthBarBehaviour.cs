@@ -49,6 +49,7 @@ public class HealthBarBehaviour : MonoBehaviour
     public void RestartHealthBar()
     {
         targetFillAmount = 1;
+        delayTargetFillAmount = 1;
         StartCoroutine(_FillHealthBar());
     }
     private IEnumerator _FillHealthBar()

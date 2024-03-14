@@ -7,6 +7,7 @@ public class CrystalBehaviour : MonoBehaviour
     private int crystalValue;
     [SerializeField] private float maxSpeed = 1000;
     [SerializeField] private AnimationCurve speedCurve;
+    [SerializeField] private float startMovingDelay;
     private bool canStartMoving;
 
     private float elapsedTime = 0f;
@@ -68,7 +69,7 @@ public class CrystalBehaviour : MonoBehaviour
 
     private IEnumerator _StartMoving()
     {
-        yield return new WaitForSeconds(0.9f);
+        yield return new WaitForSeconds(startMovingDelay);
         canStartMoving = true;
     }
 

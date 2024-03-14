@@ -55,7 +55,7 @@ public abstract class States : ScriptableObject
 
     }
 
-    public virtual void OnTriggerEnter()
+    public virtual void OnTriggerEnter(Collider other)
     {
 
     }

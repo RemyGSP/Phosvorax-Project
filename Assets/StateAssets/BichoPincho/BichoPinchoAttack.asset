@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d405297960b6f844a873baf43127cf91, type: 3}
+  m_Name: BichoPinchoAttack
+  m_EditorClassIdentifier: 
+  stateGameObject: {fileID: 0}
+  stateTransitions:
+  - decisionToBeMade: {fileID: 11400000, guid: 601d13c993b198c4e8bc840c280d21ca, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: 63ad6c8eb74c85242b0a1a8988628b15,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 0}
+  - decisionToBeMade: {fileID: 11400000, guid: a350cd000a99817468eb47a9a26df358, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: d4dd6dbbb3170894b938a405c021e1a3,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 0}
+  - decisionToBeMade: {fileID: 11400000, guid: b0216a1a4d245d44c98c684fcc6074b2, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: 78b8583c3ceb23d419a3522835ebce6f,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 0}
+  force: 45
+  stopTime: 2
+  accelerationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.002494812
+      value: -0.33473057
+      inSlope: 0.9312993
+      outSlope: 0.9312993
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.37422186
+      value: 0.01145857
+      inSlope: 0.74684334
+      outSlope: 0.74684334
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.6076695
+      value: 0.14274657
+      inSlope: 1.373708
+      outSlope: 1.373708
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2.1850286
+      outSlope: 2.1850286
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  deccelerationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -1.6774131
+      outSlope: -1.6774131
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.34875605
+      value: 0.41499203
+      inSlope: -1.1427327
+      outSlope: -1.1427327
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1.03125
+      value: 0
+      inSlope: -0.6080524
+      outSlope: -0.6080524
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  feedback: {fileID: 330836809388514668, guid: 796a5a178a5df4947b31f69c5ef09225, type: 3}

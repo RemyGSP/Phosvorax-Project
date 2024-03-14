@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a6fc230cc3ebfc544909b6d5b0ff9dd4, type: 2}
+  - {fileID: 2100000, guid: 5c6d0cee78574cc46bac3776651cf458, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -131,7 +131,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f5130f2481cdd45b85062602fcf9ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  maxSpeed: 1000
+  speedCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.32063964
+      outSlope: 0.32063964
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.81273955
+      value: 0.2605965
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 3.94853
+      outSlope: 3.94853
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!54 &6861932687069318733
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -199,5 +232,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 7.5612783, y: 1.7004015, z: 9.052078}
-  m_Center: {x: 0.34721327, y: 0.3502009, z: -0.5630244}
+  m_Size: {x: 6.1684136, y: 1.7024375, z: 5.6664414}
+  m_Center: {x: 0.031564206, y: 0.34918284, z: -0.5307085}

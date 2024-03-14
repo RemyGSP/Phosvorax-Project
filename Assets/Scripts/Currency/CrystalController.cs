@@ -5,12 +5,21 @@ using UnityEngine;
 
 public class CrystalController : MonoBehaviour
 {
+    public static CrystalController instance;
     [SerializeField] TextMeshProUGUI crystalDisplay;
     private int crystalAmount;
     // Start is called before the first frame update
     void Start()
     {
-        
+        if  (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.Log("El singleton CrystalController ya existe borrando objeto: " + gameObject.name);
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
@@ -43,8 +52,11 @@ public class CrystalController : MonoBehaviour
     public bool ReduceCrystals(int crystalAmount)
     {
         bool aux = false;
-        if (this.crystalAmount - crystalAmount < 0)
+        Debug.Log("Have " + this.crystalAmount + " Reduce " + crystalAmount);
+        if (this.crystalAmount - crystalAmount > 0)
         {
+            Debug.Log(crystalAmount);
+            Debug.Log(crystalAmount);
             aux = true;
             this.crystalAmount -= crystalAmount;
             crystalDisplay.text = this.crystalAmount.ToString();

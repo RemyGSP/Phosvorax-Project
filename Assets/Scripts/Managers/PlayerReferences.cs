@@ -10,6 +10,9 @@ public class PlayerReferences : MonoBehaviour
     [SerializeField] public GameObject shieldObject;
     [SerializeField] public Renderer shieldObjectRenderer;
     [SerializeField] public Transform ShotingPoint;
+    [SerializeField] private float playerSpeed;
+    [SerializeField] private float playerDamage;
+    [SerializeField] private float playerHealth;
     public static PlayerReferences instance;
     [SerializeField] private GameObject footPos;
     [SerializeField] private Animator playerAnimator;
@@ -19,6 +22,7 @@ public class PlayerReferences : MonoBehaviour
     [Header("Position")]
     static Vector3 playerCoordinates;
     [SerializeField] LayerMask groundMask;
+    [SerializeField] private HealthBehaviour healthBehaviour;
     #endregion
 
 

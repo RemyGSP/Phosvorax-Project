@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class DeathState : MonoBehaviour
+[CreateAssetMenu(menuName ="States/DeathState")]
+public class DeathState : States
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject gameOver;
+    public DeathState(GameObject stateGameObject) : base(stateGameObject)
     {
-        
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnExitState()
     {
-        
+        return;
     }
+
+    public override void Update()
+    {
+        return;
+    }
+
+    public override void Start()
+    {
+        base.Start();
+        Instantiate(gameOver);
+        stateGameObject.GetComponent<StateMachine>().enabled = false;
+    }
+
+
 }

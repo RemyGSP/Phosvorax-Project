@@ -26,7 +26,7 @@ public class DamageDisplay : MonoBehaviour
         b.GetComponentInChildren<Animator>().Play("DamageText");
         b.GetComponentInChildren<TextMeshProUGUI>().text = damage.ToString();
         b.transform.position = transform.position;
-        StartCoroutine(_DeactivateDamageDisplay(b.GetComponentInChildren<Animator>()));
+        MonoInstance.instance.StartCoroutine(_DeactivateDamageDisplay(b.GetComponentInChildren<Animator>()));
         this.currentHealth = currentHealth;
         if (currentHealth == 0)
         {

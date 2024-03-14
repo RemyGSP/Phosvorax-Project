@@ -27,12 +27,10 @@ public class BichoPinchoAttackState : States
 
     public override States CheckTransitions()
     {
-        Debug.Log(base.CheckTransitions());
         return base.CheckTransitions();
     }
     public override void OnExitState()
     {
-        Debug.Log("Exit");
         infoContainer.StopAttack();
         infoContainer.StartAttackTimer();
         return;
@@ -40,7 +38,6 @@ public class BichoPinchoAttackState : States
 
     public override void Start()
     {
-        Debug.Log("Hola");
         infoContainer = stateGameObject.GetComponent<BichoPinchoReferences>();
         infoContainer.StopAttackTimer();
         infoContainer.RestartAttackTimer();
@@ -66,7 +63,6 @@ public class BichoPinchoAttackState : States
             infoContainer.StartAttackTimer();
             Vector3 lastPos = rb.velocity;
             float decceleration = deccelerationCurve.Evaluate(stopTimer);
-            Debug.Log("Deceleration " + decceleration + " Velocity: " + rb.velocity);
             rb.velocity = (lastPos / force / acceleration).normalized * force * decceleration;
 
         }

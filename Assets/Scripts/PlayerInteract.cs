@@ -24,14 +24,12 @@ public class PlayerInteract : MonoBehaviour
 
     public void AddInteractable(IInteractable interactable)
     {
-        Debug.Log("Add");
 
         interactableList.Add(interactable);
     }
 
     public void RemoveInteractable(IInteractable interactable)
     {
-        Debug.Log("Remove");
         interactableList.Remove(interactable);
     }
 

@@ -89,6 +89,7 @@ public class BichoPinchoReferences : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         isCrashing = true;
+        Debug.Log("Colision con: " + other.name);
     }
     private void OnTriggerExit(Collider other)
     {

@@ -2776,6 +2776,7 @@ GameObject:
   - component: {fileID: 855069378}
   - component: {fileID: 855069377}
   - component: {fileID: 855069376}
+  - component: {fileID: 855069380}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2937,6 +2938,20 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &855069380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 855069374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ad0142713d93441877d696787860a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 977702554}
+  intensity: 2.5
 --- !u!1 &873572683
 GameObject:
   m_ObjectHideFlags: 0
@@ -3589,7 +3604,19 @@ MonoBehaviour:
   parryDamageDetector: 0
   onHit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 855069380}
+        m_TargetAssemblyTypeName: CameraShake, Assembly-CSharp
+        m_MethodName: ShakeCamera
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.2
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onRevive:
     m_PersistentCalls:
       m_Calls: []
@@ -4284,6 +4311,7 @@ GameObject:
   - component: {fileID: 1585584108}
   - component: {fileID: 1585584110}
   - component: {fileID: 1585584109}
+  - component: {fileID: 1585584111}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -4361,6 +4389,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1585584111
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1585584107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_NoiseProfile: {fileID: 11400000, guid: e9ce97b7a206dc64d90931ea044e0c72, type: 2}
+  m_PivotOffset: {x: 0, y: 0, z: 0}
+  m_AmplitudeGain: 0
+  m_FrequencyGain: 0
+  mNoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!1 &1634808384
 GameObject:
   m_ObjectHideFlags: 0

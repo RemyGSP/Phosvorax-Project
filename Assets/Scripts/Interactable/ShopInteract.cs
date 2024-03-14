@@ -29,7 +29,6 @@ public class ShopInteract : MonoBehaviour, IInteractable
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Hola");
             other.gameObject.GetComponent<PlayerInteract>().AddInteractable(this);
 
             interactableTooltip.SetActive(true);

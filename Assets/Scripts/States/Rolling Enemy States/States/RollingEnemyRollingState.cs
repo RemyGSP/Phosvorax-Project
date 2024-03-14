@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-[CreateAssetMenu(menuName = "EnemyStates/EnemyRollingState")]
-public class EnemyRollingState : States
+[CreateAssetMenu(menuName = "EnemyStates/RollingEnemyRollingState")]
+public class RollingEnemyRollingState : States
 {
     #region Variables
 
     [Header("MoveValues")]
+    [SerializeField] private float startSpeed;
     [SerializeField] private float maxRollingSpeed;
     [SerializeField] private AnimationCurve curveToMaxAcceleration;
     [SerializeField] private float rotationSpeed;
@@ -25,10 +27,12 @@ public class EnemyRollingState : States
 
     Vector3 targetSpeed;
 
+    StateMachine machine;
+
     #endregion
 
     #region Constructor
-    public EnemyRollingState(GameObject stateGameObject) : base(stateGameObject)
+    public RollingEnemyRollingState(GameObject stateGameObject) : base(stateGameObject)
     {
     }
     #endregion
@@ -41,21 +45,20 @@ public class EnemyRollingState : States
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         direction = stateGameObject.transform.forward;
+        machine = stateGameObject.GetComponent<StateMachine>();
     }
-
 
     public override void Update()
     {
-
         RaycastHit hit;
 
-        if (Physics.Linecast(stateGameObject.transform.position, stateGameObject.transform.position + direction * 7f, out hit))
-        {
-            Debug.DrawRay(stateGameObject.transform.position, direction * 5f, Color.red);
+        float sphereCastRadius = stateGameObject.GetComponent<BoxCollider>().bounds.extents.x;
 
+        if (Physics.SphereCast(stateGameObject.transform.position, sphereCastRadius, direction, out hit, maxRaycastDistance))
+        {
             if (!hit.collider.CompareTag("Player"))
             {
-                Debug.DrawRay(stateGameObject.transform.position, direction * 5f, Color.red);
+                Debug.DrawRay(stateGameObject.transform.position, direction * maxRaycastDistance, Color.red);
 
                 Vector3 normal = hit.normal;
 
@@ -66,7 +69,6 @@ public class EnemyRollingState : States
                 stateGameObject.transform.rotation *= quat;
                 targetSpeed = quat * targetSpeed;
                 Debug.Log("Hit object: " + hit.collider.name);
-
             }
         }
 
@@ -78,13 +80,16 @@ public class EnemyRollingState : States
             float curveValue = curveToMaxAcceleration.Evaluate(t);
             float targetAcceleration = curveValue * maxRollingSpeed;
             targetSpeed += stateGameObject.transform.forward * targetAcceleration * Time.deltaTime;
+
+            // Aplicar la velocidad mínima
+            if (targetSpeed.magnitude < startSpeed)
+            {
+                targetSpeed = targetSpeed.normalized * startSpeed;
+            }
+
             rigidBody.velocity = targetSpeed;
         }
-
-        Debug.Log(rigidBody.velocity);
     }
-
-
 
     public override void OnExitState()
     {

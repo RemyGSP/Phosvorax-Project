@@ -97,6 +97,7 @@ public class RollingEnemyRollingState : States
 
     public override void OnExitState()
     {
+        elapsedTime = 0;
     }
 
     #endregion

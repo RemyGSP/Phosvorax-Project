@@ -24,7 +24,6 @@ public class EnemyIdleState : States
     #region Methods
     public override void Start()
     {
-        Debug.Log("idlestate");
         enemy = stateGameObject.GetComponent<NavMeshAgent>();
         enemy.speed = 0;
     }

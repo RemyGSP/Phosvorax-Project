@@ -72,6 +72,7 @@ public class RollingEnemyChaseState : States
 
     public override void OnExitState()
     {
+        playerSeen = false;
         return;
     }
     #endregion

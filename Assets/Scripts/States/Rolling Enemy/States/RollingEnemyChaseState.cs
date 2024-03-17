@@ -54,7 +54,7 @@ public class RollingEnemyChaseState : States
             if (hit.transform != null && hit.transform.position.z == PlayerReferences.instance.GetPlayerCoordinates().z && hit.transform.position.x == PlayerReferences.instance.GetPlayerCoordinates().x)
             {
                 playerSeen = true;
-                stateGameObject.GetComponent<RollingEnemyReferences>().SetPlayerSeen(playerSeen);
+                stateGameObject.GetComponent<EnemyReferences>().SetPlayerSeen(playerSeen);
                 stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, playerPosition - stateGameObject.transform.position, 0.5f);
                 enemy.SetDestination(playerPosition);
             }

@@ -89,6 +89,6 @@ public class RollingEnemyReferences : MonoBehaviour
 
     public bool GetIsStunned()
     {
-        return isStunned;
+        return isStuned;
     }
 }

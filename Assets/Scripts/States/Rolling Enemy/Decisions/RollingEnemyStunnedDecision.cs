@@ -10,8 +10,8 @@ public class RollingEnemyStunnedDecision : Decision
     {
 
         bool isStunned = stateMachine.GetComponent<RollingEnemyReferences>().GetIsStunned();
-
         bool aux = false;
+
         if (isStunned)
         {
             aux = true;

@@ -42,6 +42,7 @@ public class RollingEnemyRollingState : States
     public override void Start()
     {
         enemy = stateGameObject.GetComponent<NavMeshAgent>();
+        enemy.speed = 0;
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         direction = stateGameObject.transform.forward;
@@ -68,7 +69,6 @@ public class RollingEnemyRollingState : States
                 Quaternion quat = Quaternion.Euler(0, angle, 0);
                 stateGameObject.transform.rotation *= quat;
                 targetSpeed = quat * targetSpeed;
-                Debug.Log("Hit object: " + hit.collider.name);
             }
         }
 

@@ -13,7 +13,7 @@ public class RollingEnemyStunnedState : States
 
     public override void OnExitState()
     {
-
+        stateGameObject.GetComponent<RollingEnemyReferences>().SetIsStunned(false);
     }
 
     public override void Update()

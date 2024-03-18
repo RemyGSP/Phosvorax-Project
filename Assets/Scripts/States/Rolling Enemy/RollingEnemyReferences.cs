@@ -6,27 +6,12 @@ public class RollingEnemyReferences : MonoBehaviour
 {
     [SerializeField] private float damage;
     [SerializeField] private bool isStunned;
-    [SerializeField] private bool isRolling;
-    [SerializeField] private float rollTimer;
-    [SerializeField] private bool isStuned;
+
     private bool playerSeen;
     private bool startRollTimer;
     void Start() 
     {
         isStunned = false;
-    }
-
-    public void Roll()
-    {
-        isRolling = true;
-    }
-    public void StopRolling()
-    {
-        isRolling = false;
-    }
-    public bool IsRolling()
-    {
-        return isRolling;
     }
 
     void Update()
@@ -42,15 +27,7 @@ public class RollingEnemyReferences : MonoBehaviour
     {
         startRollTimer = false;
     }
-    public void SetRollTime(float attackTime)
-    {
-        this.rollTimer = attackTime;
-    }
 
-    public bool CheckIfStunned()
-    {
-        return isStunned;
-    }
     public void Stun(float stunTime)
     {
         isStunned = true;
@@ -84,11 +61,11 @@ public class RollingEnemyReferences : MonoBehaviour
 
     public void SetIsStunned(bool stun)
     {
-        isStuned = stun;
+        isStunned = stun;
     }
 
     public bool GetIsStunned()
     {
-        return isStuned;
+        return isStunned;
     }
 }

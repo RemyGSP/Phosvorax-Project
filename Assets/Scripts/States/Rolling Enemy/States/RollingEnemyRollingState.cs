@@ -70,6 +70,18 @@ public class RollingEnemyRollingState : States
                 stateGameObject.transform.rotation *= quat;
                 targetSpeed = quat * targetSpeed;
             }
+            else
+            {
+                //hacer que mate al player. preferiblemente oneshot
+                Vector3 normal = hit.normal;
+
+                direction = Vector3.Reflect(direction, normal).normalized;
+
+                float angle = Vector3.SignedAngle(stateGameObject.transform.forward, direction, Vector3.up);
+                Quaternion quat = Quaternion.Euler(0, angle, 0);
+                stateGameObject.transform.rotation *= quat;
+                targetSpeed = quat * targetSpeed;
+            }
         }
 
         elapsedTime += Time.deltaTime;

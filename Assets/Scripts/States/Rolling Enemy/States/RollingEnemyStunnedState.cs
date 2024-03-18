@@ -24,6 +24,7 @@ public class RollingEnemyStunnedState : States
     public override void Start()
     {
         stateGameObject.GetComponent<RollingEnemyReferences>().Stun(stunTime);
+        stateGameObject.GetComponent<RollingEnemyReferences>().SetIsStunned(true);
         stateGameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
        
     }

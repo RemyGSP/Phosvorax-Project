@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public class StateMachine : MonoBehaviour
 {
     [SerializeField] private States entryState;
     [SerializeField] private States currentState;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,11 +31,16 @@ public class StateMachine : MonoBehaviour
         States newState = currentState.CheckTransitions();
         if (newState is not null)
         {
-            currentState.OnExitState();
-            currentState = Instantiate(newState);
-            currentState.InitializeState(this.gameObject);
-            currentState.OnEnterState();
+            ChangeState(newState);
         }
+    }
+
+    private void ChangeState(States newState)
+    {
+        currentState.OnExitState();
+        currentState = Instantiate(newState);
+        currentState.InitializeState(this.gameObject);
+        currentState.OnEnterState();
     }
 
     private void OnCollisionEnter(Collision collision)

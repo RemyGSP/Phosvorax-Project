@@ -13,7 +13,7 @@ public class AreaDamageAbility : Ability
     {
         playerTransform = stateGameObject.GetComponent<Transform>();
         AreaDamage();
-        Debug.Log("nikinikole si o no?");
+        //Debug.Log("nikinikole si o no?");
     }
 
     public override void OnExitState()

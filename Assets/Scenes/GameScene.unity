@@ -1321,6 +1321,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entryState: {fileID: 0}
   currentState: {fileID: 0}
+  stunnedState: {fileID: 0}
 --- !u!114 &992127173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1350,7 +1351,7 @@ MonoBehaviour:
   minHealth: 0
   damageModifier: 0
   parryDamageDetector: 0
-  onHit:
+  onGetDamaged:
     m_PersistentCalls:
       m_Calls: []
   onRevive:
@@ -2146,9 +2147,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2345252906728925867, guid: b512993666e602e409c2175bd6f93cba,
         type: 3}
+      propertyPath: damageModifier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2345252906728925867, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
       propertyPath: onHit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2779766081550897541, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
+      propertyPath: stunnedState
+      value: 
+      objectReference: {fileID: 11400000, guid: c84723fe140906f4d81ba9edecc5557c,
+        type: 2}
     - target: {fileID: 4344926261779294968, guid: b512993666e602e409c2175bd6f93cba,
         type: 3}
       propertyPath: m_Name

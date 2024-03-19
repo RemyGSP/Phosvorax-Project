@@ -13,4 +13,9 @@ MonoBehaviour:
   m_Name: OnDamageState
   m_EditorClassIdentifier: 
   stateGameObject: {fileID: 0}
-  stateTransitions: []
+  stateTransitions:
+  - decisionToBeMade: {fileID: 11400000, guid: cd1d39069d32b3f419bddb153b7c11d4, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: 8de858c2648c16e4a8dd9de391dd1fde,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 11400000, guid: 98a7d593610d7fa41a8207f835e69776,
+      type: 2}

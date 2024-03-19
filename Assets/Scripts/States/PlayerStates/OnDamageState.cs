@@ -10,16 +10,16 @@ public class OnDamageState : States
     }
     public override void Start()
     {
-        Debug.Log("medañolmao");
+        //Debug.Log("medañolmao");
     }
 
     public override void OnExitState()
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void Update()
     {
-        throw new System.NotImplementedException();
+        
     }
 }

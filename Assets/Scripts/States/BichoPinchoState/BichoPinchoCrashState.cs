@@ -26,7 +26,7 @@ public class BichoPinchoCrashState : States
     public override void Start()
     {
         animator = stateGameObject.GetComponent<Animator>();
-        Debug.Log("KYS");
+        //Debug.Log("KYS");
         animator.SetBool("crash",true);
         base.Start();
         Vector3 backwardDirection = -stateGameObject.transform.forward;

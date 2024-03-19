@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "States/PlayerBasicAttackState")]
+[CreateAssetMenu(menuName = "States/PlayerOnDamageState")]
 public class OnDamageState : States
 {
     public OnDamageState(GameObject stateGameObject) : base(stateGameObject)

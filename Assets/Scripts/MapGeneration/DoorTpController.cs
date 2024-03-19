@@ -33,7 +33,7 @@ public class DoorTpController : MonoBehaviour
     {
         destinationObject = newDestination;
 
-        Debug.Log("funcion puerta");
+        //Debug.Log("funcion puerta");
         gameObject.SetActive(true);
     }
 }

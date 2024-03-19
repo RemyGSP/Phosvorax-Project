@@ -40,10 +40,27 @@ public abstract class States : ScriptableObject
 
     public virtual void OnEnterState()
     {
+        HealthBehaviour hb = stateGameObject.GetComponent<HealthBehaviour>();
+        if (hb != null)
+        {
+            hb.onGetDamaged.AddListener(OnReceivedDamage);
+        }
         Start();
     }
 
-    public abstract void OnExitState();
+    public virtual void OnExitState()
+    {
+        HealthBehaviour hb = stateGameObject.GetComponent<HealthBehaviour>();
+        if (hb != null)
+        {
+            hb.onGetDamaged.RemoveListener(OnReceivedDamage);
+        }
+    }
+
+    void OnReceivedDamage(float dmg)
+    {
+        stateGameObject.GetComponent<StateMachine>().ReceivedDamage();
+    }
 
     //virtual para que cuando se utilize un objeto de tipo States pero que contenga un hijo 
     public virtual void InitializeState(GameObject gameObject)

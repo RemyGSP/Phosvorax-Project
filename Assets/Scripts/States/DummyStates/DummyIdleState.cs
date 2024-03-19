@@ -16,7 +16,6 @@ public class DummyIdleState : States
     // Start is called before the first frame update
     public override void Start()
     {
-        Debug.Log("Dummy Idle");
         animator = stateGameObject.GetComponent<Animator>();
         animator.SetBool("Idle",true);
     }

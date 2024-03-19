@@ -76,6 +76,7 @@ public class BichoPinchoAttackState : States
         {
             reached = true;
         }
+        Debug.Log("Acceleration: " + acceleration + " Deceleration: " + deccelerationCurve.Evaluate(stopTimer));
     }
 
     public override void OnTriggerEnter(Collider other)

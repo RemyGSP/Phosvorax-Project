@@ -22,7 +22,6 @@ public class DamageDisplay : MonoBehaviour
         damage = this.currentHealth - currentHealth;
         GameObject b = Instantiate(damagePrefab);
         b.GetComponent<RectTransform>().sizeDelta = new Vector2(1,1);
-        Debug.Log(b.GetComponentInChildren<Animator>());
         b.GetComponentInChildren<Animator>().Play("DamageText");
         b.GetComponentInChildren<TextMeshProUGUI>().text = damage.ToString();
         b.transform.position = transform.position;

@@ -12,9 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e769ffc821571b48bf497ed8ae79914, type: 3}
   m_Name: EnemyIdleState
   m_EditorClassIdentifier: 
-  stateTransitions: []
-  EnemyChaseState: {fileID: 0}
-  EnemyAttackState: {fileID: 0}
-  EnemyDieState: {fileID: 0}
-  maxAttackDistance: 5
-  distanceToSeePlayer: 20
+  stateGameObject: {fileID: 0}
+  stateTransitions:
+  - decisionToBeMade: {fileID: 11400000, guid: 7b2c8f844fb99094f9b3d5beadc8a4c8, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: 715ca006327cf564bad76a83106e0b9b,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 11400000}
+  - decisionToBeMade: {fileID: 11400000, guid: 3e2c1271059576d4ea7fce5384ef0e43, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: dbd99a2dd69e7004cbecbf60b9ccb7ed,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 11400000}

@@ -955,6 +955,7 @@ MonoBehaviour:
   player: {fileID: 2012424539}
   shieldObject: {fileID: 2012424543}
   shieldObjectRenderer: {fileID: 2012424544}
+  playerRenderer: {fileID: 1830131742}
   ShotingPoint: {fileID: 2012424541}
   playerSpeed: 0
   playerDamage: 0
@@ -2137,6 +2138,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1726681177}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!137 &1830131742 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1258105728910112462, guid: b512993666e602e409c2175bd6f93cba,
+    type: 3}
+  m_PrefabInstance: {fileID: 2012424538}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2012424538
 PrefabInstance:
   m_ObjectHideFlags: 0

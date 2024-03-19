@@ -90,10 +90,7 @@ public class EnemyMeleeAttackState : States
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         currentAttackDelay = attackDelay;
 
-        if (stateGameObject.TryGetComponent<AttackAreaVisualizer>(out AttackAreaVisualizer attAreaVisual))
-        {
-            attAreaVisual.DrawAttackArea(400f, 400f);
-        }
+        
 
 
 

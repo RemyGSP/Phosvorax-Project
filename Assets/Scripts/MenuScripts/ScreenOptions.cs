@@ -35,7 +35,6 @@ public class ScreenOptions : MonoBehaviour
     {
         CheckIfPlayerPrefsContainsPlayerConfiguration();
         playerPrefOptions = GetCurrentPlayerPrefsOptions();
-        ApplyOptions();
         currentPlayerOptions = new int[3];
         ComproveIfConfigChanged();
         screenModeOptions = new string[2];

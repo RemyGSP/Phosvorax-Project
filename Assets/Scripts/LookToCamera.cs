@@ -6,11 +6,14 @@ public class LookToCamera : MonoBehaviour
 {
 
     private Vector3 desiredRotation = new Vector3(35f, 45f, 0f);
+    [SerializeField]private  Vector3 offset;
 
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = Quaternion.Euler(desiredRotation);
+        Vector3 finalRotation = desiredRotation + offset;
+        Debug.Log("Final rotation: " + finalRotation + " Offset: " + offset);
+        transform.rotation = Quaternion.Euler(finalRotation);
 
     }
 }

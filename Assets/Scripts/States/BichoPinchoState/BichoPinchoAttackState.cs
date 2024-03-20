@@ -19,6 +19,7 @@ public class BichoPinchoAttackState : States
     [SerializeField] private  AnimationCurve accelerationCurve;
     [SerializeField] private AnimationCurve deccelerationCurve;
     [SerializeField] GameObject feedback;
+    private Quaternion rotation;
     //En este script es donde guardo informacion que transciende los estados para que lo puedan usar las decisiones etc
     private BichoPinchoReferences infoContainer;
     public BichoPinchoAttackState(GameObject stateGameObject) : base(stateGameObject)
@@ -47,7 +48,8 @@ public class BichoPinchoAttackState : States
         reached = false;
         targetPosition = PlayerReferences.instance.GetPlayerCoordinates();
         targetPosition.y = stateGameObject.transform.position.y;
-        stateGameObject.transform.LookAt(targetPosition);
+        GetRotation(targetPosition);
+        stateGameObject.transform.rotation = Quaternion.Lerp(stateGameObject.transform.rotation, rotation, 0.05f);
         // Instantiate the object
         GameObject instantiatedObject = Instantiate(feedback, feedbackSpawnPos.transform.position, Quaternion.identity);
         instantiatedObject.GetComponent<FollowPlayer>().SetPlayer(feedbackSpawnPos);
@@ -65,7 +67,12 @@ public class BichoPinchoAttackState : States
             Vector3 lastPos = rb.velocity;
             float decceleration = deccelerationCurve.Evaluate(stopTimer);
             rb.velocity = (lastPos / force / acceleration).normalized * force * decceleration;
-
+            Debug.Log("Decceleration " + decceleration);
+            if (decceleration < 0.2f)
+            {
+                GetRotation(targetPosition = PlayerReferences.instance.GetPlayerCoordinates());
+                stateGameObject.transform.rotation = Quaternion.Lerp(stateGameObject.transform.rotation, rotation, 0.008f);
+            }
         }
         else
         {
@@ -74,7 +81,9 @@ public class BichoPinchoAttackState : States
             //direccion y corrige su direccion hacia atras
             if (currentTime > 0.0f && currentTime < 0.7f)
             {
-                stateGameObject.transform.LookAt(targetPosition);
+                //stateGameObject.transform.LookAt(targetPosition);
+                stateGameObject.transform.rotation = Quaternion.Lerp(stateGameObject.transform.rotation, rotation, 0.05f);
+
             }
         }
         if (Vector3.Distance(stateGameObject.transform.position, targetPosition) < 0.5f)
@@ -91,7 +100,14 @@ public class BichoPinchoAttackState : States
             other.gameObject.GetComponent<HealthBehaviour>().Damage(infoContainer.GetDamage());
         }
     }
-
+    
+    public void GetRotation(Vector3 targetPos)
+    {
+        Quaternion previousRotation = stateGameObject.transform.rotation;
+        stateGameObject.transform.LookAt(targetPos);
+        rotation = stateGameObject.transform.rotation;
+        stateGameObject.transform.rotation = previousRotation;
+    }
 
 }
  

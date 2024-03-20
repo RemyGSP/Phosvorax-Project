@@ -12,7 +12,6 @@ public class LookToCamera : MonoBehaviour
     void Update()
     {
         Vector3 finalRotation = desiredRotation + offset;
-        Debug.Log("Final rotation: " + finalRotation + " Offset: " + offset);
         transform.rotation = Quaternion.Euler(finalRotation);
 
     }

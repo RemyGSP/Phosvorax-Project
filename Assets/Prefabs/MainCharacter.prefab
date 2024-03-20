@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 5587114476268801040}
   - component: {fileID: 6722613108393594499}
   m_Layer: 3
-  m_Name: Canvas
+  m_Name: AbilityPointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -374,6 +374,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3758352024179655184}
+  - {fileID: 7614544897425037937}
   m_Father: {fileID: 8838741370877958639}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -456,7 +457,7 @@ GameObject:
   - component: {fileID: 1100857960166773119}
   - component: {fileID: 1869670708816101238}
   m_Layer: 3
-  m_Name: areaFeedback
+  m_Name: AbilityArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -473,8 +474,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7614544897425037937}
+  m_Children: []
   m_Father: {fileID: 4737731626265216644}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 45}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -787,7 +787,7 @@ GameObject:
   - component: {fileID: 4620337261037209325}
   - component: {fileID: 7591278037796775855}
   m_Layer: 3
-  m_Name: cursorIndicator
+  m_Name: EfectArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -800,16 +800,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4205370706460424573}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.6532815, y: -0.27059805, z: 0.27059805, w: 0.6532815}
+  m_LocalPosition: {x: 0, y: 0, z: 0.07071495}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3758352024179655184}
+  m_Father: {fileID: 4737731626265216644}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0.1}
+  m_AnchoredPosition: {x: -0.07071495, y: 4.1}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4620337261037209325
@@ -913,6 +913,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entryState: {fileID: 11400000, guid: 8de858c2648c16e4a8dd9de391dd1fde, type: 2}
   currentState: {fileID: 0}
+  stunnedState: {fileID: 0}
 --- !u!114 &5708823608967699834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -925,9 +926,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f47a69741abf424c9f24e32bff27374, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  areaFeedback: {fileID: 1869670708816101238}
-  cursorIndicator: {fileID: 4205370706460424573}
-  cursorSpeed: 1
 --- !u!114 &6520834428026274798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1001,7 +999,7 @@ MonoBehaviour:
   minHealth: 0
   damageModifier: 0
   parryDamageDetector: 0
-  onHit:
+  onGetDamaged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}

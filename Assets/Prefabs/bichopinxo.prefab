@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70333981eedb8b24bb20306811f6c63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBehaviour: {fileID: 0}
+  healthBehaviour: {fileID: 2665370193748559192}
   fillSpeed: 10
   damageText: {fileID: 0}
   healthBar: {fileID: 9010398206959219582}
@@ -201,6 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entryState: {fileID: 11400000, guid: 63ad6c8eb74c85242b0a1a8988628b15, type: 2}
   currentState: {fileID: 0}
+  stunnedState: {fileID: 0}
 --- !u!54 &4974840870385779408
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -286,7 +287,7 @@ MonoBehaviour:
   minHealth: 0
   damageModifier: 1
   parryDamageDetector: 0
-  onHit:
+  onGetDamaged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6372215883572015367}
@@ -856,7 +857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81f3d0363559bee4082e85dd1182d4f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBehaviour: {fileID: 0}
+  healthBehaviour: {fileID: 2665370193748559192}
   damagePrefab: {fileID: 5903100796543579690, guid: bebd230af3fd32945bbdfa4b78cfd1d0,
     type: 3}
 --- !u!114 &1291907169096113753

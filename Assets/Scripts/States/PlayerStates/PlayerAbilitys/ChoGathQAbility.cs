@@ -2,16 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChoGathQAbility : MonoBehaviour
+[CreateAssetMenu(menuName = "Abilitys/ChoGathQAbility")]
+public class ChoGathQAbility : Ability
 {
-    // Start is called before the first frame update
-    void Start()
+
+
+    public override void AbilityUpdate()
     {
         
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void OnEnterState(GameObject stateGameObject)
+    {
+        
+    }
+
+    public override void OnExitState()
     {
         
     }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5383,7 +5383,7 @@ MonoBehaviour:
   minHealth: 0
   damageModifier: 0
   parryDamageDetector: 0
-  onHit:
+  onGetDamaged:
     m_PersistentCalls:
       m_Calls: []
   onRevive:
@@ -5430,6 +5430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entryState: {fileID: 0}
   currentState: {fileID: 0}
+  stunnedState: {fileID: 0}
 --- !u!65 &515215993
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6171,6 +6172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entryState: {fileID: 0}
   currentState: {fileID: 0}
+  stunnedState: {fileID: 0}
 --- !u!114 &992127173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6200,7 +6202,7 @@ MonoBehaviour:
   minHealth: 0
   damageModifier: 0
   parryDamageDetector: 0
-  onHit:
+  onGetDamaged:
     m_PersistentCalls:
       m_Calls: []
   onRevive:
@@ -6630,6 +6632,7 @@ MonoBehaviour:
   player: {fileID: 1092576554}
   shieldObject: {fileID: 390216966}
   shieldObjectRenderer: {fileID: 390216969}
+  playerRenderer: {fileID: 0}
   ShotingPoint: {fileID: 1892208724}
   playerSpeed: 0
   playerDamage: 0
@@ -7098,7 +7101,7 @@ Transform:
   m_GameObject: {fileID: 1754930487}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.427, y: -3.1381304, z: -5.22}
+  m_LocalPosition: {x: 1.528, y: -3.1381304, z: -5.22}
   m_LocalScale: {x: 2.8064332, y: -0.20052853, z: 10.208185}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7151,7 +7154,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 5
+    widthMultiplier: 1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -7164,22 +7167,13 @@ LineRenderer:
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
-        value: 0.6666666
-        inSlope: -1.0335647
-        outSlope: -1.0335647
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.12765968
-        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0, g: 0.023826122, b: 1, a: 1}
-      key1: {r: 1, g: 0.06132078, b: 0.67443305, a: 1}
+      key0: {r: 1, g: 0, b: 0.02849722, a: 1}
+      key1: {r: 0, g: 0, b: 0, a: 1}
       key2: {r: 1, g: 1, b: 1, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}

@@ -263,6 +263,6 @@ public class PrefabRoomInstancier : MonoBehaviour
             matrixString += "\n";
         }
 
-        Debug.Log(matrixString);
+        //Debug.Log(matrixString);
     }
 }

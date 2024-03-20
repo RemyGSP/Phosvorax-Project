@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class HealthBehaviour : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class HealthBehaviour : MonoBehaviour
     [SerializeField] private float minHealth;
     [SerializeField] private float damageModifier;
     [SerializeField] private bool parryDamageDetector;
-    public UnityEvent<float> onHit;
+    [FormerlySerializedAs("onHit")] public UnityEvent<float> onGetDamaged;
     public UnityEvent onRevive;
     private bool hasBeenHit;
 
@@ -48,8 +49,11 @@ public class HealthBehaviour : MonoBehaviour
         {
             float modifiedDamage = damage * damageModifier;
             currentHealth -= modifiedDamage;
-            onHit.Invoke(currentHealth);
-            CheckIfDeath();
+            if (modifiedDamage > 0)
+            {
+                onGetDamaged.Invoke(currentHealth);
+                CheckIfDeath();
+            }
             aux = true;
         }
         SetParrydetectorTrue();

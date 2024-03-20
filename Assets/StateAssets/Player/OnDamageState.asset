@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4af453901513994686d36a6b5286f44, type: 3}
+  m_Name: OnDamageState
+  m_EditorClassIdentifier: 
+  stateGameObject: {fileID: 0}
+  stateTransitions:
+  - decisionToBeMade: {fileID: 11400000, guid: cd1d39069d32b3f419bddb153b7c11d4, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: 8de858c2648c16e4a8dd9de391dd1fde,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 11400000, guid: 98a7d593610d7fa41a8207f835e69776,
+      type: 2}
+  invulnerabilityTime: 1
+  blinkCount: 5

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5923812216479279752}
   - component: {fileID: 3598106830986938501}
   - component: {fileID: 1907253318647696549}
+  - component: {fileID: -7430922123759199623}
   m_Layer: 0
   m_Name: exclamation
   m_TagString: Untagged
@@ -132,3 +133,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08705a9eedddec74a9b7c39ac46d8a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 80}
+--- !u!114 &-7430922123759199623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330836809388514668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d854b76edf15f44784eb57309199534, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}

@@ -7,7 +7,6 @@ public class EnemyReferences : MonoBehaviour
     #region Variables
     [Header("Enemy")]
     private GameObject enemy;
-    public static EnemyReferences instance;
 
     [Header("Position")]
     static Vector3 enemyCoordinates;
@@ -25,10 +24,7 @@ public class EnemyReferences : MonoBehaviour
     #region Methods
     private void Start()
     {
-        if (instance == null)
-            instance = this;
-        else
-            Debug.Log("Manager EnemyReferences already exists");
+
     }
     public Vector3 GetEnemyCoordinates()
     {

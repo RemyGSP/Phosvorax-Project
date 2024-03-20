@@ -1,11 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.XR;
 
 public class StateMachine : MonoBehaviour
 {
     [SerializeField] private States entryState;
     [SerializeField] private States currentState;
+    [SerializeField] private States stunnedState;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,10 +33,7 @@ public class StateMachine : MonoBehaviour
         States newState = currentState.CheckTransitions();
         if (newState is not null)
         {
-            currentState.OnExitState();
-            currentState = Instantiate(newState);
-            currentState.InitializeState(this.gameObject);
-            currentState.OnEnterState();
+            ChangeState(newState);
         }
     }
 
@@ -47,4 +48,19 @@ public class StateMachine : MonoBehaviour
 
     }
 
+    public void ChangeState(States newState)
+    {
+        currentState.OnExitState();
+        currentState = Instantiate(newState);
+        currentState.InitializeState(this.gameObject);
+        currentState.OnEnterState();
+    }
+    public void ReceivedDamage()
+    {
+        //Si no se puede stunear, esto no hace nada y ya
+        if (stunnedState != null)
+        {
+            ChangeState(stunnedState);
+        }
+    }
 }

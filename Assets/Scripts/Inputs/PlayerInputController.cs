@@ -167,7 +167,7 @@ public class PlayerInputController : MonoBehaviour
 
     public void OnControlsChanged(PlayerInput playerInput)
     {
-        Debug.Log("Current control scheme: " + playerInput.currentControlScheme);
+        //Debug.Log("Current control scheme: " + playerInput.currentControlScheme);
 
         if (playerInput.currentControlScheme.Equals("Keyboard"))
         {

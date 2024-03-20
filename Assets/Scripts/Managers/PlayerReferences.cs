@@ -9,6 +9,7 @@ public class PlayerReferences : MonoBehaviour
     [SerializeField] private GameObject player;
     [SerializeField] public GameObject shieldObject;
     [SerializeField] public Renderer shieldObjectRenderer;
+    [SerializeField] public Renderer playerRenderer;
     [SerializeField] public Transform ShotingPoint;
     [SerializeField] private float playerSpeed;
     [SerializeField] private float playerDamage;

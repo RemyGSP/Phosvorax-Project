@@ -20,16 +20,15 @@ public class SlashGenerator : MonoBehaviour
 
     private IEnumerator DecreaseScrollValueOverTime()
     {
-        float startScrollValue = 5f;
-        float targetScrollValue = -10f;
-        duration = 0.5f; // Duración en segundos para el cambio gradual
+        float startScrollValue = -0.2f;
+        float targetScrollValue = 1f;
 
         float elapsedTime = 0f;
 
         while (elapsedTime < duration)
         {
             float newScrollValue = Mathf.Lerp(startScrollValue, targetScrollValue, elapsedTime / duration);
-            slashMaterial.SetFloat("_Scroll", newScrollValue);
+            slashMaterial.SetFloat("_Dissolve", newScrollValue);
             elapsedTime += Time.deltaTime; // Incrementar elapsedTime
             yield return null;
         }

@@ -10,4 +10,14 @@ public class FeedbackPosition : MonoBehaviour
     {
         return spawnPos.position;
     }
+
+    public Transform GetFeedbackObject()
+    {
+        return spawnPos;
+    }
+
+    public GameObject GetFeedbackGameObject()
+    {
+        return spawnPos.gameObject;
+    }
 }

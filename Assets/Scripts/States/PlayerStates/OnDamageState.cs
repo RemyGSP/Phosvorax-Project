@@ -7,55 +7,51 @@ using UnityEngine;
 public class OnDamageState : States
 {
     [SerializeField] private float invulnerabilityTime;
-    public AnimationCurve blinkCurve; // Curva de animación para el parpadeo
+    [SerializeField] private int blinkCount = 5; // Número de parpadeos
     private bool isBlinking = false;
-    private HealthBehaviour playerhealth;
+    private HealthBehaviour playerHealth;
+    private Renderer playerRenderer;
 
     public OnDamageState(GameObject stateGameObject) : base(stateGameObject)
     {
     }
-    
+
     public override void Start()
     {
-        playerhealth = stateGameObject.GetComponent<HealthBehaviour>();
-        MonoInstance.instance.StartCoroutine(InvulnerabilityCorutine());
+        playerHealth = stateGameObject.GetComponent<HealthBehaviour>();
+        playerRenderer = PlayerReferences.instance.playerRenderer;
+        MonoInstance.instance.StartCoroutine(InvulnerabilityCoroutine());
     }
 
     public override void FixedUpdate()
     {
-   
     }
 
     public override void OnExitState()
     {
-        
     }
 
     public override void Update()
     {
-        
     }
 
-    IEnumerator InvulnerabilityCorutine()
+    IEnumerator InvulnerabilityCoroutine()
     {
         isBlinking = true;
-        float timer = 0f;
-        playerhealth.SetDamageModifier(0);
-        while (timer < invulnerabilityTime)
+        playerHealth.SetDamageModifier(0);
+
+        float blinkInterval = invulnerabilityTime / (blinkCount * 2); // Calculamos el intervalo entre parpadeos
+
+        for (int i = 0; i < blinkCount; i++)
         {
-            float blinkValue = blinkCurve.Evaluate(timer / invulnerabilityTime);
-
-            // Cambia la visibilidad del jugador
-            PlayerReferences.instance.playerRenderer.enabled = !PlayerReferences.instance.playerRenderer.enabled;
-
-            yield return null;
-            timer += Time.deltaTime;
-
+            // Cambiar la visibilidad del jugador
+            playerRenderer.enabled = !playerRenderer.enabled;
+            yield return new WaitForSeconds(blinkInterval);
         }
 
-        PlayerReferences.instance.playerRenderer.enabled = true; // Asegúrate de que el jugador esté visible al final del parpadeo
-        playerhealth.SetDamageModifier(1);
+        // Asegúrate de que el jugador esté visible al final del parpadeo
+        playerRenderer.enabled = true;
+        playerHealth.SetDamageModifier(1);
         isBlinking = false;
     }
-
 }

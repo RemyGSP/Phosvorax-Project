@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-[CreateAssetMenu(menuName = "EnemyStates/EnemyMeleeAttackState")]
+[CreateAssetMenu(menuName = "EnemyStates/RangedEnemyAttackState")]
 public class RangedEnemyAttackState : States
 {
 
@@ -19,25 +19,21 @@ public class RangedEnemyAttackState : States
     [SerializeField] LayerMask playerLayerMask;
 
     private RotateCharacter rotateCharacter;
+    private LaserGenerator laserGenerator;
     private Rigidbody rigidBody;
     private Animator anim;
+
+    [Header("Values")]
     [SerializeField] private float attackDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
     [SerializeField] private float attackOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
-    [SerializeField] private float sphereSize; // Tamaño del área de detección
     [SerializeField] private float attackDamage;
+    [SerializeField] private float timeToSpendAttacking;
 
     //controlar que el daño vaya con la animacion
     float animationLength;
-    float currentAttackTime;
     bool canAttack;
-    private float currentAttackDelay;
-    [Header("Timers")]
-    public float AttackTimer;
-    public float AttackCD;
-
+    private float elapsedTime;
     [SerializeField] private float maxAttackDistance = 5f;
-
-    [SerializeField] private AttackAreaVisualizer attackAreaVisualizer;
 
     private NavMeshAgent enemy;
 
@@ -83,23 +79,20 @@ public class RangedEnemyAttackState : States
 
     public override void Start()
     {
+        laserGenerator = stateGameObject.GetComponent<LaserGenerator>();
         enemy = stateGameObject.GetComponent<NavMeshAgent>();
         enemy.speed = 0;
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         anim = stateGameObject.GetComponent<Animator>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
-        currentAttackDelay = attackDelay;
-
+        canAttack = true;
         ExecuteAnim();
     }
 
     private void ExecuteAnim()
     {
         //anim.SetTrigger("attack");
-        currentAttackTime = 0;
         //animationLength = anim.GetCurrentAnimatorClipInfo(0).Length;
-        stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position);
-        currentAttackDelay = attackDelay;
         canAttack = true;
 
     }
@@ -110,48 +103,47 @@ public class RangedEnemyAttackState : States
 
         Vector3 attackDirection = stateGameObject.transform.forward;
 
-        // Lanza un rayo en la dirección del ataque
+        if (!laserGenerator.GetLaserState())
+        {
+            laserGenerator.ActivateLaser();
+        }
+
         RaycastHit hit;
         if (Physics.Raycast(stateGameObject.transform.position, attackDirection, out hit, maxAttackDistance, playerLayerMask))
         {
             // Si el rayo golpea un objeto en la capa del jugador, aplica daño
-            if (hit.collider.TryGetComponent<HealthBehaviour>(out HealthBehaviour healthBehaviour))
+            if (hit.collider.CompareTag("Player"))
             {
-                healthBehaviour.Damage(attackDamage);
+                hit.collider.GetComponent<HealthBehaviour>().Damage(attackDamage);
             }
 
             Debug.Log("Impacto con: " + hit.collider.gameObject.name);
         }
-
-        canAttack = false;
     }
 
 
-    public override void FixedUpdate()
-    {
-        currentAttackDelay -= Time.deltaTime;
-        currentAttackTime += Time.deltaTime;
-
-        if (currentAttackDelay <= 0)
-        {
-            if (canAttack)
-            {
-                ExecuteAttack();
-                PlayerTimers.Instance.playerBasicAttackTimer = 0;
-            }
-            currentAttackDelay = attackDelay;
-            canAttack = true;
-        }
-    }
     public override void Update()
     {
         stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position, 0.5f);
-        AttackTimer += Time.deltaTime;
+
+        elapsedTime += Time.deltaTime;
+
+        if (canAttack)
+        {
+            if(elapsedTime < timeToSpendAttacking)
+            {
+                ExecuteAttack();
+            }
+            else
+            {
+                canAttack = false;
+            }
+        }
     }
 
     public override void OnExitState()
     {
-        return;
+        canAttack = true;
     }
 
     #endregion

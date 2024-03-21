@@ -19,6 +19,7 @@ public class PlayerInputController : MonoBehaviour
     private bool isKeyboard;
     private bool isGamepad;
     private bool isCanceling;
+    private bool isPausing;
     private int abilityPressed;
     private void Start()
     {
@@ -50,6 +51,19 @@ public class PlayerInputController : MonoBehaviour
         return skewedInput;
     }
 
+    public void OnPause()
+    {
+        isPausing = true;
+    }
+
+    public bool IsPausing()
+    {
+        return isPausing;
+    }
+    public void HasPaused()
+    {
+        isPausing = false;
+    }
     public Vector3 GetPlayerInputDirection()
     {
         return movementDirection;

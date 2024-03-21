@@ -35,6 +35,9 @@ public class PlayerInteract : MonoBehaviour
 
     public void TryInteract() 
     {
-        interactableList.First().Interact(this);
+        if (interactableList.Count > 0)
+        {
+            interactableList.First().Interact(this);
+        }
     }
 }

@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "EnemyDecisions/RollingEnemyChasingDecision")]
-
-public class RollingEnemyChaseDecision : Decision
+[CreateAssetMenu(menuName = "EnemyDecisions/RangedEnemyGetAwayDecision")]
+public class GetAwayDecision : Decision
 {
     public override bool Decide(StateMachine stateMachine)
     {
-        bool isStuned = stateMachine.GetComponent<RollingEnemyReferences>().GetIsStunned();
-
+        bool canGetAway = stateMachine.GetComponent<RangedEnemyReferences>().GetCanMoveAway();
         bool aux = false;
 
-        if (!isStuned)
+        if (canGetAway)
         {
             aux = true;
         }

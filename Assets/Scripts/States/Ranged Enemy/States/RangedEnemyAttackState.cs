@@ -25,7 +25,6 @@ public class RangedEnemyAttackState : States
 
     [Header("Values")]
     [SerializeField] private float attackDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
-    [SerializeField] private float attackOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
     [SerializeField] private float attackDamage;
     [SerializeField] private float timeToSpendAttacking;
 
@@ -137,6 +136,9 @@ public class RangedEnemyAttackState : States
             else
             {
                 canAttack = false;
+                stateGameObject.GetComponent<RangedEnemyReferences>().SetCanAttack(canAttack);
+                stateGameObject.GetComponent<RangedEnemyReferences>().SetCanMoveAway(true);
+                stateGameObject.GetComponent<RangedEnemyReferences>().SetCanChase(true);
             }
         }
     }
@@ -144,6 +146,8 @@ public class RangedEnemyAttackState : States
     public override void OnExitState()
     {
         canAttack = true;
+        stateGameObject.GetComponent<LaserGenerator>().DeactivateLaser();
+        stateGameObject.GetComponent<RangedEnemyReferences>().SetCanChase(false);
     }
 
     #endregion

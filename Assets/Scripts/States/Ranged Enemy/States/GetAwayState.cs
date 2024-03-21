@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[CreateAssetMenu(menuName = "EnemyStates/RangedEnemyAttackState")]
+[CreateAssetMenu(menuName = "EnemyStates/RangedEnemyGetAwayState")]
 public class GetAwayState : States
 {
 
@@ -24,7 +24,8 @@ public class GetAwayState : States
     [Header("Values")]
     [SerializeField] private float speed;
     [SerializeField] private float timeToRunAway;
-
+    [SerializeField] private float maxDistanceToPlayer;
+ 
     private float currentTime;
     #endregion
 
@@ -69,43 +70,64 @@ public class GetAwayState : States
     public override void Start()
     {
         enemy = stateGameObject.GetComponent<NavMeshAgent>();
-        enemy.speed = 0;
+        enemy.speed = speed;
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         anim = stateGameObject.GetComponent<Animator>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
 
     }
 
- 
+
 
 
     public override void Update()
     {
         currentTime += Time.deltaTime;
 
-        if(currentTime < timeToRunAway)
+        if (currentTime < timeToRunAway)
         {
             Vector3 playerPosition = PlayerReferences.instance.GetPlayerCoordinates();
-
             Vector3 directionToPlayer = playerPosition - stateGameObject.transform.position;
-            directionToPlayer.Normalize();
+            float distanceToPlayer = directionToPlayer.magnitude;
 
-            // Obtener la posición más alejada de la nav mesh en la dirección opuesta al jugador
-            Vector3 oppositeDirection = -directionToPlayer;
-            NavMeshHit hit;
-            if (NavMesh.SamplePosition(stateGameObject.transform.position + oppositeDirection * 10f, out hit, 10f, NavMesh.AllAreas))
+            if (distanceToPlayer < maxDistanceToPlayer)
             {
-                // Mover al enemigo hacia el punto más alejado de la nav mesh
-                enemy.SetDestination(hit.position);
-                //enemy.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, hit.position - stateGameObject.transform.position, 0.5f);
-                //Vector3 oppositeLookDirection = -(hit.position - stateGameObject.transform.position);
-                //enemy.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, oppositeLookDirection - stateGameObject.transform.position, 0.5f); // si queremos que el enmigo esté andando hacia atras
+                directionToPlayer.Normalize();
+
+                Vector3 oppositeDirectionLeft = Quaternion.Euler(0, -45f, 0) * -directionToPlayer;
+                Vector3 oppositeDirectionRight = Quaternion.Euler(0, 45f, 0) * -directionToPlayer;
+
+                NavMeshHit hitLeft, hitRight;
+                bool canMoveLeft = NavMesh.SamplePosition(stateGameObject.transform.position + oppositeDirectionLeft * 10f, out hitLeft, 10f, NavMesh.AllAreas);
+                bool canMoveRight = NavMesh.SamplePosition(stateGameObject.transform.position + oppositeDirectionRight * 10f, out hitRight, 10f, NavMesh.AllAreas);
+
+                if (canMoveLeft && canMoveRight)
+                {
+                    if ((hitLeft.position - playerPosition).sqrMagnitude > (hitRight.position - playerPosition).sqrMagnitude)
+                        enemy.SetDestination(hitLeft.position);
+                    else
+                        enemy.SetDestination(hitRight.position);
+                }
+                else if (canMoveLeft)
+                {
+                    enemy.SetDestination(hitLeft.position);
+                }
+                else if (canMoveRight)
+                {
+                    enemy.SetDestination(hitRight.position);
+                }
+                // Si no podemos movernos hacia ningún lado, el enemigo se quedará en su posición actual
+            }
+            else
+            {
+                stateGameObject.GetComponent<RangedEnemyReferences>().SetCanAttack(true);
             }
         }
     }
 
     public override void OnExitState()
     {
+        stateGameObject.GetComponent<RangedEnemyReferences>().SetCanMoveAway(false);
     }
 
     #endregion

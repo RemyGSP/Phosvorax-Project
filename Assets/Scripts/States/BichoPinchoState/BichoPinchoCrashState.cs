@@ -25,6 +25,7 @@ public class BichoPinchoCrashState : States
 
     public override void Start()
     {
+
         animator = stateGameObject.GetComponent<Animator>();
         animator.SetBool("crash",true);
         base.Start();

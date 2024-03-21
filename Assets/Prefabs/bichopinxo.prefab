@@ -26,16 +26,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 649489497507210099}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 4}
-  m_LocalScale: {x: 1.0001389, y: 0.22561723, z: 1.0002447}
+  m_LocalScale: {x: 0.7697588, y: 0.023265649, z: 1.0002447}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7479696556528999539}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.4, y: 44.1}
+  m_AnchoredPosition: {x: 3.3, y: 51}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2118400686065672919
@@ -59,14 +59,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
+  m_Color: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 87808060f0e89694e89e611ffe919571, type: 3}
+  m_Sprite: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70333981eedb8b24bb20306811f6c63b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBehaviour: {fileID: 0}
+  healthBehaviour: {fileID: 2665370193748559192}
   fillSpeed: 10
   damageText: {fileID: 0}
   healthBar: {fileID: 9010398206959219582}
@@ -526,8 +526,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3.1816387
-  m_Center: {x: 1.6264938, y: 3.0325508, z: 8.027442}
+  m_Radius: 5.3828487
+  m_Center: {x: 1.6264938, y: 1.4235368, z: 11.837666}
 --- !u!95 &4731757175753150963
 Animator:
   serializedVersion: 5
@@ -1105,7 +1105,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.2, y: 76.77}
+  m_AnchoredPosition: {x: 7.2, y: 66.3}
   m_SizeDelta: {x: 29.046, y: 0.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5753232356639488429
@@ -1164,8 +1164,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10
-  m_fontSizeBase: 10
+  m_fontSize: 6
+  m_fontSizeBase: 6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1200,7 +1200,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -14.553875, y: 0, z: -11.822211, w: -2.102954}
+  m_margin: {x: -15.549929, y: 0, z: 10.797331, w: -2.102954}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

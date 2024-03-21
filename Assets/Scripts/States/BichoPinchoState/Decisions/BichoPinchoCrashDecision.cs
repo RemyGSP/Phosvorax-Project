@@ -9,7 +9,14 @@ public class BichoPinchoCrashDecision : Decision
 {
     public override bool Decide(StateMachine stateMachine)
     {
-        RaycastHit hit;
-        return stateMachine.gameObject.GetComponent<BichoPinchoReferences>().IsCrashing();
+        if (stateMachine.gameObject.GetComponent<BichoPinchoReferences>().IsCrashing())
+        {
+            stateMachine.gameObject.GetComponent<BichoPinchoReferences>().StopCrashing();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

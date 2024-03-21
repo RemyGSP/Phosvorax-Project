@@ -3241,13 +3241,66 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tienda
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5016016066649370970, guid: aae22248d487d16458cff5c027490028, type: 3}
-    - {fileID: 2622795248218720791, guid: aae22248d487d16458cff5c027490028, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7201925537649357424, guid: aae22248d487d16458cff5c027490028,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3685452977962286492}
   m_SourcePrefab: {fileID: 100100000, guid: aae22248d487d16458cff5c027490028, type: 3}
+--- !u!1 &3685452977962286490 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7201925537649357424, guid: aae22248d487d16458cff5c027490028,
+    type: 3}
+  m_PrefabInstance: {fileID: 3685452977962286489}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3685452977962286491 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5804695355743099548, guid: aae22248d487d16458cff5c027490028,
+    type: 3}
+  m_PrefabInstance: {fileID: 3685452977962286489}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3685452977962286492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3685452977962286490}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3e0dd06138b66449a468a40c6108d2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menus:
+  - {fileID: 3685452977962286491}
+  goBackAction:
+    m_Name: Go Back
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 899f3255-fd24-4e28-9f20-f04561198071
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 6558c558-efa4-4682-bbc5-c8b55b7083ba
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Go Back
+      m_Flags: 0
+    - m_Name: 
+      m_Id: 5e1faf2e-48f4-4e4e-b386-b4e5fa94fc7e
+      m_Path: <Gamepad>/buttonWest
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Go Back
+      m_Flags: 0
+    m_Flags: 0
 --- !u!23 &5072482785624795979
 MeshRenderer:
   m_ObjectHideFlags: 0

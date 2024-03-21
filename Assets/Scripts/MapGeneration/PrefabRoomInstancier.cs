@@ -47,7 +47,7 @@ public class PrefabRoomInstancier : MonoBehaviour
 
     int numRows = roomLayoutTypeMatrix.GetLength(0);
     int numCols = roomLayoutTypeMatrix.GetLength(1);
-    float spacing = 50f;
+    float spacing = 300f;
 
     for (int row = 0; row < numRows; row++)
     {

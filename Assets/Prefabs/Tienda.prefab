@@ -3057,7 +3057,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 337952923321242825}
-  - component: {fileID: 2622795248218720791}
   m_Layer: 0
   m_Name: ShopVisuals
   m_TagString: Untagged
@@ -3099,20 +3098,6 @@ Transform:
   - {fileID: 5162887801399315866}
   m_Father: {fileID: 7134955502788962806}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!114 &2622795248218720791
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3387927642413653508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 215db7d6d23343743850331ecf4b3d6d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shopCanvas: {fileID: 5804695355743099548}
-  interactableTooltip: {fileID: 7588350039247838249}
 --- !u!1 &3450770804632646889
 GameObject:
   m_ObjectHideFlags: 0
@@ -5750,7 +5735,6 @@ GameObject:
   - component: {fileID: 5853947168307782564}
   - component: {fileID: 6584202941537135033}
   - component: {fileID: 2092574070443304583}
-  - component: {fileID: 5016016066649370970}
   m_Layer: 13
   m_Name: Tienda
   m_TagString: Untagged
@@ -5872,38 +5856,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shopCanvas: {fileID: 5804695355743099548}
   interactableTooltip: {fileID: 7588350039247838249}
---- !u!114 &5016016066649370970
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7201925537649357424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0162a95808fdcb24dac08b16a10fa7bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  leveledUpSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  notLevelUpSprite: {fileID: 21300000, guid: 1d5a01d0044796c45bb882fd3a8159af, type: 3}
-  totalCost: {fileID: 0}
-  purchaseButton: {fileID: 0}
-  upgradeables:
-  - levelCosts: 
-    type: 0
-    squareContainer: {fileID: 0}
-    upgradeCostUI: {fileID: 0}
-    upgradeCost: 50
-  - levelCosts: 
-    type: 2
-    squareContainer: {fileID: 0}
-    upgradeCostUI: {fileID: 0}
-    upgradeCost: 50
-  - levelCosts: 
-    type: 1
-    squareContainer: {fileID: 0}
-    upgradeCostUI: {fileID: 0}
-    upgradeCost: 50
 --- !u!1 &7555213993708924683
 GameObject:
   m_ObjectHideFlags: 0
@@ -6006,7 +5958,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7588350039247838249}
   m_LocalRotation: {x: 0.38112038, y: 0.42504773, z: -0.027956396, w: 0.8205488}
-  m_LocalPosition: {x: 0, y: 0, z: -0.17}
+  m_LocalPosition: {x: 0, y: 0, z: -0.32}
   m_LocalScale: {x: 0.008655943, y: 0.008655943, z: 0.008655943}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6015,7 +5967,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 40.483, y: 62.758, z: 21.447}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1.54, y: 0.82}
+  m_AnchoredPosition: {x: 1.9, y: 1.52}
   m_SizeDelta: {x: 550, y: 309}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &4033368076593538343

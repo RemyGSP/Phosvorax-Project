@@ -72,6 +72,7 @@ public class BichoPinchoReferences : MonoBehaviour
     public void Stun(float stunTime)
     {
         isStunned = true;
+        GetComponent<StunBar>().StartStun(stunTime);
         StartCoroutine(_StopStun(stunTime));
     }
 

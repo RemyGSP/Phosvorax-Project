@@ -11,10 +11,7 @@ GameObject:
   - component: {fileID: 4452635094723457508}
   - component: {fileID: 2118400686065672919}
   - component: {fileID: 3081561675174895209}
-  - component: {fileID: 7429719583255533942}
-  - component: {fileID: 649579567496163571}
-  - component: {fileID: 8611107612134376720}
-  - component: {fileID: 8093837574373835509}
+  - component: {fileID: 3825429307745468273}
   m_Layer: 6
   m_Name: stunBar
   m_TagString: Untagged
@@ -29,16 +26,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 649489497507210099}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3.966}
-  m_LocalScale: {x: 0.08691874, y: 0.019832643, z: 0.0869807}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 4}
+  m_LocalScale: {x: 1.0001389, y: 0.22561723, z: 1.0002447}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 886689347171769289}
+  m_Father: {fileID: 7479696556528999539}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.161, y: 0.286}
+  m_AnchoredPosition: {x: 0.4, y: 44.1}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2118400686065672919
@@ -74,57 +71,12 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
-  m_FillOrigin: 1
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7429719583255533942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 649489497507210099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70333981eedb8b24bb20306811f6c63b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBehaviour: {fileID: 0}
-  fillSpeed: 10
-  damageText: {fileID: 0}
-  healthBar: {fileID: 3081561675174895209}
-  delayBar: {fileID: 0}
---- !u!114 &649579567496163571
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 649489497507210099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08705a9eedddec74a9b7c39ac46d8a66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0, z: 0}
---- !u!114 &8611107612134376720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 649489497507210099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 267de7a5066a6ce44a0acc2da6b7146e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stunThingsContainer: {fileID: 0}
-  stunBar: {fileID: 0}
-  fillSpeed: 0
---- !u!114 &8093837574373835509
+--- !u!114 &3825429307745468273
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -152,7 +104,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &886689347171769289
 Transform:
   m_ObjectHideFlags: 0
@@ -162,12 +114,10 @@ Transform:
   m_GameObject: {fileID: 1129629489774401754}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -38.4, y: 41.8, z: -36.8}
+  m_LocalPosition: {x: -36.4, y: 50.87, z: -45.7}
   m_LocalScale: {x: 11.506597, y: 11.376055, z: 11.499619}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4452635094723457508}
-  - {fileID: 1732432420584831813}
+  m_Children: []
   m_Father: {fileID: 7479696556528999539}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1543174949144934713
@@ -623,7 +573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267de7a5066a6ce44a0acc2da6b7146e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stunThingsContainer: {fileID: 1129629489774401754}
+  stunThingsContainer: {fileID: 7158420164466314825}
   stunBar: {fileID: 3081561675174895209}
   fillSpeed: 10
 --- !u!1 &2365529270750695669
@@ -1001,6 +951,8 @@ RectTransform:
   - {fileID: 1237496207975735190}
   - {fileID: 8542856565096611023}
   - {fileID: 2656963427778249698}
+  - {fileID: 4452635094723457508}
+  - {fileID: 1732432420584831813}
   - {fileID: 886689347171769289}
   m_Father: {fileID: 5578408129058381823}
   m_LocalEulerAnglesHint: {x: -10.49, y: 25.827, z: -2.912}
@@ -1129,14 +1081,14 @@ GameObject:
   - component: {fileID: 1732432420584831813}
   - component: {fileID: 5753232356639488429}
   - component: {fileID: 7039997307043875104}
-  - component: {fileID: 2384849996492074800}
+  - component: {fileID: 2515747164912006654}
   m_Layer: 6
   m_Name: StunnedText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1732432420584831813
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1144,16 +1096,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7158420164466314825}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 4.14}
-  m_LocalScale: {x: 0.08691874, y: 0.08786985, z: 0.0869807}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 3.6}
+  m_LocalScale: {x: 1.0001389, y: 0.9996123, z: 1.0002447}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 886689347171769289}
+  m_Father: {fileID: 7479696556528999539}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 3.33, y: 1.01}
+  m_AnchoredPosition: {x: 1.2, y: 76.77}
   m_SizeDelta: {x: 29.046, y: 0.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5753232356639488429
@@ -1212,8 +1164,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 3
-  m_fontSizeBase: 3
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1248,13 +1200,13 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 11.814626, w: -2.102954}
+  m_margin: {x: -14.553875, y: 0, z: -11.822211, w: -2.102954}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &2384849996492074800
+--- !u!114 &2515747164912006654
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

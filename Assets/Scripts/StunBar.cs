@@ -11,22 +11,21 @@ public class StunBar : MonoBehaviour
     [SerializeField] private float fillSpeed;
     public void StartStun(float stun)
     {
+        stunBar.fillAmount = 1;
         stunThingsContainer.SetActive(true);
         StartCoroutine(_StunBar(stun));
     }
 
     private IEnumerator _StunBar(float stunTime)
     {
-        float reductionRate = 1f / stunTime;
+        float reductionRate = 0.1f;
         while (Mathf.Abs(stunBar.fillAmount - reductionRate) > 0.01f)
         {
-            // Use Mathf.Lerp to interpolate between the current fill amount and the target fill amount
-            stunBar.fillAmount = Mathf.Lerp(stunBar.fillAmount, 0, Time.deltaTime * fillSpeed);
+            stunBar.fillAmount = stunBar.fillAmount - reductionRate;
 
-            yield return null; // Wait for the end of frame before continuing the loop
+            yield return new WaitForSeconds(stunTime / 10);
         }
 
-        // Ensure the health bar reaches exactly the target fill amount
         stunBar.fillAmount = 0;
         stunThingsContainer.SetActive(false);
     }

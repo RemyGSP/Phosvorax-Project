@@ -67,7 +67,6 @@ public class BichoPinchoAttackState : States
             Vector3 lastPos = rb.velocity;
             float decceleration = deccelerationCurve.Evaluate(stopTimer);
             rb.velocity = (lastPos / force / acceleration).normalized * force * decceleration;
-            Debug.Log("Decceleration " + decceleration);
             if (decceleration < 0.2f)
             {
                 GetRotation(targetPosition = PlayerReferences.instance.GetPlayerCoordinates());

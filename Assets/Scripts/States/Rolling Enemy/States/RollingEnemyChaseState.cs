@@ -66,7 +66,6 @@ public class RollingEnemyChaseState : States
         }
         else
         {
-            Debug.Log("LineCastFalse");
         }
     }
 

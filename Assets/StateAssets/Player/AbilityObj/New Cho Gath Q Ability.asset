@@ -9,21 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: ded27f3d26b7d3241bf9357ae5b646a7, type: 3}
   m_Name: New Cho Gath Q Ability
-  m_EditorClassIdentifier: Assembly-CSharp::ChoGathQAbility
+  m_EditorClassIdentifier: 
   abilityRange: 0
-  abilityBaseDamage: 0
+  abilityBaseDamage: 69
   abilityCD: 0
-  onststetime: 1
-  enemyLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
-  animOffsetRotation: 0
-  attackDelay: 0.5
-  attackOffset: 1
-  sphereSize: 1
-  attackDamage: 30
-  attackAreaVisualizer: {fileID: 0}
-  abilityFeedback: {fileID: 2780774166322537487, guid: b498e1ccdf178dd46a7697ac47aa0f2e,
+  onststetime: 0.2
+  prefabToInstantiate: {fileID: 5160241765724351915, guid: 8f88ae5a717e6584ea69dba5dd9b3f17,
     type: 3}
+  bulletLifetime: 1

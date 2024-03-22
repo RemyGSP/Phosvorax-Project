@@ -72,6 +72,7 @@ public class BichoPinchoReferences : MonoBehaviour
     public void Stun(float stunTime)
     {
         isStunned = true;
+        GetComponent<StunBar>().StartStun(stunTime);
         StartCoroutine(_StopStun(stunTime));
     }
 
@@ -89,9 +90,13 @@ public class BichoPinchoReferences : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         isCrashing = true;
-        Debug.Log("Colision con: " + other.name);
     }
     private void OnTriggerExit(Collider other)
+    {
+        isCrashing = false;
+    }
+
+    public void StopCrashing()
     {
         isCrashing = false;
     }

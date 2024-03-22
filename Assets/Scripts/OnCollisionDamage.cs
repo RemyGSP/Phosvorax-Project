@@ -1,13 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class OnCollisionDamage : MonoBehaviour
 {
     [SerializeField] private float damage;
-    public void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.TryGetComponent<HealthBehaviour>(out HealthBehaviour healthBehaviour))
+        HandleCollision(other.gameObject);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        HandleCollision(collision.gameObject);
+    }
+
+    private void HandleCollision(GameObject otherGameObject)
+    {
+        HealthBehaviour healthBehaviour = otherGameObject.GetComponent<HealthBehaviour>();
+        if (healthBehaviour != null)
         {
             healthBehaviour.Damage(damage);
         }

@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08705a9eedddec74a9b7c39ac46d8a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &1904762223958030522
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,6 +199,7 @@ GameObject:
   - component: {fileID: 2595741549642505742}
   - component: {fileID: 2586276983033023295}
   - component: {fileID: 5053571556393018717}
+  - component: {fileID: 4855829284575582547}
   m_Layer: 6
   m_Name: training_dummy
   m_TagString: Untagged
@@ -258,6 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   entryState: {fileID: 11400000, guid: a4535ce0ac891114c9e39e6d8e6fdf99, type: 2}
   currentState: {fileID: 0}
+  stunnedState: {fileID: 0}
 --- !u!114 &3841608278678365490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -275,7 +278,7 @@ MonoBehaviour:
   minHealth: 0
   damageModifier: 1
   parryDamageDetector: 0
-  onHit:
+  onGetDamaged:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2795308130669804286}
@@ -372,6 +375,33 @@ MonoBehaviour:
   healthBehaviour: {fileID: 3841608278678365490}
   damagePrefab: {fileID: 5903100796543579690, guid: bebd230af3fd32945bbdfa4b78cfd1d0,
     type: 3}
+--- !u!54 &4855829284575582547
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4697017240656324050}
+  serializedVersion: 4
+  m_Mass: 50
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &6676232919334447449
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,6 +508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08705a9eedddec74a9b7c39ac46d8a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &6774080502169825540
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,3 +953,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08705a9eedddec74a9b7c39ac46d8a66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: 0}

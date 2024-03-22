@@ -15,7 +15,7 @@ public class RollingEnemyRollingState : States
     [SerializeField] private AnimationCurve curveToMaxAcceleration;
     [SerializeField] private float rotationSpeed;
     [SerializeField] private float timeToSpendRolling;
-
+    [SerializeField] private float damage;
     [Header("Raycast Values")]
     [SerializeField] private float maxRaycastDistance;
 
@@ -41,6 +41,7 @@ public class RollingEnemyRollingState : States
 
     public override void Start()
     {
+        stateGameObject.GetComponent<Animator>().SetBool("walking",true);
         enemy = stateGameObject.GetComponent<NavMeshAgent>();
         enemy.speed = 0;
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
@@ -74,7 +75,10 @@ public class RollingEnemyRollingState : States
             {
                 //hacer que mate al player. preferiblemente oneshot
                 Vector3 normal = hit.normal;
-
+                if (hit.collider.gameObject.TryGetComponent<HealthBehaviour>(out HealthBehaviour healthBehaviour))
+                {
+                    healthBehaviour.Damage(damage);
+                }
                 direction = Vector3.Reflect(direction, normal).normalized;
 
                 float angle = Vector3.SignedAngle(stateGameObject.transform.forward, direction, Vector3.up);
@@ -110,6 +114,7 @@ public class RollingEnemyRollingState : States
     public override void OnExitState()
     {
         elapsedTime = 0;
+        stateGameObject.GetComponent<Animator>().SetBool("walking", false);
     }
 
     #endregion

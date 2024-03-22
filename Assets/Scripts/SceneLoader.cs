@@ -18,7 +18,6 @@ public class SceneLoader : MonoBehaviour
             Debug.Log("Ya existe otra instancia de SceneLoader");
             Destroy(gameObject);
         }
-        DontDestroyOnLoad(gameObject); 
 
     }
     public void SceneLoad(string scene)

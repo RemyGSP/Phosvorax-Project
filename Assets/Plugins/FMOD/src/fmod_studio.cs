@@ -1796,6 +1796,7 @@ namespace FMOD.Studio
             return hasHandle() && FMOD_Studio_VCA_IsValid(this.handle);
         }
 
+
         #endregion
     }
 

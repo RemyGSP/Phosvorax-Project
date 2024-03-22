@@ -12,12 +12,12 @@ public class RollingEnemyDieState : States
     }
     public override void OnExitState()
     {
-        throw new System.NotImplementedException();
+        return;
     }
 
     public override void Start()
     {
-        //stateGameObject.GetComponent<CrystalDrop>().Drop();
+        stateGameObject.GetComponent<CrystalDrop>().Drop();
         Destroy(stateGameObject);
     }
 

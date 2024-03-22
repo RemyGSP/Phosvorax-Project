@@ -66,6 +66,7 @@ public class BasicAttackState : States
 
     private void ExecuteAnim()
     {
+        AudioManager.Instance.CallOneShot("event:/SlashSound");
         anim.SetTrigger("attack");
         rigidBody.AddForce(stateGameObject.transform.rotation * Vector3.forward * impulse, ForceMode.Impulse);
         currentAttackTime = 0;

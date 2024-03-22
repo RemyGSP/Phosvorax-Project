@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour
 
     public void Start()
     {
+        Instance = this;
         generalVCA = RuntimeManager.GetVCA(VCAPath + generalVCAPath);
         sfxVCA = RuntimeManager.GetVCA(VCAPath + SFXVCAPath);
         musicVCA = RuntimeManager.GetVCA(VCAPath + musicVCAPath);

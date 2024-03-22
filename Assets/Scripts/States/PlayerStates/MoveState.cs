@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using UnityEngine.Windows;
 
 [CreateAssetMenu(menuName = "States/PlayerMoveState")]
 public class MoveState : States
@@ -21,6 +22,8 @@ public class MoveState : States
     [SerializeField] AnimationCurve curveToMaxAcceleration;
     [SerializeField] private float rotationSpeed;
     private Animator animator;
+    private Coroutine isMoving;
+    private FMOD.Studio.EventInstance foosteps;
     float currentMovementStatusTimer;
     #endregion
 
@@ -51,6 +54,11 @@ public class MoveState : States
             currentSpeed = maxSpeed * curveToMaxAcceleration.Evaluate(currentMovementStatusTimer / timeToMaxVelocity);
         }
         currentMovementStatusTimer += Time.deltaTime;
+        if (isMoving == null)
+        {
+            isMoving = MonoInstance.instance.StartCoroutine(_PlayFootstep());
+
+        }
 
         return playerDirection * currentSpeed;
     }
@@ -80,6 +88,15 @@ public class MoveState : States
         {
             animator.SetBool("running", false);
         }
+    }
+
+    private IEnumerator _PlayFootstep()
+    {
+        foosteps = FMODUnity.RuntimeManager.CreateInstance("event:/Footsteps");
+        foosteps.start();
+        foosteps.release();
+        yield return new WaitForSeconds(0.4f);
+        isMoving = null;
     }
     #endregion
 }

@@ -24,6 +24,7 @@ public class EzrealQAbility : Ability
     }
     private void ShootProjectile(Vector3 direction)
     {
+        AudioManager.Instance.CallOneShot("event:/Zap");
         GameObject b = Instantiate(bulletPrefab, PlayerReferences.instance.ShotingPoint.position, PlayerReferences.instance.ShotingPoint.rotation);
 
         b.GetComponent<Rigidbody>().velocity = direction.normalized * bulletSpeed;

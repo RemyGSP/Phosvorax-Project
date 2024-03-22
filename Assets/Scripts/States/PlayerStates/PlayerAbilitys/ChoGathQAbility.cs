@@ -20,6 +20,7 @@ public class ChoGathQAbility : Ability
 
     public override void OnEnterState(GameObject stateGameObject)
     {
+        AudioManager.Instance.CallOneShot("event:/StoneAttack");
         targetDir = PlayerReferences.instance.GetMouseTargetDir();
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
@@ -27,7 +28,6 @@ public class ChoGathQAbility : Ability
 
     public override void OnExitState()
     {
-
         targetDir.y = -0.7f;
         GameObject projectile = Instantiate(prefabToInstantiate, targetDir, Quaternion.identity);
 

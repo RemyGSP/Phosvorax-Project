@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -23,10 +24,20 @@ public class RangedEnemyAttackState : States
     private Rigidbody rigidBody;
     private Animator anim;
 
+    //LaserValues
+    private float laserOffValue = 2.5f;
+    private float laserOnMaxValue = 0f;
+    private float laserAuxValue;
+
+
+
+
     [Header("Values")]
     [SerializeField] private float attackDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
     [SerializeField] private float attackDamage;
     [SerializeField] private float timeToSpendAttacking;
+    [SerializeField] private float lerpSpeed = 0.5f;
+    [SerializeField] private float lineDrawUnitsPerMeter = 0.375f;
 
     //controlar que el daño vaya con la animacion
     float animationLength;
@@ -98,8 +109,10 @@ public class RangedEnemyAttackState : States
 
     void ExecuteAttack()
     {
-        Vector3 attackDirection = stateGameObject.transform.forward;
-        float currentLaserLength = laserGenerator.GetLaserLength();
+        Vector3 finalPoint = laserGenerator.getFinalPointCoordinates();
+        Vector3 initialPoint = laserGenerator.getInitialPointCoordinates();
+
+        float currentLaserLength = (finalPoint - initialPoint).magnitude;
 
         if (!laserGenerator.GetLaserState())
         {
@@ -107,31 +120,50 @@ public class RangedEnemyAttackState : States
         }
 
         RaycastHit hit;
-        if (Physics.Raycast(stateGameObject.transform.position, attackDirection, out hit, currentLaserLength, playerLayerMask))
+        Vector3 fullRayVector = (finalPoint - initialPoint);
+        float laserDistanceValue = -1; // Valor predeterminado en caso de no colisión
+
+        if (Physics.Raycast(initialPoint, fullRayVector.normalized, out hit, currentLaserLength, playerLayerMask, QueryTriggerInteraction.Ignore))
         {
+            Vector3 hitPosition = hit.point;
+
             // Si el rayo golpea un objeto en la capa del jugador, aplica daño
             if (hit.collider.CompareTag("Player"))
             {
                 hit.collider.GetComponent<HealthBehaviour>().Damage(attackDamage);
             }
+            else
+            {
+                float distanceFromFinalPointToCollision = (initialPoint - hitPosition).magnitude;
+                float newcurrentLaserLength = Mathf.Abs(distanceFromFinalPointToCollision);
+                laserDistanceValue = newcurrentLaserLength * lineDrawUnitsPerMeter;
+            }
 
             Debug.Log("Impacto con: " + hit.collider.gameObject.name);
+            Debug.DrawLine(initialPoint, hitPosition, Color.red);
+        }
+        else
+        {
+            // Si no hay colisión, actualiza el valor predeterminado del láser
+            laserDistanceValue = currentLaserLength * lineDrawUnitsPerMeter;
         }
 
-        // Dibujar el rayo
-        Debug.DrawRay(stateGameObject.transform.position, attackDirection * currentLaserLength, Color.red);
+        // Actualiza la distancia del láser
+        laserGenerator.SetLineRenderFinalDistance(laserDistanceValue);
     }
 
 
     public override void Update()
     {
-        stateGameObject.transform.rotation = (rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position, 0.5f));
+        Quaternion desriedRotation = (rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position, 0.5f));
+        stateGameObject.transform.rotation = Quaternion.Lerp(stateGameObject.transform.rotation, desriedRotation, Time.deltaTime * lerpSpeed);
+
 
         elapsedTime += Time.deltaTime;
 
         if (canAttack)
         {
-            if(elapsedTime < timeToSpendAttacking)
+            if (elapsedTime < timeToSpendAttacking)
             {
                 ExecuteAttack();
             }
@@ -150,6 +182,7 @@ public class RangedEnemyAttackState : States
         canAttack = true;
         stateGameObject.GetComponent<LaserGenerator>().DeactivateLaser();
         stateGameObject.GetComponent<RangedEnemyReferences>().SetCanChase(false);
+
     }
     #endregion
 }

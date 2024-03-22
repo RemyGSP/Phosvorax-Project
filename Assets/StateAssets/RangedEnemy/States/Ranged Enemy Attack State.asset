@@ -24,8 +24,10 @@ MonoBehaviour:
     onDecisionFalseExitState: {fileID: 0}
   playerLayerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 9
   attackDelay: 0.5
   attackDamage: 50
   timeToSpendAttacking: 3
+  lerpSpeed: 5
+  lineDrawUnitsPerMeter: 0.375
   maxAttackDistance: 100

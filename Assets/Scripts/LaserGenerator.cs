@@ -1,17 +1,21 @@
-using System.Collections; 
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public class LaserGenerator : MonoBehaviour
 {
     public GameObject laser;
     public GameObject laserOriginParticle;
+    public GameObject laserOriginPoint;
+    [SerializeField] private GameObject laserFinalPoint;
     private Material laserMaterial;
     [SerializeField] private float duration;
+    LineRenderer lineRenderer;
+    float originalLineZ = 10;
 
     private void Start()
     {
-        laserMaterial = laser.GetComponent<Renderer>().material;
+        lineRenderer = laser.GetComponentInChildren<LineRenderer>();
+        laserMaterial = lineRenderer.material;
         if (laserMaterial == null)
         {
             Debug.LogError("Material not found on laser object!");
@@ -21,7 +25,7 @@ public class LaserGenerator : MonoBehaviour
     {
         laser.SetActive(true);
         laserOriginParticle.SetActive(true);
-        StartCoroutine(ChangeScrollValueOverTime(2.5f,0f));
+        StartCoroutine(ChangeScrollValueOverTime(2.5f, 0f));
     }
 
     public void DeactivateLaser()
@@ -48,10 +52,33 @@ public class LaserGenerator : MonoBehaviour
         }
     }
 
-    public float GetLaserLength()
+    public void ChangeLaserValue(float startScrollValue, float targetScrollValue)
     {
-        Debug.Log("Laser lenght: "+ laser.GetComponentInChildren<Renderer>().bounds.size.z);
-        return (laser.GetComponentInChildren<Renderer>().bounds.size.z) / 1f;
+        StartCoroutine(ChangeScrollValueOverTime(startScrollValue, targetScrollValue));
     }
 
+
+    public Vector3 getFinalPointCoordinates()
+    {
+        return laserFinalPoint.transform.position;
+    }
+
+    public Vector3 getInitialPointCoordinates()
+    {
+        return laserOriginPoint.transform.position;
+    }
+
+    internal void SetLineRenderFinalDistance(float newLineRenderPointPositionZ)
+    {
+        Vector3 temp = lineRenderer.GetPosition(1);
+        if (newLineRenderPointPositionZ == -1)
+        {
+            temp.z = originalLineZ;
+        }
+        else
+        {
+            temp.z = newLineRenderPointPositionZ;
+        }
+        lineRenderer.SetPosition(1, temp);
+    }
 }

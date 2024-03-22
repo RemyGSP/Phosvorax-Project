@@ -43,7 +43,7 @@ public class EnemyMeleeChaseState : States
 
     public override void Update()
     {
-        RaycastHit hit;
+        /*RaycastHit hit;
         Vector3 playerVisiblePosition = PlayerReferences.instance.GetPlayerVisiblePoint(); //Visible point es un empty game object dentro del player que sirve para que el linedraw vaya hacia esa posicion porque con el pivote del player se va al suelo y nunca colisiona con el jugador
         Vector3 playerPosition = PlayerReferences.instance.GetPlayerCoordinates();
         Vector3 vecToPlayer = playerVisiblePosition - stateGameObject.transform.position;
@@ -67,7 +67,11 @@ public class EnemyMeleeChaseState : States
         else
         {
             Debug.Log("LineCastFalse");
-        }
+        }*/
+
+        Vector3 playerPos = PlayerReferences.instance.GetPlayerCoordinates();
+
+        enemy.SetDestination(playerPos);
     }
 
     public override void OnExitState()

@@ -74,7 +74,6 @@ public class GetAwayState : States
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         anim = stateGameObject.GetComponent<Animator>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
-
     }
 
 
@@ -118,16 +117,18 @@ public class GetAwayState : States
                 }
                 // Si no podemos movernos hacia ningún lado, el enemigo se quedará en su posición actual
             }
-            else
-            {
-                stateGameObject.GetComponent<RangedEnemyReferences>().SetCanAttack(true);
-            }
+        }
+        else
+        {
+            enemy.speed = 0;
+            stateGameObject.GetComponent<RangedEnemyReferences>().SetCanAttack(true);
         }
     }
 
     public override void OnExitState()
     {
         stateGameObject.GetComponent<RangedEnemyReferences>().SetCanMoveAway(false);
+        currentTime = 0;
     }
 
     #endregion

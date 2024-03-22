@@ -17,6 +17,7 @@ public class RotateCharacter : MonoBehaviour
         return rotation;
     }
 
+
     public Quaternion NonSmoothenedRotation(Vector3 direction)
     {
         Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);

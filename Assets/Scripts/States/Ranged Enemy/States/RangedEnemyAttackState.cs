@@ -98,9 +98,8 @@ public class RangedEnemyAttackState : States
 
     void ExecuteAttack()
     {
-
-
         Vector3 attackDirection = stateGameObject.transform.forward;
+        float currentLaserLength = laserGenerator.GetLaserLength();
 
         if (!laserGenerator.GetLaserState())
         {
@@ -108,7 +107,7 @@ public class RangedEnemyAttackState : States
         }
 
         RaycastHit hit;
-        if (Physics.Raycast(stateGameObject.transform.position, attackDirection, out hit, maxAttackDistance, playerLayerMask))
+        if (Physics.Raycast(stateGameObject.transform.position, attackDirection, out hit, currentLaserLength, playerLayerMask))
         {
             // Si el rayo golpea un objeto en la capa del jugador, aplica daño
             if (hit.collider.CompareTag("Player"))
@@ -118,12 +117,15 @@ public class RangedEnemyAttackState : States
 
             Debug.Log("Impacto con: " + hit.collider.gameObject.name);
         }
+
+        // Dibujar el rayo
+        Debug.DrawRay(stateGameObject.transform.position, attackDirection * currentLaserLength, Color.red);
     }
 
 
     public override void Update()
     {
-        stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position, 0.5f);
+        stateGameObject.transform.rotation = (rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position, 0.5f));
 
         elapsedTime += Time.deltaTime;
 
@@ -149,7 +151,6 @@ public class RangedEnemyAttackState : States
         stateGameObject.GetComponent<LaserGenerator>().DeactivateLaser();
         stateGameObject.GetComponent<RangedEnemyReferences>().SetCanChase(false);
     }
-
     #endregion
 }
 

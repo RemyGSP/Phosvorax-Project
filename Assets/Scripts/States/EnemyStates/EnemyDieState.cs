@@ -54,6 +54,7 @@ public class EnemyDieState : States
     {
         stateGameObject.SetActive(false);
         canRevive = false;
+        stateGameObject.GetComponent<CrystalDrop>().Drop();
     }
 
     public override void FixedUpdate()

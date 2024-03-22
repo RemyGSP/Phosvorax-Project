@@ -20,7 +20,7 @@ public class EnemyMeleeChaseState : States
     [SerializeField] private float maxSpeed;
     [SerializeField] float timeToMaxVelocity;
     [SerializeField] private float rotationSpeed;
-
+    [SerializeField]private float speed = 1000;
     float currentMovementStatusTimer;
     private bool playerSeen = false;
     private RotateCharacter rotateCharacter;
@@ -45,31 +45,32 @@ public class EnemyMeleeChaseState : States
 
     public override void Update()
     {
-        RaycastHit hit;
-        Vector3 playerVisiblePosition = PlayerReferences.instance.GetPlayerVisiblePoint(); //Visible point es un empty game object dentro del player que sirve para que el linedraw vaya hacia esa posicion porque con el pivote del player se va al suelo y nunca colisiona con el jugador
-        Vector3 playerPosition = PlayerReferences.instance.GetPlayerCoordinates();
-        Vector3 vecToPlayer = playerVisiblePosition - stateGameObject.transform.position;
-        if (Physics.Raycast(stateGameObject.transform.position, vecToPlayer, out hit, vecToPlayer.magnitude))
-        {
-            Debug.DrawLine(stateGameObject.transform.position, playerVisiblePosition, Color.magenta, 1.2f);
+        //RaycastHit hit;
+        //Vector3 playerVisiblePosition = PlayerReferences.instance.GetPlayerVisiblePoint(); //Visible point es un empty game object dentro del player que sirve para que el linedraw vaya hacia esa posicion porque con el pivote del player se va al suelo y nunca colisiona con el jugador
+        //Vector3 playerPosition = PlayerReferences.instance.GetPlayerCoordinates();
+        //Vector3 vecToPlayer = playerVisiblePosition - stateGameObject.transform.position;
+        //if (Physics.Raycast(stateGameObject.transform.position, vecToPlayer, out hit, vecToPlayer.magnitude))
+        //{
+        //    Debug.DrawLine(stateGameObject.transform.position, playerVisiblePosition, Color.magenta, 1.2f);
 
-            if (hit.transform != null && hit.transform.position.z == PlayerReferences.instance.GetPlayerCoordinates().z && hit.transform.position.x == PlayerReferences.instance.GetPlayerCoordinates().x)
-            {
-                playerSeen = true;
-                stateGameObject.GetComponent<EnemyReferences>().SetPlayerSeen(playerSeen);
+        //    if (hit.transform != null && hit.transform.position.z == PlayerReferences.instance.GetPlayerCoordinates().z && hit.transform.position.x == PlayerReferences.instance.GetPlayerCoordinates().x)
+        //    {
+        //        playerSeen = true;
+        //        stateGameObject.GetComponent<EnemyReferences>().SetPlayerSeen(playerSeen);
 
-                stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, playerPosition - stateGameObject.transform.position, 0.5f);
-                enemy.SetDestination(playerPosition);
-            }
-            else
-            {
-                playerSeen = false;
-                stateGameObject.GetComponent<EnemyReferences>().SetPlayerSeen(playerSeen);
-            }
-        }
-        else
-        {
-        }
+        //        stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, playerPosition - stateGameObject.transform.position, 0.5f);
+        //        enemy.SetDestination(playerPosition);
+        //    }
+        //    else
+        //    {
+        //        playerSeen = false;
+        //        stateGameObject.GetComponent<EnemyReferences>().SetPlayerSeen(playerSeen);
+        //    }
+        //}
+        //else
+        //{
+        //}
+        rigidBody.velocity = (PlayerReferences.instance.GetPlayerVisiblePoint() - stateGameObject.transform.position).normalized * speed * Time.deltaTime;
     }
 
     public override void OnExitState()

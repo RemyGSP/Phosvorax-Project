@@ -7,9 +7,11 @@ public class ShopInteract : MonoBehaviour, IInteractable
 
     [SerializeField] private GameObject shopCanvas;
     [SerializeField] private GameObject interactableTooltip;
+    [SerializeField] private GameObject tendero;
     public void Interact(PlayerInteract player)
     {
         shopCanvas.SetActive(true);
+        tendero.GetComponent<Animator>().SetBool("isOpen",true);
         PlayerReferences.instance.canMove = false;
     }
 
@@ -50,6 +52,7 @@ public class ShopInteract : MonoBehaviour, IInteractable
     {
         shopCanvas.SetActive(false);
         PlayerReferences.instance.canMove = true;
+        tendero.GetComponent<Animator>().SetBool("isOpen", false);
         GetComponent<ShopController>().RestartState();
     }
 }

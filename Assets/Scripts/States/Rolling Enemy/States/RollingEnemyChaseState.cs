@@ -39,6 +39,7 @@ public class RollingEnemyChaseState : States
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         anim = stateGameObject.GetComponent<Animator>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
+        stateGameObject.GetComponent<Animator>().SetBool("walking", true);
     }
 
     public override void Update()
@@ -72,6 +73,7 @@ public class RollingEnemyChaseState : States
     public override void OnExitState()
     {
         playerSeen = false;
+        stateGameObject.GetComponent<Animator>().SetBool("walking", false);
         return;
     }
     #endregion

@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class HandleGameOver : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private void Start()
     {
-        
+        StopGame();
+    }
+    public void StopGame()
+    {
+        Time.timeScale = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ResumeGame()
     {
-        
+        Time.timeScale = 1;
     }
 }

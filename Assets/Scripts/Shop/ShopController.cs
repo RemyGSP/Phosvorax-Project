@@ -176,11 +176,14 @@ public class ShopController : MonoBehaviour
         upgradeables[0].SetLevel(ShopManager.instance.GetHealthLevel());
         upgradeables[1].SetLevel(ShopManager.instance.GetSpeedLevel());
         upgradeables[2].SetLevel(ShopManager.instance.GetDamageLevel());
+        Debug.Log(ShopManager.instance.GetHealthLevel());
+        Debug.Log(ShopManager.instance.GetSpeedLevel());
+        Debug.Log(ShopManager.instance.GetDamageLevel());
         for (int i = 0; i < upgradeables.Length; i++)
         {
             Upgradeable upgradeable = upgradeables[i];
             int level = upgradeable.GetLevel();
-            for (int a = 0; i < upgradeable.GetSquares().Length; a++)
+            for (int a = 0; a < upgradeable.GetSquares().Length; a++)
             {
                 if (upgradeable.GetSquares()[a].sprite == leveledUpSprite && a >= ShopManager.instance.GetDamageLevel())
                 {

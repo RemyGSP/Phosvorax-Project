@@ -28,7 +28,7 @@ public class ChoGathQAbility : Ability
     public override void OnExitState()
     {
 
-
+        targetDir.y = -0.5f;
         GameObject projectile = Instantiate(prefabToInstantiate, targetDir, Quaternion.identity);
 
 

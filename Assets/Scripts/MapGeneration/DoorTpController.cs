@@ -1,40 +1,80 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DoorTpController : MonoBehaviour
 {
-    private GameObject destinationObject; // Asigna el objeto de destino desde el Inspector.
+    public float fadeDuration = 1f;
+    public float delayBeforeFade = 0.5f;
+    public GameObject destinationObject;
+    private GameObject fadePanel;
 
-    void Awake()
+    private bool isTeleporting = false;
+
+    private void Start()
     {
-        gameObject.SetActive(false);
+        // Encuentra el Canvas en la escena con el nombre "Canvas1"
+        GameObject canvasObject = GameObject.Find("CanvasFundidoNegro");
+
+        // Si no encuentra el canvas, muestra un mensaje de advertencia
+        if (canvasObject == null)
+        {
+            Debug.LogError("No se encontró ningún objeto Canvas con el nombre 'Canvas1' en la escena.");
+            return;
+        }
+
+        // Encuentra el primer hijo del canvas, que debería ser el panel de fundido
+        fadePanel = canvasObject.transform.GetChild(0).gameObject;
     }
+
+    private IEnumerator TeleportWithFade(Collider other)
+    {
+        isTeleporting = true;
+
+        Image panelImage = fadePanel.GetComponent<Image>();
+
+        float timer = 0f;
+
+        // Fade to black
+        while (timer < fadeDuration)
+        {
+            timer += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, 1f, timer / fadeDuration);
+            panelImage.color = new Color(panelImage.color.r, panelImage.color.g, panelImage.color.b, alpha);
+            yield return null;
+        }
+
+        // Teleport
+        other.transform.position = destinationObject.transform.position;
+
+        // Wait before fading out
+        yield return new WaitForSeconds(delayBeforeFade);
+
+        // Fade back to transparent
+        timer = 0f;
+        while (timer < fadeDuration)
+        {
+            timer += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, timer / fadeDuration);
+            panelImage.color = new Color(panelImage.color.r, panelImage.color.g, panelImage.color.b, alpha);
+            yield return null;
+        }
+
+        isTeleporting = false;
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (!isTeleporting && other.gameObject.layer == LayerMask.NameToLayer("Player") && destinationObject != null)
         {
-            if (destinationObject != null)
-            {
-                other.transform.position = destinationObject.transform.position;
-
-                // Activa el objeto al teleportar al jugador.
-                gameObject.SetActive(true);
-            }
-            else
-            {
-                Debug.LogWarning("El objeto de destino no está asignado en el Inspector.");
-            }
+            StartCoroutine(TeleportWithFade(other));
         }
     }
 
     public void SetDestination(GameObject newDestination)
     {
         destinationObject = newDestination;
-
-        //Debug.Log("funcion puerta");
-        gameObject.SetActive(true);
     }
 }
 

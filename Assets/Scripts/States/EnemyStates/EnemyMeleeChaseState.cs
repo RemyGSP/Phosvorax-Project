@@ -32,6 +32,8 @@ public class EnemyMeleeChaseState : States
 
     #region Methods
 
+
+
     public override void Start()
     {
         enemy = stateGameObject.GetComponent<NavMeshAgent>();
@@ -55,6 +57,7 @@ public class EnemyMeleeChaseState : States
             {
                 playerSeen = true;
                 stateGameObject.GetComponent<EnemyReferences>().SetPlayerSeen(playerSeen);
+
                 stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, playerPosition - stateGameObject.transform.position, 0.5f);
                 enemy.SetDestination(playerPosition);
             }
@@ -66,7 +69,6 @@ public class EnemyMeleeChaseState : States
         }
         else
         {
-            Debug.Log("LineCastFalse");
         }
     }
 

@@ -65,7 +65,7 @@ public class RollingEnemyRollingState : States
                 Vector3 normal = hit.normal;
 
                 direction = Vector3.Reflect(direction, normal).normalized;
-
+                direction.y = 0.5f;
                 float angle = Vector3.SignedAngle(stateGameObject.transform.forward, direction, Vector3.up);
                 Quaternion quat = Quaternion.Euler(0, angle, 0);
                 stateGameObject.transform.rotation *= quat;
@@ -80,7 +80,7 @@ public class RollingEnemyRollingState : States
                     healthBehaviour.Damage(damage);
                 }
                 direction = Vector3.Reflect(direction, normal).normalized;
-
+                direction.y = 0.5f;
                 float angle = Vector3.SignedAngle(stateGameObject.transform.forward, direction, Vector3.up);
                 Quaternion quat = Quaternion.Euler(0, angle, 0);
                 stateGameObject.transform.rotation *= quat;
@@ -102,6 +102,7 @@ public class RollingEnemyRollingState : States
             {
                 targetSpeed = targetSpeed.normalized * startSpeed;
             }
+            targetSpeed.y = 0.5f;
 
             rigidBody.velocity = targetSpeed;
         }

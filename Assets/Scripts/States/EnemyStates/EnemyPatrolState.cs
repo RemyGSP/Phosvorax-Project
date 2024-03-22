@@ -46,6 +46,7 @@ public class EnemyPatrolState : States
 
     public override void Update()
     {
+        Debug.Log("IsOnNavMesh " + enemy.isOnNavMesh);
         if (enemy.remainingDistance <= enemy.stoppingDistance) //ha acabado de hacer el camino
         {
             Vector3 point;
@@ -59,7 +60,6 @@ public class EnemyPatrolState : States
 
     private bool RandomPoint(Vector3 center, float range, out Vector3 result)
     {
-
         Vector3 randomPoint = center + Random.insideUnitSphere * range; //punto random
         NavMeshHit hit;
         if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))

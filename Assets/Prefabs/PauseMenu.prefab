@@ -171,9 +171,9 @@ RectTransform:
   - {fileID: 487142381992128084}
   m_Father: {fileID: 2618742767639326067}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 80, y: -15}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6567362557179630579
@@ -268,6 +268,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: CallOneShot
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: event:/ButtonClick
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &330980858212031411
@@ -509,7 +521,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5512703631431594129}
         m_TargetAssemblyTypeName: ScreenOptions, Assembly-CSharp
         m_MethodName: ChangeVsync
         m_Mode: 0
@@ -712,9 +724,9 @@ RectTransform:
   - {fileID: 6352953771305735834}
   m_Father: {fileID: 2618742767639326067}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 80, y: -95}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8906322479363078220
@@ -809,6 +821,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: GameScene
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: CallOneShot
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: event:/ButtonClick
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1139657840839733961
@@ -1045,7 +1069,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlaySounds, Assembly-CSharp
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: CallOneShot
         m_Mode: 5
         m_Arguments:
@@ -1056,9 +1080,9 @@ MonoBehaviour:
           m_StringArgument: event:/ButtonClick
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5512703631431594129}
         m_TargetAssemblyTypeName: ScreenOptions, Assembly-CSharp
-        m_MethodName: ChangeResolutionOption
+        m_MethodName: SetResolution
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1198,9 +1222,9 @@ RectTransform:
   - {fileID: 6663148275175355059}
   m_Father: {fileID: 2618742767639326067}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 80, y: -175}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4218187855691338757
@@ -1295,6 +1319,18 @@ MonoBehaviour:
           m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: CallOneShot
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: event:/ButtonClick
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &1702782405583407393
@@ -2144,7 +2180,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5512703631431594129}
         m_TargetAssemblyTypeName: ScreenOptions, Assembly-CSharp
         m_MethodName: ChangeAntiAlising
         m_Mode: 0
@@ -2821,7 +2857,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlaySounds, Assembly-CSharp
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: CallOneShot
         m_Mode: 5
         m_Arguments:
@@ -2832,9 +2868,9 @@ MonoBehaviour:
           m_StringArgument: event:/ButtonClick
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5512703631431594129}
         m_TargetAssemblyTypeName: ScreenOptions, Assembly-CSharp
-        m_MethodName: ChangeRefreshRate
+        m_MethodName: SetRefreshRate
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4501,7 +4537,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5512703631431594129}
         m_TargetAssemblyTypeName: ScreenOptions, Assembly-CSharp
         m_MethodName: SetScreenMode
         m_Mode: 0
@@ -4657,7 +4693,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlaySounds, Assembly-CSharp
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: CallOneShot
         m_Mode: 5
         m_Arguments:
@@ -4668,9 +4704,9 @@ MonoBehaviour:
           m_StringArgument: event:/ButtonClick
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5512703631431594129}
         m_TargetAssemblyTypeName: ScreenOptions, Assembly-CSharp
-        m_MethodName: ChangeResolutionOption
+        m_MethodName: SetResolution
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4964,13 +5000,14 @@ GameObject:
   - component: {fileID: 6509673958115967505}
   - component: {fileID: 8001861685266972543}
   - component: {fileID: 9088261624386512275}
+  - component: {fileID: 5512703631431594129}
   m_Layer: 0
   m_Name: PauseMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7167208592621587374
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5108,6 +5145,23 @@ MonoBehaviour:
       m_Action: Go Back
       m_Flags: 0
     m_Flags: 0
+--- !u!114 &5512703631431594129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5309870070022165857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40b0124582bf814498c7614bc1f12141, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resolutionText: {fileID: 3752127565326860278}
+  refreshRateText: {fileID: 7572329148878468526}
+  screenModeText: {fileID: 0}
+  applyButton: {fileID: 0}
+  refreshRate: 3c0000004b0000007800000090000000a5000000f0000000
 --- !u!1 &5542302099433491129
 GameObject:
   m_ObjectHideFlags: 0
@@ -6419,7 +6473,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PlaySounds, Assembly-CSharp
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: CallOneShot
         m_Mode: 5
         m_Arguments:
@@ -6430,9 +6484,9 @@ MonoBehaviour:
           m_StringArgument: event:/ButtonClick
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 5512703631431594129}
         m_TargetAssemblyTypeName: ScreenOptions, Assembly-CSharp
-        m_MethodName: ChangeRefreshRate
+        m_MethodName: SetRefreshRate
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7074,9 +7128,9 @@ RectTransform:
   - {fileID: 8129549074619682355}
   m_Father: {fileID: 2618742767639326067}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 80, y: -255}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9222259769913825301
@@ -7171,6 +7225,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
+        m_MethodName: CallOneShot
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: event:/ButtonClick
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &8393717310256588017

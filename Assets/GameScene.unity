@@ -1696,7 +1696,7 @@ MonoBehaviour:
   player: {fileID: 1635873173}
   shieldObject: {fileID: 1635873182}
   shieldObjectRenderer: {fileID: 1635873183}
-  playerRenderer: {fileID: 0}
+  playerRenderer: {fileID: 2132658602}
   ShotingPoint: {fileID: 1635873180}
   playerSpeed: 0
   playerDamage: 0
@@ -2604,6 +2604,12 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!137 &2132658602 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1258105728910112462, guid: b512993666e602e409c2175bd6f93cba,
+    type: 3}
+  m_PrefabInstance: {fileID: 1635873172}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

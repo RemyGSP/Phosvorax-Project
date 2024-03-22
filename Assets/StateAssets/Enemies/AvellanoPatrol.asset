@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b90bb3c63e4401048a9fad927b9b1cab, type: 3}
+  m_Name: AvellanoPatrol
+  m_EditorClassIdentifier: 
+  stateGameObject: {fileID: 0}
+  stateTransitions:
+  - decisionToBeMade: {fileID: 11400000, guid: 7b2c8f844fb99094f9b3d5beadc8a4c8, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: 715ca006327cf564bad76a83106e0b9b,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 0}
+  - decisionToBeMade: {fileID: 11400000, guid: 3e2c1271059576d4ea7fce5384ef0e43, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: dbd99a2dd69e7004cbecbf60b9ccb7ed,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 0}
+  patrolAreaRange: 150

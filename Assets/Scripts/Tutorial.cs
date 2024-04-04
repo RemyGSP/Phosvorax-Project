@@ -12,6 +12,8 @@ public class Tutorial : MonoBehaviour
     private int currentTutorial;
     private bool[] movedToDirections;
     [SerializeField] private GameObject movementTutorialFeedback;
+    [SerializeField] private GameObject attackTutorialFeedback;
+    [SerializeField] private GameObject dashTutorialFeedback;
     private GameObject currentFeedback;
     void Start()
     {
@@ -41,6 +43,7 @@ public class Tutorial : MonoBehaviour
             switch (currentTutorial)
             {
                 case 0: MovementTutorial(); break;
+                case 1: AttackTutorial(); break;   
             }
         }
     }
@@ -78,6 +81,34 @@ public class Tutorial : MonoBehaviour
         }
 
         if (movedToDirections[0] && movedToDirections[1] && movedToDirections[2] && movedToDirections[3])
+        {
+            Destroy(currentFeedback);
+            currentFeedback = null;
+            currentTutorial++;
+        }
+    }
+
+    public void AttackTutorial()
+    {
+        if (currentFeedback == null)
+        {
+            currentFeedback = Instantiate(attackTutorialFeedback);
+        }
+        if (PlayerInputController.Instance.IsAttacking())
+        {
+            Destroy(currentFeedback);
+            currentFeedback = null;
+            currentTutorial++;
+        }
+    }
+
+    public void DashTutorial()
+    {
+        if (currentFeedback == null)
+        {
+            currentFeedback = Instantiate(dashTutorialFeedback);
+        }
+        if (PlayerInputController.Instance.IsRolling())
         {
             Destroy(currentFeedback);
             currentFeedback = null;

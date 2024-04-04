@@ -10,6 +10,7 @@ public class PlayerInputController : MonoBehaviour
     static public PlayerInputController Instance { get; private set; }
     private Vector3 movementDirection;
     private Vector2 cursorPosition;
+    private Vector3 unadulteredMovementDirection;
     private bool isRolling;
     private bool isAttacking;
     private bool isInteracting;
@@ -40,6 +41,8 @@ public class PlayerInputController : MonoBehaviour
     public void OnMove(InputValue moveValue)
     {
         var temporalMovementDirection = moveValue.Get<Vector2>();
+        unadulteredMovementDirection.x = moveValue.Get<Vector2>().x;
+        unadulteredMovementDirection.z = moveValue.Get<Vector2>().y;
         Vector3 toConvert = new Vector3(temporalMovementDirection.x, 0, temporalMovementDirection.y);
         movementDirection = IsoVectorConvert(toConvert);
 
@@ -67,6 +70,10 @@ public class PlayerInputController : MonoBehaviour
     public Vector3 GetPlayerInputDirection()
     {
         return movementDirection;
+    }
+    public Vector3 GetRawMovementInput()
+    {
+        return unadulteredMovementDirection;
     }
 
     public void OnAim(InputValue inputValue)

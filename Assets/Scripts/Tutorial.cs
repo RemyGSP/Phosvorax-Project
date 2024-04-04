@@ -15,6 +15,7 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private GameObject attackTutorialFeedback;
     [SerializeField] private GameObject dashTutorialFeedback;
     private GameObject currentFeedback;
+    private bool currentTutorialFinished;
     void Start()
     {
         if (PlayerPrefs.HasKey("HasDoneTutorial"))
@@ -39,11 +40,13 @@ public class Tutorial : MonoBehaviour
     void Update()
     {
         if (isTutorial)
+
         {
             switch (currentTutorial)
             {
                 case 0: MovementTutorial(); break;
-                case 1: AttackTutorial(); break;   
+                case 1: AttackTutorial(); break;
+                case 2: DashTutorial(); break;
             }
         }
     }
@@ -82,9 +85,11 @@ public class Tutorial : MonoBehaviour
 
         if (movedToDirections[0] && movedToDirections[1] && movedToDirections[2] && movedToDirections[3])
         {
-            Destroy(currentFeedback);
-            currentFeedback = null;
-            currentTutorial++;
+            if (!currentTutorialFinished)
+            {
+                StartCoroutine(_DestroyFeedback(currentFeedback));
+                currentTutorialFinished = true;
+            }
         }
     }
 
@@ -96,9 +101,13 @@ public class Tutorial : MonoBehaviour
         }
         if (PlayerInputController.Instance.IsAttacking())
         {
-            Destroy(currentFeedback);
-            currentFeedback = null;
-            currentTutorial++;
+            currentFeedback.GetComponent<SingleActionTutorial>().PressButton();
+            if (!currentTutorialFinished)
+            {
+                StartCoroutine(_DestroyFeedback(currentFeedback));
+                currentTutorialFinished = true;
+            }
+
         }
     }
 
@@ -110,12 +119,23 @@ public class Tutorial : MonoBehaviour
         }
         if (PlayerInputController.Instance.IsRolling())
         {
-            Destroy(currentFeedback);
-            currentFeedback = null;
-            currentTutorial++;
+            currentFeedback.GetComponent<SingleActionTutorial>().PressButton();
+            if (!currentTutorialFinished)
+            {
+                StartCoroutine(_DestroyFeedback(currentFeedback));
+                currentTutorialFinished = true;
+            }
         }
     }
 
+    private IEnumerator _DestroyFeedback(GameObject objectToDestroy)
+    {
+        yield return new WaitForSeconds(0.2f);
+        Destroy(objectToDestroy);
+        currentFeedback = null;
+        currentTutorial++;
+        currentTutorialFinished = false;
+    }
     public void FinishTutorial()
     {
         PlayerPrefs.SetInt("HasDoneTutorial", 1);

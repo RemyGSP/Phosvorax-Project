@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,28 +6,47 @@ using UnityEngine;
 public class MovementTutorialFeedback : MonoBehaviour
 {
     [SerializeField] private GameObject[] wasdFeedback;
+    [SerializeField] private GameObject joystick;
+    [SerializeField] private GameObject[] joystickFeedback;
     void Start()
     {
-            ActivateFeedback();
+        ActivateFeedback();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void ActivateFeedback()
     {
-        foreach (var wasd in wasdFeedback)
+        if (PlayerInputController.Instance.IsUsingKeyboard())
         {
-            wasd.SetActive(true);
+            foreach (var wasd in wasdFeedback)
+            {
+                wasd.SetActive(true);
+            }
         }
+        else
+        {
+            joystick.SetActive(true);
+            foreach (var wasd in joystickFeedback)
+            {
+                wasd.SetActive(true);
+            }
+        }
+
     }
-
-
     public void DeactivateFeedback(int index)
     {
-        wasdFeedback[index].SetActive(false);   
+        if (PlayerInputController.Instance.IsUsingKeyboard())
+        {
+            wasdFeedback[index].GetComponent<Animator>().SetTrigger("pressed");
+        }
+        else
+        {
+            joystickFeedback[index].GetComponent<Animator>().SetTrigger("pressed");
+        }
     }
 }

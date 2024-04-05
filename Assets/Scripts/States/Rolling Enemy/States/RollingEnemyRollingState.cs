@@ -48,6 +48,7 @@ public class RollingEnemyRollingState : States
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         direction = stateGameObject.transform.forward;
         machine = stateGameObject.GetComponent<StateMachine>();
+        stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position, 0.5f);
     }
 
     public override void Update()
@@ -61,31 +62,20 @@ public class RollingEnemyRollingState : States
             if (!hit.collider.CompareTag("Player"))
             {
                 Debug.DrawRay(stateGameObject.transform.position, direction * maxRaycastDistance, Color.red);
-
-                Vector3 normal = hit.normal;
-
-                direction = Vector3.Reflect(direction, normal).normalized;
-                direction.y = 0.5f;
-                float angle = Vector3.SignedAngle(stateGameObject.transform.forward, direction, Vector3.up);
-                Quaternion quat = Quaternion.Euler(0, angle, 0);
-                stateGameObject.transform.rotation *= quat;
-                targetSpeed = quat * targetSpeed;
             }
             else
             {
-                //hacer que mate al player. preferiblemente oneshot
-                Vector3 normal = hit.normal;
-                if (hit.collider.gameObject.TryGetComponent<HealthBehaviour>(out HealthBehaviour healthBehaviour))
-                {
-                    healthBehaviour.Damage(damage);
-                }
-                direction = Vector3.Reflect(direction, normal).normalized;
-                direction.y = 0.5f;
-                float angle = Vector3.SignedAngle(stateGameObject.transform.forward, direction, Vector3.up);
-                Quaternion quat = Quaternion.Euler(0, angle, 0);
-                stateGameObject.transform.rotation *= quat;
-                targetSpeed = quat * targetSpeed;
+                hit.collider.GetComponent<HealthBehaviour>().Damage(damage);
+
             }
+            Vector3 normal = hit.normal;
+
+            direction = Vector3.Reflect(direction, normal).normalized;
+            direction.y = 0.5f;
+            float angle = Vector3.SignedAngle(stateGameObject.transform.forward, direction, Vector3.up);
+            Quaternion quat = Quaternion.Euler(0, angle, 0);
+            stateGameObject.transform.rotation *= quat;
+            targetSpeed = quat * targetSpeed;
         }
 
         elapsedTime += Time.deltaTime;

@@ -96,4 +96,3 @@ public class RollingEnemyChaseState : States
     }
     #endregion
 }
-

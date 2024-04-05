@@ -20,6 +20,8 @@ public class BichoPinchoAttackState : States
     [SerializeField] private AnimationCurve deccelerationCurve;
     [SerializeField] GameObject feedback;
     private Quaternion rotation;
+    //Esto se utiliza para que no golpee multiples veces, este bool se necesita para poder golpear y una vez ha golpeado se pone a false
+    private bool hasHit;
     //En este script es donde guardo informacion que transciende los estados para que lo puedan usar las decisiones etc
     private BichoPinchoReferences infoContainer;
     public BichoPinchoAttackState(GameObject stateGameObject) : base(stateGameObject)
@@ -39,6 +41,7 @@ public class BichoPinchoAttackState : States
 
     public override void Start()
     {
+        hasHit = false;
         GameObject feedbackSpawnPos = stateGameObject.GetComponent<FeedbackPosition>().GetFeedbackGameObject();
         infoContainer = stateGameObject.GetComponent<BichoPinchoReferences>();
         infoContainer.StopAttackTimer();
@@ -94,9 +97,10 @@ public class BichoPinchoAttackState : States
 
     public override void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && !hasHit)
         {
             other.gameObject.GetComponent<HealthBehaviour>().Damage(infoContainer.GetDamage());
+            hasHit = true;
         }
     }
     

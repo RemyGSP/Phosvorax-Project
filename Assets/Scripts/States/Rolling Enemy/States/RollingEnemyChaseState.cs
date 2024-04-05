@@ -63,7 +63,6 @@ public class RollingEnemyChaseState : States
         if (Physics.Raycast(stateGameObject.transform.position, vecToPlayer, out hit, vecToPlayer.magnitude, playerLayerMask, QueryTriggerInteraction.Ignore))
         {
             Debug.DrawLine(stateGameObject.transform.position, stateGameObject.transform.position + vecToPlayer, Color.magenta, 1.2f);
-            Debug.Log(hit.collider.transform);
             if (hit.transform != null && hit.transform.CompareTag("Player"))
             {
                 playerSeen = true;

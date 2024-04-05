@@ -5186,7 +5186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4850134f190ea848b443eeab0005829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entryState: {fileID: 11400000, guid: 061d3d33d0f7c5c47bdcc4a2eaf48a6d, type: 2}
+  entryState: {fileID: 11400000, guid: 9cbaa46c5a2792d46811fef6bcec3971, type: 2}
   currentState: {fileID: 0}
   stunnedState: {fileID: 0}
 --- !u!114 &4597560775666372666
@@ -5216,6 +5216,8 @@ MonoBehaviour:
   distanceToSeePlayer: 100
   playerSeen: 0
   maxAttackDistance: 15
+  distanceToStartCountdown: 0
+  canBeStarted: 0
 --- !u!114 &427362357681375115
 MonoBehaviour:
   m_ObjectHideFlags: 0

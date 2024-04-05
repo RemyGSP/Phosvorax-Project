@@ -10,8 +10,9 @@ public class RangedEnemyChaseDecision : Decision
     public override bool Decide(StateMachine stateMachine)
     {
         bool stopGetAway = stateMachine.GetComponent<RangedEnemyReferences>().GetCanAttack();
+        bool canStart = stateMachine.GetComponent<EnemyReferences>().GetCanBeStarted();
         bool aux = false;
-        if (stopGetAway)
+        if (stopGetAway && canStart)
         {
             aux = true;
         }

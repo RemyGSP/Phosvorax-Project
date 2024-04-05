@@ -7,6 +7,7 @@ using UnityEngine;
 public class DeathState : States
 {
     [SerializeField] private GameObject gameOver;
+    [SerializeField] private float deathOffset;
     public DeathState(GameObject stateGameObject) : base(stateGameObject)
     {
     }
@@ -24,8 +25,14 @@ public class DeathState : States
     public override void Start()
     {
         base.Start();
-        Instantiate(gameOver);
         stateGameObject.GetComponent<StateMachine>().enabled = false;
+        MonoInstance.instance.StartCoroutine(_InstantiateGameOver());
+    }
+
+    private IEnumerator _InstantiateGameOver()
+    {
+        yield return new WaitForSeconds(deathOffset);
+        Instantiate(gameOver);
     }
 
 

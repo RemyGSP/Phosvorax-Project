@@ -8,10 +8,10 @@ public class BasicAttackState : States
 {
     [SerializeField] LayerMask enemyLayerMask;
     private Rigidbody rigidBody;
-    [SerializeField] private float animOffsetRotation;
-    [SerializeField] private float attackDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
-    [SerializeField] private float attackOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
+    [SerializeField] private float attackDelay; // Tiempo de retraso antes de ejecutar el ataque
+    [SerializeField] private float attackOffset; // Distancia desde el jugador para el inicio del ataque
     [SerializeField] private float sphereSize; // Tamaño del área de detección
+    [SerializeField] private float heightOffset;
     [SerializeField] private float attackDamage;
     [SerializeField] private float impulse;
     private RotateCharacter rotateCharacter;
@@ -21,8 +21,6 @@ public class BasicAttackState : States
     private bool canAttack;
     private float currentAttackDelay;
     private Transform playerTransform;
-
-    [SerializeField] private AttackAreaVisualizer attackAreaVisualizer;
 
     
 
@@ -59,7 +57,7 @@ private void InitializeComponents()
     rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
     rigidBody = stateGameObject.GetComponent<Rigidbody>();
     playerTransform = stateGameObject.GetComponent<Transform>();
-    rigidBody.AddForce(stateGameObject.transform.rotation * Vector3.forward * impulse, ForceMode.Impulse);
+    //rigidBody.AddForce(stateGameObject.transform.rotation * Vector3.forward * impulse, ForceMode.Impulse);
     currentAttackDelay = attackDelay;
 }
 
@@ -86,14 +84,16 @@ private void ExecuteAnimation()
     animationLength = anim.GetCurrentAnimatorClipInfo(0).Length;
     currentAttackDelay = attackDelay;
     canAttack = true;
+    canAttack = false;//-----
     ExecuteAttack();
 }
 
     void ExecuteAttack()
     {
         Debug.Log("Attack");
-        //stateGameObject.GetComponent<GroundSlashShooter>().OnShoot();
-        Vector3 attackPosition = playerTransform.position + playerTransform.forward * attackOffset;
+        //stateGameObject.GetComponent<>().OnShoot();
+        Vector3 playerForward = playerTransform.forward;
+        Vector3 attackPosition = playerTransform.position + playerForward * attackOffset + Vector3.up * heightOffset;
         Collider[] hitColliders = Physics.OverlapSphere(attackPosition, sphereSize / 2, enemyLayerMask, QueryTriggerInteraction.UseGlobal);
         foreach (Collider hitCollider in hitColliders)
         {
@@ -114,7 +114,7 @@ private void ExecuteAnimation()
         currentAttackTime += Time.deltaTime;
         if (currentAttackDelay <= 0 && canAttack)
         {
-            //ExecuteAttack();
+            ExecuteAttack();
             PlayerTimers.Instance.playerBasicAttackTimer = 0;
         }
 
@@ -122,7 +122,7 @@ private void ExecuteAnimation()
 
     public override void Update()
     {
-        return;
+        rigidBody.velocity = Vector3.zero;
     }
 
     public new void OnEnterState()

@@ -4,12 +4,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "States/PlayerIdleState")]
-public class IdleStateDummy : States
+public class IdleState : States
 {
     Animator animator;
     //private Rigidbody rigidBody;
     #region Constructor
-    public IdleStateDummy(GameObject stateGameObject) : base(stateGameObject)
+    public IdleState(GameObject stateGameObject) : base(stateGameObject)
     {
     }
 

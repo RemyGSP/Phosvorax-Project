@@ -45,35 +45,49 @@ public class BasicAttackState : States
     }
 
     public override void Start()
-    {
-        PlayerTimers.Instance.playerBasicAttackTimer = 0;
-        anim = PlayerReferences.instance.GetPlayerAnimator() ;
-        rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
-        rigidBody = stateGameObject.GetComponent<Rigidbody>();
-        playerTransform = stateGameObject.GetComponent<Transform>();
-        rigidBody.AddForce(stateGameObject.transform.rotation * Vector3.forward * impulse, ForceMode.Impulse);
-        //Lo que tardara en ejecutarse el ataque comparado con la animacion
-        currentAttackDelay = attackDelay;
+{
+    InitializeComponents();
+    RotatePlayerTowardsMouseTarget();
+    GenerateAttackSlash();
+    ExecuteAnimation();
+}
+
+private void InitializeComponents()
+{
+    PlayerTimers.Instance.playerBasicAttackTimer = 0;
+    anim = PlayerReferences.instance.GetPlayerAnimator();
+    rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
+    rigidBody = stateGameObject.GetComponent<Rigidbody>();
+    playerTransform = stateGameObject.GetComponent<Transform>();
+    rigidBody.AddForce(stateGameObject.transform.rotation * Vector3.forward * impulse, ForceMode.Impulse);
+    currentAttackDelay = attackDelay;
+}
+
+private void RotatePlayerTowardsMouseTarget()
+{
+
+    if (!PlayerInputController.Instance.isGamepad){
         Vector3 targetDir = PlayerReferences.instance.GetMouseTargetDir() - stateGameObject.transform.position;
-
         stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
-        stateGameObject.GetComponent<SlashGenerator>().GenerateSlash();
-
-        //PlayerReferences.instance.GetPlayerAnimator().SetBool("meleeAttack", true);
-        ExecuteAnim();
     }
+    
+}
 
-    private void ExecuteAnim()
-    {
-        AudioManager.Instance.CallOneShot("event:/SlashSound");
-        anim.SetTrigger("attack");
-        currentAttackTime = 0;
-        animationLength = anim.GetCurrentAnimatorClipInfo(0).Length ;
-        //stateGameObject.transform.rotation = Quaternion.Euler(stateGameObject.transform.rotation.x , stateGameObject.transform.rotation.y + animOffsetRotation, stateGameObject.transform.rotation.z );
-        currentAttackDelay = attackDelay;
-        canAttack = true;
-        ExecuteAttack();
-    }
+private void GenerateAttackSlash()
+{
+    stateGameObject.GetComponent<SlashGenerator>().GenerateSlash();
+}
+
+private void ExecuteAnimation()
+{
+    AudioManager.Instance.CallOneShot("event:/SlashSound");
+    anim.SetTrigger("attack");
+    currentAttackTime = 0;
+    animationLength = anim.GetCurrentAnimatorClipInfo(0).Length;
+    currentAttackDelay = attackDelay;
+    canAttack = true;
+    ExecuteAttack();
+}
 
     void ExecuteAttack()
     {

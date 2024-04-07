@@ -18,7 +18,7 @@ public class PlayerInputController : MonoBehaviour
     private bool isUsingAbility1;
     private bool isUsingAbility2;
     private bool isKeyboard;
-    private bool isGamepad;
+    public bool isGamepad;
     private bool isCanceling;
     private bool isPausing;
     private int abilityPressed;

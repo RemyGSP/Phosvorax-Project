@@ -7,7 +7,7 @@ using UnityEngine;
 public class IdleState : States
 {
     Animator animator;
-    //private Rigidbody rigidBody;
+    private Rigidbody rigidBody;
     #region Constructor
     public IdleState(GameObject stateGameObject) : base(stateGameObject)
     {
@@ -16,7 +16,7 @@ public class IdleState : States
     public new void OnEnterState()
     {
         base.OnEnterState();
-        //rigidBody = stateGameObject.GetComponent<Rigidbody>();
+        rigidBody = stateGameObject.GetComponent<Rigidbody>();
     }
     public override void OnExitState()
     {
@@ -29,7 +29,7 @@ public class IdleState : States
     public override void Update()
     {
         PlayerReferences.instance.GetPlayerAnimator().SetBool("idle", true);
-        //rigidBody.velocity = Vector3.zero;
+        rigidBody.velocity = Vector3.zero;
     }
     #endregion
 }

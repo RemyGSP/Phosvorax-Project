@@ -97,20 +97,14 @@ public class BichoPinchoAttackState : States
 
     public override void OnTriggerEnter(Collider other)
     {
-        Debug.Log(hasHit +" Tag " +  other.gameObject.name);
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Pruebafdnjlksdjfnsd");
+
             other.gameObject.GetComponent<HealthBehaviour>().Damage(infoContainer.GetDamage());
             hasHit = true;
         }
     }
-
-    public override void OnCollisionEnter(Collision other)
-    {
-        base.OnCollisionEnter(other);
-    }
-
+    
     public void GetRotation(Vector3 targetPos)
     {
         Quaternion previousRotation = stateGameObject.transform.rotation;

@@ -20,16 +20,15 @@ public class EzrealQAbility : Ability
         targetDir.y = 0;
         stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
         ShootProjectile(targetDir);
-
     }
+
     private void ShootProjectile(Vector3 direction)
     {
         AudioManager.Instance.CallOneShot("event:/Zap");
         GameObject b = Instantiate(bulletPrefab, PlayerReferences.instance.ShotingPoint.position, PlayerReferences.instance.ShotingPoint.rotation);
-
         b.GetComponent<Rigidbody>().velocity = direction.normalized * bulletSpeed;
         b.GetComponent<BulletBehaviour>().SetLifetime(bulletDuration);
-        b.GetComponent<BulletBehaviour>().SetDamage(abilityBaseDamage);
+        b.GetComponent<BulletBehaviour>().SetDamage(abilityBaseDamage * ShopManager.instance.GetDamageLevel() * 0.7f);
     }
 
     public override void OnExitState()

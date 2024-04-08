@@ -43,6 +43,7 @@ public class ShopManager : MonoBehaviour
     public void SetHealthLevel(int healthLevel)
     {
         this.healthLevel = healthLevel;
+        PlayerReferences.instance.GetPlayerAnimator().gameObject.GetComponent<HealthBehaviour>().LevelUpHp();
     }
 
     public void SetSpeedLevel(int speedLevel)

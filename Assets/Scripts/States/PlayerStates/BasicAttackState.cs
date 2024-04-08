@@ -9,7 +9,6 @@ public class BasicAttackState : States
     [SerializeField] LayerMask enemyLayerMask;
     private Rigidbody rigidBody;
     [SerializeField] private float animOffsetRotation;
-
     [SerializeField] private float attackDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
     [SerializeField] private float attackOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
     [SerializeField] private float sphereSize; // Tamaño del área de detección
@@ -52,7 +51,7 @@ public class BasicAttackState : States
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         playerTransform = stateGameObject.GetComponent<Transform>();
-
+        rigidBody.AddForce(stateGameObject.transform.rotation * Vector3.forward * impulse, ForceMode.Impulse);
         //Lo que tardara en ejecutarse el ataque comparado con la animacion
         currentAttackDelay = attackDelay;
         Vector3 targetDir = PlayerReferences.instance.GetMouseTargetDir() - stateGameObject.transform.position;
@@ -68,7 +67,6 @@ public class BasicAttackState : States
     {
         AudioManager.Instance.CallOneShot("event:/SlashSound");
         anim.SetTrigger("attack");
-        rigidBody.AddForce(stateGameObject.transform.rotation * Vector3.forward * impulse, ForceMode.Impulse);
         currentAttackTime = 0;
         animationLength = anim.GetCurrentAnimatorClipInfo(0).Length ;
         //stateGameObject.transform.rotation = Quaternion.Euler(stateGameObject.transform.rotation.x , stateGameObject.transform.rotation.y + animOffsetRotation, stateGameObject.transform.rotation.z );
@@ -83,9 +81,9 @@ public class BasicAttackState : States
         //stateGameObject.GetComponent<GroundSlashShooter>().OnShoot();
         Vector3 attackPosition = playerTransform.position + playerTransform.forward * attackOffset;
         Collider[] hitColliders = Physics.OverlapSphere(attackPosition, sphereSize / 2, enemyLayerMask, QueryTriggerInteraction.UseGlobal);
-
         foreach (Collider hitCollider in hitColliders)
         {
+            rigidBody.velocity = Vector3.zero;
             if (hitCollider.TryGetComponent<HealthBehaviour>(out HealthBehaviour healthBehaviour))
             {
                 healthBehaviour.Damage(attackDamage);
@@ -93,6 +91,7 @@ public class BasicAttackState : States
             Debug.Log("Impacto con: " + hitCollider.gameObject.name);
         }
         canAttack = false;
+        rigidBody.velocity = Vector3.zero;
     }
 
     public override void FixedUpdate()

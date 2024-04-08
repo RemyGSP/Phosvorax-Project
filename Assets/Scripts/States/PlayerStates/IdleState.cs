@@ -13,10 +13,12 @@ public class IdleState : States
     {
     }
 
-    public new void OnEnterState()
-    {
-        base.OnEnterState();
+    public override void Start(){
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
+    }
+    public new void OnEnterState()
+    {  
+        
     }
     public override void OnExitState()
     {
@@ -28,8 +30,9 @@ public class IdleState : States
     // Aquí hacer la lógica para cuando el jugador no haga nada, normalmente solo será que haga la animación de idle del objeto
     public override void Update()
     {
-        PlayerReferences.instance.GetPlayerAnimator().SetBool("idle", true);
         rigidBody.velocity = Vector3.zero;
+        PlayerReferences.instance.GetPlayerAnimator().SetBool("idle", true);
+        
     }
     #endregion
 }

@@ -30,7 +30,7 @@ public class BasicAttackState : States
 
     public new States CheckTransitions()
     {
-        Debug.Log("Basic Attack CurrentAttackTime: " + currentAttackTime + "AnimationLenght: " + animationLength);
+       // Debug.Log("Basic Attack CurrentAttackTime: " + currentAttackTime + "AnimationLenght: " + animationLength);
         if (currentAttackTime > animationLength)
         {
             return base.CheckTransitions();
@@ -134,6 +134,6 @@ private void ExecuteAnimation()
     public override void OnExitState()
     {
         rigidBody.velocity = Vector3.zero;
-        //PlayerReferences.instance.GetPlayerAnimator().SetInteger("meleeAttack", 0);
+        
     }
 }

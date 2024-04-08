@@ -18,6 +18,7 @@ public class EnemyPatrolState : States
 
     [Header("Patrol Values")]
     [SerializeField] private float patrolAreaRange; //radius of sphere
+    [SerializeField] private float extraDistance; //disancia extra para sumar a la distancia del enemigo  para evitar bugs con la navmesh y los puntos
 
     private Transform patrolCenterPoint; //centre of the area the agent wants to move around in
 
@@ -46,16 +47,16 @@ public class EnemyPatrolState : States
 
     public override void Update()
     {
-        //Debug.Log("IsOnNavMesh " + enemy.isOnNavMesh);
-        //if (enemy.remainingDistance <= enemy.stoppingDistance) //ha acabado de hacer el camino
-        //{
-        //    Vector3 point;
-        //    if (RandomPoint(patrolCenterPoint.position, patrolAreaRange, out point))
-        //    {
-        //        //Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //para ver el punto 
-        //        enemy.SetDestination(point);
-        //    }
-        //}
+        Debug.Log("IsOnNavMesh " + enemy.isOnNavMesh);
+        if (enemy.remainingDistance <= (enemy.stoppingDistance + extraDistance)) //ha acabado de hacer el camino
+        {
+            Vector3 point;
+            if (RandomPoint(patrolCenterPoint.position, patrolAreaRange, out point))
+            {
+                //Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //para ver el punto 
+                enemy.SetDestination(point);
+            }
+        }
     }
 
     private bool RandomPoint(Vector3 center, float range, out Vector3 result)

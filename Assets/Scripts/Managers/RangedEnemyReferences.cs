@@ -17,7 +17,7 @@ public class RangedEnemyReferences : MonoBehaviour
 
     private void Start()
     {
-        canAttack = false;
+        canAttack = true;
         canMoveAway = false;
     }
     public void SetCanAttack(bool aux)

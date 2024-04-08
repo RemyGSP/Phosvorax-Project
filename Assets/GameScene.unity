@@ -97,8 +97,10 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 929c12a673ae7094bb1904d5b7682c2e,
+    type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 1dc5178c7046be04da3550ac11786d51,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -407,7 +409,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 1.1666666
+  m_VoxelSize: 0.33333334
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 4ac478764ccd3da47881e545507370d6, type: 2}
   m_BuildHeightMesh: 0
@@ -681,6 +683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b767277d3b9536443be754f1d3e25e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  surface: {fileID: 139387885}
   prefabRooms:
   - prefabRooms:
     - {fileID: 1111919837220083903, guid: 011c0fe9c675ae2429749a0d230a2b1f, type: 3}
@@ -2259,7 +2262,7 @@ Light:
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_ColorTemperature: 3773
+  m_ColorTemperature: 3772.85
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0

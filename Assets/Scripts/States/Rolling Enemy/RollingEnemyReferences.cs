@@ -43,7 +43,7 @@ public class RollingEnemyReferences : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Colision con: " + other.name);
+        //Debug.Log("Colision con: " + other.name);
     }
     public float GetDamage()
     {

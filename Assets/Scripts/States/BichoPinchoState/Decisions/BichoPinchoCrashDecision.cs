@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 
-[CreateAssetMenu(menuName = "Decision/BichoPinchoCrash")]
+[CreateAssetMenu(menuName = "EnemyDecisions/BichoPinchoCrash")]
 
 public class BichoPinchoCrashDecision : Decision
 {

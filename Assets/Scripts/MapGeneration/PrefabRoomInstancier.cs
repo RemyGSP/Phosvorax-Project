@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEditor;
 
 
 
@@ -18,6 +19,7 @@ public class Roomlist
 
 public class PrefabRoomInstancier : MonoBehaviour
 {
+    [SerializeField] Unity.AI.Navigation.NavMeshSurface surface;
     public List<Roomlist> prefabRooms;
     public static bool isMapGenerated;
     private int[,] roomLayoutTypeMatrix;
@@ -131,7 +133,7 @@ public class PrefabRoomInstancier : MonoBehaviour
 
             }
         }
-
+        Lightmapping.Bake();
         ConnectingRoomDoors();
         GenerateNavMeshSurfaces();
     }
@@ -240,14 +242,8 @@ public class PrefabRoomInstancier : MonoBehaviour
 
     void GenerateNavMeshSurfaces()
     {
-        foreach (GameObject go in roomInstancesMatrix)
-        {
-            Unity.AI.Navigation.NavMeshSurface[] surfaces = go.GetComponentsInChildren<Unity.AI.Navigation.NavMeshSurface>();
-            foreach (Unity.AI.Navigation.NavMeshSurface surface in surfaces)
-            {
-                surface.BuildNavMesh();
-            }
-        }
+        surface.BuildNavMesh();
+
         isMapGenerated = true;
         DestroyRooms();
     }

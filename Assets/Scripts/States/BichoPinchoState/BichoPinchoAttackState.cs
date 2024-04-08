@@ -105,7 +105,12 @@ public class BichoPinchoAttackState : States
             hasHit = true;
         }
     }
-    
+
+    public override void OnCollisionEnter(Collision other)
+    {
+        base.OnCollisionEnter(other);
+    }
+
     public void GetRotation(Vector3 targetPos)
     {
         Quaternion previousRotation = stateGameObject.transform.rotation;

@@ -27,6 +27,7 @@ public class BulletBehaviour : MonoBehaviour
         Destroy(gameObject);
         if (other.gameObject.TryGetComponent<HealthBehaviour>(out HealthBehaviour healthBehaviour))
         {
+
             healthBehaviour.Damage(damage);
         }
     }

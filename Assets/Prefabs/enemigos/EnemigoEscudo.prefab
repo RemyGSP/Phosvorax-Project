@@ -837,6 +837,7 @@ GameObject:
   - component: {fileID: 6363179488054842110}
   - component: {fileID: 7239002181496637897}
   - component: {fileID: 7870360242837003514}
+  - component: {fileID: -4212732617425363431}
   m_Layer: 6
   m_Name: EnemigoEscudo
   m_TagString: Untagged
@@ -887,7 +888,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!65 &2738255451914050575
 BoxCollider:
@@ -908,8 +909,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.7828503, y: 1.7546083, z: 7.9541187}
-  m_Center: {x: 0.123215675, y: 0.928184, z: -0.8109808}
+  m_Size: {x: 3.7828512, y: 3.2489276, z: 7.954196}
+  m_Center: {x: 0.12321587, y: 1.6753435, z: -0.8109809}
 --- !u!114 &8352437070261413969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -922,7 +923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fab57eab529985f42a8bbf306ee2483e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 500
+  currentHealth: 200
   maxHealth: 500
   minHealth: 0
   damageModifier: 0
@@ -993,7 +994,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4850134f190ea848b443eeab0005829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entryState: {fileID: 11400000, guid: ff71a8145160e874fb32d83a652ae886, type: 2}
+  entryState: {fileID: 11400000, guid: af1816cb64bcf704e8d64627b93774bc, type: 2}
   currentState: {fileID: 0}
   stunnedState: {fileID: 0}
 --- !u!114 &2429448216783206228
@@ -1008,9 +1009,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 326bab1633a13d843bdf4d68755d91f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToSeePlayer: 35
+  distanceToSeePlayer: 50
   playerSeen: 0
   maxAttackDistance: 20
+  distanceToStartCountdown: 100
+  canBeStarted: 0
 --- !u!195 &7621287577153602973
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1102,6 +1105,19 @@ MonoBehaviour:
   stunThingsContainer: {fileID: 4255297009824577736}
   stunBar: {fileID: 7110760463592556323}
   fillSpeed: 10
+--- !u!114 &-4212732617425363431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3063802882198433313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfef3417cdebe7240b3cc6b6c0d97bab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 20
 --- !u!1 &3329097428739035065
 GameObject:
   m_ObjectHideFlags: 0

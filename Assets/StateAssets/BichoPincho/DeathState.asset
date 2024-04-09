@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: DeathState
   m_EditorClassIdentifier: 
   stateGameObject: {fileID: 0}
-  stateTransitions: []
+  stateTransitions:
+  - decisionToBeMade: {fileID: 11400000, guid: b0216a1a4d245d44c98c684fcc6074b2, type: 2}
+    onDecisionTrueExitState: {fileID: 0}
+    onDecisionFalseExitState: {fileID: 0}

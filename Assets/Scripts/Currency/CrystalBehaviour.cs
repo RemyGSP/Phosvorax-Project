@@ -9,12 +9,14 @@ public class CrystalBehaviour : MonoBehaviour
     [SerializeField] private AnimationCurve speedCurve;
     [SerializeField] private float startMovingDelay;
     private bool canStartMoving;
+    private bool playerInRange;
 
     private float elapsedTime = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
+        StartCoroutine(_StartMoving());
         StartCoroutine(_Delete());
         canStartMoving = false;
         rb = GetComponent<Rigidbody>();
@@ -23,7 +25,7 @@ public class CrystalBehaviour : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (canStartMoving)
+        if (canStartMoving && playerInRange)
         {
             // Increment elapsed time
             elapsedTime += Time.fixedDeltaTime;
@@ -63,7 +65,15 @@ public class CrystalBehaviour : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            StartCoroutine(_StartMoving());
+            playerInRange = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            playerInRange = false;
         }
     }
 

@@ -81,5 +81,15 @@ public class PlayerReferences : MonoBehaviour
     {
         return playerVisiblePoint.transform.position;
     }
+
+    public void DeactivatePlayer()
+    {
+        player.GetComponent<StateMachine>().enabled = false;
+    }
+
+    public GameObject GetPlayer()
+    {
+        return player;
+    }
     #endregion
 }

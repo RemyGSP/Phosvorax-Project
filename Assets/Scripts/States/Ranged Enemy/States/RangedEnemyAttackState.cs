@@ -17,7 +17,11 @@ public class RangedEnemyAttackState : States
 
 
     #region Variables
+    [Header("Layers")]
     [SerializeField] LayerMask playerLayerMask;
+    [SerializeField] LayerMask groundLayerMask;
+
+    LayerMask combinedLayers;
 
     private RotateCharacter rotateCharacter;
     private LaserGenerator laserGenerator;
@@ -89,6 +93,7 @@ public class RangedEnemyAttackState : States
 
     public override void Start()
     {
+        combinedLayers = playerLayerMask | groundLayerMask;
         laserGenerator = stateGameObject.GetComponent<LaserGenerator>();
         enemy = stateGameObject.GetComponent<NavMeshAgent>();
         enemy.speed = 0;
@@ -123,7 +128,7 @@ public class RangedEnemyAttackState : States
         Vector3 fullRayVector = (finalPoint - initialPoint);
         float laserDistanceValue = -1; // Valor predeterminado en caso de no colisión
 
-        if (Physics.Raycast(initialPoint, fullRayVector.normalized, out hit, currentLaserLength, playerLayerMask, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(initialPoint, fullRayVector.normalized, out hit, currentLaserLength, combinedLayers, QueryTriggerInteraction.Ignore))
         {
             Vector3 hitPosition = hit.point;
 

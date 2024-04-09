@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f54262700536c84c8ee2a2a0b06670f, type: 3}
+  m_Name: RollingEnemyEntryState
+  m_EditorClassIdentifier: 
+  stateGameObject: {fileID: 0}
+  stateTransitions:
+  - decisionToBeMade: {fileID: 11400000, guid: c93346a234365f64bb0514541104fa2b, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: ff71a8145160e874fb32d83a652ae886,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 0}
+  timeToStartEnemies: 1

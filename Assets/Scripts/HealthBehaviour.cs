@@ -42,6 +42,12 @@ public class HealthBehaviour : MonoBehaviour
         return parryDamageDetector;
     }
 
+    public void LevelUpHp()
+    {
+        SetHP(100 + (maxHealth * 0.2f));
+        Heal(maxHealth);
+        onGetDamaged.Invoke(currentHealth);
+    }
     public bool Damage(float damage)
     {
         bool aux = false;

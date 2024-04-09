@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public class ShopManager : MonoBehaviour
@@ -43,6 +44,7 @@ public class ShopManager : MonoBehaviour
     public void SetHealthLevel(int healthLevel)
     {
         this.healthLevel = healthLevel;
+        PlayerReferences.instance.GetPlayer().gameObject.GetComponent<HealthBehaviour>().LevelUpHp();
     }
 
     public void SetSpeedLevel(int speedLevel)
@@ -55,6 +57,28 @@ public class ShopManager : MonoBehaviour
         this.damageLevel = damageLevel;
     }
 
+
+    [CustomEditor(typeof(ShopManager))]
+    public class ExampleScriptEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+
+            if (GUILayout.Button("Set Health Level"))
+            {
+                ShopManager.instance.SetHealthLevel(ShopManager.instance.GetHealthLevel() + 1);
+            }
+            if (GUILayout.Button("Set Damage Level"))
+            {
+                ShopManager.instance.SetDamageLevel(ShopManager.instance.GetDamageLevel()+ 1);
+            }
+            if (GUILayout.Button("Set Speed Level"))
+            {
+                ShopManager.instance.SetSpeedLevel(ShopManager.instance.GetSpeedLevel() + 1);
+            }
+        }
+    }
 
 
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEditor;
 
 
 
@@ -13,13 +14,14 @@ public class Roomlist
     public List<GameObject> spawnRoom;
     public List<GameObject> shopRoom;
 
-    
+
 }
 
 public class PrefabRoomInstancier : MonoBehaviour
 {
+    [SerializeField] Unity.AI.Navigation.NavMeshSurface surface;
     public List<Roomlist> prefabRooms;
-
+    public static bool isMapGenerated;
     private int[,] roomLayoutTypeMatrix;
     private int[,] roomTypeMatrix;
     public GameObject[,] roomInstancesMatrix;
@@ -30,110 +32,111 @@ public class PrefabRoomInstancier : MonoBehaviour
     public void ReceiveMatrix(int[,] matrix1, int[,] matrix2)
     {
         roomLayoutTypeMatrix = matrix1;
-        roomTypeMatrix  = matrix2;
+        roomTypeMatrix = matrix2;
         roomInstancesMatrix = new GameObject[matrix1.GetLength(0), matrix1.GetLength(1)];
         PrintMatrix(roomLayoutTypeMatrix);
         PrintMatrix(roomTypeMatrix);
         InstantiateRooms();
     }
 
-  public void InstantiateRooms()
-{
-    if (roomLayoutTypeMatrix == null || prefabRooms == null || prefabRooms.Count == 0)
+    public void InstantiateRooms()
     {
-        Debug.LogError("Matrix or prefabRooms not set properly.");
-        return;
-    }
-
-    int numRows = roomLayoutTypeMatrix.GetLength(0);
-    int numCols = roomLayoutTypeMatrix.GetLength(1);
-    float spacing = 300f;
-
-    for (int row = 0; row < numRows; row++)
-    {
-        for (int col = 0; col < numCols; col++)
+        isMapGenerated = false;
+        if (roomLayoutTypeMatrix == null || prefabRooms == null || prefabRooms.Count == 0)
         {
-            int layoutTypeIndex = roomLayoutTypeMatrix[row, col];
-            int roomTypeIndex = roomTypeMatrix[row, col];
+            Debug.LogError("Matrix or prefabRooms not set properly.");
+            return;
+        }
 
-            List<GameObject> selectedRoomList;
-            if (layoutTypeIndex >= 0 && layoutTypeIndex < prefabRooms.Count)
+        int numRows = roomLayoutTypeMatrix.GetLength(0);
+        int numCols = roomLayoutTypeMatrix.GetLength(1);
+        float spacing = 300f;
+
+        for (int row = 0; row < numRows; row++)
+        {
+            for (int col = 0; col < numCols; col++)
+            {
+                int layoutTypeIndex = roomLayoutTypeMatrix[row, col];
+                int roomTypeIndex = roomTypeMatrix[row, col];
+
+                List<GameObject> selectedRoomList;
+                if (layoutTypeIndex >= 0 && layoutTypeIndex < prefabRooms.Count)
                 {
                     switch (roomTypeIndex)
-                {
-                    case 1:
-                       selectedRoomList = prefabRooms[layoutTypeIndex].bossRooms;
-                       if (selectedRoomList.Count > 0)
-                        {
-                            GameObject selectedPrefab = selectedRoomList[Random.Range(0, selectedRoomList.Count)];
-                            Vector3 spawnPosition = new Vector3(col * spacing, 0f, -row * spacing);
+                    {
+                        case 1:
+                            selectedRoomList = prefabRooms[layoutTypeIndex].bossRooms;
+                            if (selectedRoomList.Count > 0)
+                            {
+                                GameObject selectedPrefab = selectedRoomList[Random.Range(0, selectedRoomList.Count)];
+                                Vector3 spawnPosition = new Vector3(col * spacing, 0f, -row * spacing);
 
-                            // Instanciar la habitación y asignarla a prefabRoomsMatrix
-                            GameObject instantiatedRoom = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
+                                // Instanciar la habitación y asignarla a prefabRoomsMatrix
+                                GameObject instantiatedRoom = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
 
-                            // Establecer el objeto instanciado como hijo de otro objeto (por ejemplo, el objeto que tiene el script)
-                            instantiatedRoom.transform.parent = transform;
+                                // Establecer el objeto instanciado como hijo de otro objeto (por ejemplo, el objeto que tiene el script)
+                                instantiatedRoom.transform.parent = transform;
 
-                            roomInstancesMatrix[row, col] = instantiatedRoom;
-                        }
-                        break;
-                    case 2:
-                        selectedRoomList = prefabRooms[layoutTypeIndex].spawnRoom;
-                        if (selectedRoomList.Count > 0)
-                        {
-                            GameObject selectedPrefab = selectedRoomList[Random.Range(0, selectedRoomList.Count)];
-                            Vector3 spawnPosition = new Vector3(col * spacing, 0f, -row * spacing);
+                                roomInstancesMatrix[row, col] = instantiatedRoom;
+                            }
+                            break;
+                        case 2:
+                            selectedRoomList = prefabRooms[layoutTypeIndex].spawnRoom;
+                            if (selectedRoomList.Count > 0)
+                            {
+                                GameObject selectedPrefab = selectedRoomList[Random.Range(0, selectedRoomList.Count)];
+                                Vector3 spawnPosition = new Vector3(col * spacing, 0f, -row * spacing);
 
-                            // Instanciar la habitación y asignarla a prefabRoomsMatrix
-                            GameObject instantiatedRoom = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
+                                // Instanciar la habitación y asignarla a prefabRoomsMatrix
+                                GameObject instantiatedRoom = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
 
-                            // Establecer el objeto instanciado como hijo de otro objeto (por ejemplo, el objeto que tiene el script)
-                            instantiatedRoom.transform.parent = transform;
+                                // Establecer el objeto instanciado como hijo de otro objeto (por ejemplo, el objeto que tiene el script)
+                                instantiatedRoom.transform.parent = transform;
 
-                            roomInstancesMatrix[row, col] = instantiatedRoom;
-                        }
-                        break;
-                    case 3:
-                        selectedRoomList = prefabRooms[layoutTypeIndex].shopRoom;
-                        if (selectedRoomList.Count > 0)
-                        {
-                            GameObject selectedPrefab = selectedRoomList[Random.Range(0, selectedRoomList.Count)];
-                            Vector3 spawnPosition = new Vector3(col * spacing, 0f, -row * spacing);
+                                roomInstancesMatrix[row, col] = instantiatedRoom;
+                            }
+                            break;
+                        case 3:
+                            selectedRoomList = prefabRooms[layoutTypeIndex].shopRoom;
+                            if (selectedRoomList.Count > 0)
+                            {
+                                GameObject selectedPrefab = selectedRoomList[Random.Range(0, selectedRoomList.Count)];
+                                Vector3 spawnPosition = new Vector3(col * spacing, 0f, -row * spacing);
 
-                            // Instanciar la habitación y asignarla a prefabRoomsMatrix
-                            GameObject instantiatedRoom = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
+                                // Instanciar la habitación y asignarla a prefabRoomsMatrix
+                                GameObject instantiatedRoom = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
 
-                            // Establecer el objeto instanciado como hijo de otro objeto (por ejemplo, el objeto que tiene el script)
-                            instantiatedRoom.transform.parent = transform;
+                                // Establecer el objeto instanciado como hijo de otro objeto (por ejemplo, el objeto que tiene el script)
+                                instantiatedRoom.transform.parent = transform;
 
-                            roomInstancesMatrix[row, col] = instantiatedRoom;
-                        }
-                        break;
-                    default:
-                        selectedRoomList = prefabRooms[layoutTypeIndex].prefabRooms;
-                        if (selectedRoomList.Count > 0)
-                        {
-                            GameObject selectedPrefab = selectedRoomList[Random.Range(0, selectedRoomList.Count)];
-                            Vector3 spawnPosition = new Vector3(col * spacing, 0f, -row * spacing);
+                                roomInstancesMatrix[row, col] = instantiatedRoom;
+                            }
+                            break;
+                        default:
+                            selectedRoomList = prefabRooms[layoutTypeIndex].prefabRooms;
+                            if (selectedRoomList.Count > 0)
+                            {
+                                GameObject selectedPrefab = selectedRoomList[Random.Range(0, selectedRoomList.Count)];
+                                Vector3 spawnPosition = new Vector3(col * spacing, 0f, -row * spacing);
 
-                            // Instanciar la habitación y asignarla a prefabRoomsMatrix
-                            GameObject instantiatedRoom = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
+                                // Instanciar la habitación y asignarla a prefabRoomsMatrix
+                                GameObject instantiatedRoom = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);
 
-                            // Establecer el objeto instanciado como hijo de otro objeto (por ejemplo, el objeto que tiene el script)
-                            instantiatedRoom.transform.parent = transform;
+                                // Establecer el objeto instanciado como hijo de otro objeto (por ejemplo, el objeto que tiene el script)
+                                instantiatedRoom.transform.parent = transform;
 
-                            roomInstancesMatrix[row, col] = instantiatedRoom;
-                        }
-                        break;
+                                roomInstancesMatrix[row, col] = instantiatedRoom;
+                            }
+                            break;
+                    }
                 }
-                }
-            
+
+            }
         }
+        Lightmapping.Bake();
+        ConnectingRoomDoors();
+        GenerateNavMeshSurfaces();
     }
-
-    ConnectingRoomDoors();
-    GenerateNavMeshSurfaces();
-}
 
 
     void ConnectingRoomDoors()
@@ -239,14 +242,9 @@ public class PrefabRoomInstancier : MonoBehaviour
 
     void GenerateNavMeshSurfaces()
     {
-        foreach (GameObject go in roomInstancesMatrix)
-        {
-            Unity.AI.Navigation.NavMeshSurface[] surfaces = go.GetComponentsInChildren<Unity.AI.Navigation.NavMeshSurface>();
-            foreach (Unity.AI.Navigation.NavMeshSurface surface in surfaces)
-            {
-                surface.BuildNavMesh();
-            }
-        }
+        surface.BuildNavMesh();
+
+        isMapGenerated = true;
         DestroyRooms();
     }
 

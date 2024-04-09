@@ -60,7 +60,7 @@ public class MoveState : States
 
         }
 
-        return playerDirection * currentSpeed;
+        return (playerDirection * currentSpeed) * (1 + 0.1f * ShopManager.instance.GetSpeedLevel());
     }
 
     public override void Update()

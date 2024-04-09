@@ -1651,7 +1651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 326bab1633a13d843bdf4d68755d91f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToSeePlayer: 25
+  distanceToSeePlayer: 10
   playerSeen: 0
   maxAttackDistance: 5
   distanceToStartCountdown: 100
@@ -1792,7 +1792,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0.9
+  m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &6773056614007094674

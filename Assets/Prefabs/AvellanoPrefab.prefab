@@ -1636,7 +1636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4850134f190ea848b443eeab0005829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entryState: {fileID: 11400000, guid: 56ede9c11d2900743af391452c78502a, type: 2}
+  entryState: {fileID: 11400000, guid: c590ae67840ac5e4a9a6c7d1d86a7fa0, type: 2}
   currentState: {fileID: 0}
   stunnedState: {fileID: 0}
 --- !u!114 &4611290178302955891
@@ -1651,10 +1651,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 326bab1633a13d843bdf4d68755d91f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceToSeePlayer: 4
+  distanceToSeePlayer: 25
   playerSeen: 0
-  maxAttackDistance: 3
-  distanceToStartCountdown: 0
+  maxAttackDistance: 5
+  distanceToStartCountdown: 100
   canBeStarted: 0
 --- !u!114 &4542839557066686406
 MonoBehaviour:

@@ -23,7 +23,6 @@ public class RollState : States
     public override void Start()
     {
         animator = animator = PlayerReferences.instance.GetPlayerAnimator();
-        Physics.IgnoreLayerCollision(stateGameObject.layer, 6);
         //stateGameObject.GetComponent<Collider>().enabled = false;
         currentDashTime = 0f;
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
@@ -75,7 +74,6 @@ public class RollState : States
     public override void OnExitState()
     {
         rigidBody.velocity = Vector3.zero;
-        Physics.IgnoreLayerCollision(stateGameObject.layer, 6);
         //stateGameObject.GetComponent<Collider>().enabled = true;
         PlayerReferences.instance.GetPlayerAnimator().SetBool("dash", false);
     }

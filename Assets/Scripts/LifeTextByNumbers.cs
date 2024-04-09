@@ -19,6 +19,12 @@ public class LifeTextByNumbers : MonoBehaviour
 
     public void ChangeText(float currentHealth)
     {
-        healthText.text =currentHealth + " / " + healthBehaviour.GetMaxHealth();
+        if (currentHealth < 0)
+        {
+            currentHealth = 0;
+        }
+        healthText.GetComponent<Animator>().SetTrigger("hit");
+        healthText.text = currentHealth + " / " + healthBehaviour.GetMaxHealth();
+
     }
 }

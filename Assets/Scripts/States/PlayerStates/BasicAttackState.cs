@@ -7,18 +7,28 @@ using UnityEngine;
 public class BasicAttackState : States
 {
 
+    
     [SerializeField] private float attackOffset; // Distancia desde el jugador para el inicio del ataque
     [SerializeField] private float heightOffset;
     [SerializeField] private float sphereSize; // Tamaño del área de detección
     [SerializeField] private float attackDamage;
     [SerializeField] private LayerMask hitLayerMask;
     [SerializeField] private float impulseForce;
+    [SerializeField] private float damageDelay;
+    [SerializeField] private float slashMeshDelay;
+    [SerializeField] private float consecutiveSlashes;
     private RotateCharacter rotateCharacter;
     private Rigidbody rigidBody;
     private Animator anim;
-    private float animationLength;
+    private AnimationClip punchClip;
+
+    const string attackAnimationClipName = "ActionPunch";
     private float inAttackStateTimer;
-    
+    private bool damageChek;
+    private bool meshChek;
+
+
+
     public BasicAttackState(GameObject stateGameObject) : base(stateGameObject)
     {
     }
@@ -26,7 +36,7 @@ public class BasicAttackState : States
     public override States CheckTransitions()
     {
         States newGameState = null;
-        if (inAttackStateTimer > animationLength){
+        if (inAttackStateTimer > punchClip.length){
             newGameState = base.CheckTransitions();
         }
         
@@ -35,11 +45,18 @@ public class BasicAttackState : States
     }
     public override void Start(){
         InitializeComponents();
+        PerforingAttack();
+    }
+
+    private void PerforingAttack()
+    {
+        inAttackStateTimer = 0;
+        damageChek = false;
+        meshChek = false;
         RotatePlayerTowardsMouseTarget();
         AddImpulseForce();
-        GenerateAttackSlash();
         ExecuteAnimation();
-        ExecuteAttack();
+        
     }
 
     private void InitializeComponents()
@@ -47,12 +64,12 @@ public class BasicAttackState : States
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         anim = PlayerReferences.instance.GetPlayerAnimator();
+        punchClip = CommonUtilities.FindAnimation(anim, attackAnimationClipName);
     }
 
-    
+
     private void RotatePlayerTowardsMouseTarget()
     {
-
         if (!PlayerInputController.Instance.isGamepad){
             Vector3 targetDir = PlayerReferences.instance.GetMouseTargetDir() - stateGameObject.transform.position;
             stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
@@ -61,7 +78,7 @@ public class BasicAttackState : States
     }
 
     private void AddImpulseForce(){
-        rigidBody.AddForce(stateGameObject.transform.forward * impulseForce, ForceMode.Impulse);
+        rigidBody.AddForce(stateGameObject.transform.forward * impulseForce, ForceMode.VelocityChange);
     }
 
     private void ExecuteAttack(){
@@ -86,12 +103,21 @@ public class BasicAttackState : States
     {
         AudioManager.Instance.CallOneShot("event:/SlashSound");
         anim.SetTrigger("attack");
-        animationLength = anim.GetCurrentAnimatorClipInfo(0).Length;
     }
 
     public override void FixedUpdate()
     {
-        inAttackStateTimer += Time.deltaTime;   
+        inAttackStateTimer += Time.deltaTime; 
+        if (inAttackStateTimer > slashMeshDelay && !meshChek)
+        {
+            meshChek = true;
+            GenerateAttackSlash();
+        }
+        if (inAttackStateTimer > damageDelay && !damageChek)
+        {
+            damageChek = true;
+            ExecuteAttack();
+        }
     }
     public override void Update()
     {
@@ -101,6 +127,8 @@ public class BasicAttackState : States
     public override void OnExitState()
     {
         PlayerTimers.Instance.playerBasicAttackTimer = 0;
-        
+        rigidBody.velocity = Vector3.zero;
+        Debug.Log(punchClip.length);
+
     }
 }

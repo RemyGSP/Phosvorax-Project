@@ -12,7 +12,9 @@ public class BasicAttackState : States
     [SerializeField] private float sphereSize; // Tamaño del área de detección
     [SerializeField] private float attackDamage;
     [SerializeField] private LayerMask hitLayerMask;
+    [SerializeField] private float impulseForce;
     private RotateCharacter rotateCharacter;
+    private Rigidbody rigidBody;
     private Animator anim;
     private float animationLength;
     
@@ -31,6 +33,7 @@ public class BasicAttackState : States
     public override void Start(){
         InitializeComponents();
         RotatePlayerTowardsMouseTarget();
+        AddImpulseForce();
         GenerateAttackSlash();
         ExecuteAnimation();
         ExecuteAttack();
@@ -38,9 +41,9 @@ public class BasicAttackState : States
 
     private void InitializeComponents()
     {   
-        anim = PlayerReferences.instance.GetPlayerAnimator();
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
-        //rigidBody = stateGameObject.GetComponent<Rigidbody>();
+        rigidBody = stateGameObject.GetComponent<Rigidbody>();
+        anim = PlayerReferences.instance.GetPlayerAnimator();
     }
 
     
@@ -52,6 +55,10 @@ public class BasicAttackState : States
             stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
         }
     
+    }
+
+    private void AddImpulseForce(){
+        rigidBody.AddForce(stateGameObject.transform.forward * impulseForce, ForceMode.Acceleration);
     }
 
     private void ExecuteAttack(){
@@ -91,5 +98,6 @@ public class BasicAttackState : States
     public override void OnExitState()
     {
         PlayerTimers.Instance.playerBasicAttackTimer = 0;
+        
     }
 }

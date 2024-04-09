@@ -17,6 +17,7 @@ public class BasicAttackState : States
     private Rigidbody rigidBody;
     private Animator anim;
     private float animationLength;
+    private float inAttackStateTimer;
     
     public BasicAttackState(GameObject stateGameObject) : base(stateGameObject)
     {
@@ -25,8 +26,10 @@ public class BasicAttackState : States
     public override States CheckTransitions()
     {
         States newGameState = null;
+        if (inAttackStateTimer > animationLength){
+            newGameState = base.CheckTransitions();
+        }
         
-        newGameState = base.CheckTransitions();
         
         return newGameState;
     }
@@ -58,7 +61,7 @@ public class BasicAttackState : States
     }
 
     private void AddImpulseForce(){
-        rigidBody.AddForce(stateGameObject.transform.forward * impulseForce, ForceMode.Acceleration);
+        rigidBody.AddForce(stateGameObject.transform.forward * impulseForce, ForceMode.Impulse);
     }
 
     private void ExecuteAttack(){
@@ -88,7 +91,7 @@ public class BasicAttackState : States
 
     public override void FixedUpdate()
     {
-       return; 
+        inAttackStateTimer += Time.deltaTime;   
     }
     public override void Update()
     {

@@ -407,7 +407,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 1.1666666
+  m_VoxelSize: 0.23333333
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 4ac478764ccd3da47881e545507370d6, type: 2}
   m_BuildHeightMesh: 0
@@ -681,6 +681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b767277d3b9536443be754f1d3e25e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  surface: {fileID: 0}
   prefabRooms:
   - prefabRooms:
     - {fileID: 1111919837220083903, guid: 011c0fe9c675ae2429749a0d230a2b1f, type: 3}
@@ -1547,6 +1548,8 @@ MonoBehaviour:
   distanceToSeePlayer: 25
   playerSeen: 0
   maxAttackDistance: 10
+  distanceToStartCountdown: 0
+  canBeStarted: 0
 --- !u!114 &992127172
 MonoBehaviour:
   m_ObjectHideFlags: 0

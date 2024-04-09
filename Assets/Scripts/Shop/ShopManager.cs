@@ -65,15 +65,15 @@ public class ShopManager : MonoBehaviour
         {
             DrawDefaultInspector();
 
-            if (GUILayout.Button("Set Health Level"))
+            if (GUILayout.Button("Level Up Health Level"))
             {
                 ShopManager.instance.SetHealthLevel(ShopManager.instance.GetHealthLevel() + 1);
             }
-            if (GUILayout.Button("Set Damage Level"))
+            if (GUILayout.Button("Level Up Damage Level"))
             {
                 ShopManager.instance.SetDamageLevel(ShopManager.instance.GetDamageLevel()+ 1);
             }
-            if (GUILayout.Button("Set Speed Level"))
+            if (GUILayout.Button("Level Up Speed Level"))
             {
                 ShopManager.instance.SetSpeedLevel(ShopManager.instance.GetSpeedLevel() + 1);
             }

@@ -407,7 +407,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 1.1666666
+  m_VoxelSize: 0.23333333
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 4ac478764ccd3da47881e545507370d6, type: 2}
   m_BuildHeightMesh: 0
@@ -681,6 +681,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b767277d3b9536443be754f1d3e25e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  surface: {fileID: 0}
   prefabRooms:
   - prefabRooms:
     - {fileID: 1111919837220083903, guid: 011c0fe9c675ae2429749a0d230a2b1f, type: 3}
@@ -1547,6 +1548,8 @@ MonoBehaviour:
   distanceToSeePlayer: 25
   playerSeen: 0
   maxAttackDistance: 10
+  distanceToStartCountdown: 0
+  canBeStarted: 0
 --- !u!114 &992127172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2424,6 +2427,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MainCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 5780334170682324822, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5780334170682324822, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7001635485009746340, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 245.6226
+      objectReference: {fileID: 0}
+    - target: {fileID: 7001635485009746340, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 34.5891
+      objectReference: {fileID: 0}
+    - target: {fileID: 7001635485009746340, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -230.08871
+      objectReference: {fileID: 0}
+    - target: {fileID: 7001635485009746340, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -46.805466
       objectReference: {fileID: 0}
     - target: {fileID: 8838741370877958639, guid: b512993666e602e409c2175bd6f93cba,
         type: 3}

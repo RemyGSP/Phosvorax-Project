@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShopManager : MonoBehaviour
 {
@@ -65,6 +66,8 @@ public class ShopManager : MonoBehaviour
         {
             DrawDefaultInspector();
 
+            
+
             if (GUILayout.Button("Level Up Health Level"))
             {
                 ShopManager.instance.SetHealthLevel(ShopManager.instance.GetHealthLevel() + 1);
@@ -76,7 +79,7 @@ public class ShopManager : MonoBehaviour
             if (GUILayout.Button("Level Up Speed Level"))
             {
                 ShopManager.instance.SetSpeedLevel(ShopManager.instance.GetSpeedLevel() + 1);
-            }
+            }    
         }
     }
 

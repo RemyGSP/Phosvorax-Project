@@ -133,7 +133,7 @@ public class PrefabRoomInstancier : MonoBehaviour
 
             }
         }
-        Lightmapping.Bake();
+        //Lightmapping.Bake();
         ConnectingRoomDoors();
         GenerateNavMeshSurfaces();
     }

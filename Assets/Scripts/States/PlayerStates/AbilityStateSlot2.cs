@@ -45,5 +45,6 @@ public class AbilityStateSlot2 : States
     public override void OnExitState()
     {
         abilityListObj.abilityList[usingAbilityNumber].OnExitState();
+        base.OnExitState();
     }
 }

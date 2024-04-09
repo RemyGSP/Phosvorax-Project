@@ -76,10 +76,12 @@ public class RollState : States
         rigidBody.velocity = Vector3.zero;
         //stateGameObject.GetComponent<Collider>().enabled = true;
         PlayerReferences.instance.GetPlayerAnimator().SetBool("dash", false);
+        base.OnExitState();
     }
 
     public new void OnEnterState()
     {
+        base.OnEnterState();
     }
     #endregion
 }

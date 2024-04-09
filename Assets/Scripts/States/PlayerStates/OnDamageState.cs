@@ -29,6 +29,7 @@ public class OnDamageState : States
 
     public override void OnExitState()
     {
+        base.OnExitState();
     }
 
     public override void Update()

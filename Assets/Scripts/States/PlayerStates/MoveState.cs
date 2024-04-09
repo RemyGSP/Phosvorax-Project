@@ -88,6 +88,7 @@ public class MoveState : States
         {
             animator.SetBool("running", false);
         }
+        base.OnExitState();
     }
 
     private IEnumerator _PlayFootstep()

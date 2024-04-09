@@ -17,12 +17,13 @@ public class IdleState : States
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
     }
     public new void OnEnterState()
-    {  
-        
+    {
+        base.OnEnterState();
     }
     public override void OnExitState()
     {
         PlayerReferences.instance.GetPlayerAnimator().SetBool("idle", false);
+        base.OnExitState();
     }
     #endregion
 

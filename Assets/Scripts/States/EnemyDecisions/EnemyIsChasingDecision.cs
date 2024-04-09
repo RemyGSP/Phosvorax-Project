@@ -12,9 +12,10 @@ public class EnemyIsChasingDecision : Decision
         float distance = Vector3.Distance(PlayerReferences.instance.GetPlayerCoordinates(), enemiePos);
         float distanceToSeePlayer = stateMachine.GetComponent<EnemyReferences>().GetDistanceToSeePlayer();
         float maxAttackDistance = stateMachine.GetComponent<EnemyReferences>().GetMaxAttackPosition();
+        bool canStart = stateMachine.GetComponent<EnemyReferences>().GetCanBeStarted();
         bool aux = false;
 
-        if (distance <= distanceToSeePlayer && distance > maxAttackDistance)
+        if (distance <= distanceToSeePlayer && distance > maxAttackDistance && canStart)
         {
             aux = true;
         }

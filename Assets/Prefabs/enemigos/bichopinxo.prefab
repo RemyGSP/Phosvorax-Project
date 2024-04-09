@@ -280,6 +280,7 @@ GameObject:
   - component: {fileID: 4731757175753150963}
   - component: {fileID: 3785227429176898186}
   - component: {fileID: 3769844553174306827}
+  - component: {fileID: -8000897243154259096}
   m_Layer: 6
   m_Name: bichopinxo
   m_TagString: Untagged
@@ -296,7 +297,7 @@ Transform:
   m_GameObject: {fileID: 1728056717686730391}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.446312, y: 3.43, z: 28.583122}
+  m_LocalPosition: {x: 14.446312, y: 2.59, z: 28.583122}
   m_LocalScale: {x: 0.18683, y: 0.18683, z: 0.18683}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -320,7 +321,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4850134f190ea848b443eeab0005829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entryState: {fileID: 11400000, guid: 63ad6c8eb74c85242b0a1a8988628b15, type: 2}
+  entryState: {fileID: 11400000, guid: a292d979381888e4fbc09e7c0711ccbc, type: 2}
   currentState: {fileID: 0}
   stunnedState: {fileID: 0}
 --- !u!54 &4974840870385779408
@@ -576,6 +577,23 @@ MonoBehaviour:
   stunThingsContainer: {fileID: 7158420164466314825}
   stunBar: {fileID: 3081561675174895209}
   fillSpeed: 10
+--- !u!114 &-8000897243154259096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1728056717686730391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 326bab1633a13d843bdf4d68755d91f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceToSeePlayer: 0
+  playerSeen: 0
+  maxAttackDistance: 0
+  distanceToStartCountdown: 100
+  canBeStarted: 0
 --- !u!1 &2365529270750695669
 GameObject:
   m_ObjectHideFlags: 0

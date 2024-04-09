@@ -36,7 +36,7 @@ public class ChoGathQAbility : Ability
         if (bulletBehaviour != null)
         {
             bulletBehaviour.SetLifetime(bulletLifetime);
-            bulletBehaviour.SetDamage(abilityBaseDamage);
+            projectile.GetComponent<BulletBehaviour>().SetDamage(abilityBaseDamage + (abilityBaseDamage * ShopManager.instance.GetDamageLevel() * 0.7f));
         }
     }
 }

@@ -35,8 +35,8 @@ public class HUDManager : MonoBehaviour
     {
         float timer = 0.0f;
         
-        Debug.Log(PlayerTimers.Instance.abilityTimers[abilityNumber]);
-        Debug.Log(cooldown);
+        //Debug.Log(PlayerTimers.Instance.abilityTimers[abilityNumber]);
+        //Debug.Log(cooldown);
         ability.gameObject.SetActive(true);
 
         while (timer < cooldown)

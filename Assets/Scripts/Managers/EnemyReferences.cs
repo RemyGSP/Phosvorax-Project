@@ -18,6 +18,11 @@ public class EnemyReferences : MonoBehaviour
     [Header("Attack")]
     [SerializeField] float maxAttackDistance;
 
+
+    [Header("StartEnemyStuff")]
+    [SerializeField] private float distanceToStartCountdown; //Area para que si el jugador entra empiece a pasar el tiempo para que el enemigo se active. El numero deberia de ocupar toda la sala y ser el mismo para todos los enemigos
+    [SerializeField] bool canBeStarted = false;
+
     #endregion
 
 
@@ -50,6 +55,21 @@ public class EnemyReferences : MonoBehaviour
     public void SetPlayerSeen(bool playerSeen)
     {
         this.playerSeen = playerSeen;
+    }
+
+    public float GetDistanceToStartCountdown()
+    {
+        return distanceToStartCountdown;
+    }
+
+    public void SetCanBeStarted(bool canBeStarted)
+    {
+        this.canBeStarted = canBeStarted;
+    }
+
+    public bool GetCanBeStarted()
+    {
+        return canBeStarted;
     }
     #endregion
 }

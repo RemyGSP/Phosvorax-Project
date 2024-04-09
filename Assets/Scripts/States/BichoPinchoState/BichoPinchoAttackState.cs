@@ -97,8 +97,9 @@ public class BichoPinchoAttackState : States
 
     public override void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && !hasHit)
+        if (other.gameObject.CompareTag("Player"))
         {
+
             other.gameObject.GetComponent<HealthBehaviour>().Damage(infoContainer.GetDamage());
             hasHit = true;
         }

@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,7 +6,7 @@ using UnityEngine.UI;
 public class DoorTpController : MonoBehaviour
 {
     public float fadeDuration = 1f;
-    public float delayBeforeFade = 0.5f;
+    public float delayBeforeFade = 0.1f;
     public GameObject destinationObject;
     private GameObject fadePanel;
 
@@ -13,7 +14,6 @@ public class DoorTpController : MonoBehaviour
 
     private void Start()
     {
-        // Encuentra el Canvas en la escena con el nombre "Canvas1"
         GameObject canvasObject = GameObject.Find("CanvasFundidoNegro");
 
         // Si no encuentra el canvas, muestra un mensaje de advertencia
@@ -33,7 +33,7 @@ public class DoorTpController : MonoBehaviour
 
         Image panelImage = fadePanel.GetComponent<Image>();
 
-        float timer = 0f;
+        float timer = 0.2f;
 
         // Fade to black
         while (timer < fadeDuration)

@@ -9,10 +9,11 @@ public class RollingEnemyChaseDecision : Decision
     public override bool Decide(StateMachine stateMachine)
     {
         bool isStuned = stateMachine.GetComponent<RollingEnemyReferences>().GetIsStunned();
+        bool canStart = stateMachine.GetComponent<EnemyReferences>().GetCanBeStarted();
 
         bool aux = false;
 
-        if (!isStuned)
+        if (!isStuned && canStart)
         {
             aux = true;
         }

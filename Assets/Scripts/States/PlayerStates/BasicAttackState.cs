@@ -11,6 +11,7 @@ public class BasicAttackState : States
     [SerializeField] private float attackOffset; // Distancia desde el jugador para el inicio del ataque
     [SerializeField] private float heightOffset;
     [SerializeField] private float sphereSize; // Tamaño del área de detección
+    [SerializeField] private float sphereHeight; // Tamaño del área de detección
     [SerializeField] private float attackDamage;
     [SerializeField] private LayerMask hitLayerMask;
     [SerializeField] private float impulseForce;
@@ -84,7 +85,13 @@ public class BasicAttackState : States
     private void ExecuteAttack(){
         Vector3 playerForward = stateGameObject.transform.forward;
         Vector3 attackPosition = stateGameObject.transform.position + playerForward * attackOffset + Vector3.up * heightOffset;
-        Collider[] hitColliders = Physics.OverlapSphere(attackPosition, sphereSize / 2, hitLayerMask, QueryTriggerInteraction.UseGlobal);
+        float capsuleRadius = sphereSize / 2;
+
+        // Using Physics.OverlapCapsule with your provided sphereHeight
+        Collider[] hitColliders = Physics.OverlapCapsule(attackPosition - Vector3.up * (sphereHeight / 2),
+                                                         attackPosition + Vector3.up * (sphereHeight / 2),
+                                                         capsuleRadius, hitLayerMask, QueryTriggerInteraction.UseGlobal);
+
         foreach (Collider hitCollider in hitColliders)
         {
             if (hitCollider.TryGetComponent<HealthBehaviour>(out HealthBehaviour healthBehaviour))

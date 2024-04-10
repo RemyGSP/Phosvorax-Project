@@ -121,7 +121,6 @@ public class EnemyMeleeAttackState : States
             {
                 healthBehaviour.Damage(attackDamage);
             }
-            Debug.Log("Impacto con: " + hitCollider.gameObject.name);
         }
         canAttack = false;
     }

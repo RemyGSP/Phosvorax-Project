@@ -5,7 +5,7 @@ using UnityEngine;
 public class DamageOnHit : MonoBehaviour
 {
     private bool hasDoneDamage;
-    [SerializeField] private float damage;
+    private float damage;
 
     private void Start()
     {

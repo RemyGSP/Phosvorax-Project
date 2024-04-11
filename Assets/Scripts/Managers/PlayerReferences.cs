@@ -86,5 +86,10 @@ public class PlayerReferences : MonoBehaviour
     {
         player.GetComponent<StateMachine>().enabled = false;
     }
+
+    public GameObject GetPlayer()
+    {
+        return player;
+    }
     #endregion
 }

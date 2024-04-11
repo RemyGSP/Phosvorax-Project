@@ -838,6 +838,7 @@ GameObject:
   - component: {fileID: 7239002181496637897}
   - component: {fileID: 7870360242837003514}
   - component: {fileID: -4212732617425363431}
+  - component: {fileID: 4594088130613647489}
   m_Layer: 6
   m_Name: EnemigoEscudo
   m_TagString: Untagged
@@ -923,8 +924,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fab57eab529985f42a8bbf306ee2483e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 250
-  maxHealth: 250
+  currentHealth: 200
+  maxHealth: 200
   minHealth: 0
   damageModifier: 0
   parryDamageDetector: 0
@@ -952,6 +953,18 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4594088130613647489}
+        m_TargetAssemblyTypeName: OnHitColorFeedback, Assembly-CSharp
+        m_MethodName: PlayHitFeedback
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.2
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
@@ -1117,7 +1130,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfef3417cdebe7240b3cc6b6c0d97bab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+--- !u!114 &4594088130613647489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3063802882198433313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a93deb59527e5b40b495509b520f27e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeMaterial: {fileID: 2100000, guid: 226c5d5c3d9c58f4a966a545d1f35c80, type: 2}
+  visuals: {fileID: 5959025351771360677}
 --- !u!1 &3329097428739035065
 GameObject:
   m_ObjectHideFlags: 0

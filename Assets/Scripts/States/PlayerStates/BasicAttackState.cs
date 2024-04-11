@@ -135,7 +135,6 @@ public class BasicAttackState : States
     {
         PlayerTimers.Instance.playerBasicAttackTimer = 0;
         rigidBody.velocity = Vector3.zero;
-        Debug.Log(punchClip.length);
         base.OnExitState();
 
     }

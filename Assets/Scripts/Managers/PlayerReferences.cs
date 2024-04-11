@@ -69,6 +69,7 @@ public class PlayerReferences : MonoBehaviour
             targetDir = castPoint.direction;
             targetDir.y = 0f; // Mantener en el plano XY
         }
+        Debug.Log(targetDir);
         return targetDir;
     }
 

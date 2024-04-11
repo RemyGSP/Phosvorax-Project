@@ -230,7 +230,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 1.1666666
+  m_VoxelSize: 0.23333333
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 4ac478764ccd3da47881e545507370d6, type: 2}
   m_BuildHeightMesh: 0
@@ -576,6 +576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b767277d3b9536443be754f1d3e25e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  surface: {fileID: 0}
   prefabRooms:
   - prefabRooms:
     - {fileID: 1111919837220083903, guid: 011c0fe9c675ae2429749a0d230a2b1f, type: 3}
@@ -1442,6 +1443,8 @@ MonoBehaviour:
   distanceToSeePlayer: 25
   playerSeen: 0
   maxAttackDistance: 10
+  distanceToStartCountdown: 0
+  canBeStarted: 0
 --- !u!114 &992127172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1819,6 +1822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d7a24cfb7a3304e8306226d61cef6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneTransitions: {fileID: 0}
 --- !u!114 &1476196561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1916,7 +1920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerBasicAttackTimer: 0
-  playerBasicAttackCD: 1
+  playerBasicAttackCD: 0.1
   rollTimer: 0
   rollCD: 1
   abilityTimers: []
@@ -2402,6 +2406,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainCharacter
       objectReference: {fileID: 0}
+    - target: {fileID: 5708823608967699834, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
+      propertyPath: attackOffset
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5708823608967699834, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
+      propertyPath: heightOffset
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5708823608967699834, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
+      propertyPath: capsuleHeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5708823608967699834, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
+      propertyPath: capsuleRadius
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 8838741370877958639, guid: b512993666e602e409c2175bd6f93cba,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2452,7 +2476,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 9022989039581898921, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
+      propertyPath: duration
+      value: 0.4
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8233896356909297269, guid: b512993666e602e409c2175bd6f93cba, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

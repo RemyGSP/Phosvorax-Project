@@ -32,11 +32,10 @@ public class ChoGathQAbility : Ability
         GameObject projectile = Instantiate(prefabToInstantiate, targetDir, Quaternion.identity);
 
 
-        BulletBehaviour bulletBehaviour = projectile.GetComponent<BulletBehaviour>();
-        if (bulletBehaviour != null)
+        DamageOnHit damageOnHit= projectile.GetComponent<DamageOnHit>();
+        if (damageOnHit != null)
         {
-            bulletBehaviour.SetLifetime(bulletLifetime);
-            projectile.GetComponent<BulletBehaviour>().SetDamage(abilityBaseDamage + (abilityBaseDamage * ShopManager.instance.GetDamageLevel() * 0.7f));
+            damageOnHit.SetDamage(abilityBaseDamage + (abilityBaseDamage * ShopManager.instance.GetDamageLevel() * 0.7f));
         }
     }
 }

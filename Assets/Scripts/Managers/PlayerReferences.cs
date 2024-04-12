@@ -51,10 +51,10 @@ public class PlayerReferences : MonoBehaviour
 
     public Vector3 GetMouseTargetDir()
     {
-        // Obtener la posición del ratón en la pantalla
+        // Obtener la posiciï¿½n del ratï¿½n en la pantalla
         Vector3 mousePos = Input.mousePosition;
 
-        // Calcular la dirección del ratón en el mundo
+        // Calcular la direcciï¿½n del ratï¿½n en el mundo
         Ray castPoint = Camera.main.ScreenPointToRay(mousePos);
         RaycastHit hit;
         Vector3 targetDir = Vector3.zero;
@@ -69,7 +69,7 @@ public class PlayerReferences : MonoBehaviour
             targetDir = castPoint.direction;
             targetDir.y = 0f; // Mantener en el plano XY
         }
-        Debug.Log(targetDir);
+        //Debug.Log(targetDir);
         return targetDir;
     }
 

@@ -125,6 +125,12 @@ public class BasicAttackState : States
             damageChek = true;
             ExecuteAttack();
         }
+
+        if (PlayerInputController.Instance.IsAttacking()){
+            Debug.Log("pepe");
+        }
+
+
     }
     public override void Update()
     {

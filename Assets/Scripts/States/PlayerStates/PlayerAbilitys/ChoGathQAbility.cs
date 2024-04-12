@@ -35,7 +35,7 @@ public class ChoGathQAbility : Ability
         DamageOnHit damageOnHit= projectile.GetComponent<DamageOnHit>();
         if (damageOnHit != null)
         {
-            if (ShopManager.instance.GetDamageLevel() == 1)
+            if (ShopManager.instance.GetDamageLevel() == 0)
             {
                 damageOnHit.SetDamage(abilityBaseDamage);
             }

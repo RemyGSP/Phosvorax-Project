@@ -28,7 +28,7 @@ public class EzrealQAbility : Ability
         GameObject b = Instantiate(bulletPrefab, PlayerReferences.instance.ShotingPoint.position, PlayerReferences.instance.ShotingPoint.rotation);
         b.GetComponent<Rigidbody>().velocity = direction.normalized * bulletSpeed;
         b.GetComponent<BulletBehaviour>().SetLifetime(bulletDuration);
-        if (ShopManager.instance.GetDamageLevel() == 1)
+        if (ShopManager.instance.GetDamageLevel() == 0)
         {
             b.GetComponent<BulletBehaviour>().SetDamage(abilityBaseDamage);
         }

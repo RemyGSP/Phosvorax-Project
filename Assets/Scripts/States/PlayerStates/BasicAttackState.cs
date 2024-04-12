@@ -47,6 +47,7 @@ public class BasicAttackState : States
     public override void Start(){
         InitializeComponents();
         PerforingAttack();
+        PlayerInputController.Instance.Attacked();
     }
 
     private void PerforingAttack()
@@ -125,6 +126,12 @@ public class BasicAttackState : States
             damageChek = true;
             ExecuteAttack();
         }
+
+        if (PlayerInputController.Instance.IsAttacking()){
+            Debug.Log("pepe");
+        }
+
+
     }
     public override void Update()
     {

@@ -39,7 +39,7 @@ public class StateMachine : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.name);
+        //Debug.Log(collision.gameObject.name);
         currentState.OnCollisionEnter(collision);
     }
 

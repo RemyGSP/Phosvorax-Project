@@ -117,10 +117,12 @@ public class PlayerInputController : MonoBehaviour
 
     public void OnBasicAttack(InputValue inputValue)
     {
-        if (inputValue.isPressed)
             isAttacking = true;
-        else
-            isAttacking = false;
+    }
+
+    public void Attacked()
+    {
+        isAttacking = false;
     }
     public bool IsAttacking()
     {

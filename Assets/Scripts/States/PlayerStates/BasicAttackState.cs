@@ -23,7 +23,7 @@ public class BasicAttackState : States
     private Animator anim;
     private AnimationClip punchClip;
 
-    const string attackAnimationClipName = "ActionPunch";
+    const string attackAnimationClipName = "ActionPunchFixed";
     private float inAttackStateTimer;
     private bool damageChek;
     private bool meshChek;

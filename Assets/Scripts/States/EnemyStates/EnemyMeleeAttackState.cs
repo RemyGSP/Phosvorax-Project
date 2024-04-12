@@ -119,9 +119,17 @@ public class EnemyMeleeAttackState : States
         {
             if (hitCollider.TryGetComponent<HealthBehaviour>(out HealthBehaviour healthBehaviour))
             {
-                healthBehaviour.Damage(attackDamage);
+                if (ShopManager.instance.GetDamageLevel() == 1)
+                {
+                    healthBehaviour.Damage(attackDamage);
+                }
+                else
+                {
+                    healthBehaviour.Damage((attackDamage * (ShopManager.instance.GetDamageLevel() - 1)  * 0.7f));
+                }
             }
         }
+
         canAttack = false;
     }
 

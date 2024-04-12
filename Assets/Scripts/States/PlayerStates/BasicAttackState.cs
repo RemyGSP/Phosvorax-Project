@@ -47,6 +47,7 @@ public class BasicAttackState : States
     public override void Start(){
         InitializeComponents();
         PerforingAttack();
+        PlayerInputController.Instance.Attacked();
     }
 
     private void PerforingAttack()

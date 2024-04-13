@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "States/PlayerBasicAttackState")]
@@ -23,10 +24,13 @@ public class BasicAttackState : States
     private Animator anim;
     private AnimationClip punchClip;
 
-    const string attackAnimationClipName = "ActionPunch";
+    const string attackAnimationClipName = "ActionPunchFixed";
     private float inAttackStateTimer;
+    private float inAttackStateExitTime;
     private bool damageChek;
     private bool meshChek;
+    private bool attakChek;
+    private int consecutiveSlashesCounter;
 
 
 
@@ -37,7 +41,8 @@ public class BasicAttackState : States
     public override States CheckTransitions()
     {
         States newGameState = null;
-        if (inAttackStateTimer > punchClip.length){
+        if (inAttackStateTimer > inAttackStateExitTime)
+        {
             newGameState = base.CheckTransitions();
         }
         
@@ -47,6 +52,18 @@ public class BasicAttackState : States
     public override void Start(){
         InitializeComponents();
         PerforingAttack();
+        PlayerInputController.Instance.Attacked();
+    }
+
+    private void InitializeComponents()
+    {
+        rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
+        rigidBody = stateGameObject.GetComponent<Rigidbody>();
+        anim = PlayerReferences.instance.GetPlayerAnimator();
+        punchClip = CommonUtilities.FindAnimation(anim, attackAnimationClipName);
+        consecutiveSlashesCounter = 0;
+        inAttackStateExitTime = punchClip.length;
+        attakChek = false;
     }
 
     private void PerforingAttack()
@@ -54,18 +71,11 @@ public class BasicAttackState : States
         inAttackStateTimer = 0;
         damageChek = false;
         meshChek = false;
+        attakChek = true;
         RotatePlayerTowardsMouseTarget();
         AddImpulseForce();
         ExecuteAnimation();
         
-    }
-
-    private void InitializeComponents()
-    {   
-        rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
-        rigidBody = stateGameObject.GetComponent<Rigidbody>();
-        anim = PlayerReferences.instance.GetPlayerAnimator();
-        punchClip = CommonUtilities.FindAnimation(anim, attackAnimationClipName);
     }
 
 
@@ -125,10 +135,20 @@ public class BasicAttackState : States
             damageChek = true;
             ExecuteAttack();
         }
-
-        if (PlayerInputController.Instance.IsAttacking()){
-            Debug.Log("pepe");
+        if (inAttackStateTimer >= punchClip.length)
+        {
+            attakChek = false;
         }
+
+        if (PlayerInputController.Instance.IsAttacking() && consecutiveSlashesCounter < consecutiveSlashes)
+        {
+
+            PlayerInputController.Instance.Attacked();
+            consecutiveSlashesCounter++;
+            inAttackStateExitTime += inAttackStateExitTime;
+        }
+
+
 
 
     }

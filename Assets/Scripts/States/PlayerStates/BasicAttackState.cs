@@ -29,7 +29,6 @@ public class BasicAttackState : States
     private float inAttackStateExitTime;
     private bool damageChek;
     private bool meshChek;
-    private bool attakChek;
     private int consecutiveSlashesCounter;
     private int attackNumberCounter;
 
@@ -65,7 +64,6 @@ public class BasicAttackState : States
         consecutiveSlashesCounter = 1;
         attackNumberCounter= 0; 
         inAttackStateExitTime = punchClip.length;
-        attakChek = false;
     }
 
     private void PerforingAttack()
@@ -73,7 +71,6 @@ public class BasicAttackState : States
         inAttackStateTimer = 0;
         damageChek = false;
         meshChek = false;
-        attakChek = true;
         attackNumberCounter++;
         RotatePlayerTowardsMouseTarget();
         AddImpulseForce();
@@ -138,28 +135,23 @@ public class BasicAttackState : States
             damageChek = true;
             ExecuteAttack();
         }
-        if (inAttackStateTimer >= punchClip.length)
-        {
-            attakChek = false;
-        }
 
         if (inAttackStateTimer > punchClip.length && consecutiveSlashesCounter > 1 && attackNumberCounter < consecutiveSlashesCounter)
         {
+            Debug.Log("pepepe");
             PerforingAttack();
             inAttackStateExitTime = punchClip.length;
         }
 
-        if (PlayerInputController.Instance.IsAttacking() && consecutiveSlashesCounter < consecutiveSlashes)
+        if (PlayerInputController.Instance.IsAttacking() && consecutiveSlashesCounter < consecutiveSlashes && consecutiveSlashesCounter == attackNumberCounter)
         {
 
             PlayerInputController.Instance.Attacked();
             consecutiveSlashesCounter++;
             inAttackStateExitTime += inAttackStateExitTime;
+        }else{
+            PlayerInputController.Instance.Attacked();
         }
-
-        
-
-
 
     }
     public override void Update()

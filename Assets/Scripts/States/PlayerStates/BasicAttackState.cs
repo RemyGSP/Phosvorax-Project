@@ -143,7 +143,7 @@ public class BasicAttackState : States
             attakChek = false;
         }
 
-        if (inAttackStateTimer >= punchClip.length && consecutiveSlashesCounter > 1 && attackNumberCounter < consecutiveSlashesCounter)
+        if (inAttackStateTimer > punchClip.length && consecutiveSlashesCounter > 1 && attackNumberCounter < consecutiveSlashesCounter)
         {
             PerforingAttack();
             inAttackStateExitTime = punchClip.length;

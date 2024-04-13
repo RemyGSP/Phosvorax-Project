@@ -84,8 +84,7 @@ public class BasicAttackState : States
         if (!PlayerInputController.Instance.isGamepad){
             Vector3 targetDir = PlayerReferences.instance.GetMouseTargetDir() - stateGameObject.transform.position;
             stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
-        }else{
-            
+        }else if(PlayerInputController.Instance.GetPlayerInputDirection()!= Vector3.zero){           
             stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(PlayerInputController.Instance.GetPlayerInputDirection());
         }
     

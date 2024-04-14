@@ -10,7 +10,7 @@ public class RooomController : MonoBehaviour
     private List<GameObject> _doorList;
     public List<GameObject> DoorList => _doorList;  // Propiedad pública solo de lectura para acceder a la lista desde otro script
 
-    [SerializeField] private GameObject[] inRoomEnemyList; 
+    [SerializeField] private List<GameObject> inRoomEnemyList;
 
     private void Awake()
     {

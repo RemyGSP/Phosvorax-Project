@@ -3,8 +3,15 @@ using System.Collections;
 
 public class DoorTpController : MonoBehaviour
 {
-    public GameObject destinationObject;
+    [SerializeField] private GameObject destinationObject;
+    [SerializeField] private GameObject exitWall;
+    [SerializeField] private GameObject model;
     private bool isTeleporting = false;
+    private Animator anim;
+
+    private void Start(){
+        anim = model.GetComponent<Animator>();
+    }
 
     private IEnumerator Teleport(Collider other)
     {
@@ -30,5 +37,18 @@ public class DoorTpController : MonoBehaviour
     public void SetDestination(GameObject newDestination)
     {
         destinationObject = newDestination;
+        
+    }
+
+    public void TpOpen()
+    {
+        anim.SetBool("puenteon", true);
+        //pogramar espera para que no pueda pasar antes de que suba el peunte.
+        exitWall.SetActive(true);
+    }
+    public void TpClose()
+    {
+        anim.SetBool("puenteon", false);
+        exitWall.SetActive(false);
     }
 }

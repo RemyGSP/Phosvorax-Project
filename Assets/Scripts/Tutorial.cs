@@ -54,7 +54,7 @@ public class Tutorial : MonoBehaviour
 
     public void MovementTutorial()
     {
-        Debug.Log(PlayerInputController.Instance.GetRawMovementInput());
+        //Debug.Log(PlayerInputController.Instance.GetRawMovementInput());
         Vector3 currentInput = PlayerInputController.Instance.GetRawMovementInput();
         if (currentFeedback == null)
         {

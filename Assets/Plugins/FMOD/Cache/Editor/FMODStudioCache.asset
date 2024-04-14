@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2364349595124054751
+--- !u!114 &-8887678612861703443
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,18 +9,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SlashSound
   m_EditorClassIdentifier: 
-  Path: PhosvoraxFMOD/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 638467195389865915
-  FileSizes:
-  - Name: Desktop
-    Value: 1368
-  Exists: 1
---- !u!114 &-1808599543260375955
+  Path: event:/SlashSound
+  Guid:
+    Data1: 647775686
+    Data2: 1097613346
+    Data3: 221987483
+    Data4: -2007507948
+  Banks:
+  - {fileID: 8806266165583862026}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5898305050954722493
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -39,7 +46,101 @@ MonoBehaviour:
     Data3: 478624130
     Data4: -1514675485
   Banks:
-  - {fileID: 717084628358219544}
+  - {fileID: 8806266165583862026}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-5421311457857202068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: PhosvoraxFMOD/Build/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638484533388345979
+  FileSizes:
+  - Name: Desktop
+    Value: 1934
+  Exists: 1
+--- !u!114 &-3695912765675823834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: PhosvoraxFMOD/Build/Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 638484533388425959
+  FileSizes:
+  - Name: Desktop
+    Value: 2453856
+  Exists: 1
+--- !u!114 &-418868123443228583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MenuMusic
+  m_EditorClassIdentifier: 
+  Path: event:/MenuMusic
+  Guid:
+    Data1: 1117980534
+    Data2: 1159064484
+    Data3: 443369144
+    Data4: -1572054955
+  Banks:
+  - {fileID: -3695912765675823834}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 184320
+--- !u!114 &-360290363126329979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/ButtonClick
+  m_EditorClassIdentifier: 
+  Path: event:/ButtonClick
+  Guid:
+    Data1: -980226462
+    Data2: 1205635610
+    Data3: -54034530
+    Data4: -871796585
+  Banks:
+  - {fileID: 8806266165583862026}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -60,52 +161,25 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -2364349595124054751}
-  - {fileID: 3665797463744718854}
-  - {fileID: 7517551339425895214}
-  - {fileID: 717084628358219544}
+  - {fileID: 522057013528196026}
+  - {fileID: -5421311457857202068}
+  - {fileID: -3695912765675823834}
+  - {fileID: 8806266165583862026}
   EditorEvents:
-  - {fileID: 871363345077262896}
-  - {fileID: 2624017664297613959}
-  - {fileID: 2670015459295549088}
-  - {fileID: -1808599543260375955}
-  - {fileID: 473020580395664348}
-  - {fileID: 8911078944173563272}
+  - {fileID: -418868123443228583}
+  - {fileID: 1104403082319747898}
+  - {fileID: -360290363126329979}
+  - {fileID: 2264301876736666318}
+  - {fileID: -8887678612861703443}
+  - {fileID: -5898305050954722493}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 3665797463744718854}
+  - {fileID: -5421311457857202068}
   StringsBanks:
-  - {fileID: -2364349595124054751}
-  cacheTime: 638467195389875575
+  - {fileID: 522057013528196026}
+  cacheTime: 638484533388445974
   cacheVersion: 131609
---- !u!114 &473020580395664348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/Zap
-  m_EditorClassIdentifier: 
-  Path: event:/Zap
-  Guid:
-    Data1: -1872620440
-    Data2: 1095622557
-    Data3: -667291490
-    Data4: -374917051
-  Banks:
-  - {fileID: 717084628358219544}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &717084628358219544
+--- !u!114 &522057013528196026
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,138 +189,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/SFX.bank
+  m_Name: bank:/Master.strings.bank
   m_EditorClassIdentifier: 
-  Path: PhosvoraxFMOD/Build/Desktop/SFX.bank
-  Name: SFX
-  StudioPath: bank:/SFX
-  lastModified: 638467195389875575
+  Path: PhosvoraxFMOD/Build/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638484533388345979
   FileSizes:
   - Name: Desktop
-    Value: 73696
+    Value: 1368
   Exists: 1
---- !u!114 &871363345077262896
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/ButtonClick
-  m_EditorClassIdentifier: 
-  Path: event:/ButtonClick
-  Guid:
-    Data1: -980226462
-    Data2: 1205635610
-    Data3: -54034530
-    Data4: -871796585
-  Banks:
-  - {fileID: 717084628358219544}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &2624017664297613959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/MenuMusic
-  m_EditorClassIdentifier: 
-  Path: event:/MenuMusic
-  Guid:
-    Data1: 1117980534
-    Data2: 1159064484
-    Data3: 443369144
-    Data4: -1572054955
-  Banks:
-  - {fileID: 7517551339425895214}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 184320
---- !u!114 &2670015459295549088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SlashSound
-  m_EditorClassIdentifier: 
-  Path: event:/SlashSound
-  Guid:
-    Data1: 647775686
-    Data2: 1097613346
-    Data3: 221987483
-    Data4: -2007507948
-  Banks:
-  - {fileID: 717084628358219544}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &3665797463744718854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: PhosvoraxFMOD/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 638466322702126672
-  FileSizes:
-  - Name: Desktop
-    Value: 1934
-  Exists: 1
---- !u!114 &7517551339425895214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Music.bank
-  m_EditorClassIdentifier: 
-  Path: PhosvoraxFMOD/Build/Desktop/Music.bank
-  Name: Music
-  StudioPath: bank:/Music
-  lastModified: 638460333403576815
-  FileSizes:
-  - Name: Desktop
-    Value: 2453856
-  Exists: 1
---- !u!114 &8911078944173563272
+--- !u!114 &1104403082319747898
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -265,7 +218,7 @@ MonoBehaviour:
     Data3: 1407153569
     Data4: -1025432922
   Banks:
-  - {fileID: 717084628358219544}
+  - {fileID: 8806266165583862026}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -273,3 +226,50 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &2264301876736666318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Zap
+  m_EditorClassIdentifier: 
+  Path: event:/Zap
+  Guid:
+    Data1: -1872620440
+    Data2: 1095622557
+    Data3: -667291490
+    Data4: -374917051
+  Banks:
+  - {fileID: 8806266165583862026}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &8806266165583862026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: PhosvoraxFMOD/Build/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 638484533388445974
+  FileSizes:
+  - Name: Desktop
+    Value: 73696
+  Exists: 1

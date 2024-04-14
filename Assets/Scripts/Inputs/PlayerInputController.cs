@@ -18,7 +18,7 @@ public class PlayerInputController : MonoBehaviour
     private bool isUsingAbility1;
     private bool isUsingAbility2;
     private bool isKeyboard;
-    private bool isGamepad;
+    public bool isGamepad;
     private bool isCanceling;
     private bool isPausing;
     private int abilityPressed;
@@ -117,10 +117,12 @@ public class PlayerInputController : MonoBehaviour
 
     public void OnBasicAttack(InputValue inputValue)
     {
-        if (inputValue.isPressed)
             isAttacking = true;
-        else
-            isAttacking = false;
+    }
+
+    public void Attacked()
+    {
+        isAttacking = false;
     }
     public bool IsAttacking()
     {

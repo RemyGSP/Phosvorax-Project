@@ -24,7 +24,10 @@ MonoBehaviour:
     onDecisionFalseExitState: {fileID: 0}
   playerLayerMask:
     serializedVersion: 2
-    m_Bits: 9
+    m_Bits: 8
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
   attackDelay: 0.5
   attackDamage: 20
   timeToSpendAttacking: 3

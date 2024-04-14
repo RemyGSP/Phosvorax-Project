@@ -25,7 +25,7 @@
                 },
                 {
                     "name": "BasicAttack",
-                    "type": "PassThrough",
+                    "type": "Button",
                     "id": "d37db4d0-6263-4ade-a736-c499fabe7166",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -159,7 +159,7 @@
                 {
                     "name": "",
                     "id": "99725beb-02f7-4345-bb09-c82a1c6d616a",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -171,6 +171,17 @@
                     "name": "",
                     "id": "83b80a48-2ab9-452c-8cf4-77ce3b4b3f68",
                     "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BasicAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f2acedd0-c5e2-47d9-a0d2-8687c8b323e4",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

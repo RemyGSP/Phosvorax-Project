@@ -44,7 +44,7 @@ public class HealthBehaviour : MonoBehaviour
 
     public void LevelUpHp()
     {
-        SetHP(100 + (maxHealth * 0.2f));
+        SetHP(maxHealth + (maxHealth * 0.2f));
         Heal(maxHealth);
         onGetDamaged.Invoke(currentHealth);
     }

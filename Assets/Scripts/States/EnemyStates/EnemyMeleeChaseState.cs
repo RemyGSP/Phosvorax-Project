@@ -73,12 +73,13 @@ public class EnemyMeleeChaseState : States
         else
         {
         }
-        rigidBody.velocity = (PlayerReferences.instance.GetPlayerVisiblePoint() - stateGameObject.transform.position).normalized * speed * Time.deltaTime;
+        //rigidBody.velocity = (PlayerReferences.instance.GetPlayerVisiblePoint() - stateGameObject.transform.position).normalized * speed * Time.deltaTime;
     }
 
     public override void OnExitState()
     {
-        return;
+        rigidBody.velocity = Vector3.zero;   
+        enemy.speed = 0;
     }
     #endregion
 }

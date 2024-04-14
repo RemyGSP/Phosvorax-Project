@@ -6,120 +6,143 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "States/PlayerBasicAttackState")]
 public class BasicAttackState : States
 {
-    [SerializeField] LayerMask enemyLayerMask;
-    private Rigidbody rigidBody;
-    [SerializeField] private float animOffsetRotation;
-    [SerializeField] private float attackDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
-    [SerializeField] private float attackOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
-    [SerializeField] private float sphereSize; // Tamaño del área de detección
-    [SerializeField] private float attackDamage;
-    [SerializeField] private float impulse;
-    private RotateCharacter rotateCharacter;
-    private Animator anim;
-    private float animationLength;
-    private float currentAttackTime;
-    private bool canAttack;
-    private float currentAttackDelay;
-    private Transform playerTransform;
-
-    [SerializeField] private AttackAreaVisualizer attackAreaVisualizer;
 
     
+    [SerializeField] private float attackOffset; // Distancia desde el jugador para el inicio del ataque
+    [SerializeField] private float heightOffset;
+    [SerializeField] private float sphereSize; // Tamaño del área de detección
+    [SerializeField] private float sphereHeight; // Tamaño del área de detección
+    [SerializeField] private float attackDamage;
+    [SerializeField] private LayerMask hitLayerMask;
+    [SerializeField] private float impulseForce;
+    [SerializeField] private float damageDelay;
+    [SerializeField] private float slashMeshDelay;
+    [SerializeField] private float consecutiveSlashes;
+    private RotateCharacter rotateCharacter;
+    private Rigidbody rigidBody;
+    private Animator anim;
+    private AnimationClip punchClip;
+
+    const string attackAnimationClipName = "ActionPunch";
+    private float inAttackStateTimer;
+    private bool damageChek;
+    private bool meshChek;
+
+
 
     public BasicAttackState(GameObject stateGameObject) : base(stateGameObject)
     {
     }
 
-    public new States CheckTransitions()
+    public override States CheckTransitions()
     {
-        Debug.Log("Basic Attack CurrentAttackTime: " + currentAttackTime + "AnimationLenght: " + animationLength);
-        if (currentAttackTime > animationLength)
-        {
-            return base.CheckTransitions();
+        States newGameState = null;
+        if (inAttackStateTimer > punchClip.length){
+            newGameState = base.CheckTransitions();
         }
-        else
-        {
-            return null;
-        }
+        
+        
+        return newGameState;
+    }
+    public override void Start(){
+        InitializeComponents();
+        PerforingAttack();
+        PlayerInputController.Instance.Attacked();
+    }
+
+    private void PerforingAttack()
+    {
+        inAttackStateTimer = 0;
+        damageChek = false;
+        meshChek = false;
+        RotatePlayerTowardsMouseTarget();
+        AddImpulseForce();
+        ExecuteAnimation();
         
     }
 
-    public override void Start()
-    {
-        PlayerTimers.Instance.playerBasicAttackTimer = 0;
-        anim = PlayerReferences.instance.GetPlayerAnimator() ;
+    private void InitializeComponents()
+    {   
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
-        playerTransform = stateGameObject.GetComponent<Transform>();
-        rigidBody.AddForce(stateGameObject.transform.rotation * Vector3.forward * impulse, ForceMode.Impulse);
-        //Lo que tardara en ejecutarse el ataque comparado con la animacion
-        currentAttackDelay = attackDelay;
-        Vector3 targetDir = PlayerReferences.instance.GetMouseTargetDir() - stateGameObject.transform.position;
-
-        stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
-        stateGameObject.GetComponent<SlashGenerator>().GenerateSlash();
-
-        //PlayerReferences.instance.GetPlayerAnimator().SetBool("meleeAttack", true);
-        ExecuteAnim();
+        anim = PlayerReferences.instance.GetPlayerAnimator();
+        punchClip = CommonUtilities.FindAnimation(anim, attackAnimationClipName);
     }
 
-    private void ExecuteAnim()
+
+    private void RotatePlayerTowardsMouseTarget()
     {
-        AudioManager.Instance.CallOneShot("event:/SlashSound");
-        anim.SetTrigger("attack");
-        currentAttackTime = 0;
-        animationLength = anim.GetCurrentAnimatorClipInfo(0).Length ;
-        //stateGameObject.transform.rotation = Quaternion.Euler(stateGameObject.transform.rotation.x , stateGameObject.transform.rotation.y + animOffsetRotation, stateGameObject.transform.rotation.z );
-        currentAttackDelay = attackDelay;
-        canAttack = true;
-        ExecuteAttack();
+        if (!PlayerInputController.Instance.isGamepad){
+            Vector3 targetDir = PlayerReferences.instance.GetMouseTargetDir() - stateGameObject.transform.position;
+            stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
+        }
+    
     }
 
-    void ExecuteAttack()
-    {
-        Debug.Log("Attack");
-        //stateGameObject.GetComponent<GroundSlashShooter>().OnShoot();
-        Vector3 attackPosition = playerTransform.position + playerTransform.forward * attackOffset;
-        Collider[] hitColliders = Physics.OverlapSphere(attackPosition, sphereSize / 2, enemyLayerMask, QueryTriggerInteraction.UseGlobal);
+    private void AddImpulseForce(){
+        rigidBody.AddForce(stateGameObject.transform.forward * impulseForce, ForceMode.VelocityChange);
+    }
+
+    private void ExecuteAttack(){
+        Vector3 playerForward = stateGameObject.transform.forward;
+        Vector3 attackPosition = stateGameObject.transform.position + playerForward * attackOffset + Vector3.up * heightOffset;
+        float capsuleRadius = sphereSize / 2;
+
+        // Using Physics.OverlapCapsule with your provided sphereHeight
+        Collider[] hitColliders = Physics.OverlapCapsule(attackPosition - Vector3.up * (sphereHeight / 2),
+                                                         attackPosition + Vector3.up * (sphereHeight / 2),
+                                                         capsuleRadius, hitLayerMask, QueryTriggerInteraction.UseGlobal);
+
         foreach (Collider hitCollider in hitColliders)
         {
-            rigidBody.velocity = Vector3.zero;
             if (hitCollider.TryGetComponent<HealthBehaviour>(out HealthBehaviour healthBehaviour))
             {
                 healthBehaviour.Damage(attackDamage);
             }
-            Debug.Log("Impacto con: " + hitCollider.gameObject.name);
         }
-        canAttack = false;
-        rigidBody.velocity = Vector3.zero;
+    }
+
+    private void GenerateAttackSlash()
+    {
+        stateGameObject.GetComponent<SlashGenerator>().GenerateSlash();
+    }
+
+    private void ExecuteAnimation()
+    {
+        AudioManager.Instance.CallOneShot("event:/SlashSound");
+        anim.SetTrigger("attack");
     }
 
     public override void FixedUpdate()
     {
-        currentAttackDelay -= Time.deltaTime;
-        currentAttackTime += Time.deltaTime;
-        if (currentAttackDelay <= 0 && canAttack)
+        inAttackStateTimer += Time.deltaTime; 
+        if (inAttackStateTimer > slashMeshDelay && !meshChek)
         {
-            //ExecuteAttack();
-            PlayerTimers.Instance.playerBasicAttackTimer = 0;
+            meshChek = true;
+            GenerateAttackSlash();
+        }
+        if (inAttackStateTimer > damageDelay && !damageChek)
+        {
+            damageChek = true;
+            ExecuteAttack();
         }
 
-    }
+        if (PlayerInputController.Instance.IsAttacking()){
+            Debug.Log("pepe");
+        }
 
+
+    }
     public override void Update()
     {
         return;
     }
 
-    public new void OnEnterState()
-    {
-        base.OnEnterState();
-
-    }
-
     public override void OnExitState()
     {
+        PlayerTimers.Instance.playerBasicAttackTimer = 0;
         rigidBody.velocity = Vector3.zero;
-        //PlayerReferences.instance.GetPlayerAnimator().SetInteger("meleeAttack", 0);
+        base.OnExitState();
+
     }
 }

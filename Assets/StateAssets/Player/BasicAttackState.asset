@@ -27,13 +27,15 @@ MonoBehaviour:
     onDecisionTrueExitState: {fileID: 11400000, guid: 5317b5ae24963d048bdc46ea029a3c49,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}
-  enemyLayerMask:
+  attackOffset: 2.5
+  heightOffset: 5
+  sphereSize: 6
+  sphereHeight: 10
+  attackDamage: 50
+  hitLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  animOffsetRotation: 0
-  attackDelay: 0.5
-  attackOffset: 2.5
-  sphereSize: 10
-  attackDamage: 25
-  impulse: 500
-  attackAreaVisualizer: {fileID: 0}
+  impulseForce: 5
+  damageDelay: 0.2
+  slashMeshDelay: 0.1
+  consecutiveSlashes: 0

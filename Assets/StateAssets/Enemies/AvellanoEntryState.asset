@@ -13,5 +13,9 @@ MonoBehaviour:
   m_Name: AvellanoEntryState
   m_EditorClassIdentifier: 
   stateGameObject: {fileID: 0}
-  stateTransitions: []
-  timeToStartEnemies: 0
+  stateTransitions:
+  - decisionToBeMade: {fileID: 11400000, guid: 3173e1a22b3db7f4b8932f1a95e2f015, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: 56ede9c11d2900743af391452c78502a,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 0}
+  timeToStartEnemies: 0.3

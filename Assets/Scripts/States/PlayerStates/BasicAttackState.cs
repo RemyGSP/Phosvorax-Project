@@ -93,6 +93,25 @@ public class BasicAttackState : States
     private void AddImpulseForce(){
         rigidBody.AddForce(stateGameObject.transform.forward * impulseForce, ForceMode.VelocityChange);
     }
+    
+
+    private void ExecuteAnimation()
+    {
+        AudioManager.Instance.CallOneShot("event:/SlashSound"); 
+        if ( attackNumberCounter % 2 != 0)
+        {
+            anim.SetTrigger("attack");
+        }
+        else
+        {
+            anim.SetTrigger("combo");
+        }
+    }
+
+    private void GenerateAttackSlash()
+    {
+        stateGameObject.GetComponent<SlashGenerator>().GenerateSlash();
+    }
 
     private void ExecuteAttack(){
         Vector3 playerForward = stateGameObject.transform.forward;
@@ -113,16 +132,7 @@ public class BasicAttackState : States
         }
     }
 
-    private void GenerateAttackSlash()
-    {
-        stateGameObject.GetComponent<SlashGenerator>().GenerateSlash();
-    }
-
-    private void ExecuteAnimation()
-    {
-        AudioManager.Instance.CallOneShot("event:/SlashSound");
-        anim.SetTrigger("attack");
-    }
+    
 
     public override void FixedUpdate()
     {

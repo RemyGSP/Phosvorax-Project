@@ -91,6 +91,7 @@ public class BasicAttackState : States
     }
 
     private void AddImpulseForce(){
+        rigidBody.velocity = Vector3.zero;
         rigidBody.AddForce(stateGameObject.transform.forward * impulseForce, ForceMode.VelocityChange);
     }
     

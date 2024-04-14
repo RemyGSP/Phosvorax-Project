@@ -18,6 +18,7 @@ public class OnDamageState : States
 
     public override void Start()
     {
+        AudioManager.Instance.CallOneShot("event:/PlayerHit");
         playerHealth = stateGameObject.GetComponent<HealthBehaviour>();
         playerRenderer = PlayerReferences.instance.playerRenderer;
         MonoInstance.instance.StartCoroutine(InvulnerabilityCoroutine());

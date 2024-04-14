@@ -3,24 +3,14 @@ using UnityEngine;
 
 public class RooomController : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject door4;
-
-    [SerializeField]
-    private GameObject door2;
-
-    [SerializeField]
-    private GameObject door8;
-
-    [SerializeField]
-    private GameObject door1;
-
+    [SerializeField] private GameObject door4;
+    [SerializeField] private GameObject door2;
+    [SerializeField] private GameObject door8;
+    [SerializeField] private GameObject door1;
     private List<GameObject> _doorList;
+    public List<GameObject> DoorList => _doorList;  // Propiedad pública solo de lectura para acceder a la lista desde otro script
 
-    // Propiedad pública solo de lectura para acceder a la lista desde otro script
-    public List<GameObject> DoorList => _doorList;
-
-    // Enumeración de tipos de vegetales
+    [SerializeField] private GameObject[] inRoomEnemyList; 
 
     private void Awake()
     {

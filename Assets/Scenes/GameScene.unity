@@ -1827,6 +1827,12 @@ Transform:
   - {fileID: 1726681178}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &945261111 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5422448483555203259, guid: b512993666e602e409c2175bd6f93cba,
+    type: 3}
+  m_PrefabInstance: {fileID: 1635873172}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &977702553
 GameObject:
   m_ObjectHideFlags: 0
@@ -3044,6 +3050,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805479322376229860, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
+      propertyPath: visuals
+      value: 
+      objectReference: {fileID: 945261111}
+    - target: {fileID: 7805479322376229860, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
+      propertyPath: firstHalfPercentage
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7805479322376229860, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
+      propertyPath: secondHalfPercentage
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 8838741370877958639, guid: b512993666e602e409c2175bd6f93cba,
         type: 3}

@@ -129,6 +129,7 @@ public class BasicAttackState : States
             if (hitCollider.TryGetComponent<HealthBehaviour>(out HealthBehaviour healthBehaviour))
             {
                 healthBehaviour.Damage(attackDamage);
+                AudioManager.Instance.CallOneShot("event:/EnemyHit");
             }
         }
     }

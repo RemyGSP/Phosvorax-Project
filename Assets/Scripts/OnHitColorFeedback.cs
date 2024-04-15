@@ -8,7 +8,8 @@ public class OnHitColorFeedback : MonoBehaviour
     [SerializeField] private GameObject visuals;
     private Material previousMaterial;
     private bool isCurrentlyOnFeedback;
-
+    [SerializeField] private float firstHalfPercentage;
+    [SerializeField] private float secondHalfPercentage;
     private void Start()
     {
         changeMaterial = Instantiate(changeMaterial);
@@ -33,9 +34,15 @@ public class OnHitColorFeedback : MonoBehaviour
         materials.Add(Instantiate(changeMaterial));
         SkinnedMeshRenderer meshRenderer = visuals.GetComponent<SkinnedMeshRenderer>();
         meshRenderer.materials = materials.ToArray();
-
-
-        float duration = timeToVanish / 2.25f; // Half the time to vanish for fade in and fade out
+        float duration;
+        if (firstHalfPercentage == 0)
+        {
+            duration = timeToVanish / 1.5f; // Half the time to vanish for fade in and fade out
+        }
+        else
+        {
+            duration  = timeToVanish / (1 / firstHalfPercentage);
+        }
         float alpha = 1;
         float emissionIntensity = 10;
         Color color = Color.white;
@@ -46,9 +53,16 @@ public class OnHitColorFeedback : MonoBehaviour
         emissionColor *= emissionIntensity;
         meshRenderer.materials[1].SetColor("_EmissionColor", emissionColor);
 
-        yield return new WaitForSeconds(timeToVanish / 1.5f);    
+        yield return new WaitForSeconds(duration);
 
-
+        if (firstHalfPercentage == 0)
+        {
+            duration = timeToVanish / 2.5f; // Half the time to vanish for fade in and fade out
+        }
+        else
+        {
+            duration = timeToVanish / (1 / secondHalfPercentage);
+        }
         Color finalColor = Color.red;
         finalColor.a = 1f;
         meshRenderer.materials[1].color = finalColor;
@@ -58,7 +72,7 @@ public class OnHitColorFeedback : MonoBehaviour
         meshRenderer.materials[1].SetColor("_EmissionColor", finalEmissionColor);
         alpha = 1;
         float elapsedTime = 0f;
-        while (elapsedTime < timeToVanish/2.5)
+        while (elapsedTime < duration)
         {
             
             emissionIntensity = 10;

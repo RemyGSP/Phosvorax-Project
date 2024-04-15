@@ -28,7 +28,14 @@ public class EzrealQAbility : Ability
         GameObject b = Instantiate(bulletPrefab, PlayerReferences.instance.ShotingPoint.position, PlayerReferences.instance.ShotingPoint.rotation);
         b.GetComponent<Rigidbody>().velocity = direction.normalized * bulletSpeed;
         b.GetComponent<BulletBehaviour>().SetLifetime(bulletDuration);
-        b.GetComponent<BulletBehaviour>().SetDamage(abilityBaseDamage + ( abilityBaseDamage * ShopManager.instance.GetDamageLevel() * 0.7f));
+        if (ShopManager.instance.GetDamageLevel() == 0)
+        {
+            b.GetComponent<BulletBehaviour>().SetDamage(abilityBaseDamage);
+        }
+        else
+        {
+            b.GetComponent<BulletBehaviour>().SetDamage((abilityBaseDamage * (ShopManager.instance.GetDamageLevel() - 1) * 0.7f));
+        }
     }
 
     public override void OnExitState()

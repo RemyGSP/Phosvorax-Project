@@ -60,7 +60,7 @@ public class PlayerReferences : MonoBehaviour
         Vector3 targetDir = Vector3.zero;
 
         if (Physics.Raycast(castPoint, out hit, Mathf.Infinity,groundMask))
-        {
+        { 
             targetDir = hit.point; // Conseguir la direccion a la que esta apuntando el raton en el mundo
             targetDir.y = 0f; // Mantener en el plano XY
         }
@@ -69,6 +69,7 @@ public class PlayerReferences : MonoBehaviour
             targetDir = castPoint.direction;
             targetDir.y = 0f; // Mantener en el plano XY
         }
+        Debug.Log(targetDir);
         return targetDir;
     }
 
@@ -85,6 +86,11 @@ public class PlayerReferences : MonoBehaviour
     public void DeactivatePlayer()
     {
         player.GetComponent<StateMachine>().enabled = false;
+    }
+
+    public GameObject GetPlayer()
+    {
+        return player;
     }
     #endregion
 }

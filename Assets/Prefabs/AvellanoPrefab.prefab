@@ -1556,6 +1556,7 @@ GameObject:
   - component: {fileID: 1762962960605002454}
   - component: {fileID: 6773056614007094674}
   - component: {fileID: -8414349042622777919}
+  - component: {fileID: 4418681338333383521}
   m_Layer: 6
   m_Name: AvellanoPrefab
   m_TagString: Untagged
@@ -1700,6 +1701,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4418681338333383521}
+        m_TargetAssemblyTypeName: OnHitColorFeedback, Assembly-CSharp
+        m_MethodName: PlayHitFeedback
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0.2
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onRevive:
     m_PersistentCalls:
       m_Calls:
@@ -1825,3 +1838,17 @@ MonoBehaviour:
   attackTime: 0
   isStunned: 0
   isAttacking: 0
+--- !u!114 &4418681338333383521
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8660318500787574725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a93deb59527e5b40b495509b520f27e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  changeMaterial: {fileID: 2100000, guid: 226c5d5c3d9c58f4a966a545d1f35c80, type: 2}
+  visuals: {fileID: 1249032257434788804}

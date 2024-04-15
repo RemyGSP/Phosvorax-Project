@@ -11,22 +11,39 @@ public class EzrealQAbility : Ability
     [SerializeField] private float bulletDuration;
     private Transform playerTransform;
     private RotateCharacter rotateCharacter;
+    private GameObject sgo;
     public override void OnEnterState(GameObject stateGameObject)
     {
+        sgo = stateGameObject;
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         playerTransform = stateGameObject.GetComponent<Transform>();
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
-        Vector3 targetDir = PlayerReferences.instance.GetMouseTargetDir() - stateGameObject.transform.position;
-        targetDir.y = 0;
-        stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
-        ShootProjectile(targetDir);
+        RotatePlayerTowardsMouseTarget();
     }
 
-    private void ShootProjectile(Vector3 direction)
+    private void RotatePlayerTowardsMouseTarget()
+    {
+        if (!PlayerInputController.Instance.isGamepad){
+            Vector3 targetDir = PlayerReferences.instance.GetMouseTargetDir() - sgo.transform.position;
+            targetDir.y = 0;
+            sgo.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);   
+        }else if(PlayerInputController.Instance.GetPlayerInputDirection()!= Vector3.zero){           
+            sgo.transform.rotation = rotateCharacter.NonSmoothenedRotation(PlayerInputController.Instance.GetPlayerInputDirection());
+        }
+
+        ShootProjectile();
+        
+    
+    }
+
+    
+
+    private void ShootProjectile()
     {
         AudioManager.Instance.CallOneShot("event:/Zap");
         GameObject b = Instantiate(bulletPrefab, PlayerReferences.instance.ShotingPoint.position, PlayerReferences.instance.ShotingPoint.rotation);
-        b.GetComponent<Rigidbody>().velocity = direction.normalized * bulletSpeed;
+        Vector3 playerForward = sgo.transform.forward;
+        b.GetComponent<Rigidbody>().velocity = playerForward.normalized * bulletSpeed;
         b.GetComponent<BulletBehaviour>().SetLifetime(bulletDuration);
         if (ShopManager.instance.GetDamageLevel() == 0)
         {

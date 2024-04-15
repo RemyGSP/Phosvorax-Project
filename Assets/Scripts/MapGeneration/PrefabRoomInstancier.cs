@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEditor;
-
-
+using System.Threading.Tasks;
 
 [System.Serializable]
 public class Roomlist
@@ -29,17 +28,17 @@ public class PrefabRoomInstancier : MonoBehaviour
     public Vector2Int endRoom;
     public Vector2Int spawnRoom;
 
-    public void ReceiveMatrix(int[,] matrix1, int[,] matrix2)
+    async public Task ReceiveMatrix(int[,] matrix1, int[,] matrix2)
     {
         roomLayoutTypeMatrix = matrix1;
         roomTypeMatrix = matrix2;
         roomInstancesMatrix = new GameObject[matrix1.GetLength(0), matrix1.GetLength(1)];
-        PrintMatrix(roomLayoutTypeMatrix);
-        PrintMatrix(roomTypeMatrix);
+        await PrintMatrix(roomLayoutTypeMatrix);
+        await PrintMatrix(roomTypeMatrix);
         InstantiateRooms();
     }
 
-    public void InstantiateRooms()
+    async public Task InstantiateRooms()
     {
         isMapGenerated = false;
         if (roomLayoutTypeMatrix == null || prefabRooms == null || prefabRooms.Count == 0)
@@ -133,13 +132,12 @@ public class PrefabRoomInstancier : MonoBehaviour
 
             }
         }
-        //Lightmapping.Bake();
-        ConnectingRoomDoors();
-        GenerateNavMeshSurfaces();
+        await ConnectingRoomDoors();
+        await GenerateNavMeshSurfaces();
     }
 
 
-    void ConnectingRoomDoors()
+    async Task ConnectingRoomDoors()
     {
         // Iterar sobre la matriz
         for (int i = 0; i < roomInstancesMatrix.GetLength(0); i++)
@@ -221,7 +219,7 @@ public class PrefabRoomInstancier : MonoBehaviour
 
     }
 
-    private void DestroyRooms()
+    async private Task DestroyRooms()
     {
         int numRows = roomInstancesMatrix.GetLength(0);
         int numCols = roomInstancesMatrix.GetLength(1);
@@ -240,15 +238,15 @@ public class PrefabRoomInstancier : MonoBehaviour
         }
     }
 
-    void GenerateNavMeshSurfaces()
+    async Task GenerateNavMeshSurfaces()
     {
         surface.BuildNavMesh();
 
         isMapGenerated = true;
-        DestroyRooms();
+        await DestroyRooms();
     }
 
-    void PrintMatrix(int[,] matrix)
+    async Task PrintMatrix(int[,] matrix)
     {
         string matrixString = "Matriz recibida:\n";
 

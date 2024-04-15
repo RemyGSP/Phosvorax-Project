@@ -42,15 +42,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Cancel",
-                    "type": "PassThrough",
-                    "id": "127201d2-63b4-40d0-a78c-ddad6d65a62d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Ability2",
                     "type": "PassThrough",
                     "id": "c03e5766-5324-4cac-aa6f-4cf28d69eb83",
@@ -63,6 +54,15 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "7394c5e0-763b-4c74-9808-b5c3feadbc72",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Cancel",
+                    "type": "PassThrough",
+                    "id": "127201d2-63b4-40d0-a78c-ddad6d65a62d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -202,34 +202,23 @@
                 },
                 {
                     "name": "",
+                    "id": "555d51f8-9c0f-4237-81c3-6558abae33c7",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ability1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "692975fa-e616-4e60-bb7b-693d08ec9c36",
                     "path": "<Keyboard>/#(C)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Cancel",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c052d475-8ca4-49db-b09b-a5a6feb94399",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Ability2",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4d55b720-1bbf-49c1-a47b-99130dc2e37b",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -252,6 +241,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c052d475-8ca4-49db-b09b-a5a6feb94399",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ability2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c40980fb-5f31-48de-ad15-4b7e927b3fc0",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Ability2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4d55b720-1bbf-49c1-a47b-99130dc2e37b",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b3a41e8a-c152-4340-a98d-1f5549169436",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -19,4 +19,9 @@ public class FollowPlayer : MonoBehaviour
     {
         this.player = player;
     }
+
+    public void SetOffset(Vector3 offset)
+    {
+        this.offset = offset;
+    }
 }

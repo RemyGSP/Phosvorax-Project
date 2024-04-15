@@ -111,7 +111,7 @@ public class BasicAttackState : States
 
     private void GenerateAttackSlash()
     {
-        stateGameObject.GetComponent<SlashGenerator>().GenerateSlash();
+        stateGameObject.GetComponent<SlashGenerator>().GenerateSlash(attackNumberCounter);
     }
 
     private void ExecuteAttack(){
@@ -152,7 +152,6 @@ public class BasicAttackState : States
 
         if (inAttackStateTimer > punchClip.length && consecutiveSlashesCounter > 1 && attackNumberCounter < consecutiveSlashesCounter)
         {
-            Debug.Log("pepepe");
             PerforingAttack();
             inAttackStateExitTime = punchClip.length;
         }

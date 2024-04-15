@@ -54,6 +54,7 @@ public class RollState : States
 
     public void Dash()
     {
+        AudioManager.Instance.CallOneShot("event:/Dash");
         if (playerDirection != Vector3.zero)
         {
             rigidBody.AddForce(playerDirection * dashForce, ForceMode.Impulse);

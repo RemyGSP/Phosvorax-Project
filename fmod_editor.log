@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0000018B006582F8 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 0000020005D8F098 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -20,164 +20,6 @@
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 62400
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 11872
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000054C0A9F058
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8783B3F70
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8783B3F30
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8783B4050
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8783B4110
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000018E44E977B8
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
-[LOG] SystemI::createSoundInternal             : Sample 0/1: name='56_Attack_03', format=5, channels=2, frequency=48000, lengthbytes=4896, lengthpcm=32000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.103809.
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 62400
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 11872
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000054C0A9F058
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8783B3F70
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8783B3F30
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8783B4050
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8783B4110
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000018D4CEC8778
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
-[LOG] SystemI::createSoundInternal             : Sample 0/1: name='35_Miss_Evade_02', format=5, channels=2, frequency=48000, lengthbytes=8256, lengthpcm=64000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.217988.
-[LOG] SystemI::createSoundInternal             : Create name='', mode=0x02000202
-[LOG] SystemI::createSoundInternal             : exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             : exinfo->length             = 62400
-[LOG] SystemI::createSoundInternal             : exinfo->fileoffset         = 11872
-[LOG] SystemI::createSoundInternal             : exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlist      = 00000054C0A9F058
-[LOG] SystemI::createSoundInternal             : exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             : exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             : exinfo->useropen           = 00007FF8783B3F70
-[LOG] SystemI::createSoundInternal             : exinfo->userclose          = 00007FF8783B3F30
-[LOG] SystemI::createSoundInternal             : exinfo->userread           = 00007FF8783B4050
-[LOG] SystemI::createSoundInternal             : exinfo->userseek           = 00007FF8783B4110
-[LOG] SystemI::createSoundInternal             : exinfo->fileuserdata       = 0000018E5091E878
-[LOG] SystemI::createSoundInternal             : exinfo->initialseekpostype = 1
-[LOG] SystemI::DSPCodecPoolRegister            : register codec pool for pool type 5
-[LOG] SystemI::createSoundInternal             : Sample 0/1: name='61_Hit_03', format=5, channels=2, frequency=48000, lengthbytes=2656, lengthpcm=32000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.292922.
-[LOG] SystemI::mixerSuspend                    : Suspending output.
-[LOG] SystemI::mixerResume                     : Resuming output.
-[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0000018E45360B98, queue head = 0000018E50CF9AC8, queue count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000018E45360B98
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000018E45360B98
-[LOG] SoundI::release                          : Pixel 10 (0000018E45360838)
-[LOG] SoundI::release                          :     Pixel 10 (0000018D4626AC78)
-[LOG] SoundI::release                          :     Pixel 10 (0000018E45360B98)
-[LOG] SystemI::createSound                     : filename = PhosvoraxFMOD/Build/Desktop/Music.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0000018E453670D8, queue head = 0000018E50CF9AC8, queue count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000018E453670D8
-[LOG] SystemI::createSoundInternal             :     Create name='PhosvoraxFMOD/Build/Desktop/Music.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 4107264
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 3616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000018D1D26B2E0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Pixel 9', format=5, channels=2, frequency=48000, lengthbytes=1024896, lengthpcm=4224000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.888672.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000018E453670D8
-[LOG] SoundI::release                          : Pixel 9 (0000018E453670D8)
-[LOG] SoundI::release                          :     Pixel 9 (0000018D4626E6F8)
-[LOG] SoundI::release                          :     Pixel 9 (0000018D448BE238)
-[LOG] SystemI::createSound                     : filename = PhosvoraxFMOD/Build/Desktop/Music.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0000018D436A2AA8, queue head = 0000018E50CF9AC8, queue count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000018D436A2AA8
-[LOG] SystemI::createSoundInternal             :     Create name='PhosvoraxFMOD/Build/Desktop/Music.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 4107264
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 3616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000018D9C9319C0
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Pixel 11', format=5, channels=2, frequency=48000, lengthbytes=988288, lengthpcm=4607998, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.889801.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000018D436A2AA8
-[LOG] SystemI::mixerSuspend                    : Suspending output.
-[LOG] SystemI::mixerResume                     : Resuming output.
-[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0000018D448BDED8, queue head = 0000018E50CF9AC8, queue count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000018D448BDED8
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000018D448BDED8
-[LOG] SoundI::release                          : Pixel 11 (0000018D436A2AA8)
-[LOG] SoundI::release                          :     Pixel 11 (0000018D4626AC78)
-[LOG] SoundI::release                          :     Pixel 11 (0000018D448BDED8)
-[LOG] SystemI::createSound                     : filename = PhosvoraxFMOD/Build/Desktop/Music.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0000018D4299BC08, queue head = 0000018E50CF9AC8, queue count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000018D4299BC08
-[LOG] SystemI::createSoundInternal             :     Create name='PhosvoraxFMOD/Build/Desktop/Music.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 4107264
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 3616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000018D1D56AA00
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Pixel 9', format=5, channels=2, frequency=48000, lengthbytes=1024896, lengthpcm=4224000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.888672.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000018D4299BC08
-[LOG] SoundI::release                          : Pixel 9 (0000018D4299BC08)
-[LOG] SoundI::release                          :     Pixel 9 (0000018D4626DD38)
-[LOG] SoundI::release                          :     Pixel 9 (0000018D448BDED8)
-[LOG] SystemI::mixerSuspend                    : Suspending output.
-[LOG] SystemI::mixerResume                     : Resuming output.
-[LOG] SystemI::createSound                     : filename = PhosvoraxFMOD/Build/Desktop/Music.bank : mode 02010082
-[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
-[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0000018E45361FD8, queue head = 0000018E50CF9AC8, queue count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000018E45361FD8
-[LOG] SystemI::createSoundInternal             :     Create name='PhosvoraxFMOD/Build/Desktop/Music.bank', mode=0x02010082
-[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 224
-[LOG] SystemI::createSoundInternal             :     exinfo->length             = 4107264
-[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 3616
-[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000018D1D26BE20
-[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
-[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
-[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
-[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Pixel 10', format=5, channels=2, frequency=48000, lengthbytes=1200320, lengthpcm=4992000, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.777954.
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000018E45361FD8
-[LOG] SystemI::mixerSuspend                    : Suspending output.
-[LOG] SystemI::mixerResume                     : Resuming output.
-[LOG] AsyncThread::add                         : add sound to async queue : soundi = 0000018D448BE238, queue head = 0000018E50CF9AC8, queue count = 0
-[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000018D448BE238
-[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000018D448BE238
-[LOG] SoundI::release                          : Pixel 10 (0000018E45361FD8)
-[LOG] SoundI::release                          :     Pixel 10 (0000018D4626E6F8)
-[LOG] SoundI::release                          :     Pixel 10 (0000018D448BE238)
-[LOG] SoundI::release                          :  (0000018D4372C688)
-[LOG] SoundI::release                          :     61_Hit_03 (0000018D4626D518)
-[LOG] SoundI::release                          :  (0000018D44734928)
-[LOG] SoundI::release                          :     35_Miss_Evade_02 (0000018D4626EBD8)
-[LOG] SoundI::release                          :  (0000018E1FB489D8)
-[LOG] SoundI::release                          :     56_Attack_03 (0000018D4626B498)
-[LOG] SoundI::release                          :  (0000018E51390AD8)
-[LOG] SoundI::release                          :     08_Step_rock_02 (0000018D4626A798)
-[LOG] Thread::callback                         : FMOD Studio update thread finished.
-[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
-[LOG] LiveUpdate::release                      : 
-[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
-[LOG] Thread::callback                         : FMOD stream thread finished.
-[LOG] Thread::callback                         : FMOD mixer thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] SystemI::close                           : Closed.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
@@ -185,5 +27,3 @@
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
 [LOG] SystemI::close                           : Closed.
-[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
-[LOG] Thread::callback                         : FMOD file thread finished.

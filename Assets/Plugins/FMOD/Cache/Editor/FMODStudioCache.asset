@@ -54,6 +54,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-6674974116892494365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/GameMusic
+  m_EditorClassIdentifier: 
+  Path: event:/GameMusic
+  Guid:
+    Data1: -155998407
+    Data2: 1295661692
+    Data3: 956807817
+    Data4: -1452804626
+  Banks:
+  - {fileID: -3695912765675823834}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-5898305050954722493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,7 +123,7 @@ MonoBehaviour:
   Path: PhosvoraxFMOD/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638487255634591938
+  lastModified: 638487719633019608
   FileSizes:
   - Name: Desktop
     Value: 1934
@@ -116,10 +143,10 @@ MonoBehaviour:
   Path: PhosvoraxFMOD/Build/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638466205595250600
+  lastModified: 638487772171461756
   FileSizes:
   - Name: Desktop
-    Value: 2453856
+    Value: 4110880
   Exists: 1
 --- !u!114 &-2329337083321469152
 MonoBehaviour:
@@ -201,7 +228,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 1
   MaxDistance: 20
-  Length: 184320
+  Length: 85714
 --- !u!114 &-360290363126329979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -257,12 +284,13 @@ MonoBehaviour:
   - {fileID: -2329337083321469152}
   - {fileID: -1539536001367001509}
   - {fileID: -9164446719949481069}
+  - {fileID: -6674974116892494365}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5421311457857202068}
   StringsBanks:
   - {fileID: 522057013528196026}
-  cacheTime: 638487255635413351
+  cacheTime: 638487772171461756
   cacheVersion: 131609
 --- !u!114 &522057013528196026
 MonoBehaviour:
@@ -279,10 +307,10 @@ MonoBehaviour:
   Path: PhosvoraxFMOD/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638487255634621852
+  lastModified: 638487719633039563
   FileSizes:
   - Name: Desktop
-    Value: 1534
+    Value: 1574
   Exists: 1
 --- !u!114 &1104403082319747898
 MonoBehaviour:
@@ -380,7 +408,7 @@ MonoBehaviour:
   Path: PhosvoraxFMOD/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638487255635413351
+  lastModified: 638487704956134376
   FileSizes:
   - Name: Desktop
     Value: 74272

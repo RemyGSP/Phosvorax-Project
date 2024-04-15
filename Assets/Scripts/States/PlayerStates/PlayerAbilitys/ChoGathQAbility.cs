@@ -43,6 +43,7 @@ public class ChoGathQAbility : Ability
             {
                 damageOnHit.SetDamage((abilityBaseDamage * (ShopManager.instance.GetDamageLevel() - 1) * 0.7f));
             }
+            AudioManager.Instance.CallOneShot("event:/EnemyHit");
         }
     }
 }

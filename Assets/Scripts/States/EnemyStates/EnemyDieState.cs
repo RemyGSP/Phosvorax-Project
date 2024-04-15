@@ -18,41 +18,14 @@ public class EnemyDieState : States
     private bool canRevive;
     #endregion
 
-    public override States CheckTransitions()
-    {
-        bool notChanged = true;
-        int counter = 0;
-        States newPlayerState = null;
 
-        while (notChanged)
-        {
-            newPlayerState = stateTransitions[counter].GetExitState(stateGameObject.GetComponent<StateMachine>());
-            if (newPlayerState != null)
-            {
-                notChanged = false;
-                newPlayerState = Instantiate(newPlayerState);
-                newPlayerState.InitializeState(stateGameObject);
-                newPlayerState.Start();
-            }
-            if (counter < stateTransitions.Length - 1)
-            {
-                counter++;
-            }
-            else
-            {
-                notChanged = false;
-            }
-        }
-
-        return newPlayerState;
-    }
 
     #region Methods
 
 
     public override void Start()
     {
-        stateGameObject.SetActive(false);
+        Destroy(stateGameObject);
         canRevive = false;
         stateGameObject.GetComponent<CrystalDrop>().Drop();
     }

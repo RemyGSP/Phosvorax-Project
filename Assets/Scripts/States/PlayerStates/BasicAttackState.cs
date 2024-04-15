@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "States/PlayerBasicAttackState")]
@@ -23,10 +24,13 @@ public class BasicAttackState : States
     private Animator anim;
     private AnimationClip punchClip;
 
-    const string attackAnimationClipName = "ActionPunch";
+    const string attackAnimationClipName = "ActionPunchFixed";
     private float inAttackStateTimer;
+    private float inAttackStateExitTime;
     private bool damageChek;
     private bool meshChek;
+    private int consecutiveSlashesCounter;
+    private int attackNumberCounter;
 
 
 
@@ -37,7 +41,8 @@ public class BasicAttackState : States
     public override States CheckTransitions()
     {
         States newGameState = null;
-        if (inAttackStateTimer > punchClip.length){
+        if (inAttackStateTimer > inAttackStateExitTime)
+        {
             newGameState = base.CheckTransitions();
         }
         
@@ -47,6 +52,18 @@ public class BasicAttackState : States
     public override void Start(){
         InitializeComponents();
         PerforingAttack();
+        PlayerInputController.Instance.Attacked();
+    }
+
+    private void InitializeComponents()
+    {
+        rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
+        rigidBody = stateGameObject.GetComponent<Rigidbody>();
+        anim = PlayerReferences.instance.GetPlayerAnimator();
+        punchClip = CommonUtilities.FindAnimation(anim, attackAnimationClipName);
+        consecutiveSlashesCounter = 1;
+        attackNumberCounter= 0; 
+        inAttackStateExitTime = punchClip.length;
     }
 
     private void PerforingAttack()
@@ -54,18 +71,11 @@ public class BasicAttackState : States
         inAttackStateTimer = 0;
         damageChek = false;
         meshChek = false;
+        attackNumberCounter++;
         RotatePlayerTowardsMouseTarget();
         AddImpulseForce();
         ExecuteAnimation();
         
-    }
-
-    private void InitializeComponents()
-    {   
-        rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
-        rigidBody = stateGameObject.GetComponent<Rigidbody>();
-        anim = PlayerReferences.instance.GetPlayerAnimator();
-        punchClip = CommonUtilities.FindAnimation(anim, attackAnimationClipName);
     }
 
 
@@ -74,12 +84,34 @@ public class BasicAttackState : States
         if (!PlayerInputController.Instance.isGamepad){
             Vector3 targetDir = PlayerReferences.instance.GetMouseTargetDir() - stateGameObject.transform.position;
             stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(targetDir);
+        }else if(PlayerInputController.Instance.GetPlayerInputDirection()!= Vector3.zero){           
+            stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(PlayerInputController.Instance.GetPlayerInputDirection());
         }
     
     }
 
     private void AddImpulseForce(){
+        rigidBody.velocity = Vector3.zero;
         rigidBody.AddForce(stateGameObject.transform.forward * impulseForce, ForceMode.VelocityChange);
+    }
+    
+
+    private void ExecuteAnimation()
+    {
+        AudioManager.Instance.CallOneShot("event:/SlashSound"); 
+        if ( attackNumberCounter % 2 != 0)
+        {
+            anim.SetTrigger("attack");
+        }
+        else
+        {
+            anim.SetTrigger("combo");
+        }
+    }
+
+    private void GenerateAttackSlash()
+    {
+        stateGameObject.GetComponent<SlashGenerator>().GenerateSlash();
     }
 
     private void ExecuteAttack(){
@@ -101,16 +133,7 @@ public class BasicAttackState : States
         }
     }
 
-    private void GenerateAttackSlash()
-    {
-        stateGameObject.GetComponent<SlashGenerator>().GenerateSlash();
-    }
-
-    private void ExecuteAnimation()
-    {
-        AudioManager.Instance.CallOneShot("event:/SlashSound");
-        anim.SetTrigger("attack");
-    }
+    
 
     public override void FixedUpdate()
     {
@@ -125,6 +148,24 @@ public class BasicAttackState : States
             damageChek = true;
             ExecuteAttack();
         }
+
+        if (inAttackStateTimer > punchClip.length && consecutiveSlashesCounter > 1 && attackNumberCounter < consecutiveSlashesCounter)
+        {
+            Debug.Log("pepepe");
+            PerforingAttack();
+            inAttackStateExitTime = punchClip.length;
+        }
+
+        if (PlayerInputController.Instance.IsAttacking() && consecutiveSlashesCounter < consecutiveSlashes && consecutiveSlashesCounter == attackNumberCounter)
+        {
+
+            PlayerInputController.Instance.Attacked();
+            consecutiveSlashesCounter++;
+            inAttackStateExitTime += inAttackStateExitTime;
+        }else{
+            PlayerInputController.Instance.Attacked();
+        }
+
     }
     public override void Update()
     {
@@ -136,6 +177,6 @@ public class BasicAttackState : States
         PlayerTimers.Instance.playerBasicAttackTimer = 0;
         rigidBody.velocity = Vector3.zero;
         base.OnExitState();
-
+        PlayerInputController.Instance.Attacked();
     }
 }

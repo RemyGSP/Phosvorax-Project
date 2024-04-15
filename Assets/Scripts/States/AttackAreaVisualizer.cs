@@ -53,6 +53,7 @@ public class AttackAreaVisualizer : MonoBehaviour
         Gizmos.DrawLine(position + up + Vector3.left * radius, position + down + Vector3.left * radius);
         Gizmos.DrawLine(position + up + Vector3.right * radius, position + down + Vector3.right * radius);
     }
+
 }
 
 

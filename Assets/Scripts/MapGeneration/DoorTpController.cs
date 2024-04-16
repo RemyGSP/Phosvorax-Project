@@ -9,7 +9,8 @@ public class DoorTpController : MonoBehaviour
     private bool isTeleporting = false;
     private Animator anim;
 
-    private void Start(){
+    private void Start()
+    {
         anim = model.GetComponent<Animator>();
     }
 
@@ -18,7 +19,7 @@ public class DoorTpController : MonoBehaviour
         destinationObject = newDestination;
 
     }
- 
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -49,25 +50,18 @@ public class DoorTpController : MonoBehaviour
         if (!anim.GetBool("puenteon"))
         {
             anim.SetBool("puenteon", true);
-            // Pausa durante un segundo
-            StartCoroutine(ActivateExitWallAfterDelay(1.0f));
+            //poner espera antes de quitar la barrera para no curzar cunado no esta listo
+            exitWall.SetActive(false);
         }
-    }
 
-    private IEnumerator ActivateExitWallAfterDelay(float delay)
-    {
-        // Esperar el tiempo especificado
-        yield return new WaitForSeconds(delay);
-        // Activar la pared de salida
-        exitWall.SetActive(true);
     }
     public void TpClose()
     {
         if (anim.GetBool("puenteon"))
         {
-        anim.SetBool("puenteon", false);
-        exitWall.SetActive(true);
+            anim.SetBool("puenteon", false);
+            exitWall.SetActive(true);
         }
-        
+
     }
 }

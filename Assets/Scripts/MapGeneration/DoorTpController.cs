@@ -55,6 +55,7 @@ public class DoorTpController : MonoBehaviour
         }
 
     }
+    
     public void TpClose()
     {
         if (anim.GetBool("puenteon"))

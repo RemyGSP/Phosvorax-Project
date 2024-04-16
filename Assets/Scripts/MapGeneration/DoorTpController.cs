@@ -9,9 +9,12 @@ public class DoorTpController : MonoBehaviour
     private bool isTeleporting = false;
     private Animator anim;
 
+    private RooomController roomController;
+
     private void Start()
     {
         anim = model.GetComponent<Animator>();
+        roomController = transform.parent.GetComponent<RooomController>();
     }
 
     public void SetDestination(GameObject newDestination)
@@ -26,7 +29,7 @@ public class DoorTpController : MonoBehaviour
         if (!isTeleporting && other.gameObject.layer == LayerMask.NameToLayer("Player") && destinationObject != null)
         {
             StartCoroutine(Teleport(other));
-            //decirle a la otra puerta que el player esta en su sala, decirle a tu sala que el player ya no esta
+            
         }
     }
 
@@ -37,12 +40,18 @@ public class DoorTpController : MonoBehaviour
         // Teleport
         other.transform.position = destinationObject.transform.position;
 
-        // Esperar un frame antes de permitir otra teleportación
+        InformToSetPlayerInRoom(false);
+        destinationObject.GetComponent<DoorTpController>().InformToSetPlayerInRoom(true);
+
         yield return null;
 
         isTeleporting = false;
     }
 
+
+    public void InformToSetPlayerInRoom(bool ipir){
+        roomController.SetIsPlayerInRoom(ipir);
+    }
 
 
     public void TpOpen()

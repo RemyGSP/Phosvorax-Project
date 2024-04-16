@@ -13,6 +13,22 @@ public class DoorTpController : MonoBehaviour
         anim = model.GetComponent<Animator>();
     }
 
+    public void SetDestination(GameObject newDestination)
+    {
+        destinationObject = newDestination;
+
+    }
+ 
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!isTeleporting && other.gameObject.layer == LayerMask.NameToLayer("Player") && destinationObject != null)
+        {
+            StartCoroutine(Teleport(other));
+            //decirle a la otra puerta que el player esta en su sala, decirle a tu sala que el player ya no esta
+        }
+    }
+
     private IEnumerator Teleport(Collider other)
     {
         isTeleporting = true;
@@ -26,29 +42,24 @@ public class DoorTpController : MonoBehaviour
         isTeleporting = false;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!isTeleporting && other.gameObject.layer == LayerMask.NameToLayer("Player") && destinationObject != null)
-        {
-            StartCoroutine(Teleport(other));
-        }
-    }
 
-    public void SetDestination(GameObject newDestination)
-    {
-        destinationObject = newDestination;
-        
-    }
 
     public void TpOpen()
     {
         if (!anim.GetBool("puenteon"))
         {
-        anim.SetBool("puenteon", true);
-        //poner espera antes de quitar la barrera para no curzar cunado no esta listo
-        exitWall.SetActive(false);
+            anim.SetBool("puenteon", true);
+            // Pausa durante un segundo
+            StartCoroutine(ActivateExitWallAfterDelay(1.0f));
         }
-        
+    }
+
+    private IEnumerator ActivateExitWallAfterDelay(float delay)
+    {
+        // Esperar el tiempo especificado
+        yield return new WaitForSeconds(delay);
+        // Activar la pared de salida
+        exitWall.SetActive(true);
     }
     public void TpClose()
     {

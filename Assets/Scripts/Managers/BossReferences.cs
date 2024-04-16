@@ -8,6 +8,8 @@ public class BossReferences : MonoBehaviour
     [SerializeField] private GameObject cristalSpawnPoint;
     [SerializeField] private GameObject crystalPrefab;
 
+    [Header("SpawnEnemyAbility")]
+    [SerializeField] private GameObject enemyToSpawn;
     public GameObject GetCrystalSpawnPoint()
     { 
         return cristalSpawnPoint;
@@ -16,6 +18,11 @@ public class BossReferences : MonoBehaviour
     public GameObject GetCrystalPrefab()
     { 
         return crystalPrefab;
+    }
+
+    public GameObject GetEnemyToSpawn()
+    {
+        return enemyToSpawn;
     }
 
 }

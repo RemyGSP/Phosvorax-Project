@@ -19,6 +19,8 @@ public class EnemyEntryState : States
     [SerializeField] private float timeToStartEnemies;
     private float currentElapsedTime;
     private bool canStartCountdown;
+    [SerializeField] private GameObject spawnParticles;
+    GameObject particles = null;
     #endregion
 
     #region Methods
@@ -33,11 +35,20 @@ public class EnemyEntryState : States
     {
         if(canStartCountdown)
         {
+            if (particles == null)
+            {
+                particles = Instantiate(spawnParticles, stateGameObject.transform.position, Quaternion.identity);
+                ParticleSystem.MainModule module = particles.GetComponent<ParticleSystem>().main;
+                module.startLifetime = timeToStartEnemies;
+                module.duration = timeToStartEnemies;
+
+            }
             currentElapsedTime += Time.deltaTime;
 
             if (currentElapsedTime >= timeToStartEnemies)
             {
                 Debug.Log(stateGameObject.GetComponent<Collider>() + "Ha sido activado");
+                Destroy(particles);
                 stateGameObject.GetComponent<EnemyReferences>().SetCanBeStarted(true);
             }
         }

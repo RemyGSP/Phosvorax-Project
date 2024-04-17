@@ -7,12 +7,10 @@ public class DoorTpController : MonoBehaviour
     [SerializeField] private GameObject exitWall;
     [SerializeField] private GameObject model;
     private bool isTeleporting = false;
-    private bool TpState;
     private Animator anim;
 
     private void Start(){
         anim = model.GetComponent<Animator>();
-        TpState = true;
     }
 
     private IEnumerator Teleport(Collider other)
@@ -44,22 +42,20 @@ public class DoorTpController : MonoBehaviour
 
     public void TpOpen()
     {
-        if (!TpState)
+        if (!anim.GetBool("puenteon"))
         {
         anim.SetBool("puenteon", true);
         //poner espera antes de quitar la barrera para no curzar cunado no esta listo
         exitWall.SetActive(false);
-        TpState = true;
         }
         
     }
     public void TpClose()
     {
-        if (TpState)
+        if (anim.GetBool("puenteon"))
         {
         anim.SetBool("puenteon", false);
         exitWall.SetActive(true);
-        TpState = false;
         }
         
     }

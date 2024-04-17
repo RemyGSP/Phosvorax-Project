@@ -12,6 +12,7 @@ public class RooomController : MonoBehaviour
 
     [SerializeField] private List<GameObject> inRoomEnemyList;
     [SerializeField] private bool isPlayerInRoom;
+    private bool isEmptyMessageSent = false;
 
     private void Awake()
     {
@@ -58,6 +59,25 @@ public class RooomController : MonoBehaviour
         if (isPlayerInRoom&&inRoomEnemyList.Count>0){
             CloseDoors();
         }
+        
+    }
+
+    private void FixedUpdate()
+    {
+        // Verificar y eliminar referencias nulas de la lista de enemigos
+        for (int i = inRoomEnemyList.Count - 1; i >= 0; i--)
+        {
+            if (inRoomEnemyList[i] == null)
+                inRoomEnemyList.RemoveAt(i);
+        }
+
+        // Si la lista de enemigos está vacía y no se ha enviado el mensaje aún, mostrar un mensaje de depuración
+        if (inRoomEnemyList.Count == 0 && !isEmptyMessageSent)
+        {
+            OpenDoors();
+            isEmptyMessageSent = true;
+        }
+            
         
     }
 

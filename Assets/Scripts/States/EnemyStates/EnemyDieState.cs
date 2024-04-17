@@ -19,15 +19,16 @@ public class EnemyDieState : States
     #endregion
 
 
-
     #region Methods
 
-
+   
     public override void Start()
     {
+        
         Destroy(stateGameObject);
         canRevive = false;
         stateGameObject.GetComponent<CrystalDrop>().Drop();
+        
     }
 
     public override void FixedUpdate()
@@ -41,7 +42,7 @@ public class EnemyDieState : States
 
     public override void OnExitState()
     {
-        return;
+        stateGameObject.transform.parent.GetComponent<RooomController>().CheckToOpenDoors();
     }
 
     #endregion

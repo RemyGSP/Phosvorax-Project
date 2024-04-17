@@ -62,23 +62,20 @@ public class RooomController : MonoBehaviour
         
     }
 
-    private void FixedUpdate()
-    {
-        // Verificar y eliminar referencias nulas de la lista de enemigos
+    public void CheckToOpenDoors(){
+        
+        if (isPlayerInRoom&&inRoomEnemyList.Count==1){
+            OpenDoors();
+        }
+        
+    }
+
+    private void Update(){
         for (int i = inRoomEnemyList.Count - 1; i >= 0; i--)
         {
             if (inRoomEnemyList[i] == null)
                 inRoomEnemyList.RemoveAt(i);
         }
-
-        // Si la lista de enemigos está vacía y no se ha enviado el mensaje aún, mostrar un mensaje de depuración
-        if (inRoomEnemyList.Count == 0 && !isEmptyMessageSent)
-        {
-            OpenDoors();
-            isEmptyMessageSent = true;
-        }
-            
-        
     }
 
     public void SetIsPlayerInRoom(bool pir){

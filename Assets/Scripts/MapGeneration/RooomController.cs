@@ -72,12 +72,11 @@ public class RooomController : MonoBehaviour
         }
 
         // Verificar si hay un jugador en la habitación y solo un enemigo presente
-        if (isPlayerInRoom && inRoomEnemyList.Count == 1)
+        if (isPlayerInRoom && inRoomEnemyList.Count <= 1)
         {
             OpenDoors();
         }
     }
-
 
 
     public void SetIsPlayerInRoom(bool pir){

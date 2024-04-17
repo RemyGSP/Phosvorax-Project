@@ -79,13 +79,6 @@ public class RooomController : MonoBehaviour
     }
 
 
-    private void Update(){
-        for (int i = inRoomEnemyList.Count - 1; i >= 0; i--)
-        {
-            if (inRoomEnemyList[i] == null)
-                inRoomEnemyList.RemoveAt(i);
-        }
-    }
 
     public void SetIsPlayerInRoom(bool pir){
         isPlayerInRoom = pir;

@@ -33,11 +33,21 @@ PrefabInstance:
       propertyPath: onGetDamaged.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: DamageDisplay, Assembly-CSharp
       objectReference: {fileID: 0}
+    - target: {fileID: 5756812854669339236, guid: 3dc0eb2909b521a4ab749503653bc0c5,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7082171068831767307, guid: 3dc0eb2909b521a4ab749503653bc0c5,
         type: 3}
       propertyPath: m_Name
       value: GolemRanged Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7282111715296908536, guid: 3dc0eb2909b521a4ab749503653bc0c5,
+        type: 3}
+      propertyPath: visuals
+      value: 
+      objectReference: {fileID: 3416123320425327312}
     - target: {fileID: 8205291948700660381, guid: 3dc0eb2909b521a4ab749503653bc0c5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -122,6 +132,12 @@ MonoBehaviour:
   - {fileID: 5903100796543579690, guid: bebd230af3fd32945bbdfa4b78cfd1d0, type: 3}
   - {fileID: 5903100796543579690, guid: 2894b1f53a2f9c24eb152732243338bb, type: 3}
   - {fileID: 5903100796543579690, guid: 135abc9c360d7034e99ed5f51b550e8f, type: 3}
+--- !u!1 &3416123320425327312 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7701349017995977757, guid: 3dc0eb2909b521a4ab749503653bc0c5,
+    type: 3}
+  m_PrefabInstance: {fileID: 5010309765613817549}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4640530483760712006 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 427362357681375115, guid: 3dc0eb2909b521a4ab749503653bc0c5,

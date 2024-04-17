@@ -2070,6 +2070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceToSeePlayer: 25
   playerSeen: 0
+  visuals: {fileID: 0}
   maxAttackDistance: 10
   distanceToStartCountdown: 0
   canBeStarted: 0
@@ -3276,10 +3277,30 @@ PrefabInstance:
       propertyPath: m_Center.y
       value: 2.4259064
       objectReference: {fileID: 0}
+    - target: {fileID: 3812261576529563374, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 3812261576529563374, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 4344926261779294968, guid: b512993666e602e409c2175bd6f93cba,
         type: 3}
       propertyPath: m_Name
       value: MainCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038642190640400432, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 6038642190640400432, guid: b512993666e602e409c2175bd6f93cba,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 7730945534434157788, guid: b512993666e602e409c2175bd6f93cba,
         type: 3}

@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -20,7 +22,9 @@ public class EnemyEntryState : States
     private float currentElapsedTime;
     private bool canStartCountdown;
     [SerializeField] private GameObject spawnParticles;
+    [SerializeField] private bool dissolves;
     GameObject particles = null;
+    private float dissolveDuration;
     #endregion
 
     #region Methods
@@ -29,6 +33,7 @@ public class EnemyEntryState : States
     {
         currentElapsedTime = 0f;
         canStartCountdown = false;
+
     }
 
     public override void Update()
@@ -39,9 +44,10 @@ public class EnemyEntryState : States
             {
                 particles = Instantiate(spawnParticles, stateGameObject.transform.position, Quaternion.identity);
                 ParticleSystem.MainModule module = particles.GetComponent<ParticleSystem>().main;
-                module.startLifetime = timeToStartEnemies;
-                module.duration = timeToStartEnemies;
-
+                if (dissolves)
+                {
+                    MonoInstance.instance.StartCoroutine(Dissolve(stateGameObject.GetComponent<EnemyReferences>().GetEnemy()));
+                }
             }
             currentElapsedTime += Time.deltaTime;
 
@@ -67,6 +73,24 @@ public class EnemyEntryState : States
 
     }
 
+    private IEnumerator Dissolve(GameObject dissolveObject)
+    {
+        float elapsedTime = 0;
+        //0 es invisible 1 es visible
+        float currentDissolve = 0;
+        Material disolveMaterial = dissolveObject.GetComponent<EnemyReferences>().GetVisuals().GetComponent<SkinnedMeshRenderer>().sharedMaterial;
+
+
+        while (currentDissolve < 1)
+        {
+            currentDissolve += 0.005f;
+            disolveMaterial.SetFloat("_Dissolve", currentDissolve);
+
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+
+    }
     public override void OnExitState()
     {
     }

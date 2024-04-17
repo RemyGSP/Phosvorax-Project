@@ -126,6 +126,7 @@ public class Tutorial : MonoBehaviour
                 currentTutorialFinished = true;
             }
         }
+        FinishTutorial();
     }
 
     private IEnumerator _DestroyFeedback(GameObject objectToDestroy)

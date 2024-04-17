@@ -62,13 +62,22 @@ public class RooomController : MonoBehaviour
         
     }
 
-    public void CheckToOpenDoors(){
-        
-        if (isPlayerInRoom&&inRoomEnemyList.Count==1){
+    public void CheckToOpenDoors()
+    {
+        // Eliminar enemigos nulos de la lista
+        for (int i = inRoomEnemyList.Count - 1; i >= 0; i--)
+        {
+            if (inRoomEnemyList[i] == null)
+                inRoomEnemyList.RemoveAt(i);
+        }
+
+        // Verificar si hay un jugador en la habitación y solo un enemigo presente
+        if (isPlayerInRoom && inRoomEnemyList.Count == 1)
+        {
             OpenDoors();
         }
-        
     }
+
 
     private void Update(){
         for (int i = inRoomEnemyList.Count - 1; i >= 0; i--)

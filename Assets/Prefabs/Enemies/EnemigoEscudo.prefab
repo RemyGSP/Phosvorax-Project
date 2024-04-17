@@ -1144,6 +1144,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeMaterial: {fileID: 2100000, guid: 226c5d5c3d9c58f4a966a545d1f35c80, type: 2}
   visuals: {fileID: 5959025351771360677}
+  firstHalfPercentage: 0
+  secondHalfPercentage: 0
 --- !u!1 &3329097428739035065
 GameObject:
   m_ObjectHideFlags: 0
@@ -1752,8 +1754,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBehaviour: {fileID: 8352437070261413969}
-  damagePrefab: {fileID: 5903100796543579690, guid: bebd230af3fd32945bbdfa4b78cfd1d0,
-    type: 3}
+  damagePrefabs:
+  - {fileID: 5903100796543579690, guid: bebd230af3fd32945bbdfa4b78cfd1d0, type: 3}
+  - {fileID: 5903100796543579690, guid: 2894b1f53a2f9c24eb152732243338bb, type: 3}
+  - {fileID: 5903100796543579690, guid: 135abc9c360d7034e99ed5f51b550e8f, type: 3}
 --- !u!114 &3991187746088574517
 MonoBehaviour:
   m_ObjectHideFlags: 0

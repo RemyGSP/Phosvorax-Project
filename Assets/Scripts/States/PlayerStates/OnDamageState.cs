@@ -20,7 +20,8 @@ public class OnDamageState : States
     {
         AudioManager.Instance.CallOneShot("event:/PlayerHit");
         playerHealth = stateGameObject.GetComponent<HealthBehaviour>();
-        playerRenderer = PlayerReferences.instance.playerRenderer;
+        stateGameObject.GetComponent<OnHitColorFeedback>().PlayHitFeedback(invulnerabilityTime);
+        //playerRenderer = PlayerReferences.instance.playerRenderer;
         MonoInstance.instance.StartCoroutine(InvulnerabilityCoroutine());
     }
 
@@ -40,21 +41,13 @@ public class OnDamageState : States
 
     IEnumerator InvulnerabilityCoroutine()
     {
-        isBlinking = true;
         playerHealth.SetDamageModifier(0);
 
-        float blinkInterval = invulnerabilityTime / (blinkCount * 2); // Calculamos el intervalo entre parpadeos
 
-        for (int i = 0; i < blinkCount; i++)
-        {
-            // Cambiar la visibilidad del jugador
-            playerRenderer.enabled = !playerRenderer.enabled;
-            yield return new WaitForSeconds(blinkInterval);
-        }
 
-        // Asegúrate de que el jugador esté visible al final del parpadeo
-        playerRenderer.enabled = true;
+            yield return new WaitForSeconds(invulnerabilityTime);
+        
+
         playerHealth.SetDamageModifier(1);
-        isBlinking = false;
     }
 }

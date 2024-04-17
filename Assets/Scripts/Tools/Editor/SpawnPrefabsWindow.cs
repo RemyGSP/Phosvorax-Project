@@ -101,21 +101,21 @@ public class SpawnPrefabsWindow : EditorWindow
             if (instantiating && instantiatingFeedback == null)
             {
 
-                GameObject aux = new GameObject(prefabs[selectedOptionIndex].name);
-                GameObject canvas = new GameObject();
-                canvas.AddComponent<Canvas>();
+                //GameObject aux = new GameObject(prefabs[selectedOptionIndex].name);
+                //GameObject canvas = new GameObject();
+                //canvas.AddComponent<Canvas>();
 
-                Instantiate(canvas);
+                //Instantiate(canvas);
 
-                Rect rec = new Rect(0, 0, 100, 100);
-                instantiatingFeedback = Instantiate(aux);
-                RectTransform trans = instantiatingFeedback.AddComponent<RectTransform>();
-                trans.transform.SetParent(canvas.transform); // setting parent
-                trans.localScale = Vector3.one;
-                trans.anchoredPosition = new Vector2(0f, 0f); // setting position, will be on center
-                trans.sizeDelta = new Vector2(150, 200); // custom size
-                Image image = instantiatingFeedback.AddComponent<Image>();
-                image.sprite = Sprite.Create(AssetPreview.GetMiniThumbnail(prefabs[selectedOptionIndex]), rec, new Vector2(50, 50), 1);
+                //Rect rec = new Rect(0, 0, 100, 100);
+                //instantiatingFeedback = Instantiate(aux);
+                //RectTransform trans = instantiatingFeedback.AddComponent<RectTransform>();
+                //trans.transform.SetParent(canvas.transform); // setting parent
+                //trans.localScale = Vector3.one;
+                //trans.anchoredPosition = new Vector2(0f, 0f); // setting position, will be on center
+                //trans.sizeDelta = new Vector2(150, 200); // custom size
+                //Image image = instantiatingFeedback.AddComponent<Image>();
+                //image.sprite = Sprite.Create(AssetPreview.GetMiniThumbnail(prefabs[selectedOptionIndex]), rec, new Vector2(50, 50), 1);
 
 
             }

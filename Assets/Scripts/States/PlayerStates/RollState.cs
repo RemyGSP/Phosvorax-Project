@@ -22,6 +22,7 @@ public class RollState : States
     }
     public override void Start()
     {
+        stateGameObject.GetComponent<HealthBehaviour>().SetDamageModifier(0);
         animator = animator = PlayerReferences.instance.GetPlayerAnimator();
         //stateGameObject.GetComponent<Collider>().enabled = false;
         currentDashTime = 0f;
@@ -74,6 +75,7 @@ public class RollState : States
 
     public override void OnExitState()
     {
+        stateGameObject.GetComponent<HealthBehaviour>().SetDamageModifier(1);
         rigidBody.velocity = Vector3.zero;
         //stateGameObject.GetComponent<Collider>().enabled = true;
         PlayerReferences.instance.GetPlayerAnimator().SetBool("dash", false);

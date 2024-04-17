@@ -12,13 +12,25 @@ public class EzrealQAbility : Ability
     private Transform playerTransform;
     private RotateCharacter rotateCharacter;
     private GameObject sgo;
+    private Animator anim;
+    private AnimationClip shotClip;
+    const string attackAnimationClipName = "Scene";
     public override void OnEnterState(GameObject stateGameObject)
     {
         sgo = stateGameObject;
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         playerTransform = stateGameObject.GetComponent<Transform>();
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
+        anim = PlayerReferences.instance.GetPlayerAnimator();
+        shotClip = CommonUtilities.FindAnimation(anim, attackAnimationClipName);
+        onststetime = shotClip.length;
         RotatePlayerTowardsMouseTarget();
+        ExecuteAnimation();
+    }
+    
+    private void ExecuteAnimation(){
+        anim.SetTrigger("shoot");
+
     }
 
     private void RotatePlayerTowardsMouseTarget()
@@ -31,9 +43,7 @@ public class EzrealQAbility : Ability
             sgo.transform.rotation = rotateCharacter.NonSmoothenedRotation(PlayerInputController.Instance.GetPlayerInputDirection());
         }
 
-        ShootProjectile();
-        
-    
+        ShootProjectile();    
     }
 
     

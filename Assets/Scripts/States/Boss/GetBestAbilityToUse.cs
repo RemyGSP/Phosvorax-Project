@@ -177,6 +177,11 @@ public class GetBestAbilityToUse : MonoBehaviour
             ability[i] = sortedAbilities[i];
         }
     }
+
+    public void SetCanDecide(bool aux)
+    {
+            canDecide = aux;
+    }
 }
 
 [System.Serializable]

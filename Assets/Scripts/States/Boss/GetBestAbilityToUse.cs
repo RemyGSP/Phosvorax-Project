@@ -41,7 +41,6 @@ public class GetBestAbilityToUse : MonoBehaviour
             SortAbilityOnMaxDuration();
         }
 
-        //ResetArrays();
     }
 
     private void SortAbilityOnMinRange(Vector3 playerPos)

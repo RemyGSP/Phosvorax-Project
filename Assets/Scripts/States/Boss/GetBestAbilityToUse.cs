@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class GetBestAbilityToUse : MonoBehaviour
 {
-    [SerializeField] Abilities[] ability;
-    [SerializeField] int[] abilityPoints;
+    public Abilities[] abilities;
     [SerializeField] float distanceToBeConsideredFarAway;
     private Vector3 playerPos;
     private bool canDecide = true;
 
     void Start()
     {
-        abilityPoints = new int[ability.Length];
     }
 
     void Update()
@@ -43,144 +41,98 @@ public class GetBestAbilityToUse : MonoBehaviour
             SortAbilityOnMaxDuration();
         }
 
-        GetBestAbility();
+        //ResetArrays();
     }
 
     private void SortAbilityOnMinRange(Vector3 playerPos)
     {
-        // Copiar el arreglo de puntos de habilidades para evitar modificar el original
-        int[] tempPoints = new int[abilityPoints.Length];
-        abilityPoints.CopyTo(tempPoints, 0);
 
-        // Ordenar el arreglo de puntos de habilidades por la distancia a playerPos
-        System.Array.Sort(tempPoints, (x, y) =>
+
+        System.Array.Sort(abilities, (x, y) =>
         {
-            float distanceX = Vector3.Distance(transform.position, playerPos);
-            float distanceY = Vector3.Distance(transform.position, playerPos);
-            return distanceX.CompareTo(distanceY);
+            return x.range.CompareTo(y.range);
         });
 
-        // Encontrar la habilidad más cercana
-        int index = System.Array.IndexOf(abilityPoints, tempPoints[0]);
-        Abilities closestAbility = ability[index];
+        int index = System.Array.IndexOf(abilities, abilities[0]);
+        Abilities closestAbility = abilities[index];
         Debug.Log("Closest Ability: " + closestAbility.name);
 
-        // Incrementar puntos de la habilidad más cercana
-        abilityPoints[index]++;
+        abilities[index].points++;
     }
 
     private void SortAbilityOnMaxRange(Vector3 playerPos)
     {
-        // Copiar el arreglo de puntos de habilidades para evitar modificar el original
-        int[] tempPoints = new int[abilityPoints.Length];
-        abilityPoints.CopyTo(tempPoints, 0);
-
-        // Ordenar el arreglo de puntos de habilidades por la distancia a playerPos en orden inverso
-        System.Array.Sort(tempPoints, (x, y) =>
+        System.Array.Sort(abilities, (x, y) =>
         {
-            float distanceX = Vector3.Distance(transform.position, playerPos);
-            float distanceY = Vector3.Distance(transform.position, playerPos);
-            return distanceY.CompareTo(distanceX);
+            return y.range.CompareTo(x.range);
         });
 
-        // Encontrar la habilidad más lejana
-        int index = System.Array.IndexOf(abilityPoints, tempPoints[0]);
-        Abilities farthestAbility = ability[index];
+        int index = System.Array.IndexOf(abilities, abilities[0]);
+        Abilities farthestAbility = abilities[index];
         Debug.Log("Farthest Ability: " + farthestAbility.name);
 
-        // Incrementar puntos de la habilidad más lejana
-        abilityPoints[index]++;
+        abilities[index].points++;
     }
 
     private void SortAbilityOnMaxDuration()
     {
-        // Copiar el arreglo de puntos de habilidades para evitar modificar el original
-        int[] tempPoints = new int[abilityPoints.Length];
-        abilityPoints.CopyTo(tempPoints, 0);
 
-        // Ordenar el arreglo de puntos de habilidades por la duración de las habilidades en orden inverso
-        System.Array.Sort(tempPoints, (x, y) =>
+        System.Array.Sort(abilities, (x, y) =>
         {
-            float durationX = ability[x].duration;
-            float durationY = ability[y].duration;
-            return durationY.CompareTo(durationX);
+            return y.duration.CompareTo(x.duration);
         });
 
-        // Encontrar la habilidad con la mayor duración
-        int index = System.Array.IndexOf(abilityPoints, tempPoints[0]);
-        Abilities longestDurationAbility = ability[index];
+
+        int index = System.Array.IndexOf(abilities, abilities[0]);
+        Abilities longestDurationAbility = abilities[index];
         Debug.Log("Ability with Longest Duration: " + longestDurationAbility.name);
 
-        // Incrementar puntos de la habilidad con la mayor duración
-        abilityPoints[index]++;
+        abilities[index].points++;
     }
 
     private void SortAbilityOnMinDuration()
     {
-        // Copiar el arreglo de puntos de habilidades para evitar modificar el original
-        int[] tempPoints = new int[abilityPoints.Length];
-        abilityPoints.CopyTo(tempPoints, 0);
 
-        // Ordenar el arreglo de puntos de habilidades por la duración de las habilidades
-        System.Array.Sort(tempPoints, (x, y) =>
+        System.Array.Sort(abilities, (x, y) =>
         {
-            float durationX = ability[x].duration;
-            float durationY = ability[y].duration;
-            return durationX.CompareTo(durationY);
+            return x.duration.CompareTo(y.duration);
         });
 
-        // Encontrar la habilidad con la menor duración
-        int index = System.Array.IndexOf(abilityPoints, tempPoints[0]);
-        Abilities shortestDurationAbility = ability[index];
+        int index = System.Array.IndexOf(abilities, abilities[0]);
+        Abilities shortestDurationAbility = abilities[index];
         Debug.Log("Ability with Shortest Duration: " + shortestDurationAbility.name);
 
-        // Incrementar puntos de la habilidad con la menor duración
-        abilityPoints[index]++;
+        abilities[index].points++;
     }
 
     private void IncrementPointsForAreaAbilities()
     {
-        for (int i = 0; i < ability.Length; i++)
+        for (int i = 0; i < abilities.Length; i++)
         {
-            // Verificar si la habilidad actual es una habilidad de rango
-            if (ability[i].range > 0)
+            if (abilities[i].range > 0)
             {
-                // Incrementar puntos para habilidades de rango
-                abilityPoints[i]++;
+                abilities[i].points++;
             }
         }
     }
 
-
-    private void GetBestAbility()
+    private void ResetArrays()
     {
-        // Crear un arreglo de índices para mantener el orden original de las habilidades
-        int[] indexes = new int[ability.Length];
-        for (int i = 0; i < ability.Length; i++)
+        for (int i = 0; i < abilities.Length; i++)
         {
-            indexes[i] = i;
-        }
-
-        // Ordenar el arreglo de índices según la cantidad de puntos de habilidades
-        System.Array.Sort(indexes, (x, y) => abilityPoints[y].CompareTo(abilityPoints[x]));
-
-        // Crear una lista temporal para almacenar las habilidades ordenadas por puntos
-        List<Abilities> sortedAbilities = new List<Abilities>();
-        foreach (int index in indexes)
-        {
-            sortedAbilities.Add(ability[index]);
-        }
-
-        // Reasignar las habilidades en orden de puntos al arreglo original
-        for (int i = 0; i < ability.Length; i++)
-        {
-            ability[i] = sortedAbilities[i];
+            abilities[i].points = 0;
         }
     }
 
     public void SetCanDecide(bool aux)
     {
-            canDecide = aux;
+        canDecide = aux;
+    }
+
+    public Abilities[] getAbilityArrayWithPoints()
+    {
+        ResetArrays();
+        return abilities;
     }
 }
 
@@ -190,7 +142,7 @@ public class Abilities
     public float range;
     public bool isAreaAbility;
     public float duration;
-
+    public int points;
     // el nombre es mas que nada para no confundir las habilidades
     public string name;
 
@@ -199,6 +151,6 @@ public class Abilities
         this.range = range;
         this.isAreaAbility = isAreaAbility;
         this.duration = duration;
-        this.name = name;
+        this.name = name; 
     }
 }

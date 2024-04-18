@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[CreateAssetMenu(menuName = "BossStates/BossSpawnEnemies")]
 public class BossSpawnBichoPincho : States
 {
 

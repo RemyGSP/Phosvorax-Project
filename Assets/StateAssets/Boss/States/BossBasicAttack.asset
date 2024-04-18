@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7435d37b55f2bb46b14dac5e5dc0fec, type: 3}
+  m_Name: BossBasicAttack
+  m_EditorClassIdentifier: 
+  stateGameObject: {fileID: 0}
+  stateTransitions: []
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  attackDelay: 2
+  attackOffset: 2
+  sphereSize: 5
+  attackDamage: 10
+  maxAttackDistance: 7
+  enemyMeleeAttackTimer: 0
+  enemyMeleeAttackCD: 0
+  attackAreaVisualizer: {fileID: 0}

@@ -59,10 +59,14 @@ public class DoorTpController : MonoBehaviour
         if (!anim.GetBool("puenteon"))
         {
             anim.SetBool("puenteon", true);
-            //poner espera antes de quitar la barrera para no curzar cunado no esta listo
-            exitWall.SetActive(false);
+            // Llama a la función ActivateExitWall después de 2 segundos
+            Invoke("ActivateExitWall", 3f);
         }
+    }
 
+    private void ActivateExitWall()
+    {
+        exitWall.SetActive(false);
     }
     
     public void TpClose()

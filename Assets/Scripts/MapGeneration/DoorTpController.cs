@@ -9,8 +9,28 @@ public class DoorTpController : MonoBehaviour
     private bool isTeleporting = false;
     private Animator anim;
 
-    private void Start(){
+    private RooomController roomController;
+
+    private void Start()
+    {
         anim = model.GetComponent<Animator>();
+        roomController = transform.parent.GetComponent<RooomController>();
+    }
+
+    public void SetDestination(GameObject newDestination)
+    {
+        destinationObject = newDestination;
+
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!isTeleporting && other.gameObject.layer == LayerMask.NameToLayer("Player") && destinationObject != null)
+        {
+            StartCoroutine(Teleport(other));
+            
+        }
     }
 
     private IEnumerator Teleport(Collider other)
@@ -20,43 +40,42 @@ public class DoorTpController : MonoBehaviour
         // Teleport
         other.transform.position = destinationObject.transform.position;
 
-        // Esperar un frame antes de permitir otra teleportación
+        InformToSetPlayerInRoom(false);
+        destinationObject.GetComponent<DoorTpController>().InformToSetPlayerInRoom(true);
+
         yield return null;
 
         isTeleporting = false;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!isTeleporting && other.gameObject.layer == LayerMask.NameToLayer("Player") && destinationObject != null)
-        {
-            StartCoroutine(Teleport(other));
-        }
+
+    public void InformToSetPlayerInRoom(bool ipir){
+        roomController.SetIsPlayerInRoom(ipir);
     }
 
-    public void SetDestination(GameObject newDestination)
-    {
-        destinationObject = newDestination;
-        
-    }
 
     public void TpOpen()
     {
         if (!anim.GetBool("puenteon"))
         {
-        anim.SetBool("puenteon", true);
-        //poner espera antes de quitar la barrera para no curzar cunado no esta listo
-        exitWall.SetActive(false);
+            anim.SetBool("puenteon", true);
+            // Llama a la función ActivateExitWall después de 2 segundos
+            Invoke("ActivateExitWall", 3f);
         }
-        
     }
+
+    private void ActivateExitWall()
+    {
+        exitWall.SetActive(false);
+    }
+    
     public void TpClose()
     {
         if (anim.GetBool("puenteon"))
         {
-        anim.SetBool("puenteon", false);
-        exitWall.SetActive(true);
+            anim.SetBool("puenteon", false);
+            exitWall.SetActive(true);
         }
-        
+
     }
 }

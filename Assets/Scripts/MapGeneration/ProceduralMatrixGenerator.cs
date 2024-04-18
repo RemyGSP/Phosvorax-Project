@@ -7,6 +7,7 @@ public class ProceduralMatrixGenerator : MonoBehaviour
     public Vector2Int MapSize;
     public int RoomQuantity;
     public int minDeadEnds;
+    public int mapSeed;
 
     private int maxDeadEndsIteration;
     private int DeadEndsIteration;
@@ -32,6 +33,7 @@ public class ProceduralMatrixGenerator : MonoBehaviour
 
     void StartRoomGeneration()
     {
+        UnityEngine.Random.InitState(mapSeed);
         binariMatrix = new int[(int)MapSize.x, (int)MapSize.y];
         roomsPlaced = 0;
         deadEndsCount = 0;
@@ -223,8 +225,6 @@ public class ProceduralMatrixGenerator : MonoBehaviour
         return count;
     }
 
-   
-
-   
+    
 
 }

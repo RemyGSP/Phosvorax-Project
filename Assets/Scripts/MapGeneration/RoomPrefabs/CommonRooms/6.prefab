@@ -160,6 +160,7 @@ MonoBehaviour:
   inRoomEnemyList:
   - {fileID: 3287584155401684833}
   - {fileID: 1255576909674875394}
+  isPlayerInRoom: 0
 --- !u!1 &5146569314617750670
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,8 +978,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8810569493875529456, guid: 60b90bd742b1abe4281062a21a66a263,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 332173863907952944}
   m_SourcePrefab: {fileID: 100100000, guid: 60b90bd742b1abe4281062a21a66a263, type: 3}
+--- !u!1 &3075707700775041636 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8810569493875529456, guid: 60b90bd742b1abe4281062a21a66a263,
+    type: 3}
+  m_PrefabInstance: {fileID: 5830601987421973652}
+  m_PrefabAsset: {fileID: 0}
+--- !u!208 &332173863907952944
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3075707700775041636}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 5, y: 0.00001, z: 5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!4 &4131369999748503859 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7620062796781073831, guid: 60b90bd742b1abe4281062a21a66a263,

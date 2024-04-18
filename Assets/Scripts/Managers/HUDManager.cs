@@ -41,7 +41,7 @@ public class HUDManager : MonoBehaviour
 
         while (timer < cooldown)
         {
-            ability.fillAmount = timer / cooldown;
+            ability.fillAmount = 1 - timer / cooldown;
             abilityVisualCD.text = (cooldown - timer).ToString("0.0");
             // Increment the timer by the time passed since the last frame
             timer += Time.deltaTime;

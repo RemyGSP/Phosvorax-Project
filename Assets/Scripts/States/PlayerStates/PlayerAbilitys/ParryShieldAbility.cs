@@ -14,10 +14,14 @@ public class ParryShieldAbility : Ability
 
     public override void OnEnterState(GameObject stateGameObject)
     {
+        Material disolveMaterial = PlayerReferences.instance.shieldObject.GetComponent<MeshRenderer>().sharedMaterial;
+        disolveMaterial.SetFloat("_Dissolve", 1.2f);
+        Debug.Log("Start");
         playerhealth = stateGameObject.GetComponent<HealthBehaviour>();
         playerhealth.SetDamageModifier(0);
         PlayerReferences.instance.shieldObject.SetActive(true);
-        ChangeColor(new Color(255f / 255f, 255f / 255f, 255f / 255f, 50f / 255f));
+        MonoInstance.instance.StartCoroutine(Dissolve());
+        //ChangeColor(new Color(255f / 255f, 255f / 255f, 255f / 255f, 50f / 255f));
     }
 
     public override void OnExitState()
@@ -54,6 +58,48 @@ public class ParryShieldAbility : Ability
     {
         yield return new WaitForSeconds(shieldLength);
         playerhealth.SetDamageModifier(1);
+        MonoInstance.instance.StartCoroutine(ReverseDissolve());
+    }
+    private IEnumerator Dissolve()
+    {
+        Debug.Log("Before");
+        float elapsedTime = 1.2f;
+        //0 es invisible 1 es visible
+        float currentDissolve = 1.2f;
+        Material disolveMaterial = PlayerReferences.instance.shieldObject.GetComponent<MeshRenderer>().sharedMaterial;
+        Color previousColor = disolveMaterial.GetColor("_DIssolveEdgeColor");
+
+        while (currentDissolve > -0.3f)
+        {
+            currentDissolve -= 0.02f;
+            disolveMaterial.SetFloat("_Dissolve", currentDissolve);
+
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        disolveMaterial.SetFloat("_Dissolve", -0.3f);
+        Debug.Log("Hola");
+        disolveMaterial.SetColor("_DIssolveEdgeColor", Color.cyan);
+
+    }
+    private IEnumerator ReverseDissolve()
+    {
+        float elapsedTime = 1.2f;
+        //0 es invisible 1 es visible
+        float currentDissolve = -0.3f;
+        Material disolveMaterial = PlayerReferences.instance.shieldObject.GetComponent<MeshRenderer>().sharedMaterial;
+
+
+        while (currentDissolve < 1.2f)
+        {
+            currentDissolve += 0.02f;
+            disolveMaterial.SetFloat("_Dissolve", currentDissolve);
+
+            elapsedTime += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        disolveMaterial.SetFloat("_Dissolve", 1.2f);
         PlayerReferences.instance.shieldObject.SetActive(false);
+
     }
 }

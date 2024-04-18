@@ -51,7 +51,20 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _DepthOffset: 0
+    - _DisplacementStrength: -0.1
+    - _Dissolve: -0.3
+    - _DissolveEdgeThickness: 1.25
+    - _DistortionStrength: 1.1
+    - _FresnelPower: 4.3
     - _QueueControl: 0
     - _QueueOffset: 0
-    m_Colors: []
+    - _SphereMaskHardness: 0
+    - _SphereMaskRadius: 0
+    m_Colors:
+    - _DIssolveEdgeColor: {r: 0.055354428, g: 0.054901958, b: 0.4117647, a: 0}
+    - _FresnelColor: {r: 8, g: 0, b: 0.22573853, a: 0}
+    - _HitPosition: {r: 1, g: 1, b: 0, a: 0}
+    - _MaskSmoothstep: {r: 0, g: 0, b: 0, a: 0}
+    - _ObjectScreenPosition: {r: 0.5, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []

@@ -22,7 +22,7 @@ public class BossCrystalRainState : States
     private Animator anim;
     private Animator animator;
     private GameObject crystalPrefab;
-
+    private bool spawningCrystals = false;
 
     [Header("Time")]
     [SerializeField] float timeToBeSpawning;
@@ -43,6 +43,8 @@ public class BossCrystalRainState : States
 
     public override void Start()
     {
+        stateGameObject.GetComponent<GetBestAbilityToUse>().ResetArrays();
+        spawningCrystals = true;
         enemy = stateGameObject.GetComponent<NavMeshAgent>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(true);
@@ -64,6 +66,7 @@ public class BossCrystalRainState : States
 
         if (currentTime >= timeToBeSpawning)
         {
+            spawningCrystals = false;
             stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
             StopSpawningCrystals();
         }
@@ -73,7 +76,7 @@ public class BossCrystalRainState : States
 
     IEnumerator SpawnCrystalRoutine()
     {
-        while (true)
+        while (spawningCrystals)
         {
             
             Instantiate(crystalPrefab, crystalSpawnPoint.transform.position, Quaternion.identity);

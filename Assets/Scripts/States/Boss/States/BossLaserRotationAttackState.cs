@@ -42,6 +42,7 @@ public class BossLaserRotationAttackState : States
 
     public override void Start()
     {
+        stateGameObject.GetComponent<GetBestAbilityToUse>().ResetArrays();
         stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(true);
         hasFinishedAttack = false;
         enemy.speed = 1;

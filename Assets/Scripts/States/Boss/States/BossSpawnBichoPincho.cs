@@ -23,6 +23,7 @@ public class BossSpawnBichoPincho : States
     #endregion
     public override void Start()
     {
+        stateGameObject.GetComponent<GetBestAbilityToUse>().ResetArrays();
         prefabToSpawn = stateGameObject.GetComponent<BossReferences>().GetEnemyToSpawn();
         stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(true);
         // Obtener la referencia al transform del enemigo

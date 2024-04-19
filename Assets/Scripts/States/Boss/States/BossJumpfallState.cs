@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [CreateAssetMenu(menuName = "BossStates/BossJumpfallState")]
 public class BossJumpfallState : States
@@ -34,7 +35,7 @@ public class BossJumpfallState : States
     [Header("Fall values")]
     [SerializeField] float timeFalling;
 
-    private UnityEngine.AI.NavMeshAgent enemy;
+    private NavMeshAgent enemy;
     #endregion
 
     #region Methods
@@ -52,6 +53,9 @@ public class BossJumpfallState : States
 
     public override void Start()
     {
+        stateGameObject.GetComponent<GetBestAbilityToUse>().ResetArrays();
+        stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(true);
+        enemy = stateGameObject.GetComponent<NavMeshAgent>();
         stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(true);
         finalPosition = stateGameObject.transform.position;
         hasExecutedAttack = false;
@@ -73,7 +77,7 @@ public class BossJumpfallState : States
         rigidBody.AddForce(jumpDirection * jumpForce, ForceMode.Impulse);
        
 
-        Fall(finalPosition);
+        //Fall(finalPosition);
     }
 
     private void Fall(Vector3 finalPosition)

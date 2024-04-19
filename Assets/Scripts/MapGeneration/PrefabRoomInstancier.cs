@@ -25,8 +25,7 @@ public class PrefabRoomInstancier : MonoBehaviour
     private int[,] roomTypeMatrix;
     public GameObject[,] roomInstancesMatrix;
 
-    public Vector2Int endRoom;
-    public Vector2Int spawnRoom;
+    public List<GameObject> enemysList;
 
     async public Task ReceiveMatrix(int[,] matrix1, int[,] matrix2)
     {
@@ -236,6 +235,11 @@ public class PrefabRoomInstancier : MonoBehaviour
                 }
             }
         }
+        await GenetrateEnemies();
+    }
+
+    async private Task GenetrateEnemies(){
+        
     }
 
     async Task GenerateNavMeshSurfaces()

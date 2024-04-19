@@ -23,14 +23,18 @@ public class BossSpawnBichoPincho : States
     #endregion
     public override void Start()
     {
+        prefabToSpawn = stateGameObject.GetComponent<BossReferences>().GetEnemyToSpawn();
         stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(true);
         // Obtener la referencia al transform del enemigo
         enemyTransform = stateGameObject.transform;
-
         // Spawnear el prefab varias veces
         for (int i = 0; i < numberOfSpawns; i++)
         {
             SpawnPrefab();
+            if (i == 1)
+            {
+                stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
+            }
         }
     }
 
@@ -64,7 +68,6 @@ public class BossSpawnBichoPincho : States
 
     public override void OnExitState()
     {
-        stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
         stateGameObject.GetComponent<BossReferences>().SetCanUseAbility(false);
         base.OnExitState();
     }

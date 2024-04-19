@@ -33,9 +33,9 @@ Transform:
   m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6483205017404741271}
   - {fileID: 3510678107068042015}
   - {fileID: 3739388394348056375}
-  - {fileID: 8369731277757861556}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7582062919499223240
@@ -475,7 +475,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1500955523066354046}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &8789605397832535877
+--- !u!1001 &6063333113581360998
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -491,17 +491,17 @@ PrefabInstance:
     - target: {fileID: 999150176198312433, guid: 9f66b0c462e1f8d45918662bdfa10501,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.6666666
+      value: 0.66666603
       objectReference: {fileID: 0}
     - target: {fileID: 999150176198312433, guid: 9f66b0c462e1f8d45918662bdfa10501,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.6666667
+      value: 0.666666
       objectReference: {fileID: 0}
     - target: {fileID: 999150176198312433, guid: 9f66b0c462e1f8d45918662bdfa10501,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6666666
+      value: 0.66666603
       objectReference: {fileID: 0}
     - target: {fileID: 999150176198312433, guid: 9f66b0c462e1f8d45918662bdfa10501,
         type: 3}
@@ -511,7 +511,7 @@ PrefabInstance:
     - target: {fileID: 999150176198312433, guid: 9f66b0c462e1f8d45918662bdfa10501,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000006357829
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 999150176198312433, guid: 9f66b0c462e1f8d45918662bdfa10501,
         type: 3}
@@ -558,9 +558,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f66b0c462e1f8d45918662bdfa10501, type: 3}
---- !u!4 &8369731277757861556 stripped
+--- !u!4 &6483205017404741271 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 999150176198312433, guid: 9f66b0c462e1f8d45918662bdfa10501,
     type: 3}
-  m_PrefabInstance: {fileID: 8789605397832535877}
+  m_PrefabInstance: {fileID: 6063333113581360998}
   m_PrefabAsset: {fileID: 0}

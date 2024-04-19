@@ -21,17 +21,20 @@ public class BossReferences : MonoBehaviour
 
     bool isUsingAbility = false;
     public GameObject GetCrystalSpawnPoint()
-    { 
+    {
+        Debug.Log(cristalSpawnPoint);
         return cristalSpawnPoint;
     }
 
     public GameObject GetCrystalPrefab()
-    { 
+    {
+        Debug.Log(crystalPrefab);
         return crystalPrefab;
     }
 
     public GameObject GetEnemyToSpawn()
     {
+        Debug.Log(enemyToSpawn);
         return enemyToSpawn;
     }
 

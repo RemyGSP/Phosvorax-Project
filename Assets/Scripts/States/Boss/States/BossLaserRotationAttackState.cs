@@ -64,6 +64,7 @@ public class BossLaserRotationAttackState : States
         }
         else
         {
+            stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
             hasFinishedAttack = true;
         }
 

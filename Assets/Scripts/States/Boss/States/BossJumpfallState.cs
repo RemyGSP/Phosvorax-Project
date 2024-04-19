@@ -89,6 +89,7 @@ public class BossJumpfallState : States
         }
 
         // El jefe ha terminado de caer
+        stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
         hasExecutedAttack = true;
     }
     #endregion

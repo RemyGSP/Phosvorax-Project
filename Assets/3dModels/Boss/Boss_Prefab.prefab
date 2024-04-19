@@ -818,14 +818,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities:
-  - range: 10
+  - range: 50
     isAreaAbility: 0
     duration: 2
     points: 0
     abilityIndex: 0
     name: Habilidad 1
     index: 0
-  - range: 20
+  - range: 10
     isAreaAbility: 1
     duration: 7
     points: 0
@@ -834,7 +834,7 @@ MonoBehaviour:
     index: 1
   - range: 10
     isAreaAbility: 1
-    duration: 3
+    duration: 5
     points: 0
     abilityIndex: 0
     name: Habilidad 3
@@ -846,7 +846,7 @@ MonoBehaviour:
     abilityIndex: 0
     name: Habilidad 4
     index: 3
-  distanceToBeConsideredFarAway: 20
+  distanceToBeConsideredFarAway: 50
 --- !u!4 &999150176198312433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d923291600106134da7400c28721f813,

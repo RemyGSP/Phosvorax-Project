@@ -43,6 +43,8 @@ public class BossCrystalRainState : States
 
     public override void Start()
     {
+        enemy = stateGameObject.GetComponent<NavMeshAgent>();
+        rigidBody = stateGameObject.GetComponent<Rigidbody>();
         stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(true);
         base.Start();
         crystalPrefab = stateGameObject.GetComponent<BossReferences>().GetCrystalPrefab();
@@ -52,7 +54,6 @@ public class BossCrystalRainState : States
         rigidBody.mass = Mathf.Infinity;
         ActivateFireAura();
         MonoInstance.instance.StartCoroutine(SpawnCrystalRoutine());
-        Debug.Log("hfabfafca");
 
     }
 
@@ -63,6 +64,7 @@ public class BossCrystalRainState : States
 
         if (currentTime >= timeToBeSpawning)
         {
+            stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
             StopSpawningCrystals();
         }
 
@@ -71,7 +73,6 @@ public class BossCrystalRainState : States
 
     IEnumerator SpawnCrystalRoutine()
     {
-        Debug.Log("hfabfafca");
         while (true)
         {
             

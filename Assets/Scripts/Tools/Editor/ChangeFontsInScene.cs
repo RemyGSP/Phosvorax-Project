@@ -54,11 +54,11 @@ public class ChangeFontsInScene : EditorWindow
     {
 
     }
-    [MenuItem("Tools/Prefab Instancier")]
+    [MenuItem("Tools/TextFont Changer")]
     private static void OpenWindow()
     {
-        SpawnPrefabsWindow window = new SpawnPrefabsWindow();
-        window.titleContent = new GUIContent("Prefab Instancier");
+        ChangeFontsInScene window = new ChangeFontsInScene();
+        window.titleContent = new GUIContent("Change Font in Scene");
         window.Show();
     }
 }

@@ -30,7 +30,7 @@ MonoBehaviour:
     onDecisionTrueExitState: {fileID: 11400000, guid: cb31df1a1d12d6942a219eb7ef201fc4,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}
-  - decisionToBeMade: {fileID: 11400000, guid: 7b2c8f844fb99094f9b3d5beadc8a4c8, type: 2}
+  - decisionToBeMade: {fileID: 11400000, guid: 22b084676b054d24180adcea2c141550, type: 2}
     onDecisionTrueExitState: {fileID: 11400000, guid: 54881221c3365ca48859a8720e579f3b,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}
@@ -43,9 +43,9 @@ MonoBehaviour:
     m_Bits: 8
   attackDelay: 2
   attackOffset: 2
-  sphereSize: 5
+  sphereSize: 10
   attackDamage: 10
-  maxAttackDistance: 2
+  maxAttackDistance: 20
   enemyMeleeAttackTimer: 0
   enemyMeleeAttackCD: 0
   attackAreaVisualizer: {fileID: 0}

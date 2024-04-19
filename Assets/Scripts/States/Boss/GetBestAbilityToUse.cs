@@ -54,7 +54,6 @@ public class GetBestAbilityToUse : MonoBehaviour
 
         int index = System.Array.IndexOf(abilities, abilities[0]);
         Abilities closestAbility = abilities[index];
-        Debug.Log("Closest Ability: " + closestAbility.name);
 
         abilities[index].points++;
     }
@@ -68,7 +67,6 @@ public class GetBestAbilityToUse : MonoBehaviour
 
         int index = System.Array.IndexOf(abilities, abilities[0]);
         Abilities farthestAbility = abilities[index];
-        Debug.Log("Farthest Ability: " + farthestAbility.name);
 
         abilities[index].points++;
     }
@@ -84,7 +82,6 @@ public class GetBestAbilityToUse : MonoBehaviour
 
         int index = System.Array.IndexOf(abilities, abilities[0]);
         Abilities longestDurationAbility = abilities[index];
-        Debug.Log("Ability with Longest Duration: " + longestDurationAbility.name);
 
         abilities[index].points++;
     }
@@ -99,7 +96,6 @@ public class GetBestAbilityToUse : MonoBehaviour
 
         int index = System.Array.IndexOf(abilities, abilities[0]);
         Abilities shortestDurationAbility = abilities[index];
-        Debug.Log("Ability with Shortest Duration: " + shortestDurationAbility.name);
 
         abilities[index].points++;
     }
@@ -115,7 +111,7 @@ public class GetBestAbilityToUse : MonoBehaviour
         }
     }
 
-    private void ResetArrays()
+    public void ResetArrays()
     {
         for (int i = 0; i < abilities.Length; i++)
         {
@@ -130,8 +126,22 @@ public class GetBestAbilityToUse : MonoBehaviour
 
     public Abilities[] getAbilityArrayWithPoints()
     {
-        ResetArrays();
+        {
+
+            // Copiar el array de habilidades original para no modificar el original
+            Abilities[] sortedAbilities = abilities.Clone() as Abilities[];
+
+            // Ordenar el array de habilidades basado en los puntos de mayor a menor
+            System.Array.Sort(sortedAbilities, (x, y) => y.points.CompareTo(x.points));
+
+            return sortedAbilities;
+        }
+    }
+
+    public Abilities[] getAbilityArray()
+    {
         return abilities;
+
     }
 }
 
@@ -142,8 +152,10 @@ public class Abilities
     public bool isAreaAbility;
     public float duration;
     public int points;
+    public int abilityIndex;
     // el nombre es mas que nada para no confundir las habilidades
     public string name;
+    public int index;
 
     public Abilities(float range, bool isAreaAbility, float duration, string name)
     {

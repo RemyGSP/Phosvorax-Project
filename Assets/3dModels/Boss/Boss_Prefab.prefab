@@ -649,7 +649,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
@@ -673,8 +673,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 4.8396864, y: 7.952124, z: 2.8256998}
-  m_Center: {x: -0.15516593, y: 3.4759452, z: -0.02103889}
+  m_Size: {x: 4.8396864, y: 7.952124, z: 1.8104897}
+  m_Center: {x: -0.15516591, y: 3.475917, z: 0.014646828}
 --- !u!114 &7171375307130523706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,7 +761,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceToSeePlayer: 100
   playerSeen: 0
-  maxAttackDistance: 2
+  maxAttackDistance: 7
   distanceToStartCountdown: 100
   canBeStarted: 0
 --- !u!114 &137826727665713021
@@ -779,7 +779,7 @@ MonoBehaviour:
   minTime: 4
   maxTime: 7
   currentTime: 0
-  canUseAbility: 0
+  canUseAbility: 1
   cristalSpawnPoint: {fileID: 4543425425444136761}
   crystalPrefab: {fileID: 8801671786593593430, guid: 6a9ed0591085ff6439074399f05355f5,
     type: 3}
@@ -801,10 +801,10 @@ MonoBehaviour:
   basicAttackCD: 2
   abilityTimers: []
   abilityCD:
-  - 1
-  - 1
-  - 1
-  - 1
+  - 15
+  - 7
+  - 7
+  - 10
 --- !u!114 &-7120172336418765767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -819,25 +819,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilities:
   - range: 10
+    isAreaAbility: 0
+    duration: 2
+    points: 0
+    abilityIndex: 0
+    name: Habilidad 1
+    index: 0
+  - range: 20
     isAreaAbility: 1
+    duration: 7
+    points: 0
+    abilityIndex: 0
+    name: Habilidad 2
+    index: 1
+  - range: 10
+    isAreaAbility: 1
+    duration: 3
+    points: 0
+    abilityIndex: 0
+    name: Habilidad 3
+    index: 2
+  - range: 50
+    isAreaAbility: 0
     duration: 10
     points: 0
-    name: Habilidad 1
-  - range: 20
-    isAreaAbility: 0
-    duration: 7.5
-    points: 0
-    name: Habilidad 2
-  - range: 500
-    isAreaAbility: 1
-    duration: 400
-    points: 0
-    name: Habilidad 3
-  - range: 40
-    isAreaAbility: 0
-    duration: 2.5
-    points: 0
+    abilityIndex: 0
     name: Habilidad 4
+    index: 3
   distanceToBeConsideredFarAway: 20
 --- !u!4 &999150176198312433 stripped
 Transform:

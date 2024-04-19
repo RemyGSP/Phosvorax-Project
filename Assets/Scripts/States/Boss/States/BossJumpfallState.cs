@@ -45,11 +45,14 @@ public class BossJumpfallState : States
     }
     public override void OnExitState()
     {
+        stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
+        stateGameObject.GetComponent<BossReferences>().SetCanUseAbility(false);
         base.OnExitState();
     }
 
     public override void Start()
     {
+        stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(true);
         finalPosition = stateGameObject.transform.position;
         hasExecutedAttack = false;
         stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerReferences.instance.GetPlayerCoordinates());

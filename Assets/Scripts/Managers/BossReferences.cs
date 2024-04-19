@@ -18,6 +18,8 @@ public class BossReferences : MonoBehaviour
 
     [Header("SpawnEnemyAbility")]
     [SerializeField] private GameObject enemyToSpawn;
+
+    bool isUsingAbility = false;
     public GameObject GetCrystalSpawnPoint()
     { 
         return cristalSpawnPoint;
@@ -49,7 +51,6 @@ public class BossReferences : MonoBehaviour
         }
         else
         {
-            canUseAbility = false;
         }
     }
 
@@ -62,5 +63,19 @@ public class BossReferences : MonoBehaviour
     {
        float aux = Random.Range(minTime, maxTime);
         return aux;
+    }
+
+    public void SetCanUseAbility(bool aux)
+    {
+        canUseAbility = aux;
+    }
+
+    public void SetIsUsingAbiliy(bool aux)
+    {
+        isUsingAbility = aux;
+    }
+    public bool GetIsUsingAbiliy()
+    {
+        return isUsingAbility;
     }
 }

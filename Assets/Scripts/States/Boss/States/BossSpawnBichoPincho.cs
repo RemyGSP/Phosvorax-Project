@@ -23,6 +23,7 @@ public class BossSpawnBichoPincho : States
     #endregion
     public override void Start()
     {
+        stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(true);
         // Obtener la referencia al transform del enemigo
         enemyTransform = stateGameObject.transform;
 
@@ -63,6 +64,8 @@ public class BossSpawnBichoPincho : States
 
     public override void OnExitState()
     {
+        stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
+        stateGameObject.GetComponent<BossReferences>().SetCanUseAbility(false);
         base.OnExitState();
     }
 }

@@ -43,6 +43,7 @@ public class BossCrystalRainState : States
 
     public override void Start()
     {
+        stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(true);
         base.Start();
         crystalPrefab = stateGameObject.GetComponent<BossReferences>().GetCrystalPrefab();
         crystalSpawnPoint = stateGameObject.GetComponent<BossReferences>().GetCrystalSpawnPoint();
@@ -91,6 +92,8 @@ public class BossCrystalRainState : States
 
     public override void OnExitState()
     {
+        stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
+        stateGameObject.GetComponent<BossReferences>().SetCanUseAbility(false);
         base.OnExitState();
     }
     #endregion

@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 2523647308715096934}
   m_Layer: 9
   m_Name: 2boss
-  m_TagString: Untagged
+  m_TagString: BossRoom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -283,7 +283,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8714572620826576105}
@@ -379,7 +379,7 @@ MonoBehaviour:
   door2: {fileID: 3641520801226605589}
   door8: {fileID: 0}
   door1: {fileID: 0}
-  typeSelected: 1
+  inRoomEnemyList: []
 --- !u!1001 &5600494214785494290
 PrefabInstance:
   m_ObjectHideFlags: 0

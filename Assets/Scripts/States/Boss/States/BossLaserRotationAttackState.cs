@@ -42,6 +42,7 @@ public class BossLaserRotationAttackState : States
 
     public override void Start()
     {
+        stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(true);
         hasFinishedAttack = false;
         enemy.speed = 1;
         base.Start();
@@ -70,6 +71,8 @@ public class BossLaserRotationAttackState : States
 
     public override void OnExitState()
     {
+        stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
+        stateGameObject.GetComponent<BossReferences>().SetCanUseAbility(false);
         base.OnExitState();
     }
     #endregion

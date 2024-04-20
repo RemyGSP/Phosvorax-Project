@@ -18,14 +18,6 @@ MonoBehaviour:
     onDecisionTrueExitState: {fileID: 11400000, guid: c3124c7654731eb45ab5b58732cfe96c,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}
-  - decisionToBeMade: {fileID: 11400000, guid: 0ede2bfaeb6f1b04ab57af8af9010079, type: 2}
-    onDecisionTrueExitState: {fileID: 11400000, guid: d9e6f393732030544b7cfaf3865f74a5,
-      type: 2}
-    onDecisionFalseExitState: {fileID: 0}
-  - decisionToBeMade: {fileID: 11400000, guid: f02f6709a5d2e5f4aa7d8efe74da3463, type: 2}
-    onDecisionTrueExitState: {fileID: 11400000, guid: f5211c61cb9cfd648af9b137f74ec4ca,
-      type: 2}
-    onDecisionFalseExitState: {fileID: 0}
   - decisionToBeMade: {fileID: 11400000, guid: 9d79745d5ac629244a0990a2e75c8081, type: 2}
     onDecisionTrueExitState: {fileID: 11400000, guid: cb31df1a1d12d6942a219eb7ef201fc4,
       type: 2}
@@ -40,12 +32,12 @@ MonoBehaviour:
     onDecisionFalseExitState: {fileID: 0}
   playerLayerMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 72
   attackDelay: 2
-  attackOffset: 2
+  attackOffset: 7
   sphereSize: 10
-  attackDamage: 10
+  attackDamage: 15
   maxAttackDistance: 20
-  enemyMeleeAttackTimer: 0
-  enemyMeleeAttackCD: 0
+  enemyMeleeAttackTimer: 1
+  enemyMeleeAttackCD: 2
   attackAreaVisualizer: {fileID: 0}

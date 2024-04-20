@@ -49,7 +49,6 @@ public class BossReferences : MonoBehaviour
         if(currentTime >= time)
         {
             canUseAbility = true;
-            currentTime = 0;
             SetTime();
         }
         else
@@ -80,5 +79,10 @@ public class BossReferences : MonoBehaviour
     public bool GetIsUsingAbiliy()
     {
         return isUsingAbility;
+    }
+
+    public void ResetCurrentTime()
+    {
+        currentTime = 0;
     }
 }

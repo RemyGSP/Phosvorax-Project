@@ -12,40 +12,19 @@ public class BossJumpfallState : States
     }
     #endregion
 
-
     #region Variables
-    [SerializeField] LayerMask playerLayerMask;
-    private RotateCharacter rotateCharacter;
-    private Rigidbody rigidBody;
-    private Animator anim;
-
-
-    [SerializeField] private float attackDelay = 0.5f; // Tiempo de retraso antes de ejecutar el ataque
-    [SerializeField] private float attackOffset = 1.0f; // Distancia desde el jugador para el inicio del ataque
-    [SerializeField] private float sphereSize; // Tama�o del �rea de detecci�n
-    [SerializeField] private float attackDamage;
-
-    private Vector3 finalPosition;
-
-    private bool hasExecutedAttack;
-
-    [Header("Jump values ")]
     [SerializeField] float jumpForce;
-
-    [Header("Fall values")]
     [SerializeField] float timeFalling;
 
-    private NavMeshAgent enemy;
+    private Rigidbody rigidBody;
+    private Vector3 finalPosition;
+    private bool hasExecutedAttack;
     #endregion
 
     #region Methods
-
-    public override States CheckTransitions()
-    {
-        return base.CheckTransitions();
-    }
     public override void OnExitState()
     {
+        rigidBody.constraints |= RigidbodyConstraints.FreezePositionY;
         stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
         stateGameObject.GetComponent<BossReferences>().SetCanUseAbility(false);
         base.OnExitState();
@@ -53,48 +32,43 @@ public class BossJumpfallState : States
 
     public override void Start()
     {
+        rigidBody = stateGameObject.GetComponent<Rigidbody>();
+        rigidBody.constraints &= ~RigidbodyConstraints.FreezePositionY;
+        stateGameObject.GetComponent<BossTimers>().abilityTimers[2] = 0;
         stateGameObject.GetComponent<GetBestAbilityToUse>().ResetArrays();
-        stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(true);
-        enemy = stateGameObject.GetComponent<NavMeshAgent>();
         stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(true);
         finalPosition = stateGameObject.transform.position;
         hasExecutedAttack = false;
-        stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerReferences.instance.GetPlayerCoordinates());
-        enemy.speed = 0;
-        MakeJump();
+        Jump();
     }
 
     public override void Update()
     {
-        
+        Fall();
     }
 
-    private void MakeJump()
+    private void Jump()
     {
-        Vector3 jumpDirection = stateGameObject.transform.up;
-
-        // Aplica una fuerza al Rigidbody para que el jefe salte
-        rigidBody.AddForce(jumpDirection * jumpForce, ForceMode.Impulse);
-       
-
-        //Fall(finalPosition);
+        // Aplica una fuerza al Rigidbody solo en el eje Y para que el jefe salte
+        rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
-    private void Fall(Vector3 finalPosition)
+    private void Fall()
     {
-        while (stateGameObject.transform.position.y > finalPosition.y)
+        // Calcula el desplazamiento hacia abajo
+        float step = timeFalling * Time.deltaTime;
+        Vector3 newPosition = Vector3.MoveTowards(stateGameObject.transform.position, finalPosition, step);
+
+        // Actualiza la posición del jefe
+        stateGameObject.transform.position = newPosition;
+
+        // Si el jefe ha llegado a la posición final
+        if (stateGameObject.transform.position.y <= finalPosition.y)
         {
-            // Calcula el desplazamiento hacia abajo
-            float step = timeFalling * Time.deltaTime;
-            Vector3 newPosition = Vector3.MoveTowards(stateGameObject.transform.position, finalPosition, step);
-
-            // Actualiza la posición del jefe
-            stateGameObject.transform.position = newPosition;
+            // El jefe ha terminado de caer
+            stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
+            hasExecutedAttack = true;
         }
-
-        // El jefe ha terminado de caer
-        stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
-        hasExecutedAttack = true;
     }
     #endregion
 }

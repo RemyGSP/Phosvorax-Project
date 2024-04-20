@@ -42,6 +42,9 @@ public class BossLaserRotationAttackState : States
 
     public override void Start()
     {
+        enemy = stateGameObject.GetComponent<NavMeshAgent>();
+        rigidBody = stateGameObject.GetComponent<Rigidbody>();
+        stateGameObject.GetComponent<BossTimers>().abilityTimers[1] = 0;
         stateGameObject.GetComponent<GetBestAbilityToUse>().ResetArrays();
         stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(true);
         hasFinishedAttack = false;
@@ -73,6 +76,7 @@ public class BossLaserRotationAttackState : States
 
     public override void OnExitState()
     {
+        stateGameObject.GetComponent<BossReferences>().ResetCurrentTime();
         stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
         stateGameObject.GetComponent<BossReferences>().SetCanUseAbility(false);
         base.OnExitState();

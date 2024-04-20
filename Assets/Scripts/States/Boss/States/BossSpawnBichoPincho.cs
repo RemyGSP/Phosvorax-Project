@@ -23,6 +23,7 @@ public class BossSpawnBichoPincho : States
     #endregion
     public override void Start()
     {
+        stateGameObject.GetComponent<BossTimers>().abilityTimers[0] = 0;
         stateGameObject.GetComponent<GetBestAbilityToUse>().ResetArrays();
         prefabToSpawn = stateGameObject.GetComponent<BossReferences>().GetEnemyToSpawn();
         stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(true);
@@ -48,27 +49,15 @@ public class BossSpawnBichoPincho : States
     {
         // Calcular una posición aleatoria dentro del radio especificado
         Vector3 spawnPosition = enemyTransform.position + Random.insideUnitSphere * spawnRadius;
-        spawnPosition.y = 0;
+        spawnPosition.y = 3.429993f;
 
         // Instanciar el prefab en la posición calculada
         Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
     }
 
-    /*float GetGroundHeight(Vector3 position)
-    {
-        // Raycast desde arriba hacia abajo para encontrar la altura del suelo en la posición especificada
-        RaycastHit hit;
-        if (Physics.Raycast(position, Vector3.down, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
-        {
-            return hit.point.y;
-        }
-        return 0f; // Si no se encuentra el suelo, devolver 0 como altura
-    }*/
-
-    //EN CASO DE QUE NO VAYA BIEN SPAWNEAR EN Y 0
-
     public override void OnExitState()
     {
+        stateGameObject.GetComponent<BossReferences>().ResetCurrentTime();
         stateGameObject.GetComponent<BossReferences>().SetCanUseAbility(false);
         base.OnExitState();
     }

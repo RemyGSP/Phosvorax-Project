@@ -43,6 +43,7 @@ public class BossCrystalRainState : States
 
     public override void Start()
     {
+        stateGameObject.GetComponent<BossTimers>().abilityTimers[3] = 0;
         stateGameObject.GetComponent<GetBestAbilityToUse>().ResetArrays();
         spawningCrystals = true;
         enemy = stateGameObject.GetComponent<NavMeshAgent>();
@@ -96,6 +97,7 @@ public class BossCrystalRainState : States
 
     public override void OnExitState()
     {
+        stateGameObject.GetComponent<BossReferences>().ResetCurrentTime();
         stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
         stateGameObject.GetComponent<BossReferences>().SetCanUseAbility(false);
         base.OnExitState();

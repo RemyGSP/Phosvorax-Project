@@ -620,6 +620,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -7120172336418765767}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d923291600106134da7400c28721f813,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 59931330870277246}
   m_SourcePrefab: {fileID: 100100000, guid: d923291600106134da7400c28721f813, type: 3}
 --- !u!1 &474673902440782667 stripped
 GameObject:
@@ -781,7 +785,7 @@ MonoBehaviour:
   currentTime: 0
   canUseAbility: 1
   cristalSpawnPoint: {fileID: 4543425425444136761}
-  crystalPrefab: {fileID: 8801671786593593430, guid: 6a9ed0591085ff6439074399f05355f5,
+  crystalPrefab: {fileID: 8801671786593593430, guid: 9ed351ff32307b448914c8bc63831e4b,
     type: 3}
   enemyToSpawn: {fileID: 1728056717686730391, guid: 10ce91215ac8b7a409d176a2fa023d0b,
     type: 3}
@@ -802,9 +806,9 @@ MonoBehaviour:
   abilityTimers: []
   abilityCD:
   - 15
-  - 7
-  - 7
   - 10
+  - 20
+  - 25
 --- !u!114 &-7120172336418765767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -820,7 +824,7 @@ MonoBehaviour:
   abilities:
   - range: 50
     isAreaAbility: 0
-    duration: 2
+    duration: 1
     points: 0
     abilityIndex: 0
     name: Habilidad 1
@@ -846,7 +850,22 @@ MonoBehaviour:
     abilityIndex: 0
     name: Habilidad 4
     index: 3
-  distanceToBeConsideredFarAway: 50
+  distanceToBeConsideredFarAway: 20
+--- !u!114 &59931330870277246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474673902440782667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17e7c0967875195479e85d951c2d7036, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeAttackState: {fileID: 11400000, guid: a055eb309ce1ce74fba013fbf7f12e18, type: 2}
+  attackOffset: 7
+  sphereSize: 20
 --- !u!4 &999150176198312433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d923291600106134da7400c28721f813,

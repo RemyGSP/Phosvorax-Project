@@ -13,7 +13,15 @@ MonoBehaviour:
   m_Name: Boss Laser Rotation Attack State
   m_EditorClassIdentifier: 
   stateGameObject: {fileID: 0}
-  stateTransitions: []
+  stateTransitions:
+  - decisionToBeMade: {fileID: 11400000, guid: 22b084676b054d24180adcea2c141550, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: 54881221c3365ca48859a8720e579f3b,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 0}
+  - decisionToBeMade: {fileID: 11400000, guid: 3e2c1271059576d4ea7fce5384ef0e43, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: dbd99a2dd69e7004cbecbf60b9ccb7ed,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 0}
   playerLayerMask:
     serializedVersion: 2
     m_Bits: 8

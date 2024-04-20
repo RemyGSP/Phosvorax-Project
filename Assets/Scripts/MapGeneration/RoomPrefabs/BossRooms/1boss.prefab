@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 3802015703661502041}
   m_Layer: 9
   m_Name: 1boss
-  m_TagString: Untagged
+  m_TagString: BossRoom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,12 +105,12 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6093348638721665075}
   - {fileID: 7133848563594893717}
   - {fileID: 5456540775296927600}
-  - {fileID: 7597439347950522825}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5269912205526759836
@@ -201,7 +201,7 @@ MonoBehaviour:
   door2: {fileID: 0}
   door8: {fileID: 0}
   door1: {fileID: 1421092571781134398}
-  typeSelected: 1
+  inRoomEnemyList: []
 --- !u!1 &5253087722265740346
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,7 +380,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1001 &7255922556479950904
+--- !u!1001 &6436309652640410050
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -416,12 +416,12 @@ PrefabInstance:
     - target: {fileID: 999150176198312433, guid: 9f66b0c462e1f8d45918662bdfa10501,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.0000006357829
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 999150176198312433, guid: 9f66b0c462e1f8d45918662bdfa10501,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.11181323
+      value: 0.11181324
       objectReference: {fileID: 0}
     - target: {fileID: 999150176198312433, guid: 9f66b0c462e1f8d45918662bdfa10501,
         type: 3}
@@ -463,11 +463,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9f66b0c462e1f8d45918662bdfa10501, type: 3}
---- !u!4 &7597439347950522825 stripped
+--- !u!4 &6093348638721665075 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 999150176198312433, guid: 9f66b0c462e1f8d45918662bdfa10501,
     type: 3}
-  m_PrefabInstance: {fileID: 7255922556479950904}
+  m_PrefabInstance: {fileID: 6436309652640410050}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7820791139498217785
 PrefabInstance:

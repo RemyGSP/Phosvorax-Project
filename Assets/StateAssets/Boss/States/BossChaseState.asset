@@ -14,32 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stateGameObject: {fileID: 0}
   stateTransitions:
-  - decisionToBeMade: {fileID: 0}
+  - decisionToBeMade: {fileID: 11400000, guid: 3f7b8f53217211f4b9d8e51324e7b02a, type: 2}
     onDecisionTrueExitState: {fileID: 11400000, guid: c3124c7654731eb45ab5b58732cfe96c,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}
-  - decisionToBeMade: {fileID: 0}
-    onDecisionTrueExitState: {fileID: 11400000, guid: d9e6f393732030544b7cfaf3865f74a5,
-      type: 2}
-    onDecisionFalseExitState: {fileID: 0}
-  - decisionToBeMade: {fileID: 0}
-    onDecisionTrueExitState: {fileID: 11400000, guid: f5211c61cb9cfd648af9b137f74ec4ca,
-      type: 2}
-    onDecisionFalseExitState: {fileID: 0}
-  - decisionToBeMade: {fileID: 0}
+  - decisionToBeMade: {fileID: 11400000, guid: 9d79745d5ac629244a0990a2e75c8081, type: 2}
     onDecisionTrueExitState: {fileID: 11400000, guid: cb31df1a1d12d6942a219eb7ef201fc4,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}
-  - decisionToBeMade: {fileID: 0}
+  - decisionToBeMade: {fileID: 11400000, guid: 82db58b747055e9409af9a4f4730bfa7, type: 2}
     onDecisionTrueExitState: {fileID: 11400000, guid: a055eb309ce1ce74fba013fbf7f12e18,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}
-  - decisionToBeMade: {fileID: 0}
+  - decisionToBeMade: {fileID: 11400000, guid: 3e2c1271059576d4ea7fce5384ef0e43, type: 2}
     onDecisionTrueExitState: {fileID: 11400000, guid: dbd99a2dd69e7004cbecbf60b9ccb7ed,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}
-  enemyNavMeshSpeed: 1
-  maxSpeed: 1.5
+  enemyNavMeshSpeed: 2.5
+  maxSpeed: 2.5
   timeToMaxVelocity: 1
   rotationSpeed: 3
   speed: 1

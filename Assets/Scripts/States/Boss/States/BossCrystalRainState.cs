@@ -22,7 +22,7 @@ public class BossCrystalRainState : States
     private Animator anim;
     private Animator animator;
     private GameObject crystalPrefab;
-
+    private bool spawningCrystals = false;
 
     [Header("Time")]
     [SerializeField] float timeToBeSpawning;
@@ -43,6 +43,12 @@ public class BossCrystalRainState : States
 
     public override void Start()
     {
+        stateGameObject.GetComponent<BossTimers>().abilityTimers[3] = 0;
+        stateGameObject.GetComponent<GetBestAbilityToUse>().ResetArrays();
+        spawningCrystals = true;
+        enemy = stateGameObject.GetComponent<NavMeshAgent>();
+        rigidBody = stateGameObject.GetComponent<Rigidbody>();
+        stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(true);
         base.Start();
         crystalPrefab = stateGameObject.GetComponent<BossReferences>().GetCrystalPrefab();
         crystalSpawnPoint = stateGameObject.GetComponent<BossReferences>().GetCrystalSpawnPoint();
@@ -51,7 +57,6 @@ public class BossCrystalRainState : States
         rigidBody.mass = Mathf.Infinity;
         ActivateFireAura();
         MonoInstance.instance.StartCoroutine(SpawnCrystalRoutine());
-        Debug.Log("hfabfafca");
 
     }
 
@@ -62,6 +67,8 @@ public class BossCrystalRainState : States
 
         if (currentTime >= timeToBeSpawning)
         {
+            spawningCrystals = false;
+            stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
             StopSpawningCrystals();
         }
 
@@ -70,8 +77,7 @@ public class BossCrystalRainState : States
 
     IEnumerator SpawnCrystalRoutine()
     {
-        Debug.Log("hfabfafca");
-        while (true)
+        while (spawningCrystals)
         {
             
             Instantiate(crystalPrefab, crystalSpawnPoint.transform.position, Quaternion.identity);
@@ -91,6 +97,9 @@ public class BossCrystalRainState : States
 
     public override void OnExitState()
     {
+        stateGameObject.GetComponent<BossReferences>().ResetCurrentTime();
+        stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
+        stateGameObject.GetComponent<BossReferences>().SetCanUseAbility(false);
         base.OnExitState();
     }
     #endregion

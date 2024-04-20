@@ -10,7 +10,7 @@ public class BossReferences : MonoBehaviour
     [SerializeField]  private float currentTime;
     [SerializeField] bool canUseAbility;
     private float time;
-
+    [SerializeField] public GameObject onWinPrefab;
 
     [Header("Crystal & SpawnPoint")]
     [SerializeField] private GameObject cristalSpawnPoint;

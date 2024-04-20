@@ -24,7 +24,10 @@ public class EnemyDieState : States
    
     public override void Start()
     {
-        
+        if (stateGameObject.CompareTag("Boss"))
+        {
+            Instantiate(stateGameObject.GetComponent<BossReferences>().onWinPrefab);
+        }
         Destroy(stateGameObject);
         canRevive = false;
         stateGameObject.GetComponent<CrystalDrop>().Drop();

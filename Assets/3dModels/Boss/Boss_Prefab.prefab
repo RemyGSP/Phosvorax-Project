@@ -883,7 +883,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9150133716906669301}
   m_Layer: 0
-  m_Name: Armature (1)
+  m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2208,6 +2208,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 5233429915378481136}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d923291600106134da7400c28721f813,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4763036889942559515}
   m_SourcePrefab: {fileID: 100100000, guid: d923291600106134da7400c28721f813, type: 3}
 --- !u!1 &474673902440782667 stripped
 GameObject:
@@ -2390,7 +2394,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: HealthBarBehaviour, Assembly-CSharp
-        m_MethodName: RestartHealthBar
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2536,6 +2540,27 @@ MonoBehaviour:
   firstHalfPercentage: 0.5
   secondHalfPercentage: 0.5
   notUniqueMaterial: 0
+--- !u!95 &4763036889942559515
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474673902440782667}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 02ee612c55a9b8d4e9c125789532747a, type: 3}
+  m_Controller: {fileID: 9100000, guid: bfbdf30c2d74bb34380a2a979c20adf5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!4 &999150176198312433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d923291600106134da7400c28721f813,

@@ -13,9 +13,7 @@ public class Prueba : MonoBehaviour
     {
 
 
-        Rect rec = new Rect(0, 0, 100, 100);
 
-        image.GetComponent<RawImage>().texture = AssetPreview.GetAssetPreview(prefab);
 
     }
 

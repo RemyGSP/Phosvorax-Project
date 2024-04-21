@@ -414,7 +414,7 @@ MonoBehaviour:
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 1
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!114 &6969377912404781304
@@ -552,7 +552,7 @@ MonoBehaviour:
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 1
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!114 &7371959136036556648
@@ -801,7 +801,7 @@ MonoBehaviour:
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 1
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!114 &1285050864559396248
@@ -1145,8 +1145,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeMaterial: {fileID: 2100000, guid: 226c5d5c3d9c58f4a966a545d1f35c80, type: 2}
   visuals: {fileID: 5959025351771360677}
+  visualsMultiple: []
   firstHalfPercentage: 0
   secondHalfPercentage: 0
+  notUniqueMaterial: 0
 --- !u!1 &3329097428739035065
 GameObject:
   m_ObjectHideFlags: 0

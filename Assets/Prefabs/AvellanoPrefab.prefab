@@ -922,7 +922,7 @@ MonoBehaviour:
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 1
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!114 &5715141345257930877
@@ -1132,7 +1132,7 @@ MonoBehaviour:
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 1
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!114 &6028896113185497219
@@ -1222,7 +1222,7 @@ MonoBehaviour:
   m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 1
+  m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!114 &6107644465697165714
@@ -1656,6 +1656,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   distanceToSeePlayer: 10
   playerSeen: 0
+  visuals: {fileID: 0}
   maxAttackDistance: 5
   distanceToStartCountdown: 100
   canBeStarted: 0
@@ -1854,5 +1855,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   changeMaterial: {fileID: 2100000, guid: 226c5d5c3d9c58f4a966a545d1f35c80, type: 2}
   visuals: {fileID: 1249032257434788804}
+  visualsMultiple: []
   firstHalfPercentage: 0
   secondHalfPercentage: 0
+  notUniqueMaterial: 0

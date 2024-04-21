@@ -24,6 +24,7 @@ public class AudioManager : MonoBehaviour
 
     public void Start()
     {
+        if (Instance == null)
         Instance = this;
         generalVCA = RuntimeManager.GetVCA(VCAPath + generalVCAPath);
         sfxVCA = RuntimeManager.GetVCA(VCAPath + SFXVCAPath);
@@ -49,7 +50,10 @@ public class AudioManager : MonoBehaviour
 
     public void ChangeVolumeMusic(float volume)
     {
-        generalVCA.setVolume(volume);
+        musicVCA = RuntimeManager.GetVCA(VCAPath + musicVCAPath);
+
+        musicVCA.setVolume(volume);
+        Debug.Log(volume);
     }
 
     public void ChangeVolumeSFX(float volume)
@@ -58,7 +62,7 @@ public class AudioManager : MonoBehaviour
     }
     public void ChangeVolumeMaster(float volume)
     {
-        musicVCA.setVolume(volume);
+        generalVCA.setVolume(volume);
     }
 
 

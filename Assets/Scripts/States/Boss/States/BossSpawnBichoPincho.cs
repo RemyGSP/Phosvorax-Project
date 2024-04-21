@@ -23,6 +23,7 @@ public class BossSpawnBichoPincho : States
     #endregion
     public override void Start()
     {
+        stateGameObject.GetComponent<Animator>().SetBool("rain", true);
         stateGameObject.GetComponent<BossTimers>().abilityTimers[0] = 0;
         stateGameObject.GetComponent<GetBestAbilityToUse>().ResetArrays();
         prefabToSpawn = stateGameObject.GetComponent<BossReferences>().GetEnemyToSpawn();
@@ -57,6 +58,7 @@ public class BossSpawnBichoPincho : States
 
     public override void OnExitState()
     {
+        stateGameObject.GetComponent<Animator>().SetBool("rain", false);
         stateGameObject.GetComponent<BossReferences>().ResetCurrentTime();
         stateGameObject.GetComponent<BossReferences>().SetCanUseAbility(false);
         base.OnExitState();

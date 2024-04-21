@@ -46,6 +46,9 @@ public class ScreenOptions : MonoBehaviour
 
     private void Update()
     {
+        if (applyButton != null)
+        {
+
         if (isConfigSaved)
         {
             applyButton.interactable = false;
@@ -54,6 +57,8 @@ public class ScreenOptions : MonoBehaviour
         {
             applyButton.interactable = true;
         }
+        }
+
     }
     public void AddResolutionsToArray()
     {

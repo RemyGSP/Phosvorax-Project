@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,12 +8,12 @@ public class MenuNavigation : MonoBehaviour
 {
     [SerializeField] private GameObject[] menus;
     private int currentMenu;
-    private int[] previousMenus;
+    private List<int> previousMenus;
     [SerializeField] private InputAction goBackAction;
     void Start()
     {
+        previousMenus = new List<int>();
         currentMenu = 0;
-        previousMenus = new int[menus.Length];
         ResetPreviousMenus();
         goBackAction.performed += GoBack;
     }
@@ -30,31 +31,20 @@ public class MenuNavigation : MonoBehaviour
     {
         menus[currentMenu].SetActive(false);
         menus[menu].SetActive(true);
-        previousMenus[SearchLastMenu()] = currentMenu;
+        previousMenus.Add(currentMenu);
         currentMenu = menu;
 
     }
 
     public int SearchLastMenu()
     {
-        int aux = 0;
-        for (int i = 0; i < previousMenus.Length; i++)
-        {
-            if (previousMenus[i] != -1)
-            {
-                aux = i + 1;
-            }
-
-        }
-        return aux;
+        return previousMenus.LastOrDefault();
+     
     }
 
     private void ResetPreviousMenus()
-    {
-        for (int i = 0; i < previousMenus.Length; i++)
-        {
-            previousMenus[i] = -1;
-        }
+    { 
+        previousMenus.Clear();
     }
 
 
@@ -66,6 +56,7 @@ public class MenuNavigation : MonoBehaviour
             menus[currentMenu].SetActive(false);
             menus[SearchLastMenu() - 1].SetActive(true);
             currentMenu = SearchLastMenu() - 1;
+            previousMenus.Remove(previousMenus.LastOrDefault());
             previousMenus[SearchLastMenu() -1 ] = -1;
         }
 

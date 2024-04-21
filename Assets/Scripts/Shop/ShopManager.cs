@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -58,30 +57,6 @@ public class ShopManager : MonoBehaviour
         this.damageLevel = damageLevel;
     }
 
-
-    [CustomEditor(typeof(ShopManager))]
-    public class ExampleScriptEditor : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            DrawDefaultInspector();
-
-            
-
-            if (GUILayout.Button("Level Up Health Level"))
-            {
-                ShopManager.instance.SetHealthLevel(ShopManager.instance.GetHealthLevel() + 1);
-            }
-            if (GUILayout.Button("Level Up Damage Level"))
-            {
-                ShopManager.instance.SetDamageLevel(ShopManager.instance.GetDamageLevel()+ 1);
-            }
-            if (GUILayout.Button("Level Up Speed Level"))
-            {
-                ShopManager.instance.SetSpeedLevel(ShopManager.instance.GetSpeedLevel() + 1);
-            }    
-        }
-    }
 
 
 }

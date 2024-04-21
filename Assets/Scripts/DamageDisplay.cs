@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering.UI;
 
@@ -20,7 +19,6 @@ public class DamageDisplay : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    [CustomEditor(typeof(DamageDisplay))]
     public void DisplayDamage(float currentHealth)
     {
         damage = this.currentHealth - currentHealth;

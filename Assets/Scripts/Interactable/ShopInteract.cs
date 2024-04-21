@@ -54,7 +54,7 @@ public class ShopInteract : MonoBehaviour, IInteractable
         shopCanvas.SetActive(false);
         PlayerReferences.instance.canMove = true;
         tendero.GetComponent<Animator>().SetBool("isOpen", false);
-        PlayerReferences.instance.GetPlayer().GetComponent<StateMachine>().enabled = false;
+        PlayerReferences.instance.GetPlayer().GetComponent<StateMachine>().enabled = true;
         GetComponent<ShopController>().RestartState();
     }
 }

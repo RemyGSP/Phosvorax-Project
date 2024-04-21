@@ -13,10 +13,18 @@ public class HUDManager : MonoBehaviour
     [SerializeField] GameObject HUD;
     [SerializeField] Image[] HUDAbilities;
     [SerializeField] TextMeshProUGUI[] abilitiesVisualCD;
+    private Vector2[] rectTransforms;
 
     private void Start()
     {
         instance = this;
+        int i = 0;
+        rectTransforms = new Vector2[HUDAbilities.Length];
+        foreach (Image image in HUDAbilities)
+        {
+            rectTransforms[i] = image.rectTransform.sizeDelta;
+                i++;
+        }
     }
 
     //Ability number puede ir del 0 al 3 este metodo se llama desde las decisiones de cada habilidad
@@ -28,6 +36,7 @@ public class HUDManager : MonoBehaviour
         { 
             abilitiesVisualCD[abilityNumber].gameObject.SetActive(true);
         }
+        HUDAbilities[abilityNumber].rectTransform.sizeDelta = rectTransforms[abilityNumber];
          StartCoroutine(DoCooldown(HUDAbilities[abilityNumber], abilitiesVisualCD[abilityNumber], cooldown,abilityNumber));
     }
 
@@ -37,11 +46,13 @@ public class HUDManager : MonoBehaviour
         
         //Debug.Log(PlayerTimers.Instance.abilityTimers[abilityNumber]);
         //Debug.Log(cooldown);
+        
         ability.gameObject.SetActive(true);
-
+        abilityVisualCD.gameObject.SetActive(true);
+        Vector2 size = ability.rectTransform.sizeDelta;
         while (timer < cooldown)
         {
-            ability.fillAmount = timer / cooldown;
+            ability.rectTransform.sizeDelta = new Vector2(size.x  -(size.x *  (timer / cooldown)),size.y);
             abilityVisualCD.text = (cooldown - timer).ToString("0.0");
             // Increment the timer by the time passed since the last frame
             timer += Time.deltaTime;
@@ -49,7 +60,7 @@ public class HUDManager : MonoBehaviour
             yield return null;
         }
         ability.gameObject.SetActive(false);
-        ability.fillAmount = 1.0f;
+        abilityVisualCD.gameObject.SetActive(false);
 
 
 

@@ -41,7 +41,7 @@ public class RollingEnemyRollingState : States
 
     public override void Start()
     {
-        stateGameObject.GetComponent<Animator>().SetBool("walking",true);
+        stateGameObject.GetComponent<Animator>().SetBool("rolling",true);
         enemy = stateGameObject.GetComponent<NavMeshAgent>();
         enemy.speed = 0;
         rotateCharacter = stateGameObject.GetComponent<RotateCharacter>();
@@ -105,7 +105,7 @@ public class RollingEnemyRollingState : States
     public override void OnExitState()
     {
         elapsedTime = 0;
-        stateGameObject.GetComponent<Animator>().SetBool("walking", false);
+        stateGameObject.GetComponent<Animator>().SetBool("rolling", false);
     }
 
     #endregion

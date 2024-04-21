@@ -89,7 +89,7 @@ public class EnemyMeleeAttackState : States
         anim = stateGameObject.GetComponent<Animator>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         currentAttackDelay = attackDelay;
-
+        rigidBody.mass = Mathf.Infinity;
         
 
 
@@ -158,12 +158,11 @@ public class EnemyMeleeAttackState : States
 
     public override void OnExitState()
     {
-        return;
+        base.OnExitState();
+        rigidBody.mass = 500;
     }
 
     #endregion
 }
-
-
 
 

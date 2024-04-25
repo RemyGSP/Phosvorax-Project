@@ -140,7 +140,8 @@ MonoBehaviour:
   - {fileID: -1355512455202293097}
   - {fileID: -3521520011546993945}
   - {fileID: 6240435385842631444}
-  m_RendererFeatureMap: adc0de57c6d2eee597ba0c939a4030ede7da4f12350c21cf1483ed90eb7a9a56
+  - {fileID: 1420567689186747809}
+  m_RendererFeatureMap: adc0de57c6d2eee597ba0c939a4030ede7da4f12350c21cf1483ed90eb7a9a56a1a55f6dc9deb613
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -183,6 +184,23 @@ MonoBehaviour:
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
+--- !u!114 &1420567689186747809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a8a626e4a363604d8b1a959cc4ab28f, type: 3}
+  m_Name: FullScreenFogRendererFeature
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  _injectionPoint: 450
+  _renderCamera: 3
+  _shader: {fileID: -6465566751694194690, guid: a1b07ed697d67f145899e797afa7e6d3,
+    type: 3}
 --- !u!114 &6240435385842631444
 MonoBehaviour:
   m_ObjectHideFlags: 0

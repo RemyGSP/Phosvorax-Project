@@ -26,11 +26,15 @@ public class BossLaserRotationAttackState : States
     [SerializeField] float rotationSpeed;
     [SerializeField] Vector3 rotationAxis = Vector3.left;
 
+    [Header("Move Values")]
+    [SerializeField] float chaseSpeed;
 
     [Header("Time")]
     [SerializeField] float attackTime;
     private float currentTime;
     private NavMeshAgent enemy;
+
+    private BossLasersSpawner lasersSpawner;
     #endregion
 
     #region Methods
@@ -42,6 +46,7 @@ public class BossLaserRotationAttackState : States
 
     public override void Start()
     {
+        lasersSpawner = stateGameObject.GetComponent<BossLasersSpawner>();
         enemy = stateGameObject.GetComponent<NavMeshAgent>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         stateGameObject.GetComponent<BossTimers>().abilityTimers[1] = 0;
@@ -59,23 +64,38 @@ public class BossLaserRotationAttackState : States
         currentTime += Time.deltaTime;
         Vector3 playerPos = PlayerReferences.instance.GetPlayerCoordinates();
 
-        if (currentTime >= attackTime)
+        if (currentTime <= attackTime)
         {
-
-            enemy.SetDestination(playerPos);
+         
+            if(!lasersSpawner.isLaser1Activated())
+            {
+                if (!lasersSpawner.isLaser2Activated())
+                {
+                    lasersSpawner.ActivateLasers();
+                }
+            }
+            rigidBody.mass = Mathf.Infinity;
+            // Movimiento de rotación mientras el ataque está en progreso
             stateGameObject.transform.Rotate(rotationAxis, rotationSpeed * Time.deltaTime);
 
+            // Calcular la dirección hacia el jugador
+            Vector3 directionToPlayer = (playerPos - stateGameObject.transform.position).normalized;
+
+            // Mover el enemigo en la dirección del jugador
+            stateGameObject.transform.position += directionToPlayer * chaseSpeed * Time.deltaTime;
         }
         else
         {
             stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
             hasFinishedAttack = true;
+           
         }
-
     }
 
     public override void OnExitState()
     {
+        lasersSpawner.DeactivateLasers();
+        rigidBody.mass = 2000f;
         stateGameObject.GetComponent<BossReferences>().ResetCurrentTime();
         stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
         stateGameObject.GetComponent<BossReferences>().SetCanUseAbility(false);

@@ -21,6 +21,10 @@ public class PlayerTimers : MonoBehaviour
         {
             Instance = this;
         }
+        for (int i = 0; i < abilityCD.Length; i++)
+        {
+            abilityTimers[i] = abilityCD[i];
+        }
     }
 
     private void Update()

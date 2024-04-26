@@ -32,8 +32,9 @@ public class ParryShieldAbility : Ability
         if (playerhealth.GetParrydetector())
         {
             playerhealth.SetDamageModifier(1);
-            //instanciaPlayerTimers.abilityTimers[1] = instanciaPlayerTimers.abilityCD[1];
+            PlayerTimers.Instance.abilityTimers[1] = PlayerTimers.Instance.abilityCD[1];
             PlayerReferences.instance.shieldObject.SetActive(false);
+            Debug.Log("parry");
 
         }
         else

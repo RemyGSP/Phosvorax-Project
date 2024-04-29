@@ -32,24 +32,19 @@ public class ParryShieldAbility : Ability
         if (playerhealth.GetParrydetector())
         {
             playerhealth.SetDamageModifier(1);
-            PlayerTimers.Instance.abilityTimers[1] = PlayerTimers.Instance.abilityCD[1];
-            PlayerReferences.instance.shieldObject.SetActive(false);
+            PlayerTimers.Instance.abilityTimers[0] = PlayerTimers.Instance.abilityCD[0];
             Debug.Log("parry");
-
         }
-        else
-        {
-            MonoInstance.instance.StartCoroutine(EnableShield());
-            ChangeColor(new Color(0f / 255f, 255f / 255f, 120f / 255f, 100f / 255f));
-            playerhealth.SetDamageModifier(ShieldPercentage);
-        }
+        MonoInstance.instance.StartCoroutine(EnableShield());
+        ChangeColor(new Color(0f / 255f, 255f / 255f, 120f / 255f, 100f / 255f));
+        playerhealth.SetDamageModifier(ShieldPercentage);
         playerhealth.SetParrydetectorFalse();
 
     }
 
     public override void AbilityUpdate()
     {
-        
+
     }
 
     void ChangeColor(Color newColor)

@@ -31,7 +31,6 @@ public class EnemyDieState : States
         Destroy(stateGameObject);
         canRevive = false;
         stateGameObject.GetComponent<CrystalDrop>().Drop();
-        Debug.Log("memori");
         stateGameObject.transform.parent.GetComponent<RooomController>().CheckToOpenDoors(stateGameObject);
         
     }

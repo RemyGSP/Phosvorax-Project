@@ -39,7 +39,6 @@ public class ParryShieldAbility : Ability
         ChangeColor(new Color(0f / 255f, 255f / 255f, 120f / 255f, 100f / 255f));
         playerhealth.SetDamageModifier(ShieldPercentage);
         playerhealth.SetParrydetectorFalse();
-
     }
 
     public override void AbilityUpdate()

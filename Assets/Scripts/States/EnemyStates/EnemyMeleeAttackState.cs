@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -31,6 +32,7 @@ public class EnemyMeleeAttackState : States
     float currentAttackTime;
     bool canAttack;
     private float currentAttackDelay;
+    private float startingMass;
 
     [SerializeField] private float maxAttackDistance = 5f;
 
@@ -89,6 +91,7 @@ public class EnemyMeleeAttackState : States
         anim = stateGameObject.GetComponent<Animator>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         currentAttackDelay = attackDelay;
+        startingMass = rigidBody.mass;
         rigidBody.mass = Mathf.Infinity;
         
 
@@ -139,8 +142,9 @@ public class EnemyMeleeAttackState : States
         currentAttackDelay -= Time.deltaTime;
         currentAttackTime += Time.deltaTime;
 
-        if (currentAttackDelay <= 0)
+        if (currentAttackDelay <= 0f)
         {
+            
             if (canAttack)
             {
                 ExecuteAttack();
@@ -159,7 +163,7 @@ public class EnemyMeleeAttackState : States
     public override void OnExitState()
     {
         base.OnExitState();
-        rigidBody.mass = 500;
+        rigidBody.mass = startingMass;
     }
 
     #endregion

@@ -16,9 +16,11 @@ public class BossJumpfallState : States
     [SerializeField] float jumpForce;
     [SerializeField] float timeFalling;
 
+    private float startingMass;
     private Rigidbody rigidBody;
     private Vector3 finalPosition;
     private bool hasExecutedAttack;
+    private GameObject character;
     #endregion
 
     #region Methods
@@ -32,27 +34,32 @@ public class BossJumpfallState : States
 
     public override void Start()
     {
-        rigidBody = stateGameObject.GetComponent<Rigidbody>();
+        character = stateGameObject;
+        rigidBody = character.GetComponent<Rigidbody>();
         rigidBody.constraints &= ~RigidbodyConstraints.FreezePositionY;
         stateGameObject.GetComponent<BossTimers>().abilityTimers[2] = 0;
         stateGameObject.GetComponent<GetBestAbilityToUse>().ResetArrays();
         stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(true);
         finalPosition = stateGameObject.transform.position;
         hasExecutedAttack = false;
+        startingMass = rigidBody.mass;
         Jump();
     }
 
-    public override void Update()
+    public override void FixedUpdate()
     {
         Fall();
     }
 
     private void Jump()
     {
+        rigidBody = stateGameObject.GetComponent<Rigidbody>();
+        rigidBody.mass = 0.1f;
         // Aplica una fuerza al Rigidbody solo en el eje Y para que el jefe salte
         rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
 
+    
     private void Fall()
     {
         // Calcula el desplazamiento hacia abajo
@@ -69,6 +76,11 @@ public class BossJumpfallState : States
             stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
             hasExecutedAttack = true;
         }
+    }
+
+    public override void Update()
+    {
+
     }
     #endregion
 }

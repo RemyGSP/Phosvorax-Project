@@ -15,12 +15,19 @@ MonoBehaviour:
   stateGameObject: {fileID: 0}
   stateTransitions:
   - decisionToBeMade: {fileID: 11400000, guid: 22b084676b054d24180adcea2c141550, type: 2}
-    onDecisionTrueExitState: {fileID: 11400000, guid: 54881221c3365ca48859a8720e579f3b,
+    onDecisionTrueExitState: {fileID: 11400000, guid: c4af75fb31cf6f84abc749d7355a2f85,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}
   - decisionToBeMade: {fileID: 11400000, guid: 3e2c1271059576d4ea7fce5384ef0e43, type: 2}
     onDecisionTrueExitState: {fileID: 11400000, guid: dbd99a2dd69e7004cbecbf60b9ccb7ed,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}
-  jumpForce: 100000
-  timeFalling: 1.5
+  timeToJump: 1
+  numberOfJumps: 1
+  jumpForce: 30
+  sphereSize: 30
+  attackDamage: 50
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  maxDistanceToJumpToPlayer: 30

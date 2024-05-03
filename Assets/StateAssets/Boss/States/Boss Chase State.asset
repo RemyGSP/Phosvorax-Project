@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 864d68859d8a1ac4d9bc6f1184878bad, type: 3}
-  m_Name: BossChaseState
+  m_Script: {fileID: 11500000, guid: 8c11c6af4cb32714ebd5178a3c762ebe, type: 3}
+  m_Name: Boss Chase State
   m_EditorClassIdentifier: 
   stateGameObject: {fileID: 0}
   stateTransitions:
@@ -37,9 +37,5 @@ MonoBehaviour:
   - decisionToBeMade: {fileID: 11400000, guid: 82db58b747055e9409af9a4f4730bfa7, type: 2}
     onDecisionTrueExitState: {fileID: 11400000, guid: a055eb309ce1ce74fba013fbf7f12e18,
       type: 2}
-    onDecisionFalseExitState: {fileID: 11400000}
-  enemyNavMeshSpeed: 2.5
-  maxSpeed: 2.5
-  timeToMaxVelocity: 1
-  rotationSpeed: 3
-  speed: 1
+    onDecisionFalseExitState: {fileID: 0}
+  enemyNavMeshSpeed: 3.5

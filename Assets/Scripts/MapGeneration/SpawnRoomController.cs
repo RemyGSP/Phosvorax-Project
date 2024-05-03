@@ -8,8 +8,7 @@ public class SpawnRoomController : MonoBehaviour
     void Start()
     {
         // Encuentra el objeto con el nombre "jugador"
-        GameObject jugador = GameObject.Find("MainCharacter");
-
+        GameObject jugador = PlayerReferences.instance.GetPlayer();
         // Verifica si se encontró el jugador
         if (jugador != null)
         {

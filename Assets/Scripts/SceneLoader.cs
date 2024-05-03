@@ -36,8 +36,14 @@ public class SceneLoader : MonoBehaviour
     {
         Debug.Log(sceneTransitions);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
+
+        
+
         GameObject b = Instantiate(sceneTransitions);
         DontDestroyOnLoad (b);
+        
+        yield return asyncLoad; 
+        
         while (!asyncLoad.isDone)
         {
             Debug.Log(PrefabRoomInstancier.isMapGenerated);

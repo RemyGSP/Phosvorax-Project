@@ -31,7 +31,7 @@ public class RollingEnemyReferences : MonoBehaviour
     public void Stun(float stunTime)
     {
         isStunned = true;
-        GetComponent<StunBar>().StartStun(stunTime);
+        GetComponent<StunFeedback>().StartStun(stunTime);
         StartCoroutine(_StopStun(stunTime));
     }
 

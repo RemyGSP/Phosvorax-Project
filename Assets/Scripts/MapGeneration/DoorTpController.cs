@@ -60,7 +60,7 @@ public class DoorTpController : MonoBehaviour
         {
             anim.SetBool("puenteon", true);
             // Llama a la función ActivateExitWall después de 2 segundos
-            Invoke("ActivateExitWall", 2.9f);
+            Invoke("ActivateExitWall", 2.8f);
         }
     }
 

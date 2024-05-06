@@ -61,7 +61,11 @@ public class BossJumpfallState : States
         {
             stateGameObject.transform.DOJump((PlayerReferences.instance.GetPlayerCoordinates()+ stateGameObject.transform.position) / 2, jumpForce, numberOfJumps, timeToJump).OnComplete(() =>
             {
-                Debug.Log("estaba Lejos");
+                stateGameObject.GetComponent<BossJumpfallAreaAttack>().ActivateAreaEffect();
+                stateGameObject.GetComponent<TraumaInducer>().setCanShakeCam(true);
+                rigidBody.isKinematic = false;
+                stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
+                hasExecutedAttack = true;
             });
 
         }
@@ -84,13 +88,14 @@ public class BossJumpfallState : States
                     }
                 }
 
+                stateGameObject.GetComponent<TraumaInducer>().setCanShakeCam(true);
+                rigidBody.isKinematic = false;
+                stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
+                hasExecutedAttack = true;
             });
         }
 
-        stateGameObject.GetComponent<TraumaInducer>().setCanShakeCam(true);
-        rigidBody.isKinematic = false;
-        stateGameObject.GetComponent<BossReferences>().SetIsUsingAbiliy(false);
-        hasExecutedAttack = true;
+       
     }
 
     public override void Update()

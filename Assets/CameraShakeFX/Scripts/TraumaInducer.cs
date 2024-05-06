@@ -10,14 +10,15 @@ public class TraumaInducer : MonoBehaviour
     public float MaximumStress = 0.6f;
     [Tooltip("Maximum distance in which objects are affected by this TraumaInducer")]
     public float Range = 45;
-
+    private bool canShakeCam;
     GameObject camera;
+
 
     private void Start()
     {
         camera = Camera.main.transform.parent.gameObject;
     }
-    private bool canShakeCam; 
+    
     private IEnumerator ShakeCamera()
     {
         canShakeCam = false;

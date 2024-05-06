@@ -8,10 +8,11 @@ public class BossActivate2ndPhase : MonoBehaviour
     [SerializeField] private float secondsToSubtract;
     private float  health;
     private float currentHealth;
-
+    [SerializeField] private GameObject exclamation;
     [Header("Fire Aura Game Objects")]
     [SerializeField] GameObject[] fireAura;
     private bool hasActivated2ndPhase;
+    [SerializeField] private GameObject feedbackPos;
     private void Start()
     {
         hasActivated2ndPhase = false;
@@ -29,7 +30,7 @@ public class BossActivate2ndPhase : MonoBehaviour
 
         if (!hasActivated2ndPhase)
         {
-            if (health / 2 == currentHealth)
+            if (health / 2 >= currentHealth)
             {
                 Activate2ndPhase();
                 ActivateFireAura();
@@ -45,6 +46,9 @@ public class BossActivate2ndPhase : MonoBehaviour
 
     private void Activate2ndPhase()
     {
+        GameObject gameObject = Instantiate(exclamation,feedbackPos.transform.position, Quaternion.identity);
+        gameObject.GetComponent<FollowPlayer>().SetPlayer(this.gameObject);
+
         float[] cooldownArray = this.gameObject.GetComponent<BossTimers>().GetCooldownArray();
         for (int i = 0; i < cooldownArray.Length; i++)
         {

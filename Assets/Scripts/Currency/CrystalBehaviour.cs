@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -11,9 +12,13 @@ public class CrystalBehaviour : MonoBehaviour
     private bool canStartMoving;
     private bool playerInRange;
 
+
+    [Header("Healing Values")]
+    [SerializeField] private bool isHealingCrystal;
+    [SerializeField] private float healingAmount;
+
     private float elapsedTime = 0f;
 
-    // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(_StartMoving());
@@ -22,15 +27,11 @@ public class CrystalBehaviour : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (canStartMoving && playerInRange)
         {
-            // Increment elapsed time
             elapsedTime += Time.fixedDeltaTime;
-
-            // Evaluate speed using animation curve
             float curveValue = speedCurve.Evaluate(elapsedTime);
             float currentSpeed = curveValue * maxSpeed;
 
@@ -43,7 +44,6 @@ public class CrystalBehaviour : MonoBehaviour
         }
     }
 
-
     public void SetCrystalValue(int crystalValue)
     {
         this.crystalValue = crystalValue;
@@ -55,8 +55,16 @@ public class CrystalBehaviour : MonoBehaviour
         {
             if (collision.gameObject.TryGetComponent(out CrystalController cryst))
             {
-                cryst.AddCrystals(crystalValue);
-                Destroy(this.gameObject);
+                if (!isHealingCrystal)
+                {
+                    cryst.AddCrystals(crystalValue);
+                }
+                else
+                {
+                    collision.gameObject.GetComponent<HealthBehaviour>().Heal((int)healingAmount);
+                }
+
+                Destroy(gameObject);
             }
         }
     }
@@ -88,7 +96,7 @@ public class CrystalBehaviour : MonoBehaviour
         yield return new WaitForSeconds(60f);
         if (this != null)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 }

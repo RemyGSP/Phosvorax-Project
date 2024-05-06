@@ -6,6 +6,8 @@ public class BossCrystalBehavior : MonoBehaviour
 {
     [SerializeField] float damage;
     [SerializeField] float timeToDestroy;
+    [SerializeField] Rigidbody rb;
+    [SerializeField] float downForce;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -24,5 +26,10 @@ public class BossCrystalBehavior : MonoBehaviour
         yield return new WaitForSeconds(timeToDestroy);
 
         Destroy(gameObject);
+    }
+
+    private void FixedUpdate()
+    {
+        rb.AddForce(Vector3.down * downForce, ForceMode.Impulse);
     }
 }

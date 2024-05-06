@@ -23,4 +23,9 @@ public class BossTimers : MonoBehaviour
         abilityTimers[3] += Time.deltaTime;
         basicAttackTimer += Time.deltaTime;
     }
+
+    public float[] GetCooldownArray()
+    {
+        return abilityCD;
+    }
 }

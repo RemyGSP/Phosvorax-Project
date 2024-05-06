@@ -18,12 +18,20 @@ MonoBehaviour:
     onDecisionTrueExitState: {fileID: 11400000, guid: c3124c7654731eb45ab5b58732cfe96c,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}
-  - decisionToBeMade: {fileID: 11400000, guid: 9d79745d5ac629244a0990a2e75c8081, type: 2}
+  - decisionToBeMade: {fileID: 11400000, guid: 37a9e5ceab57e7648b23eb50c3177f1c, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: d9e6f393732030544b7cfaf3865f74a5,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 0}
+  - decisionToBeMade: {fileID: 11400000, guid: 63368682ca64bb64797c26908c8de24e, type: 2}
+    onDecisionTrueExitState: {fileID: 11400000, guid: f5211c61cb9cfd648af9b137f74ec4ca,
+      type: 2}
+    onDecisionFalseExitState: {fileID: 0}
+  - decisionToBeMade: {fileID: 11400000, guid: 1e473c515e49a604f9fdf7cb249e78f1, type: 2}
     onDecisionTrueExitState: {fileID: 11400000, guid: cb31df1a1d12d6942a219eb7ef201fc4,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}
   - decisionToBeMade: {fileID: 11400000, guid: 22b084676b054d24180adcea2c141550, type: 2}
-    onDecisionTrueExitState: {fileID: 11400000, guid: 54881221c3365ca48859a8720e579f3b,
+    onDecisionTrueExitState: {fileID: 11400000, guid: c4af75fb31cf6f84abc749d7355a2f85,
       type: 2}
     onDecisionFalseExitState: {fileID: 0}
   - decisionToBeMade: {fileID: 11400000, guid: 3e2c1271059576d4ea7fce5384ef0e43, type: 2}
@@ -32,12 +40,12 @@ MonoBehaviour:
     onDecisionFalseExitState: {fileID: 0}
   playerLayerMask:
     serializedVersion: 2
-    m_Bits: 72
-  attackDelay: 2
+    m_Bits: 8
+  attackDelay: 0.75
   attackOffset: 7
   sphereSize: 10
   attackDamage: 15
   maxAttackDistance: 20
   enemyMeleeAttackTimer: 1
-  enemyMeleeAttackCD: 2
+  enemyMeleeAttackCD: 1
   attackAreaVisualizer: {fileID: 0}

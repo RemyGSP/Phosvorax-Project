@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -31,6 +32,7 @@ public class EnemyMeleeAttackState : States
     float currentAttackTime;
     bool canAttack;
     private float currentAttackDelay;
+    private float startingMass;
 
     [SerializeField] private float maxAttackDistance = 5f;
 
@@ -89,6 +91,7 @@ public class EnemyMeleeAttackState : States
         anim = stateGameObject.GetComponent<Animator>();
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
         currentAttackDelay = attackDelay;
+        startingMass = rigidBody.mass;
         rigidBody.mass = Mathf.Infinity;
         
 
@@ -119,14 +122,9 @@ public class EnemyMeleeAttackState : States
         {
             if (hitCollider.TryGetComponent<HealthBehaviour>(out HealthBehaviour healthBehaviour))
             {
-                if (ShopManager.instance.GetDamageLevel() == 1)
-                {
-                    healthBehaviour.Damage(attackDamage);
-                }
-                else
-                {
-                    healthBehaviour.Damage((attackDamage * (ShopManager.instance.GetDamageLevel() - 1)  * 0.7f));
-                }
+
+                healthBehaviour.Damage(attackDamage);
+                
             }
         }
 
@@ -139,8 +137,9 @@ public class EnemyMeleeAttackState : States
         currentAttackDelay -= Time.deltaTime;
         currentAttackTime += Time.deltaTime;
 
-        if (currentAttackDelay <= 0)
+        if (currentAttackDelay <= 0f)
         {
+            
             if (canAttack)
             {
                 ExecuteAttack();
@@ -152,14 +151,22 @@ public class EnemyMeleeAttackState : States
     }
     public override void Update()
     {
-        stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position, 0.5f);
+        Vector3 playerPosition = PlayerReferences.instance.GetPlayerCoordinates();
+
+        Vector3 directionToPlayer = playerPosition - stateGameObject.transform.position;
+        directionToPlayer.y = 0f;
+
+        Quaternion targetRotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, directionToPlayer, 0.5f);
+
+        stateGameObject.transform.rotation = targetRotation;
+
         enemyMeleeAttackTimer += Time.deltaTime;
     }
 
     public override void OnExitState()
     {
         base.OnExitState();
-        rigidBody.mass = 500;
+        rigidBody.mass = startingMass;
     }
 
     #endregion

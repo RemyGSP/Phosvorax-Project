@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using Cinemachine;
+using System.Linq.Expressions;
 
 public class DoorTpController : MonoBehaviour
 {
@@ -29,16 +31,24 @@ public class DoorTpController : MonoBehaviour
         if (!isTeleporting && other.gameObject.layer == LayerMask.NameToLayer("Player") && destinationObject != null)
         {
             StartCoroutine(Teleport(other));
-            
+            StartCoroutine(FadeInAndOut(0.4f));
+
         }
     }
 
-    private IEnumerator Teleport(Collider other)
+    private IEnumerator FadeInAndOut(float time)
+    {
+        Camera.main.transform.parent.GetComponent<CinemachineStoryboard>().m_ShowImage = true;
+        yield return new WaitForSeconds(time);
+        Camera.main.transform.parent.GetComponent<CinemachineStoryboard>().m_ShowImage = false;
+    }
+        private IEnumerator Teleport(Collider other)
     {
         isTeleporting = true;
 
         // Teleport
         other.transform.position = destinationObject.transform.position;
+        Camera.main.transform.position = destinationObject.transform.position;
 
         InformToSetPlayerInRoom(false);
         destinationObject.GetComponent<DoorTpController>().InformToSetPlayerInRoom(true);

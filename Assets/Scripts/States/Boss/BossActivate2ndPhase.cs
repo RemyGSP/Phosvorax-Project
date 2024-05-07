@@ -48,6 +48,7 @@ public class BossActivate2ndPhase : MonoBehaviour
     {
         GameObject gameObject = Instantiate(exclamation,feedbackPos.transform.position, Quaternion.identity);
         gameObject.GetComponent<FollowPlayer>().SetPlayer(this.gameObject);
+        gameObject.GetComponent<FollowPlayer>().SetOffset(new Vector3(0,feedbackPos.transform.position.y,0));
 
         float[] cooldownArray = this.gameObject.GetComponent<BossTimers>().GetCooldownArray();
         for (int i = 0; i < cooldownArray.Length; i++)

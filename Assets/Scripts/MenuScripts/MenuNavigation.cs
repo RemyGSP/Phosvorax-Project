@@ -10,6 +10,7 @@ public class MenuNavigation : MonoBehaviour
     private int currentMenu;
     private List<int> previousMenus;
     [SerializeField] private InputAction goBackAction;
+    [SerializeField] private bool closable;
     void Start()
     {
         previousMenus = new List<int>();
@@ -59,7 +60,10 @@ public class MenuNavigation : MonoBehaviour
             previousMenus.Remove(previousMenus.LastOrDefault());
             previousMenus[SearchLastMenu() -1 ] = -1;
         }
-
+        if (SearchLastMenu() == 0 && closable)
+        {
+            menus[currentMenu].SetActive(false);
+        }
     }
 
 }

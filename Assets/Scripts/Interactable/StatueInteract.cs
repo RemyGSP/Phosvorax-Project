@@ -30,6 +30,7 @@ public class StatueInteract : MonoBehaviour, IInteractable
         interactableTooltip.SetActive(false);
         isUsed = false;
         particles.SetActive(false);
+
     }
 
     void Update()
@@ -53,8 +54,7 @@ public class StatueInteract : MonoBehaviour, IInteractable
 
     private void OnTriggerExit(Collider other)
     {
-        if (!isUsed)
-        {
+
 
             if (other.CompareTag("Player"))
             {
@@ -62,7 +62,7 @@ public class StatueInteract : MonoBehaviour, IInteractable
                 interactableTooltip.SetActive(false);
             }
 
-        }
+    
     }
 
     public void StopInteract()

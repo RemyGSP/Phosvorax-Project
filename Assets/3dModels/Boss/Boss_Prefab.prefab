@@ -5312,7 +5312,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0.65}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 2
@@ -6697,7 +6697,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0.65}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 2
@@ -17112,7 +17112,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: d923291600106134da7400c28721f813,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d923291600106134da7400c28721f813,
         type: 3}
@@ -17421,10 +17421,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: -7120172336418765767}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d923291600106134da7400c28721f813,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 59931330870277246}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: d923291600106134da7400c28721f813,
         type: 3}
       insertIndex: -1
@@ -17744,21 +17740,6 @@ MonoBehaviour:
     name: Habilidad 4
     index: 3
   distanceToBeConsideredFarAway: 20
---- !u!114 &59931330870277246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 474673902440782667}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17e7c0967875195479e85d951c2d7036, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  meleeAttackState: {fileID: 11400000, guid: a055eb309ce1ce74fba013fbf7f12e18, type: 2}
-  attackOffset: 7
-  sphereSize: 20
 --- !u!114 &5233429915378481136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17844,7 +17825,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   areaEffect: {fileID: 4830781491439774295}
   damage: 35
-  areaEffectMaxSize: {x: 18, y: 0, z: 18}
+  areaEffectMaxSize: {x: 20, y: 0, z: 20}
   growthDuration: 1
 --- !u!114 &4953079630660783065
 MonoBehaviour:

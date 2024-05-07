@@ -67,7 +67,7 @@ public class PrefabRoomInstancier : MonoBehaviour
                             if (selectedRoomList.Count > 0)
                             {
                                 GameObject selectedPrefab = selectedRoomList[Random.Range(0, selectedRoomList.Count)];
-                                Vector3 spawnPosition = new Vector3(col * spacing, 0f, -row * spacing);
+                                Vector3 spawnPosition = new Vector3(col * spacing, 10f, -row * spacing); // La del boss tiene que estar mas arriba o se buguean los laseres
 
                                 // Instanciar la habitación y asignarla a prefabRoomsMatrix
                                 GameObject instantiatedRoom = Instantiate(selectedPrefab, spawnPosition, Quaternion.identity);

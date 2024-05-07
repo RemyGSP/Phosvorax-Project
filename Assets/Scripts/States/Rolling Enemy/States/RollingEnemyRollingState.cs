@@ -56,8 +56,32 @@ public class RollingEnemyRollingState : States
         RaycastHit hit;
 
         float sphereCastRadius = stateGameObject.GetComponent<BoxCollider>().bounds.extents.x;
+        int layerMask = ~(1 << LayerMask.NameToLayer("Crystals"));
 
-        if (Physics.SphereCast(stateGameObject.transform.position, sphereCastRadius, direction, out hit, maxRaycastDistance))
+        if (Physics.SphereCast(stateGameObject.transform.position, sphereCastRadius, direction, out hit, maxRaycastDistance, layerMask))
+        {
+            if (!hit.collider.CompareTag("Player"))
+            {
+                Debug.DrawRay(stateGameObject.transform.position, direction * maxRaycastDistance, Color.red);
+            }
+            else
+            {
+                hit.collider.GetComponent<HealthBehaviour>().Damage(damage);
+
+            }
+            Vector3 normal = hit.normal;
+
+            direction = Vector3.Reflect(direction, normal).normalized;
+            direction.y = 0.5f;
+            float angle = Vector3.SignedAngle(stateGameObject.transform.forward, direction, Vector3.up);
+            Quaternion quat = Quaternion.Euler(0, angle, 0);
+            stateGameObject.transform.rotation *= quat;
+            targetSpeed = quat * targetSpeed;
+        }
+
+       
+
+        if (Physics.SphereCast(stateGameObject.transform.position, sphereCastRadius / 2, direction, out hit, maxRaycastDistance, layerMask))
         {
             if (!hit.collider.CompareTag("Player"))
             {

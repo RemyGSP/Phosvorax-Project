@@ -24,22 +24,12 @@ public class LaserGenerator : MonoBehaviour
     public void ActivateLaser()
     {
         laser.SetActive(true);
-        if(laserOriginParticle != null)
-        {
-            laserOriginParticle.SetActive(true);
-        }
-        
         StartCoroutine(ChangeScrollValueOverTime(2.5f, 0f));
     }
 
     public void DeactivateLaser()
     {
         laser.SetActive(false);
-
-        if(laserOriginParticle != null)
-        {
-            laserOriginParticle.SetActive(false);
-        }
         
     }
 

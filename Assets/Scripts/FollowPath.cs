@@ -11,37 +11,48 @@ public class FollowPath : MonoBehaviour
     private int currentPointIndex = 0;
     private bool collided;
     private Rigidbody player;
-
+    private bool canUse;
+    private void Start()
+    {
+        canUse = true;
+    }
     void Update()
     {
+        Debug.Log(collided);
         if (collided)
         {
-
-            if (pathPoints.Length == 0)
-                return;
-
+            if (currentPointIndex >= pathPoints.Length)
+            {
+                collided = false;
+                canUse = false;
+            }
             // Calculate the direction towards the current target point
             Vector3 direction = (pathPoints[currentPointIndex].position - transform.position).normalized;
-            Debug.Log(direction);
+            
             // Move towards the target point
             player.velocity = speed * Time.deltaTime * direction;
-
+            Debug.Log("Distancia " + (Vector3.Distance(player.transform.position, pathPoints[currentPointIndex].position)));
             // Check if the object has reached the current point
-            if (Vector3.Distance(transform.position, pathPoints[currentPointIndex].position) < arrivalThreshold)
+            if (Vector3.Distance(player.transform.position, pathPoints[currentPointIndex].position) < arrivalThreshold)
             {
+                Debug.Log("Funciona " );
                 // Move to the next point in the path
-                currentPointIndex = (currentPointIndex + 1) % pathPoints.Length;
+                currentPointIndex++;
             }
         }
     }
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.CompareTag("Player"))
+        if (canUse)
         {
-            collided = true;
-            player = collider.gameObject.GetComponent<Rigidbody>();
+            if (collider.gameObject.CompareTag("Player"))
+            {
+                collided = true;
+                player = collider.gameObject.GetComponent<Rigidbody>();
 
+            }
         }
+
     }
 }

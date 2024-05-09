@@ -33,13 +33,13 @@ public class EnemyEntryState : States
     {
         currentElapsedTime = 0f;
         canStartCountdown = false;
-
     }
 
     public override void Update()
     {
         if(canStartCountdown)
         {
+
             if (particles == null)
             {
                 particles = Instantiate(spawnParticles, stateGameObject.transform.position, Quaternion.identity);
@@ -53,6 +53,11 @@ public class EnemyEntryState : States
 
             if (currentElapsedTime >= timeToStartEnemies)
             {
+                if (stateGameObject.TryGetComponent<BossReferences>(out BossReferences boss))
+                {
+                    boss.bossCanvas.SetActive(true);
+                    boss.bossCanvas.transform.parent = stateGameObject.transform.parent;
+                }
                 Debug.Log(stateGameObject.GetComponent<Collider>() + "Ha sido activado");
                 Destroy(particles);
                 stateGameObject.GetComponent<EnemyReferences>().SetCanBeStarted(true);

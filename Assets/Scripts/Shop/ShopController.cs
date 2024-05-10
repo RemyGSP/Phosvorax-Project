@@ -67,9 +67,15 @@ public class ShopController : MonoBehaviour
             upgradeCostUI.text = upgradeCost.ToString();
             levelSquares = squareContainer.GetComponentsInChildren<Image>();
 
-            for (int i = 0; i < currentLevel; i++)
+            for (int i = 0; i < levelSquares.Length; i++)
             {
-                levelSquares[i].sprite = leveledUpSprite;
+                if (i <= currentLevel)
+                    levelSquares[i].sprite = leveledUpSprite;
+                else
+                {
+                    levelSquares[i].sprite = notLeveledUpSprite;
+                }
+
             }
 
         }
@@ -137,7 +143,7 @@ public class ShopController : MonoBehaviour
         if ( level > ShopManager.instance.GetDamageLevel() && level > 0)
         {
             AddToBasket(-(int)Mathf.Floor((level - 1) * 1.75f * 50 + 50));
-            upgradeable.GetSquares()[level - 1].sprite = leveledUpSprite;
+            upgradeable.GetSquares()[level - 1].sprite = notLevelUpSprite;
             upgradeable.SetLevel(level - 1);
             
         }

@@ -32,6 +32,7 @@ public class BossChaseState : States
         enemy = stateGameObject.GetComponent<NavMeshAgent>();
         enemy.speed = enemyNavMeshSpeed;
         anim = stateGameObject.GetComponent<Animator>();
+        anim.SetBool("Walk", true);
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
     }
 
@@ -49,6 +50,7 @@ public class BossChaseState : States
 
     public override void OnExitState()
     {
+        anim.SetBool("Walk", false);
         rigidBody.velocity = Vector3.zero;
         enemy.speed = 0;
     }

@@ -56,6 +56,7 @@ public class RollState : States
     public void Dash()
     {
         AudioManager.Instance.CallOneShot("event:/Dash");
+        stateGameObject.GetComponent<DashFeedback>().ActivateFeedback();
         if (playerDirection != Vector3.zero)
         {
             rigidBody.AddForce(playerDirection * dashForce, ForceMode.Impulse);
@@ -75,6 +76,7 @@ public class RollState : States
 
     public override void OnExitState()
     {
+        stateGameObject.GetComponent<DashFeedback>().DeactivateFeedback();
         stateGameObject.GetComponent<HealthBehaviour>().SetDamageModifier(1);
         rigidBody.velocity = Vector3.zero;
         //stateGameObject.GetComponent<Collider>().enabled = true;

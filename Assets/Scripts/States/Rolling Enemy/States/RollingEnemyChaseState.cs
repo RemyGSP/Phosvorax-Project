@@ -59,37 +59,17 @@ public class RollingEnemyChaseState : States
         Vector3 playerPosition = PlayerReferences.instance.GetPlayerCoordinates();
         Vector3 vecToPlayer = playerVisiblePosition - stateGameObject.transform.position;
 
-        
-        if (Physics.Raycast(stateGameObject.transform.position, vecToPlayer, out hit, vecToPlayer.magnitude, playerLayerMask, QueryTriggerInteraction.Ignore))
-        {
-            Debug.DrawLine(stateGameObject.transform.position, stateGameObject.transform.position + vecToPlayer, Color.magenta, 1.2f);
-            if (hit.transform != null && hit.transform.CompareTag("Player"))
-            {
-                playerSeen = true;
-                stateGameObject.GetComponent<EnemyReferences>().SetPlayerSeen(playerSeen);
-                stateGameObject.transform.rotation = rotateCharacter.Rotate(stateGameObject.transform.rotation, playerPosition - stateGameObject.transform.position, 0.5f);
+        Quaternion targetRotation = Quaternion.LookRotation(playerPosition - stateGameObject.transform.position, Vector3.up);
+        targetRotation.eulerAngles = new Vector3(0, targetRotation.eulerAngles.y, 0);
 
-                if (NavMesh.SamplePosition(playerPosition,out NavMeshHit navHit,1.0f,-1))
-                {
-                    enemy.SetDestination(navHit.position);
-                }
-         
-            }
-            else
-            {
-                playerSeen = false;
-                stateGameObject.GetComponent<EnemyReferences>().SetPlayerSeen(playerSeen);
-                
+        stateGameObject.transform.rotation = Quaternion.Slerp(stateGameObject.transform.rotation, targetRotation, 0.5f);
 
-            }
-        }
-        else
-        {
-        }
+        enemy.SetDestination(playerPosition);
     }
 
     public override void OnExitState()
     {
+        enemy.speed = 0;
         playerSeen = false;
         stateGameObject.GetComponent<Animator>().SetBool("walking", false);
         return;

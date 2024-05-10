@@ -13,6 +13,7 @@ public class MenuNavigation : MonoBehaviour
     [SerializeField] private InputAction goBackAction;
     [SerializeField] private bool closable;
     private bool canChangeMenu = true;
+    private bool canUseAnimation = true;
 
     void Start()
     {
@@ -34,11 +35,12 @@ public class MenuNavigation : MonoBehaviour
 
     public void ChangeMenu(int menu)
     {
-        if (canChangeMenu)
+        if (canChangeMenu && canUseAnimation)
         {
-            // Activa el GameObject de transición y comienza su animación
+            transitionAnimation.SetActive(false);
             transitionAnimation.SetActive(true);
             StartCoroutine(AnimateTransitionAndChangeMenu(menu));
+            canUseAnimation = false;
         }
     }
 
@@ -52,12 +54,8 @@ public class MenuNavigation : MonoBehaviour
         previousMenus.Add(currentMenu);
         currentMenu = menu;
         ResetPreviousMenus();
+        canUseAnimation = true;
 
-        // Espera hasta que la animación de transición termine
-        yield return new WaitForSeconds(transitionAnimation.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-
-        // Desactiva el GameObject de transición una vez que la animación haya terminado
-        transitionAnimation.SetActive(false);
     }
 
     public int SearchLastMenu()
@@ -72,35 +70,18 @@ public class MenuNavigation : MonoBehaviour
 
     public void GoBack(InputAction.CallbackContext action)
     {
-        if (canChangeMenu && SearchLastMenu() > 0)
+        if (SearchLastMenu() > 0)
         {
-            transitionAnimation.SetActive(true);
-            StartCoroutine(AnimateTransitionAndGoBack());
+            Debug.Log(SearchLastMenu());
+            menus[currentMenu].SetActive(false);
+            menus[SearchLastMenu() - 1].SetActive(true);
+            currentMenu = SearchLastMenu() - 1;
+            previousMenus.Remove(previousMenus.LastOrDefault());
+            previousMenus[SearchLastMenu() - 1] = -1;
         }
-        else if (canChangeMenu && SearchLastMenu() == 0 && closable)
+        if (SearchLastMenu() == 0 && closable)
         {
-            transitionAnimation.SetActive(true);
-            StartCoroutine(AnimateTransitionAndClose());
+            menus[currentMenu].SetActive(false);
         }
-    }
-
-    IEnumerator AnimateTransitionAndGoBack()
-    {
-        yield return new WaitForSeconds(transitionAnimation.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-        transitionAnimation.SetActive(false);
-
-        menus[currentMenu].SetActive(false);
-        menus[SearchLastMenu()].SetActive(true);
-        currentMenu = SearchLastMenu();
-        previousMenus.RemoveAt(previousMenus.Count - 1);
-        ResetPreviousMenus();
-    }
-
-    IEnumerator AnimateTransitionAndClose()
-    {
-        yield return new WaitForSeconds(transitionAnimation.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-        transitionAnimation.SetActive(false);
-
-        menus[currentMenu].SetActive(false);
     }
 }

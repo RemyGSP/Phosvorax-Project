@@ -83,7 +83,7 @@ public class BichoPinchoAttackState : States
             //direccion y corrige su direccion hacia atras
             if (currentTime > 0.0f && currentTime < 0.7f)
             {
-                //stateGameObject.transform.LookAt(targetPosition);
+                stateGameObject.transform.LookAt(targetPosition);
                 stateGameObject.transform.rotation = Quaternion.Lerp(stateGameObject.transform.rotation, rotation, 0.05f);
 
             }

@@ -1,15 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR.Haptics;
 
 public class BulletBehaviour : MonoBehaviour
 {
     private float lifetime;
     [SerializeField] private float damage;
     private float timer;
+    private Renderer renderer;
+    private void Start()
+    {
+        renderer.GetComponent<Renderer>();
+    }
 
+    private void OnBecameInvisible()
+    {
+        Destroy(gameObject);
+    }
     private void Update()
     {
+
         if (lifetime != 0)
         {
             timer += Time.deltaTime;

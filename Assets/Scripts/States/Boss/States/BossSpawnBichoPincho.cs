@@ -50,7 +50,7 @@ public class BossSpawnBichoPincho : States
     {
         // Calcular una posición aleatoria dentro del radio especificado
         Vector3 spawnPosition = enemyTransform.position + Random.insideUnitSphere * spawnRadius;
-        spawnPosition.y = 3.429993f;
+        spawnPosition.y = 15f;
 
         // Instanciar el prefab en la posición calculada
         Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);

@@ -540,14 +540,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 185020569415652450}
         m_TargetAssemblyTypeName: MenuOptions, Assembly-CSharp
-        m_MethodName: ExitGame
-        m_Mode: 1
+        m_MethodName: StartNewScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: MainMenu
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!1 &6399379989108213490
@@ -769,6 +769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e0dd06138b66449a468a40c6108d2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionAnimation: {fileID: 0}
   menus:
   - {fileID: 7634561575565577256}
   goBackAction:
@@ -796,6 +797,7 @@ MonoBehaviour:
       m_Action: Go Back
       m_Flags: 0
     m_Flags: 0
+  closable: 0
 --- !u!1 &7890705490028254139
 GameObject:
   m_ObjectHideFlags: 0

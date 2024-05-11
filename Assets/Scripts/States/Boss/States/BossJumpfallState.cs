@@ -20,7 +20,7 @@ public class BossJumpfallState : States
     [SerializeField] float timeToJump;
     [SerializeField] int numberOfJumps;
     [SerializeField] float jumpForce;
-
+    private Animator anim;
     [Header("DamageValues")]
     [SerializeField] float sphereSize;
     [SerializeField] float attackDamage;
@@ -43,6 +43,8 @@ public class BossJumpfallState : States
     public override void Start()
     {
         rigidBody = stateGameObject.GetComponent<Rigidbody>();
+        anim = stateGameObject.GetComponent<Animator>();
+        anim.SetTrigger("Jump");
         rigidBody.isKinematic = true;
         rigidBody.constraints &= ~RigidbodyConstraints.FreezePositionY;
         stateGameObject.GetComponent<BossTimers>().abilityTimers[2] = 0;

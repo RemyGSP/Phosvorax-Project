@@ -102,7 +102,7 @@ public class EnemyMeleeAttackState : States
 
     private void ExecuteAnim()
     {
-        //anim.SetTrigger("attack");
+        anim.SetTrigger("Attack");
         currentAttackTime = 0;
         //animationLength = anim.GetCurrentAnimatorClipInfo(0).Length;
         stateGameObject.transform.rotation = rotateCharacter.NonSmoothenedRotation(PlayerReferences.instance.GetPlayerCoordinates() - stateGameObject.transform.position);

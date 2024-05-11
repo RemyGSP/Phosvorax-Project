@@ -349,7 +349,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4e262cca81f83c845b117baf2cb24ef8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e9bd9064a1114bb4888c42d3afbbd90f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5399,6 +5399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3e0dd06138b66449a468a40c6108d2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transitionAnimation: {fileID: 0}
   menus:
   - {fileID: 2110451544878934178}
   - {fileID: 2977830650975918085}
@@ -5428,6 +5429,7 @@ MonoBehaviour:
       m_Action: Go Back
       m_Flags: 0
     m_Flags: 0
+  closable: 0
 --- !u!114 &5512703631431594129
 MonoBehaviour:
   m_ObjectHideFlags: 0

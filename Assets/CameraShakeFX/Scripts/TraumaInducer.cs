@@ -26,7 +26,8 @@ public class TraumaInducer : MonoBehaviour
         yield return new WaitForSeconds(Delay);
 
 
-        
+        camera = Camera.main.transform.parent.gameObject;
+
         var receiver = camera.GetComponent<StressReceiver>();
             float distance = Vector3.Distance(transform.position, camera.transform.position);
             float distance01 = Mathf.Clamp01(distance / Range);

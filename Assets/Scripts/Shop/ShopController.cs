@@ -153,8 +153,9 @@ public class ShopController : MonoBehaviour
     public void ConfirmPurchase()
     {
 
-        if (currentCost < CrystalController.instance.GetCrystalAmount())
+        if (currentCost <= CrystalController.instance.GetCrystalAmount())
         {
+            Debug.Log("Damage: " + ShopManager.instance.GetDamageLevel());
             CrystalController.instance.ReduceCrystals(currentCost);
             currentCost = 0;
             totalCost.text = currentCost.ToString();

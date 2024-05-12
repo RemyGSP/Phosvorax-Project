@@ -15,6 +15,7 @@ public class HealthBehaviour : MonoBehaviour
     [SerializeField] private bool parryDamageDetector;
     [FormerlySerializedAs("onHit")] public UnityEvent<float> onGetDamaged;
     public UnityEvent onRevive;
+    public UnityEvent<float> onHeal;
     private bool hasBeenHit;
 
     private void Start()
@@ -46,7 +47,7 @@ public class HealthBehaviour : MonoBehaviour
     {
         SetHP(maxHealth + (maxHealth * 0.2f));
         Heal(maxHealth);
-        onGetDamaged.Invoke(currentHealth);
+        onHeal.Invoke(currentHealth);
     }
     public bool Damage(float damage)
     {
@@ -74,6 +75,7 @@ public class HealthBehaviour : MonoBehaviour
         {
             currentHealth = Mathf.Clamp(currentHealth + healAmount, minHealth, maxHealth);
             aux = true;
+            onHeal.Invoke(currentHealth);
         }
         return aux;
 

@@ -61,7 +61,7 @@ public class EzrealQAbility : Ability
         }
         else
         {
-            b.GetComponent<BulletBehaviour>().SetDamage((abilityBaseDamage * (ShopManager.instance.GetDamageLevel() - 1) * 0.7f));
+            b.GetComponent<BulletBehaviour>().SetDamage((abilityBaseDamage + (abilityBaseDamage + ShopManager.instance.GetDamageLevel() ) * 0.7f));
         }
         AudioManager.Instance.CallOneShot("event:/EnemyHit");
     }

@@ -52,11 +52,9 @@ public class CrystalController : MonoBehaviour
     public bool ReduceCrystals(int crystalAmount)
     {
         bool aux = false;
-        Debug.Log("Have " + this.crystalAmount + " Reduce " + crystalAmount);
         if (this.crystalAmount - crystalAmount > 0)
         {
-            Debug.Log(crystalAmount);
-            Debug.Log(crystalAmount);
+
             aux = true;
             this.crystalAmount -= crystalAmount;
             crystalDisplay.text = this.crystalAmount.ToString();

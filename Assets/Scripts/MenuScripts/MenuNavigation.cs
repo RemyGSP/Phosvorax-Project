@@ -35,15 +35,28 @@ public class MenuNavigation : MonoBehaviour
 
     public void ChangeMenu(int menu)
     {
-        if (canChangeMenu && canUseAnimation)
+        if (canChangeMenu && canUseAnimation && transitionAnimation)
         {
             transitionAnimation.SetActive(false);
             transitionAnimation.SetActive(true);
             StartCoroutine(AnimateTransitionAndChangeMenu(menu));
             canUseAnimation = false;
         }
+        else
+        {
+            ChangeMenuWithoutAnimation(menu);
+        }
     }
 
+    private void ChangeMenuWithoutAnimation(int menu)
+    {
+        menus[currentMenu].SetActive(false);
+        menus[menu].SetActive(true);
+        previousMenus.Add(currentMenu);
+        currentMenu = menu;
+        ResetPreviousMenus();
+        canUseAnimation = true;
+    }
     IEnumerator AnimateTransitionAndChangeMenu(int menu)
     {
 

@@ -89,6 +89,7 @@ public class BossJumpfallState : States
 
                     }
                 }
+                stateGameObject.GetComponent<TraumaInducer>().setCanShakeCam(true);
 
                 stateGameObject.GetComponent<TraumaInducer>().setCanShakeCam(true);
                 rigidBody.isKinematic = false;
@@ -102,7 +103,7 @@ public class BossJumpfallState : States
 
     public override void Update()
     {
-
+        stateGameObject.GetComponent<TraumaInducer>().setCanShakeCam(true);
     }
     #endregion
 }

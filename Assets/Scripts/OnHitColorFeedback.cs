@@ -119,6 +119,8 @@ public class OnHitColorFeedback : MonoBehaviour
         finalEmissionColorFadeOut *= 0f;
         meshRenderer.materials[1].SetColor("_EmissionColor", finalEmissionColorFadeOut);
         isCurrentlyOnFeedback = false;
+        meshRenderer.materials[1].SetColor("_EmissionColor", finalEmissionColorFadeOut);
+
     }
 
     private IEnumerator _ChangeMultipleMaterialOverTime(float timeToVanish)

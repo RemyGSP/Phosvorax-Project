@@ -33,12 +33,14 @@ public class ProceduralMatrixGenerator : MonoBehaviour
 
     void StartRoomGeneration()
     {
+        mapSeed = (int)(UnityEngine.Random.value * 10000); // ahora obtienes un número entre 0 y 9999
+        Debug.Log(mapSeed);
         UnityEngine.Random.InitState(mapSeed);
         binariMatrix = new int[(int)MapSize.x, (int)MapSize.y];
         roomsPlaced = 0;
         deadEndsCount = 0;
         maxDeadEndsIteration = 1000;
-        PrepareMatrixBeforeFilling();   
+        PrepareMatrixBeforeFilling();
     }
 
     void PrepareMatrixBeforeFilling(){

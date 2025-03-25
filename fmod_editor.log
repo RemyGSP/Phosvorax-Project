@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000001FD58D49038 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000001EACB271BA8 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -20,6 +20,38 @@
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
+[LOG] SoundI::release                          :  (000001EAC2C0F838)
+[LOG] SoundI::release                          :     Pixel 11 (000001EAC2CA6038)
+[LOG] SoundI::release                          :  (000001EAC2C0E6F8)
+[LOG] SoundI::release                          :     Pixel 9 (000001EAC2CA6858)
+[LOG] SoundI::release                          :  (000001EAC2C0E2A8)
+[LOG] SoundI::release                          :     MenuMusic (000001EAC2CA66B8)
+[LOG] SoundI::release                          :  (000001EAA0A31A18)
+[LOG] SoundI::release                          :     08_Step_rock_02 (000001E9C01953C8)
+[LOG] SoundI::release                          :  (000001EAC2C0F108)
+[LOG] SoundI::release                          :     buttonClickSFX (000001E93168D3D8)
+[LOG] SoundI::release                          :  (000001EAA0A322B8)
+[LOG] SoundI::release                          :     StoneAttack (000001E9C0195A48)
+[LOG] SoundI::release                          :  (000001EAC2C0ECB8)
+[LOG] SoundI::release                          :     56_Attack_03 (000001EA7F5C0C88)
+[LOG] SoundI::release                          :  (000001EAA0A31008)
+[LOG] SoundI::release                          :     35_Miss_Evade_02 (000001E93168D8B8)
+[LOG] SoundI::release                          :  (000001EAA0A33848)
+[LOG] SoundI::release                          :     61_Hit_03 (000001E93168D238)
+[LOG] SoundI::release                          :  (000001EAA0A33118)
+[LOG] SoundI::release                          :     15_Impact_flesh_02 (000001E9C0195BE8)
+[LOG] SoundI::release                          :  (000001EAA0A32FA8)
+[LOG] SoundI::release                          :     30_Earth_02 (000001E93168DBF8)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
